@@ -1,0 +1,83 @@
+.sign_up_page {
+  padding-top: 27px;
+  margin-bottom: 120px;
+  .button {
+    margin-top: 30px;
+    button {
+      background: #0b2b20;
+      border: 2px solid #0b2b20;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.2;
+      padding: 6px 30px;
+      margin-left: 5px;
+      margin-right: 5px;
+      text-transform: uppercase;
+      &:hover {
+        color: rgba(248, 171, 12, 1);
+        border: 2px solid;
+        background: transparent;
+      }
+    }
+  }
+  .content {
+    margin-top: 76px !important;
+    .image {
+      position: relative;
+      height: 495px;
+      img {
+        padding-right: 20px !important;
+      }
+      @media screen and (max-width: 768px) {
+        img {
+          padding-right: 0px !important;
+          object-fit: contain;
+        }
+      }
+    }
+    .form {
+      padding-left: 20px;
+      @media screen and (max-width: 768px) {
+        padding-left: 0px !important;
+        margin-top: 30px;
+      }
+      h5 {
+        color: #0b2b20;
+        font-size: 25px;
+        font-weight: 700;
+        text-align: center;
+        text-transform: uppercase;
+      }
+      input[type="text"] {
+        width: 100%;
+        background: rgba(217, 217, 217, 0.3);
+        border: 0;
+        padding: 10px 15px;
+        color: #0b2b2099;
+      }
+      .list_checkBox {
+        background: rgba(217, 217, 217, 0.3);
+        margin-top: 22px;
+        padding: 19px 15px;
+        .item {
+          display: flex;
+          align-items: center;
+          &:not(:nth-child(1)) {
+            margin-top: 10px;
+          }
+          input {
+            width: 12px;
+            height: 12px;
+          }
+          span {
+            color: #0b2b2099;
+            font-size: 16px;
+            font-weight: 500;
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+}

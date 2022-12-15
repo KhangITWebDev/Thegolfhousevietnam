@@ -1,0 +1,100 @@
+.footer {
+  background-color: rgba(11, 43, 32, 1);
+  padding: 30px 0px;
+  width: 100%;
+  .logo {
+    cursor: pointer;
+    &_list {
+      position: relative;
+      // @media screen and (min-width: 1280px) {
+      //   padding: 0 100px;
+      // }
+      // @media screen and (min-width: 1440px) {
+      //   padding: 0 145px;
+      // }
+      // @media screen and (max-width: 1279px) {
+      //   padding: 0 65px;
+      // }
+      @media screen and (max-width: 1280px) {
+        padding-bottom: 80px !important;
+      }
+      @media screen and (max-width: 767.98px) {
+        span {
+          width: 80% !important;
+          // height: 180px !important;
+          img {
+            object-fit: contain;
+          }
+        }
+      }
+    }
+  }
+  .menu {
+    &_list {
+      margin-top: 20px;
+      @media screen and (max-width: 992px) {
+        justify-content: space-between !important;
+      }
+      @media screen and (max-width: 576px) {
+        width: 80% !important;
+        margin: auto;
+        justify-content: start !important;
+      }
+      @media screen and (max-width: 480px) {
+        width: 100% !important;
+      }
+      span {
+        color: #fff;
+        font-size: 15px;
+        font-weight: 500;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-top: 20px;
+        cursor: pointer;
+        @media screen and (max-width: 576px) {
+          width: 50%;
+        }
+        &:hover {
+          color: rgba(248, 171, 12, 1);
+        }
+      }
+    }
+  }
+  .copy_right {
+    color: #fff;
+    text-align: center;
+    font-size: 15px;
+    margin-top: 50px;
+    font-weight: 400;
+  }
+  .footer_desc {
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 50px;
+    font-weight: 300;
+    color: #fff;
+    width: 700px;
+    font-size: 15px;
+    line-height: 1.8;
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
+  }
+  .social {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    .heading {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 400;
+    }
+    &_list {
+      flex-direction: row !important;
+      i {
+        color: #fff;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+    }
+  }
+}

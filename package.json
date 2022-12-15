@@ -1,0 +1,43 @@
+{
+  "name": "Goft-Motorsport",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start -p 3002",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^2.9.10",
+    "@reduxjs/toolkit": "^1.8.5",
+    "@rsuite/icons": "^1.0.2",
+    "axios": "^0.27.2",
+    "bootstrap": "^5.2.0",
+    "jquery": "^3.6.1",
+    "js-cookie": "^3.0.1",
+    "moment": "^2.29.4",
+    "next": "12.2.5",
+    "query-string": "^7.1.1",
+    "react": "18.2.0",
+    "react-bootstrap": "^2.6.0",
+    "react-datepicker": "^4.8.0",
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.40.0",
+    "react-multistep": "^5.3.4",
+    "react-redux": "^8.0.2",
+    "react-select": "^5.7.0",
+    "redux": "^4.2.0",
+    "redux-thunk": "^2.4.1",
+    "rsuite": "^5.23.1",
+    "sass": "^1.54.5",
+    "sweetalert2": "^11.4.29",
+    "swiper": "^8.4.5",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "eslint": "^8.23.0",
+    "eslint-config-next": "12.2.5",
+    "eslint-plugin-react": "^7.31.8"
+  }
+}

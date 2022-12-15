@@ -94,7 +94,7 @@ function HeaderGoft(props) {
                   Proshop
                 </Dropdown.Toggle>
               </Dropdown>
-              <Dropdown>
+              {/* <Dropdown>
                 <Dropdown.Toggle
                   variant="default"
                   id="dropdown-cafe"
@@ -102,7 +102,7 @@ function HeaderGoft(props) {
                 >
                   Profile
                 </Dropdown.Toggle>
-              </Dropdown>
+              </Dropdown> */}
               <Dropdown
                 show={show}
                 onMouseEnter={() => setShow(!show)}

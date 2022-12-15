@@ -71,7 +71,7 @@ function SignIn(props) {
         willClose: () => {
           clearInterval(timerInterval);
           Cookies.set("user-login", JSON.stringify(data));
-          router.back();
+          router.push("/profile");
         },
       });
       reset({
@@ -116,12 +116,12 @@ function SignIn(props) {
           <form action="" onSubmit={handleSubmit(onSubmit)}>
             <div className="input-positon">
               <div className="icon">
-                <i className="fa-light fa-user-alt"></i>
+                <i className="fa-light fa-envelope"></i>
               </div>
-              <input type="text" placeholder="Name" {...register("name")} />
+              <input type="text" placeholder="Email" {...register("email")} />
             </div>
-            {errors?.name && (
-              <Alert variant="danger">{errors?.name?.message}</Alert>
+            {errors?.email && (
+              <Alert variant="danger">{errors?.email?.message}</Alert>
             )}
             <div className="input-positon">
               <div className="icon">

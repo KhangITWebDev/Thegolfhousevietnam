@@ -124,8 +124,11 @@ function Course(props) {
       </div>
       <div className={styles.golf_options + " " + "container"}>
         <div className={styles.header}>
-          <h5>HỌC GOLF BÀI BẢN CÙNG CHUYÊN GIA</h5>
-          <p>
+          <div className="heading">
+            <h2>HỌC GOLF BÀI BẢN CÙNG CHUYÊN GIA</h2>
+            <div className="line" style={{ width: "40%" }}></div>
+          </div>
+          <p style={{ marginTop: 20 }}>
             Dù bạn là người mới bắt đầu tìm hiểu, hay người chơi Golf muốn nâng
             cao trình độ. The Golf House luôn có lộ trình phù hợp cho bạn!
           </p>
@@ -196,52 +199,20 @@ function Course(props) {
             động.
           </p>
         </div>
-        <div className="d-flex justify-content-center button">
+        {/* <div className="d-flex justify-content-center button">
           <button onClick={() => router.push("/academy/academy-detail")}>
             Detail
           </button>
-        </div>
-      </div>
-      <div className={[styles.information, styles.full].join(" ")}>
-        <div className={styles.list}>
-          <div className={styles.item}>
-            <i className="fal fa-user-alt"></i>
-            <h6>Subject</h6>
-            <span>Adults, children</span>
-          </div>
-          <div className={styles.item}>
-            <i className="fal fa-clock"></i>
-            <h6>Time</h6>
-            <span>
-              2 sessions / week;
-              <br /> 3 hours / session
-            </span>
-          </div>
-          <div className={styles.item}>
-            <i className="fal fa-calendar-alt"></i>
-            <h6>Sessions</h6>
-            <span>
-              16 sessions / semester <br /> Total 3 semesters (2 months/term)
-            </span>
-          </div>
-          <div className={styles.item}>
-            <i className="far fa-graduation-cap"></i>
-            <h6>Students</h6>
-            <span>10-15 students/class group</span>
-          </div>
-        </div>
-        <div className="button d-flex justify-content-center">
-          <button onClick={() => router.push("/academy/sign-up")}>
-            Sign Up
-          </button>
-          <button onClick={() => router.push("/academy/course/course-detail")}>
-            Detail
-          </button>
-        </div>
+        </div> */}
       </div>
       <div className={styles.fee}>
         <div className="container">
-          <h2 className="text-white text-center fw-bold">THÔNG TIN KHOÁ HỌC</h2>
+          <div className="heading">
+            <h2 className="text-white text-center fw-bold">
+              THÔNG TIN KHOÁ HỌC
+            </h2>
+            <div className="line" style={{ width: "50%" }}></div>
+          </div>
           <p className="text-white">
             TGH cung cấp chương trình giảng dạy bài bản theo tiêu chuẩn PGA, đa
             dạng các gói học phục vụ nhu cầu của học viên theo từng giai đoạn,
@@ -305,25 +276,29 @@ function Course(props) {
                 }
               >
                 <div className={"col-12 col-sm-6" + " " + styles.info}>
-                  <hr />
-                  <span
-                    style={{
-                      background:
-                        item.cate === "Khoá người lớn"
-                          ? "#0b2b20"
-                          : item.cate === "Khoá trẻ em"
-                          ? "#F8AB0C"
-                          : "#C22300",
-                    }}
-                  >
-                    {item.cate}
-                  </span>
-                  <h3>{item.title}</h3>
-                  <div
-                    dangerouslySetInnerHTML={{ __html: item.desc }}
-                    className={styles.desc}
-                  ></div>
-                  <button>Đăng ký ngay</button>
+                  <div>
+                    <hr />
+                    <span
+                      style={{
+                        background:
+                          item.cate === "Khoá người lớn"
+                            ? "#0b2b20"
+                            : item.cate === "Khoá trẻ em"
+                            ? "#F8AB0C"
+                            : "#C22300",
+                      }}
+                    >
+                      {item.cate}
+                    </span>
+                    <h3>{item.title}</h3>
+                    <div
+                      dangerouslySetInnerHTML={{ __html: item.desc }}
+                      className={styles.desc}
+                    ></div>
+                  </div>
+                  <div className="mt-auto">
+                    <button>Đăng ký ngay</button>
+                  </div>
                 </div>
                 <div className={"col-12 col-sm-6" + " " + styles.image}>
                   <Image alt={item.title} src={item.image} layout="fill" />
@@ -350,19 +325,26 @@ function Course(props) {
               className={"col-12 col-lg-4 col-md-6" + " " + styles.item}
               key={index}
             >
-              <div className={styles.info}>
+              <div
+                className={styles.info}
+                style={{ display: "flex", flexDirection: "column" }}
+              >
                 <div className={styles.image}>
                   <Image alt="Fee" src={item.image} layout="fill" />
                 </div>
-                <Link href="/">
-                  <a className={styles.title}>{item.title}</a>
-                </Link>
-                <div
-                  className={styles.subTitle}
-                  dangerouslySetInnerHTML={{ __html: item.subTitle }}
-                ></div>
-                <div className="button d-flex justify-content-center">
-                  <button>Vị trí</button>
+                <div className={styles.top}>
+                  <Link href="/">
+                    <a className={styles.title}>{item.title}</a>
+                  </Link>
+                  <div
+                    className={styles.subTitle}
+                    dangerouslySetInnerHTML={{ __html: item.subTitle }}
+                  ></div>
+                </div>
+                <div className="mt-auto">
+                  <div className="button d-flex justify-content-center">
+                    <button>Vị trí</button>
+                  </div>
                 </div>
               </div>
             </div>

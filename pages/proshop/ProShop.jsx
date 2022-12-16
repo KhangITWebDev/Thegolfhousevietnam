@@ -5,10 +5,109 @@ import { ProShopCategory } from "../../utils/DataDemo/ProShop/proShopPageData";
 import { removeAccents } from "../../utils/function";
 import styles from "./ProShop.module.scss";
 import Tab1 from "./Tab1/Tab1";
+import { Tree, Panel, InputNumber, Button, SelectPicker, Stack } from "rsuite";
+
+const data = [
+  {
+    label: "Category",
+    value: "category",
+    level: 0,
+    children: [
+      {
+        label: "Golf",
+        value: "golf",
+        level: 1,
+        children: [
+          {
+            label: "Golf Balls",
+            value: "golf-balls",
+            children: null,
+            level: 2,
+          },
+          {
+            label: "Shoes",
+            value: "shoes",
+            children: null,
+            level: 2,
+          },
+          {
+            label: "Apparel",
+            value: "apparel",
+            children: null,
+            level: 2,
+          },
+          {
+            label: "Drivers",
+            value: "drivers",
+            children: null,
+            level: 2,
+          },
+          {
+            label: "Irons",
+            value: "irons",
+            children: null,
+            level: 2,
+          },
+          {
+            label: "Wedges",
+            value: "wedges",
+            children: null,
+            level: 2,
+          },
+          {
+            label: "Hats",
+            value: "hats",
+            children: null,
+            level: 2,
+          },
+          {
+            label: "Golf Bags",
+            value: "golf-bags",
+            children: null,
+            level: 2,
+          },
+        ],
+      },
+      {
+        label: "Car",
+        value: "car",
+        level: 1,
+        children: [
+          {
+            label: "Racing Suits",
+            value: "racing-suits",
+            children: null,
+            level: 2,
+          },
+          {
+            label: "Racing Helmets",
+            value: "racing-helmets",
+            children: null,
+            level: 2,
+          },
+          {
+            label: "Racing Shoes",
+            value: "racing-shoes",
+            children: null,
+            level: 2,
+          },
+          {
+            label: "Racing Gloves",
+            value: "racing-gloves",
+            children: null,
+            level: 2,
+          },
+        ],
+      },
+    ],
+  },
+];
 
 function ProShop(props) {
   const [show1, setShow1] = useState(true);
+  const [nodeValue, setNodeValue] = useState("golf-balls");
   const [showDetail, setShowDetail] = useState(false);
+
   return (
     <div className={styles.proshop_page}>
       <div className="container">
@@ -21,77 +120,41 @@ function ProShop(props) {
             }}
           ></div>
         </div>
-        <div className={styles.content} id="pro-shop">
-          <Tab.Container id="left-tabs-example" defaultActiveKey="golf-balls">
-            <Row>
-              <Col sm={3}>
-                <Nav variant="pills" className="flex-column">
-                  <Nav.Item>
-                    <Nav.Link
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setShow1(!show1);
-                        setShowDetail(false);
-                      }}
-                    >
-                      <i className="fa-solid fa-grid-2"></i>
-                      Category
-                      <i className="fa-regular fa-chevron-down"></i>
-                    </Nav.Link>
-                    {show1 && (
-                      <div className="cate-list">
-                        {ProShopCategory.map((item, index) => (
-                          <Nav.Item key={index}>
-                            <Nav.Link onClick={() => setShowDetail(false)}>
-                              <span className="item">
-                                {item.name}
-                                <i className="fa-regular fa-chevron-down"></i>
-                              </span>
-                            </Nav.Link>
-                            {item.subCate.map((subTiem, subIndex) => (
-                              <div key={subIndex} className="sub-cate-list">
-                                <Nav.Item>
-                                  <Nav.Link
-                                    eventKey={removeAccents(subTiem.name)}
-                                    onClick={() => setShowDetail(false)}
-                                  >
-                                    <span className="sub-item">
-                                      {subTiem.name}
-                                    </span>
-                                  </Nav.Link>
-                                </Nav.Item>
-                              </div>
-                            ))}
-                          </Nav.Item>
-                        ))}
-                      </div>
-                    )}
-                  </Nav.Item>
-                </Nav>
-              </Col>
-              <Col sm={9}>
-                <div className="d-flex">
+        <div className={styles.content + " " + "d-flex"} id="pro-shop">
+          <div className="col-3">
+            <Tree
+              data={data}
+              // defaultExpandItemValues={["node_modules", "node_modules-rsuite"]}
+              defaultExpandAll
+              defaultValue={"golf-balls"}
+              renderTreeNode={(node) => {
+                return (
                   <div
-                    className="bg-black"
-                    style={{
-                      width: 1,
-                      marginRight: 30,
-                    }}
-                  ></div>
-                  <Tab.Content>
-                    <Tab.Pane eventKey="golf-balls">
-                      <Tab1
-                        showDetail={showDetail}
-                        setShowDetail={setShowDetail}
-                        data={AcademyDetailProshopData}
-                      />
-                    </Tab.Pane>
-                    <Tab.Pane eventKey="second">Tab2</Tab.Pane>
-                  </Tab.Content>
-                </div>
-              </Col>
-            </Row>
-          </Tab.Container>
+                    onClick={() => setNodeValue(node.value)}
+                    className="item"
+                  >
+                    {node.level === 0 ? (
+                      <i className="fa-regular fa-objects-column"></i>
+                    ) : node.level === 1 ? (
+                      <i />
+                    ) : (
+                      <i />
+                    )}
+                    {node.label}
+                  </div>
+                );
+              }}
+            />
+          </div>
+          <div className="col-9">
+            {nodeValue === "golf-balls" && (
+              <Tab1
+                showDetail={showDetail}
+                setShowDetail={setShowDetail}
+                data={AcademyDetailProshopData}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

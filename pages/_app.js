@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Script from "next/script";
+import { motion } from "framer-motion";
 import "../styles/globals.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
@@ -12,6 +13,7 @@ import "swiper/css/thumbs";
 import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { store } from "../store";
+import $ from "jquery";
 
 function MyApp({ Component, pageProps }) {
   const [showChild, setShowChild] = useState(false);
@@ -19,6 +21,43 @@ function MyApp({ Component, pageProps }) {
     setShowChild(true);
     import("bootstrap/dist/js/bootstrap");
     import("bootstrap/dist/js/bootstrap.bundle");
+  }, []);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const [cursorVariants, setCursorVariants] = useState("default");
+
+  useEffect(() => {
+    const mouseMove = (e) => {
+      setMousePosition({
+        x: e.clientX,
+        y: e.clientY,
+      });
+    };
+    window.addEventListener("mousemove", mouseMove);
+    return () => {
+      window.removeEventListener("mousemove", mouseMove);
+    };
+  }, []);
+
+  const variants = {
+    default: {
+      x: mousePosition.x + 16,
+      y: mousePosition.y + 16,
+    },
+    text: {
+      x: mousePosition.x + 8,
+      y: mousePosition.y + 8,
+      backgroundColor: "#fff",
+      mixBlendMode: "difference",
+    },
+  };
+
+  const textEnter = () => setCursorVariants("text");
+  const textLeave = () => setCursorVariants("default");
+
+  useEffect(() => {
+    $("h2").on("mouseenter", textEnter);
+    $("h2").on("mouseleave", textLeave);
   }, []);
 
   if (!showChild) {
@@ -51,6 +90,11 @@ function MyApp({ Component, pageProps }) {
             crossOrigin="true"
           />
         </Head>
+        {/* <motion.div
+          className="cursor"
+          variants={variants}
+          animate={cursorVariants}
+        /> */}
         <Component {...pageProps} />
       </Provider>
     );

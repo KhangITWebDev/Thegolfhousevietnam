@@ -7,6 +7,7 @@ module.exports = async (phase, { defaultConfig }) => {
     eslint: {
       ignoreDuringBuilds: true,
     },
+    output: "standalone",
     swcMinify: true,
     images: {
       domains: [

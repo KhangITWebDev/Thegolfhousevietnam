@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import { Dropdown } from "react-bootstrap";
 import Cookies from "js-cookie";
 import { LOCAL_STORAGE } from "../../utils/handleStorage";
-import DropdownUser from "../DropdownUser/dropdownUser";
 import $ from "jquery";
 import { Nav, Navbar } from "rsuite";
 
@@ -49,7 +48,6 @@ export default function HeaderAccademy({ onSelect, activeKey, ...props }) {
                 height={87}
               />
             </Navbar.Brand>
-
             <div className="d-flex justify-content-center align-items-center">
               <div className="left d-flex">
                 <Nav.Item

@@ -1,10 +1,6 @@
 import React from "react";
 import styles from "./Home.module.scss";
 import Image from "next/image";
-import { GoftTour, Trending } from "../../utils/DataDemo/GoftTour";
-import { FeedTour } from "../../utils/DataDemo/FeedTour";
-import { CarRacingTour, TrendingCRT } from "../../utils/DataDemo/CarRacingTour";
-import { FeedRacingTour, Slide } from "../../utils/DataDemo/FeedRacingTour";
 import MainLayout from "../../components/layout/mainLayout";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";

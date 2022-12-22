@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import { Dropdown } from "react-bootstrap";
 import Cookies from "js-cookie";
 import { LOCAL_STORAGE } from "../../utils/handleStorage";
-import DropdownUser from "../DropdownUser/dropdownUser";
 import $ from "jquery";
 import { Nav, Navbar } from "rsuite";
 

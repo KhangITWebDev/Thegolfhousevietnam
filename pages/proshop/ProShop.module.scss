@@ -1,7 +1,125 @@
 .proshop_page {
-  padding-top: 35px;
+  padding-top: 100px;
+  .left {
+    padding-right: 33px;
+  }
+  .ringt {
+    padding-left: 33px;
+  }
   .content {
-    margin-top: 45px;
-    margin-bottom: 85px;
+    margin-top: 100px;
+    .header {
+      span {
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 1.3;
+        color: #6e6d68;
+      }
+    }
+    .product {
+      .item {
+        margin-top: 30px;
+        &:nth-child(odd) {
+          padding-right: 15px;
+        }
+        &:nth-child(even) {
+          padding-left: 15px;
+        }
+        .info {
+          h5 {
+            font-size: 25px;
+            font-weight: 700;
+            line-height: 1.4;
+            padding-right: 15px;
+            padding-left: 15px;
+            color: #000;
+          }
+          p {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-top: 15px;
+            color: #b8b8b8;
+            padding-right: 15px;
+            padding-left: 15px;
+          }
+          .rate {
+            margin-top: 25px;
+            padding-right: 15px;
+            padding-left: 15px;
+            i {
+              font-size: 22px;
+              color: #fabf26;
+              margin-left: 6px;
+              margin-right: 6px;
+            }
+          }
+        }
+      }
+    }
+    .tabs {
+      background: #f8f8f4;
+      padding: 60px 35px;
+      h5 {
+        font-weight: 700;
+        font-size: 18px;
+        color: #000;
+        line-height: 1.3;
+        &:nth-child(1) {
+          margin-bottom: 25px;
+        }
+        &:nth-child(3) {
+          margin-bottom: 10px;
+          margin-top: 30px;
+        }
+        &:nth-child(5) {
+          margin-bottom: 5px;
+          margin-top: 40px;
+        }
+        &:nth-child(7) {
+          margin-bottom: 30px;
+          margin-top: 30px;
+        }
+        &:nth-child(11) {
+          margin-bottom: 0px;
+          margin-top: 30px;
+        }
+      }
+      span {
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 1.3;
+        color: #8e8e8e;
+      }
+      ul {
+        list-style: disc;
+        padding-left: 18px !important;
+        li {
+          font-weight: 400;
+          margin-top: 10px;
+          font-size: 17px;
+          line-height: 1.3;
+        }
+      }
+      button {
+        margin-top: 22px;
+      }
+      .tag {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 12px;
+        margin-top: 20px;
+        button {
+          border: 1px solid #8e8e8e;
+          background: transparent;
+          margin-top: 0;
+          padding: 8px 19px;
+          color: #8e8e8e;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 1.3;
+        }
+      }
+    }
   }
 }

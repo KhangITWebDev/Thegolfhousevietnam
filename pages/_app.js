@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
 import "rsuite/dist/rsuite.css";
 import "swiper/css";
+import "swiper/css/bundle";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
@@ -15,12 +16,19 @@ import { Provider } from "react-redux";
 import { store } from "../store";
 import $ from "jquery";
 
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 function MyApp({ Component, pageProps }) {
   const [showChild, setShowChild] = useState(false);
   useEffect(() => {
     setShowChild(true);
     import("bootstrap/dist/js/bootstrap");
     import("bootstrap/dist/js/bootstrap.bundle");
+    AOS.init();
+    AOS.init({
+      duration: 1000,
+    });
   }, []);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 

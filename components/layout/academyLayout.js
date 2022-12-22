@@ -7,13 +7,7 @@ function AcademyLayout({ children }) {
     <>
       <div className="wrapper-project">
         <HeaderAcademy />
-        <div
-          style={{
-            marginTop: 102,
-          }}
-        >
-          {children}
-        </div>
+        <div>{children}</div>
         <Footer />
       </div>
     </>

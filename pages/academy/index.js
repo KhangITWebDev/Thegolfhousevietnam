@@ -1,12 +1,13 @@
 import React from "react";
 import AcademyLayout from "../../components/layout/academyLayout";
-import GoftLayout from "../../components/layout/goftLayout";
+import MainLayout from "../../components/layout/mainLayout";
+import Academy from "./Academy";
 import Course from "./course/Course";
 
 export default function index(props) {
   return (
-    <GoftLayout>
-      <Course />
-    </GoftLayout>
+    <MainLayout>
+      <Academy />
+    </MainLayout>
   );
 }

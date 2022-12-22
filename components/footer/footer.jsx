@@ -11,110 +11,35 @@ function Footer(props) {
   return (
     <div className={styles.footer} id="footer">
       <div className="container">
-        <div className={styles.logo_list}>
-          <Swiper
-            breakpoints={{
-              1920: {
-                slidesPerView: 4,
-              },
-              1280: {
-                slidesPerView: 4,
-              },
-              992: {
-                slidesPerView: 3,
-              },
-              767: {
-                slidesPerView: 2,
-              },
-              480: {
-                slidesPerView: 1,
-              },
-            }}
-            // slidesPerView={5}
-            spaceBetween={30}
-            pagination={{
-              clickable: true,
-            }}
-            modules={[Pagination]}
-            className="mySwiper"
-          >
-            <SwiperSlide>
-              <Image
-                alt="logo"
-                src="/images/Logo/Logo11.png"
-                width={200}
-                height={136}
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Image
-                alt="logo"
-                src="/images/Logo/Logo12.png"
-                width={200}
-                height={136}
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Image
-                alt="logo"
-                src="/images/Logo/Logo13.png"
-                width={200}
-                height={136}
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Image
-                alt="logo"
-                src="/images/Logo/Logo11.png"
-                width={200}
-                height={136}
-              />
-            </SwiperSlide>
-          </Swiper>
-        </div>
-        <div
-          className={
-            "d-flex justify-content-center flex-wrap" + " " + styles.menu_list
-          }
-        >
-          <span>Terms of Service</span>
-          <span>Privacy Policy</span>
-          <span>Accessibility Statement</span>
-          <span>Cookie Choices</span>
-          <span>Tournament Tickets</span>
-          <span>Careers</span>
-          <span>Contact Us</span>
-          <span>Sitemap</span>
-          <span>Media</span>
-        </div>
-        <p
-          className={styles.copy_right + " " + "d-flex justify-content-center"}
-        >
-          © 2022 PGA TOUR, Inc | All Rights Reserved
-        </p>
-        <p
-          className={
-            "d-flex justify-content-center text-center text-white" +
-            " " +
-            styles.footer_desc
-          }
-        >
-          PGA TOUR, PGA TOUR Champions, and the Swinging Golfer design are
-          registered trademarks. The Korn Ferry trademark is also a registered
-          trademark, and is used in the Korn Ferry Tour logo with permission.
-        </p>
-        <div
-          className={
-            styles.social + " " + "d-flex flex-column align-items-center"
-          }
-        >
-          <h5 className={styles.heading}>CONNECT WITH THE PGA TOUR ON</h5>
-          <div className={styles.social_list}>
-            <i className="fab fa-facebook-f"></i>
-            <i className="fab fa-twitter"></i>
-            <i className="fab fa-instagram"></i>
-            <i className="fab fa-youtube"></i>
+        <div className="d-flex flex-column align-items-center">
+          <div className={styles.logo}>
+            <Image
+              alt="logo"
+              src="/images/Logo/Logo12.png"
+              width={104}
+              height={87}
+            />
           </div>
+          <div className={styles.menu + " " + "d-flex"}>
+            <div className={styles.menu_item}>Trang chủ</div>
+            <div className={styles.menu_item}>Về chúng tôi</div>
+            <div className={styles.menu_item}>Giới thiệu</div>
+            <div className={styles.menu_item}>Proshop</div>
+            <div className={styles.menu_item}>Dịch vụ khác</div>
+            <div className={styles.menu_item}>Liên hệ</div>
+          </div>
+          <div className={styles.social + " " + "d-flex"}>
+            <i className="fa-brands fa-facebook-f"></i>
+            <i className="fa-brands fa-youtube"></i>
+            <i className="fa-brands fa-dribbble"></i>
+            <i className="fa-brands fa-instagram"></i>
+          </div>
+        </div>
+        <div className={styles.copy_right}>
+          <p>
+            <strong>Thegolfhousevietnam</strong> &#169; 2022. All Rights
+            Reserved.
+          </p>
         </div>
       </div>
     </div>

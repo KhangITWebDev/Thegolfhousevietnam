@@ -77,6 +77,11 @@ export const convertDate = (date) => {
   const getDateAndMonthInDate = `${getDateInDate} ${getMonthInDate}`;
   const getFullInDate = `${getDateInDate} ${getMonthInDate} ${y}`;
   const getFullInDateLongMonth = `${getDateInDate} ${getMonthFullInDate} ${y}`;
+  const getMonthVi = `tháng ${Number(new Date(date).getMonth()) + 1}`;
+  const getYearVi = `năm ${y}`;
+  const getMonthandYearVi = `Tháng ${
+    Number(new Date(date).getMonth()) + 1
+  } năm ${y}`;
   const getTimeInDate = `${h}:${mi}`;
   const getDateWithMonthFull = `${w}, ${getMonthFullInDate} ${getDateInDateString}`;
   const getDateFullWithWeek = `${w}, ${h}:${mi}:${s}, ${getDateInDate} ${getMonthFullInDate}, ${y}`;
@@ -94,6 +99,9 @@ export const convertDate = (date) => {
     getDateFullWithWeek,
     w,
     getDateMonthYear,
+    getMonthVi,
+    getYearVi,
+    getMonthandYearVi,
   };
 };
 export const getDateArray = function (start, end) {

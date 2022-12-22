@@ -1,0 +1,53 @@
+.course_page {
+  .header {
+    padding-top: 150px;
+  }
+  .training {
+    padding-bottom: 140px;
+  }
+  .course {
+    background-color: #f8f8f4;
+    padding-top: 95px;
+    &_detail {
+      padding-top: 95px;
+      padding-bottom: 95px;
+      background-color: #f8f8f4;
+      .item {
+        .image {
+          position: relative;
+        }
+      }
+    }
+    .top {
+      span {
+        font-size: 22px;
+        font-weight: 700;
+        color: #b4a461;
+      }
+      h2 {
+        font-size: 57px;
+        font-weight: 700;
+        margin-top: 24px;
+        line-height: 1.3;
+        color: #000;
+      }
+      p {
+        font-size: 22px;
+        font-weight: 400;
+        margin-top: 20px;
+        line-height: 1.3;
+        color: #6e6d68;
+        text-align: justify;
+      }
+    }
+  }
+  .team {
+    margin-top: 75px;
+    margin-bottom: 200px;
+  }
+  .calendar {
+    background-color: #f8f8f4;
+    padding-top: 50px;
+    padding-bottom: 120px;
+  }
+}

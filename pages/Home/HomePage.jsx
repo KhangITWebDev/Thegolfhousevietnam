@@ -109,7 +109,6 @@ function HomePage(props) {
           pagination={{
             clickable: true,
           }}
-          navigation={false}
           modules={[Pagination, Navigation, Autoplay]}
           className="mySwiper"
           onSwiper={(s) => {
@@ -356,7 +355,6 @@ function HomePage(props) {
             pagination={{
               clickable: true,
             }}
-            navigation={false}
             modules={[Pagination, Navigation]}
             className="mySwiper"
             onSwiper={(s) => {
@@ -467,7 +465,6 @@ function HomePage(props) {
               pagination={{
                 clickable: true,
               }}
-              navigation={false}
               modules={[Pagination, Navigation]}
               onSwiper={(s) => setSwiper3(s)}
               className="mySwiper"
@@ -524,11 +521,14 @@ function HomePage(props) {
                   1920: {
                     slidesPerView: 4,
                   },
+                  1440: {
+                    slidesPerView: 4,
+                  },
                   1280: {
                     slidesPerView: 4,
                   },
                   992: {
-                    slidesPerView: 4,
+                    slidesPerView: 3,
                   },
                   767: {
                     slidesPerView: 2,
@@ -539,7 +539,6 @@ function HomePage(props) {
                 }}
                 slidesPerView={1}
                 spaceBetween={30}
-                navigation={false}
                 pagination={{
                   clickable: true,
                 }}
@@ -557,15 +556,17 @@ function HomePage(props) {
                           height={250}
                         />
                       </div>
-                      <div className="info d-flex flex-column align-items-center">
+                      <div className="info h-100 d-flex flex-column align-items-center">
                         <h5 className="text-center">{item.name}</h5>
-                        <p className="text-center">{item.price}</p>
-                        <div className="rate">
-                          {Array(item.rate)
-                            .fill()
-                            .map((i) => (
-                              <i key={i} className="fa-solid fa-star"></i>
-                            ))}
+                        <div className="mt-auto">
+                          <p className="text-center">{item.price}</p>
+                          <div className="rate">
+                            {Array(item.rate)
+                              .fill()
+                              .map((i) => (
+                                <i key={i} className="fa-solid fa-star"></i>
+                              ))}
+                          </div>
                         </div>
                       </div>
                     </div>

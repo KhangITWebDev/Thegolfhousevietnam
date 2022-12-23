@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from "react";
-import styles from "./headerMain.module.scss";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import Swal from "sweetalert2";
-import { Dropdown } from "react-bootstrap";
-import Cookies from "js-cookie";
-import { LOCAL_STORAGE } from "../../utils/handleStorage";
 import $ from "jquery";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import { Nav, Navbar } from "rsuite";
+import Swal from "sweetalert2";
+import styles from "./headerMain.module.scss";
 
 export default function HeaderMain({ onSelect, activeKey, ...props }) {
   const commingSoon = (e) => {
@@ -48,7 +44,6 @@ export default function HeaderMain({ onSelect, activeKey, ...props }) {
                 height={87}
               />
             </Navbar.Brand>
-
             <div className="d-flex justify-content-center align-items-center">
               <div className="left d-flex">
                 <Nav.Item
@@ -61,9 +56,30 @@ export default function HeaderMain({ onSelect, activeKey, ...props }) {
                   Trang chủ
                 </Nav.Item>
                 <Nav.Menu title="Về Chúng Tôi">
-                  <Nav.Item eventKey="2">Nhà sáng lập</Nav.Item>
-                  <Nav.Item eventKey="3">Lio Holding</Nav.Item>
-                  <Nav.Item eventKey="4">Tin tức, sự kiện</Nav.Item>
+                  <Nav.Item
+                    eventKey="2"
+                    onClick={() => {
+                      router.push("/about-us#founder");
+                    }}
+                  >
+                    Nhà sáng lập
+                  </Nav.Item>
+                  <Nav.Item
+                    eventKey="3"
+                    onClick={() => {
+                      router.push("/about-us#about");
+                    }}
+                  >
+                    Lio Holding
+                  </Nav.Item>
+                  <Nav.Item
+                    eventKey="4"
+                    onClick={() => {
+                      router.push("/about-us#news");
+                    }}
+                  >
+                    Tin tức, sự kiện
+                  </Nav.Item>
                 </Nav.Menu>
                 <Nav.Item
                   eventKey="5"
@@ -87,13 +103,23 @@ export default function HeaderMain({ onSelect, activeKey, ...props }) {
                   <Nav.Item
                     eventKey="7"
                     onClick={(e) => {
-                      e.preventDefault();
-                      router.push("/course");
+                      router.push("/course#course");
                     }}
                   >
                     Khoá học
                   </Nav.Item>
-                  <Nav.Item eventKey="8" onClick={commingSoon}>
+                  <Nav.Item
+                    eventKey="8"
+                    onClick={() => {
+                      // $("html,body").animate(
+                      //   {
+                      //     scrollTop: $("#calendar").offset().top,
+                      //   },
+                      //   "slow"
+                      // );
+                      router.push("/course#calendar");
+                    }}
+                  >
                     Đặt lịch học
                   </Nav.Item>
                 </Nav.Menu>
@@ -108,6 +134,15 @@ export default function HeaderMain({ onSelect, activeKey, ...props }) {
                 </Nav.Item>
                 <Nav.Item eventKey="10" onClick={commingSoon}>
                   Dịch vụ khác
+                </Nav.Item>
+                <Nav.Item
+                  eventKey="11"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    router.push("/contact-us");
+                  }}
+                >
+                  Liên hệ
                 </Nav.Item>
               </div>
               <div className="right d-flex">

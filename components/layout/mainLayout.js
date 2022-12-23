@@ -32,6 +32,10 @@ function MainLayout({ children }) {
           $(".rs-navbar-item")[0].classList.add("rs-navbar-item-active");
           break;
         }
+        case "/about-us": {
+          $(".rs-navbar-item")[1].classList.add("rs-navbar-item-active");
+          break;
+        }
         case "/academy": {
           $(".rs-navbar-item")[2].classList.add("rs-navbar-item-active");
           break;
@@ -40,10 +44,44 @@ function MainLayout({ children }) {
           $(".rs-navbar-item")[3].classList.add("rs-navbar-item-active");
           break;
         }
+        case "/course": {
+          $(".rs-navbar-item")[4].classList.add("rs-navbar-item-active");
+          break;
+        }
+        case "/proshop": {
+          $(".rs-navbar-item")[5].classList.add("rs-navbar-item-active");
+          break;
+        }
         default:
           break;
       }
     });
+    // $(".rs-dropdown-item").each(function (index) {
+    //   switch (router.asPath) {
+    //     case "/about-us#founder": {
+    //       $(".rs-dropdown-item")[0].classList.add("rs-dropdown-item-active");
+    //       break;
+    //     }
+    //     case "/about-us#about": {
+    //       $(".rs-dropdown-item")[1].classList.add("rs-dropdown-item-active");
+    //       break;
+    //     }
+    //     case "/about-us#news": {
+    //       $(".rs-dropdown-item")[2].classList.add("rs-dropdown-item-active");
+    //       break;
+    //     }
+    //     case "/course/#course": {
+    //       $(".rs-dropdown-item")[3].classList.add("rs-dropdown-item-active");
+    //       break;
+    //     }
+    //     case "/course/#calendar": {
+    //       $(".rs-dropdown-item")[4].classList.add("rs-dropdown-item-active");
+    //       break;
+    //     }
+    //     default:
+    //       break;
+    //   }
+    // });
   }, []);
   return (
     <>

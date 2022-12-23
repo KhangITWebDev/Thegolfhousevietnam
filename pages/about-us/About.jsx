@@ -27,7 +27,7 @@ function About(props) {
   return (
     <div className={styles.about_page}>
       <div className="container">
-        <div className={styles.membership}>
+        <div className={styles.membership} id="founder">
           <div className="d-flex align-items-center">
             <div className={"col-6" + " " + styles.left}>
               <div
@@ -77,7 +77,6 @@ function About(props) {
             spaceBetween={30}
             loop={true}
             pagination={false}
-            navigation={false}
             modules={[Pagination, Navigation]}
             className="mySwiper"
             onSwiper={(s) => {
@@ -200,7 +199,7 @@ function About(props) {
             </SwiperSlide>
           </Swiper>
         </div>
-        <div className={styles.news}>
+        <div className={styles.news} id="news">
           <div className="heading">
             <h2 className={styles.title_page}>Tin tức, Sự kiện</h2>
           </div>

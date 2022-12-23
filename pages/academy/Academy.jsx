@@ -80,7 +80,6 @@ function Academy(props) {
               spaceBetween={30}
               loop={true}
               pagination={false}
-              navigation={false}
               modules={[Pagination, Navigation]}
               className="mySwiper"
               onSwiper={(s) => {

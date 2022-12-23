@@ -170,8 +170,9 @@ a,
 p,
 span,
 button,
-div {
-  font-family: "Poppins", sans-serif;
+div,
+label {
+  font-family: "Reem Kufi", sans-serif;
   line-height: 1.3;
 }
 h1,
@@ -180,8 +181,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Poppins", sans-serif;
+  font-family: "Reem Kufi", sans-serif;
   line-height: 1.3;
+  counter-reset: #000;
 }
 button {
   cursor: pointer;
@@ -754,6 +756,7 @@ button {
         &:hover {
           border-bottom: 2px solid #fff;
           color: #fff !important;
+          background-color: transparent !important;
         }
       }
       .rs-dropdown-item {
@@ -1184,7 +1187,7 @@ button {
         i {
           font-size: 20px;
           position: relative;
-          left: -30%;
+          left: -33%;
           transition: 0.5s;
         }
       }
@@ -1486,7 +1489,7 @@ button {
   }
   .swiper-wrapper {
     position: unset !important;
-    height: 250px;
+    height: 280px;
     margin-top: 100px;
   }
   .swiper-slide {
@@ -1505,6 +1508,95 @@ button {
         font-weight: 400;
         margin-bottom: 40px;
         color: #6e6d68;
+      }
+      button {
+        background-color: transparent;
+        border: none;
+        font-size: 18px;
+        font-weight: 700;
+        transition: 0.5s;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        span {
+          display: block;
+          margin-right: 10px;
+          padding-top: 3px;
+          height: 100%;
+          position: relative;
+          left: -100%;
+          transition: 0.5s;
+        }
+        i {
+          font-size: 20px;
+          position: relative;
+          left: -40%;
+          transition: 0.5s;
+        }
+      }
+    }
+    &:hover .content button,
+    &:focus .content button {
+      span {
+        left: 0;
+      }
+      i {
+        left: 0;
+      }
+    }
+  }
+}
+#contact {
+  position: relative;
+  z-index: 1000;
+  margin-bottom: 100px;
+  .swiper-wrapper,
+  .swiper {
+    position: unset !important;
+    z-index: 1000;
+  }
+  // .swiper-pagination {
+  //   bottom: 67px;
+  //   z-index: 3000;
+  //   .swiper-pagination-bullet {
+  //     width: 14px;
+  //     height: 14px;
+  //     margin: 0 15px;
+  //     background: #fff !important;
+  //     border: 1px solid #d9d9d9;
+  //     opacity: 1;
+  //     &-active {
+  //       background: #00b577 !important;
+  //       width: 14px;
+  //       border-radius: 10px;
+  //     }
+  //   }
+  // }
+  .swiper-wrapper {
+    position: unset !important;
+    height: 280px;
+    margin-top: 100px;
+  }
+  .swiper-slide {
+    cursor: pointer;
+    .content {
+      height: 100%;
+      h5 {
+        font-size: 23px;
+        font-weight: 700;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        color: #000;
+      }
+      p {
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 1.3;
+        color: #6e6d68;
+        text-align: center;
+        &:last-child {
+          margin-bottom: 20px;
+        }
       }
       button {
         background-color: transparent;
@@ -1577,11 +1669,12 @@ button {
   }
   .swiper-wrapper {
     position: unset !important;
-    height: fit-content;
+    height: 380px;
     margin-top: 100px;
   }
   .swiper-slide {
     cursor: pointer;
+    height: 100%;
     .content {
       height: 100%;
       h5 {
@@ -1598,13 +1691,13 @@ button {
         line-height: 1.3;
         margin-top: 15px;
         color: #b8b8b8;
-        padding-right: 15px;
-        padding-left: 15px;
+        padding-right: 5px;
+        padding-left: 5px;
       }
       .rate {
         margin-top: 25px;
-        padding-right: 15px;
-        padding-left: 15px;
+        padding-right: 5px;
+        padding-left: 5px;
         i {
           font-size: 22px;
           color: #fabf26;
@@ -1775,6 +1868,29 @@ button {
   &:hover {
     background: #00b577;
     border-color: #00b577;
+  }
+}
+.form-label {
+  font-size: 20px;
+  font-weight: 500;
+  color: #000;
+}
+.form-control {
+  border: 1px solid #979797 !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  padding: 10px 20px !important;
+  color: #979797 !important;
+  border-radius: 4px !important;
+}
+.form-group {
+  &:first-child {
+    margin-top: 25px;
+  }
+  &:not(:first-child) {
+    margin-top: 30px;
   }
 }
 .heading {

@@ -60,9 +60,30 @@ export default function HeaderAccademy({ onSelect, activeKey, ...props }) {
                   Trang chủ
                 </Nav.Item>
                 <Nav.Menu title="Về Chúng Tôi">
-                  <Nav.Item eventKey="2">Nhà sáng lập</Nav.Item>
-                  <Nav.Item eventKey="3">Lio Holding</Nav.Item>
-                  <Nav.Item eventKey="4">Tin tức, sự kiện</Nav.Item>
+                  <Nav.Item
+                    eventKey="2"
+                    onClick={() => {
+                      router.push("/about-us#founder");
+                    }}
+                  >
+                    Nhà sáng lập
+                  </Nav.Item>
+                  <Nav.Item
+                    eventKey="3"
+                    onClick={() => {
+                      router.push("/about-us#about");
+                    }}
+                  >
+                    Lio Holding
+                  </Nav.Item>
+                  <Nav.Item
+                    eventKey="4"
+                    onClick={() => {
+                      router.push("/about-us#news");
+                    }}
+                  >
+                    Tin tức, sự kiện
+                  </Nav.Item>
                 </Nav.Menu>
                 <Nav.Item
                   eventKey="5"
@@ -86,13 +107,23 @@ export default function HeaderAccademy({ onSelect, activeKey, ...props }) {
                   <Nav.Item
                     eventKey="7"
                     onClick={(e) => {
-                      e.preventDefault();
-                      router.push("/course");
+                      router.push("/course#course");
                     }}
                   >
                     Khoá học
                   </Nav.Item>
-                  <Nav.Item eventKey="8" onClick={commingSoon}>
+                  <Nav.Item
+                    eventKey="8"
+                    onClick={() => {
+                      // $("html,body").animate(
+                      //   {
+                      //     scrollTop: $("#calendar").offset().top,
+                      //   },
+                      //   "slow"
+                      // );
+                      router.push("/course#calendar");
+                    }}
+                  >
                     Đặt lịch học
                   </Nav.Item>
                 </Nav.Menu>
@@ -107,6 +138,15 @@ export default function HeaderAccademy({ onSelect, activeKey, ...props }) {
                 </Nav.Item>
                 <Nav.Item eventKey="10" onClick={commingSoon}>
                   Dịch vụ khác
+                </Nav.Item>
+                <Nav.Item
+                  eventKey="11"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    router.push("/contact-us");
+                  }}
+                >
+                  Liên hệ
                 </Nav.Item>
               </div>
               <div className="right d-flex">

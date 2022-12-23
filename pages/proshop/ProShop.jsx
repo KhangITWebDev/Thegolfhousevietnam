@@ -1,23 +1,11 @@
-import React, { useState } from "react";
-import { Col, Nav, Row, Tab } from "react-bootstrap";
-import { AcademyDetailProshopData } from "../../utils/DataDemo/Academy/dataAcademyPage";
-import { ProShopCategory } from "../../utils/DataDemo/ProShop/proShopPageData";
-import { removeAccents } from "../../utils/function";
-import styles from "./ProShop.module.scss";
-import Tab1 from "./Tab1/Tab1";
-import {
-  Tree,
-  Panel,
-  InputNumber,
-  Button,
-  SelectPicker,
-  Stack,
-  Pagination,
-  Progress,
-} from "rsuite";
-import Select, { components } from "react-select";
 import Image from "next/image";
+import React, { useState } from "react";
+import Select, { components } from "react-select";
+import { Progress } from "rsuite";
+import Pagination from "../../components/pagination/pagination";
 import { ShopList } from "../../utils/DataDemo/Home/dataHome";
+import { usePagination } from "../../utils/usePagination";
+import styles from "./ProShop.module.scss";
 const customStyles = {
   option: (provided, state) => ({
     ...provided,
@@ -63,13 +51,14 @@ const options = [
   { value: "1", label: "Mới nhất" },
   { value: "2", label: "Cũ nhất" },
   { value: "3", label: "Giá cao nhất" },
-  { value: "3", label: "Giá thấp nhất" },
+  { value: "4", label: "Giá thấp nhất" },
 ];
 
 function ProShop(props) {
   const [show1, setShow1] = useState(true);
   const [activePage, setActivePage] = React.useState(1);
   const [nodeValue, setNodeValue] = useState("golf-balls");
+  const data = usePagination(ShopList, 6);
   const DropdownIndicator = (props) => {
     return (
       <components.DropdownIndicator {...props}>
@@ -83,6 +72,7 @@ function ProShop(props) {
       </components.DropdownIndicator>
     );
   };
+  const page = [1, 2];
   const [percent, setPercent] = React.useState(30);
   const status = percent === 100 ? "success" : null;
   const color = percent === 100 ? "#7C8E5B" : "#7C8E5B";
@@ -121,7 +111,7 @@ function ProShop(props) {
               </div>
             </div>
             <div className={"d-flex flex-wrap" + " " + styles.product}>
-              {ShopList.map((item, index) => (
+              {data.currentDatas.map((item, index) => (
                 <div key={index} className={"col-6" + " " + styles.item}>
                   <div
                     className={
@@ -152,17 +142,7 @@ function ProShop(props) {
               ))}
             </div>
             <div className="d-flex justify-content-center">
-              <Pagination
-                prev
-                // last
-                next
-                // first
-                size="lg"
-                total={2}
-                limit={1}
-                activePage={activePage}
-                onChangePage={setActivePage}
-              />
+              <Pagination data={data} />
             </div>
           </div>
           <div className={"col-4" + " " + styles.right}>

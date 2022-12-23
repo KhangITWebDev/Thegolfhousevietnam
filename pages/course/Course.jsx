@@ -111,7 +111,6 @@ function Course(props) {
               }}
               slidesPerView={1}
               spaceBetween={30}
-              navigation={false}
               pagination={{
                 clickable: true,
               }}
@@ -183,7 +182,6 @@ function Course(props) {
               pagination={{
                 clickable: true,
               }}
-              navigation={false}
               modules={[Pagination, Navigation]}
               onSwiper={(s) => setSwiper3(s)}
               className="mySwiper"
@@ -291,7 +289,6 @@ function Course(props) {
             pagination={{
               clickable: true,
             }}
-            navigation={false}
             modules={[Pagination, Navigation]}
             className="mySwiper"
             onSwiper={(s) => {
@@ -365,7 +362,7 @@ function Course(props) {
               <i className="fa-regular fa-chevron-down"></i>
             </button>
           </div>
-          <div>
+          <div className={styles.content}>
             <DatePicker
               selected={startDate}
               onChange={(date) => setStartDate(date)}

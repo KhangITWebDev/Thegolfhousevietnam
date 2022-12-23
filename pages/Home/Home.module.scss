@@ -41,7 +41,7 @@
           .info {
             button {
               i {
-                left: -45%;
+                left: -52%;
               }
             }
           }
@@ -76,7 +76,7 @@
             i {
               font-size: 20px;
               position: relative;
-              left: -40%;
+              left: -45%;
               transition: 0.5s;
             }
           }
@@ -424,6 +424,10 @@
             color: #000;
             margin-top: 27px;
             margin-bottom: 10px;
+            cursor: pointer;
+            &:hover {
+              color: #00b577;
+            }
           }
           span {
             font-size: 18px;

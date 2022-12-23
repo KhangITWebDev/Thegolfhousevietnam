@@ -15,10 +15,14 @@ export default function Document() {
           rel="stylesheet"
           href="/vendor/font-awesome-pro-v6-6.2.0/css/all.min.css"
         />
-        <link
+        {/* <link
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
           rel="stylesheet"
-        />
+        /> */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;600;700&display=swap"
+          rel="stylesheet"
+        ></link>
       </Head>
       <body>
         <Main />

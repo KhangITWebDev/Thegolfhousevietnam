@@ -1,5 +1,7 @@
 .proshop_page {
   padding-top: 100px;
+  margin-bottom: 65px;
+
   .left {
     padding-right: 33px;
   }
@@ -95,10 +97,17 @@
         list-style: disc;
         padding-left: 18px !important;
         li {
+          cursor: pointer;
           font-weight: 400;
           margin-top: 10px;
           font-size: 17px;
           line-height: 1.3;
+          border-bottom: 2px solid transparent;
+          width: fit-content;
+          transition: 0.5s linear;
+          &:hover {
+            border-bottom: 2px solid #000;
+          }
         }
       }
       button {
@@ -113,11 +122,15 @@
           border: 1px solid #8e8e8e;
           background: transparent;
           margin-top: 0;
-          padding: 8px 19px;
+          padding: 8px 0px;
           color: #8e8e8e;
           font-weight: 400;
           font-size: 12px;
           line-height: 1.3;
+          &:hover {
+            border: 1px solid #00b577;
+            color: #00b577;
+          }
         }
       }
     }

@@ -35,6 +35,10 @@
             padding-right: 15px;
             padding-left: 15px;
             color: #000;
+            cursor: pointer;
+            &:hover {
+              color: #00b577;
+            }
           }
           p {
             font-size: 20px;

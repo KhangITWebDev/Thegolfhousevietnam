@@ -1,7 +1,9 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { removeAccents } from "../../utils/function";
 import styles from "./About.module.scss";
 
 const newList = [
@@ -24,6 +26,7 @@ const newList = [
 
 function About(props) {
   const [swiper, setSwiper] = useState(null);
+  const router = useRouter();
   return (
     <div className={styles.about_page}>
       <div className="container">
@@ -218,7 +221,17 @@ function About(props) {
                     layout="fill"
                   />
                 </div>
-                <h3>Quỹ thưởng LPGA Tour 2023 vượt mốc 100 triệu USD</h3>
+                <h3
+                  onClick={() =>
+                    router.push(
+                      `/news-events/${removeAccents(
+                        "Quỹ thưởng LPGA Tour 2023 vượt mốc 100 triệu USD"
+                      )}`
+                    )
+                  }
+                >
+                  Quỹ thưởng LPGA Tour 2023 vượt mốc 100 triệu USD
+                </h3>
                 <span>1 giờ trước</span>
                 <p>
                   Đấu trường golf nữ hạng nhât Mỹ sẽ chi tổng cộng 101,4 triệu
@@ -243,7 +256,15 @@ function About(props) {
                           styles.content
                         }
                       >
-                        <h3>{item.title}</h3>
+                        <h3
+                          onClick={() =>
+                            router.push(
+                              `/news-events/${removeAccents(item.title)}`
+                            )
+                          }
+                        >
+                          {item.title}
+                        </h3>
                         <span>1 giờ trước</span>
                         <p>{item.desc}</p>
                       </div>
@@ -252,6 +273,11 @@ function About(props) {
                 })}
               </div>
             </div>
+          </div>
+          <div className="button">
+            <button onClick={() => router.push("/news-events")}>
+              Xem thêm
+            </button>
           </div>
         </div>
       </div>

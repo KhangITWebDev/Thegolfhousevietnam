@@ -1,9 +1,11 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Select, { components } from "react-select";
 import { Progress } from "rsuite";
 import Pagination from "../../components/pagination/pagination";
 import { ShopList } from "../../utils/DataDemo/Home/dataHome";
+import { removeAccents } from "../../utils/function";
 import { usePagination } from "../../utils/usePagination";
 import styles from "./ProShop.module.scss";
 const customStyles = {
@@ -56,6 +58,7 @@ const options = [
 
 function ProShop(props) {
   const [show1, setShow1] = useState(true);
+  const router = useRouter();
   const [activePage, setActivePage] = React.useState(1);
   const [nodeValue, setNodeValue] = useState("golf-balls");
   const data = usePagination(ShopList, 6);
@@ -128,7 +131,13 @@ function ProShop(props) {
                         height={250}
                       ></Image>
                     </div>
-                    <h5>{item.name}</h5>
+                    <h5
+                      onClick={() =>
+                        router.push(`/proshop/${removeAccents(item.name)}`)
+                      }
+                    >
+                      {item.name}
+                    </h5>
                     <p>{item.price}</p>
                     <div className={"d-flex" + " " + styles.rate}>
                       {Array(item.rate)

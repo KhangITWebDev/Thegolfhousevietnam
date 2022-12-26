@@ -11,6 +11,7 @@ import {
   NewsList,
   ShopList,
 } from "../../utils/DataDemo/Home/dataHome";
+import { removeAccents } from "../../utils/function";
 
 const slideHome = [
   {
@@ -576,7 +577,12 @@ function HomePage(props) {
             </div>
           </div>
           <div className="button">
-            <button style={{ marginTop: 100 }}>Xem thêm</button>
+            <button
+              style={{ marginTop: 100 }}
+              onClick={() => router.push("/proshop")}
+            >
+              Xem thêm
+            </button>
           </div>
         </div>
       </div>
@@ -597,7 +603,13 @@ function HomePage(props) {
                       layout="fill"
                     ></Image>
                   </div>
-                  <h5>{item.title}</h5>
+                  <h5
+                    onClick={() =>
+                      router.push(`/news-events/${removeAccents(item.title)}`)
+                    }
+                  >
+                    {item.title}
+                  </h5>
                   <span>{item.time}</span>
                   <p>{item.desc}</p>
                 </div>
@@ -605,7 +617,9 @@ function HomePage(props) {
             ))}
           </div>
           <div className="button">
-            <button>Xem thêm</button>
+            <button onClick={() => router.push("/news-events")}>
+              Xem thêm
+            </button>
           </div>
         </div>
       </div>

@@ -373,6 +373,12 @@ button {
     color: #fff;
   }
 }
+#proshop-detail {
+  .swiper-slide {
+    position: relative;
+    height: 433px !important;
+  }
+}
 #ProShopDetail {
   .nav-tabs {
     border-bottom: none;

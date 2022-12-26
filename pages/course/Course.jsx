@@ -9,32 +9,70 @@ import $ from "jquery";
 import moment from "moment";
 import { convertDate } from "../../utils/function";
 import { useEffect } from "react";
-
+import Select, { components } from "react-select";
 import { vi } from "date-fns/locale"; // the locale you want
+import { Button, Modal, Placeholder } from "rsuite";
+import Link from "next/link";
 registerLocale("vi", vi);
-const slideLogo = [
-  "/images/Home/Donors/donor1.png",
-  "/images/Home/Donors/donor2.png",
-  "/images/Home/Donors/donor3.png",
-  "/images/Home/Donors/donor4.png",
-  "/images/Home/Donors/donor4.png",
-  "/images/Home/Donors/donor4.png",
-];
-const months = [
-  "Enero ",
-  "Febrero ",
-  "Marzo ",
-  "Abril ",
-  "Mayo ",
-  "Junio ",
-  "Julio ",
-  "Agosto ",
-  "Septiembre ",
-  "Octubre ",
-  "Noviembre ",
-  "Diciembre ",
-];
+const customStyles = {
+  option: (provided, state) => ({
+    ...provided,
+    fontSize: 16,
+    color: state.isSelected ? "#fff" : "#000",
+    cursor: "pointer",
+  }),
+  singleValue: (provided, state) => ({
+    ...provided,
+    color: "#A6A6A6",
+    fontSize: 18,
+    fontWeight: 500,
+  }),
+  // dropdownIndicator: (base) => ({
+  //   ...base,
+  //   color: "#000",
+  // }),
+  indicatorSeparator: () => ({ display: "none" }),
+  container: (provided, state) => ({
+    ...provided,
+    width: "100%",
+    border: "1px solid #979797",
 
+    borderRadius: 4,
+  }),
+  input: (base, state) => ({
+    ...base,
+    color: "#A6A6A6",
+    fontSize: 18,
+    fontWeight: 500,
+  }),
+  control: (base, state) => ({
+    ...base,
+    backgroundColor: "tranparent",
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 6,
+    paddingBottom: 6,
+    cursor: "pointer",
+    color: "#A6A6A6",
+    border: "1px solid #979797",
+    border: state.isFocused ? 0 : 0,
+    boxShadow: state.isFocused ? 0 : 0,
+    "&:hover": {
+      border: state.isFocused ? 0 : 0,
+    },
+  }),
+};
+
+const options = [
+  { value: "1", label: "Khoá Junior" },
+  { value: "2", label: "Khoá học" },
+  { value: "3", label: "Khoá lẻ" },
+  { value: "4", label: "Tập luyện theo giờ" },
+];
+const options2 = [
+  { value: "1", label: "Chọn tỉnh/thành phố" },
+  { value: "2", label: "Thành phố Hồ Chí Minh" },
+];
 const slideCourse = [
   {
     image: "/images/Home/Course/img1.jpg",
@@ -62,6 +100,18 @@ function Course(props) {
   const [startDate, setStartDate] = useState(new Date());
   const [swiper2, setSwiper2] = React.useState(null);
   const [swiper3, setSwiper3] = React.useState(null);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [open2, setOpen2] = React.useState(false);
+  const handleOpen2 = () => setOpen2(true);
+  const handleClose2 = () => setOpen2(false);
+  const [open3, setOpen3] = React.useState(false);
+  const handleOpen3 = () => setOpen3(true);
+  const handleClose3 = () => setOpen3(false);
+  const [open4, setOpen4] = React.useState(false);
+  const handleOpen4 = () => setOpen4(true);
+  const handleClose4 = () => setOpen4(false);
   function insertAtIndex(i) {
     if (i === 0) {
       $("#calendar .react-datepicker__month").prepend("<div>okay things</div>");
@@ -81,6 +131,19 @@ function Course(props) {
       });
     });
   }, []);
+  const DropdownIndicator = (props) => {
+    return (
+      <components.DropdownIndicator {...props}>
+        <i
+          className="fa-solid fa-caret-down"
+          style={{
+            fontSize: 20,
+            color: "#A6A6A6",
+          }}
+        ></i>
+      </components.DropdownIndicator>
+    );
+  };
 
   return (
     <div className={styles.course_page}>
@@ -188,7 +251,7 @@ function Course(props) {
             >
               {slideCourse.map((item) => (
                 <SwiperSlide key={item}>
-                  <div className="d-flex flex-column info">
+                  <div className="d-flex flex-column info" onClick={handleOpen}>
                     <div>
                       <div className="image">
                         <Image alt="Intro 1" src={item.image} layout="fill" />
@@ -407,6 +470,179 @@ function Course(props) {
           </div>
         </div>
       </div>
+      <Modal open={open} onClose={handleClose} id="modal-signup">
+        <Modal.Header>
+          <Modal.Title>Đăng ký học</Modal.Title>
+          <button onClick={handleClose}>
+            <i className="fa-light fa-times"></i>
+          </button>
+        </Modal.Header>
+        <Modal.Body>
+          <h5>Chào mừng trở lại, vui lòng đăng ký thông tin:</h5>
+          <form action="">
+            <div className="form-group">
+              <label htmlFor="" className="form-label">
+                Họ tên
+              </label>
+              <input type="text" className="form-control" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="" className="form-label">
+                Email
+              </label>
+              <input type="text" className="form-control" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="" className="form-label">
+                Điện Thoại
+              </label>
+              <input type="text" className="form-control" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="" className="form-label">
+                Điện Thoại
+              </label>
+              <input type="text" className="form-control" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="" className="form-label">
+                Khóa học
+              </label>
+              <Select
+                options={options}
+                styles={customStyles}
+                defaultValue={options[0]}
+                components={{ DropdownIndicator }}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="" className="form-label">
+                Tỉnh/Thành phố
+              </label>
+              <Select
+                options={options2}
+                styles={customStyles}
+                defaultValue={options2[0]}
+                components={{ DropdownIndicator }}
+              />
+            </div>
+            <div className="button">
+              <button>Đăng ký</button>
+            </div>
+          </form>
+        </Modal.Body>
+      </Modal>
+      <Modal open={open2} onClose={handleClose2} id="modal-signup">
+        <Modal.Header>
+          <Modal.Title>Yêu cầu khi đặt lịch</Modal.Title>
+          <button onClick={handleClose2}>
+            <i className="fa-light fa-times"></i>
+          </button>
+        </Modal.Header>
+        <Modal.Body>
+          <h5>Chào mừng trở lại, vui lòng đăng nhập:</h5>
+          <form action="">
+            <div className="form-group">
+              <label htmlFor="" className="form-label">
+                Email
+              </label>
+              <input type="text" className="form-control" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="" className="form-label">
+                Mật khẩu
+              </label>
+              <input type="text" className="form-control" />
+            </div>
+            <div style={{ marginTop: 20 }}>
+              <Link href="">
+                <a className="link">Quên mật khẩu?</a>
+              </Link>
+            </div>
+            <div className="button">
+              <button>Đăng nhập</button>
+            </div>
+          </form>
+        </Modal.Body>
+      </Modal>
+      <Modal open={open3} onClose={handleClose3} id="modal-notify">
+        <Modal.Header>
+          <Modal.Title></Modal.Title>
+          <button onClick={handleClose3}>
+            <i className="fa-light fa-times"></i>
+          </button>
+        </Modal.Header>
+        <Modal.Body>
+          <i className="fa-regular fa-circle-check"></i>
+          <h5>Chúc mừng bạn đã đặt lịch thành công</h5>
+          <h6>Vui lòng kiểm tra lại thông tin của bạn!</h6>
+          <div className="button">
+            <button>Kiểm tra</button>
+          </div>
+        </Modal.Body>
+      </Modal>
+      <Modal open={open4} onClose={handleClose4} id="modal-checkinfo">
+        <Modal.Header>
+          <Modal.Title>Thông tin đặt lịch của bạn</Modal.Title>
+          <button onClick={handleClose4}>
+            <i className="fa-light fa-times"></i>
+          </button>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="d-flex flex-column">
+            <div className="d-flex information_column">
+              <h6 className="col-3">
+                <i className="fa-light fa-memo"></i>
+                <span>Khoá học:</span>
+              </h6>
+              <div className="col-9">
+                <h6 className="desc">Khoá Junior</h6>
+              </div>
+            </div>
+            <div className="d-flex information_column">
+              <h6 className="col-3">
+                <i className="fa-light fa-user-alt"></i>
+                <span>Tên:</span>
+              </h6>
+              <div className="col-9">
+                <h6 className="desc">Thành Vinh</h6>
+              </div>
+            </div>
+            <div className="d-flex information_column">
+              <h6 className="col-3">
+                <i className="fa-light fa-clock"></i>
+                <span>Thời gian:</span>
+              </h6>
+              <div className="col-9">
+                <h6 className="desc">Thứ 3 9:40:22, 20 tháng 12, 2022</h6>
+              </div>
+            </div>
+            <div className="d-flex information_column">
+              <h6 className="col-3">
+                <i className="fa-light fa-location-dot"></i>
+                <span>Địa điểm:</span>
+              </h6>
+              <div className="col-9">
+                <h6 className="desc">
+                  85-87 Nguyen Co Thach, An Loi Đong, Q.2, TPHCM
+                </h6>
+              </div>
+            </div>
+            <div className="d-flex information_column">
+              <h6 className="col-3">
+                <i className="fa-light fa-file-lines"></i>
+                <span>Chi tiết:</span>
+              </h6>
+              <div className="col-9">
+                <h6 className="desc">
+                  Tên: Thanh Vinh <br /> Số điện thoại: 0378759723 <br />
+                  Email: admin@example.com
+                </h6>
+              </div>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }

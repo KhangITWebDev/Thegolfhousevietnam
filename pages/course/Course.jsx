@@ -11,7 +11,7 @@ import { convertDate } from "../../utils/function";
 import { useEffect } from "react";
 import Select, { components } from "react-select";
 import { vi } from "date-fns/locale"; // the locale you want
-import { Button, Modal, Placeholder } from "rsuite";
+import { Button, Loader, Modal, Placeholder } from "rsuite";
 import Link from "next/link";
 registerLocale("vi", vi);
 const customStyles = {
@@ -64,9 +64,9 @@ const customStyles = {
 };
 
 const options = [
-  { value: "1", label: "Khoá Junior" },
+  { value: "1", label: "Khoá lẻ" },
   { value: "2", label: "Khoá học" },
-  { value: "3", label: "Khoá lẻ" },
+  { value: "3", label: "Khoá Junior" },
   { value: "4", label: "Tập luyện theo giờ" },
 ];
 const options2 = [
@@ -101,16 +101,40 @@ function Course(props) {
   const [swiper2, setSwiper2] = React.useState(null);
   const [swiper3, setSwiper3] = React.useState(null);
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const [rows, setRows] = React.useState(0);
+  const handleOpen = () => {
+    setOpen(true);
+    setOpen2(false);
+    setOpen3(false);
+    setOpen4(false);
+  };
   const handleClose = () => setOpen(false);
+  const handleEntered = () => {
+    setTimeout(() => setRows(80), 2000);
+  };
   const [open2, setOpen2] = React.useState(false);
-  const handleOpen2 = () => setOpen2(true);
+  const handleOpen2 = () => {
+    setOpen2(true);
+    setOpen(false);
+    setOpen3(false);
+    setOpen4(false);
+  };
   const handleClose2 = () => setOpen2(false);
   const [open3, setOpen3] = React.useState(false);
-  const handleOpen3 = () => setOpen3(true);
+  const handleOpen3 = () => {
+    setOpen3(true);
+    setOpen2(false);
+    setOpen(false);
+    setOpen4(false);
+  };
   const handleClose3 = () => setOpen3(false);
   const [open4, setOpen4] = React.useState(false);
-  const handleOpen4 = () => setOpen4(true);
+  const handleOpen4 = () => {
+    setOpen4(true);
+    setOpen2(false);
+    setOpen3(false);
+    setOpen(false);
+  };
   const handleClose4 = () => setOpen4(false);
   function insertAtIndex(i) {
     if (i === 0) {
@@ -121,6 +145,7 @@ function Course(props) {
       "<div>great things</div>"
     );
   }
+  const [detailIndex, setDetailIndex] = useState(2);
   useEffect(() => {
     $("#course-team .swiper-pagination-bullet").each(function (indexC) {
       $(this).css({
@@ -144,7 +169,6 @@ function Course(props) {
       </components.DropdownIndicator>
     );
   };
-
   return (
     <div className={styles.course_page}>
       <div className="container">
@@ -249,9 +273,9 @@ function Course(props) {
               onSwiper={(s) => setSwiper3(s)}
               className="mySwiper"
             >
-              {slideCourse.map((item) => (
+              {slideCourse.map((item, index) => (
                 <SwiperSlide key={item}>
-                  <div className="d-flex flex-column info" onClick={handleOpen}>
+                  <div className="d-flex flex-column info">
                     <div>
                       <div className="image">
                         <Image alt="Intro 1" src={item.image} layout="fill" />
@@ -268,7 +292,12 @@ function Course(props) {
                         </div>
                         <h5>{item.title}</h5>
                         <div className="tool">
-                          <button className="d-flex align-items-center">
+                          <button
+                            className="d-flex align-items-center"
+                            onClick={() => {
+                              setDetailIndex(index);
+                            }}
+                          >
                             <span>Xem thêm</span>
                             <i className="fa-light fa-arrow-right"></i>
                           </button>
@@ -297,13 +326,15 @@ function Course(props) {
                   <div className="image">
                     <Image
                       alt="Intro 1"
-                      src="/images/Home/Course/img3.jpg"
+                      src={slideCourse[detailIndex]?.image}
                       layout="fill"
                     />
                   </div>
                   {/* <div className="detail"></div> */}
                   <div className="detail d-flex justify-content-end">
-                    <h5>Khoá Junior</h5>
+                    <h5 onClick={handleOpen}>
+                      {slideCourse[detailIndex]?.title}
+                    </h5>
                     <span>Dành cho người tười 4-13 tuổi</span>
                     <h4>
                       20.000.000 VND <p>/tháng</p>
@@ -311,7 +342,7 @@ function Course(props) {
                     <p>
                       Học hằng tuần <br /> Giảm giá 10%
                     </p>
-                    <div className="button">
+                    <div className="button" onClick={handleOpen}>
                       <button>Đăng ký</button>
                     </div>
                   </div>
@@ -428,7 +459,10 @@ function Course(props) {
           <div className={styles.content}>
             <DatePicker
               selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              onChange={(date) => {
+                setStartDate(date);
+                handleOpen2();
+              }}
               minDate={moment().toDate()}
               shouldCloseOnSelect={false}
               open={true}
@@ -470,7 +504,13 @@ function Course(props) {
           </div>
         </div>
       </div>
-      <Modal open={open} onClose={handleClose} id="modal-signup">
+      <Modal
+        open={open}
+        onClose={handleClose}
+        id="modal-signup"
+        data-aos="fade-down"
+        data-aos-delay="800"
+      >
         <Modal.Header>
           <Modal.Title>Đăng ký học</Modal.Title>
           <button onClick={handleClose}>
@@ -479,7 +519,13 @@ function Course(props) {
         </Modal.Header>
         <Modal.Body>
           <h5>Chào mừng trở lại, vui lòng đăng ký thông tin:</h5>
-          <form action="">
+          <form
+            action=""
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleOpen3();
+            }}
+          >
             <div className="form-group">
               <label htmlFor="" className="form-label">
                 Họ tên
@@ -500,18 +546,12 @@ function Course(props) {
             </div>
             <div className="form-group">
               <label htmlFor="" className="form-label">
-                Điện Thoại
-              </label>
-              <input type="text" className="form-control" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="" className="form-label">
                 Khóa học
               </label>
               <Select
                 options={options}
                 styles={customStyles}
-                defaultValue={options[0]}
+                defaultValue={options[detailIndex]}
                 components={{ DropdownIndicator }}
               />
             </div>
@@ -526,13 +566,19 @@ function Course(props) {
                 components={{ DropdownIndicator }}
               />
             </div>
-            <div className="button">
+            <div className="button" onClick={handleOpen3}>
               <button>Đăng ký</button>
             </div>
           </form>
         </Modal.Body>
       </Modal>
-      <Modal open={open2} onClose={handleClose2} id="modal-signup">
+      <Modal
+        open={open2}
+        onClose={handleClose2}
+        id="modal-signup"
+        data-aos="fade-down"
+        data-aos-delay="800"
+      >
         <Modal.Header>
           <Modal.Title>Yêu cầu khi đặt lịch</Modal.Title>
           <button onClick={handleClose2}>
@@ -565,23 +611,43 @@ function Course(props) {
           </form>
         </Modal.Body>
       </Modal>
-      <Modal open={open3} onClose={handleClose3} id="modal-notify">
+      <Modal
+        open={open3}
+        onClose={handleClose3}
+        onEntered={handleEntered}
+        onExited={() => {
+          setRows(0);
+        }}
+        id="modal-notify"
+      >
         <Modal.Header>
           <Modal.Title></Modal.Title>
           <button onClick={handleClose3}>
             <i className="fa-light fa-times"></i>
           </button>
         </Modal.Header>
-        <Modal.Body>
-          <i className="fa-regular fa-circle-check"></i>
-          <h5>Chúc mừng bạn đã đặt lịch thành công</h5>
-          <h6>Vui lòng kiểm tra lại thông tin của bạn!</h6>
-          <div className="button">
-            <button>Kiểm tra</button>
+        {rows ? (
+          <Modal.Body>
+            <i className="fa-regular fa-circle-check"></i>
+            <h5>Chúc mừng bạn đã đặt lịch thành công</h5>
+            <h6>Vui lòng kiểm tra lại thông tin của bạn!</h6>
+            <div className="button" onClick={handleOpen4}>
+              <button>Kiểm tra</button>
+            </div>
+          </Modal.Body>
+        ) : (
+          <div style={{ textAlign: "center" }}>
+            <Loader size="md" />
           </div>
-        </Modal.Body>
+        )}
       </Modal>
-      <Modal open={open4} onClose={handleClose4} id="modal-checkinfo">
+      <Modal
+        open={open4}
+        onClose={handleClose4}
+        id="modal-checkinfo"
+        data-aos="fade-down"
+        data-aos-delay="800"
+      >
         <Modal.Header>
           <Modal.Title>Thông tin đặt lịch của bạn</Modal.Title>
           <button onClick={handleClose4}>

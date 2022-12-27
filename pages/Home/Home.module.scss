@@ -81,13 +81,18 @@
             }
           }
         }
-        &:hover .info button,
-        &:focus .info button {
-          span {
-            left: 0;
+        &:hover .info,
+        &:focus .info {
+          h5 {
+            color: #00b577;
           }
-          i {
-            left: 0;
+          button {
+            span {
+              left: 0;
+            }
+            i {
+              left: 0;
+            }
           }
         }
       }
@@ -268,6 +273,9 @@
         .info {
           position: relative;
           height: 500px;
+          img {
+            cursor: pointer;
+          }
         }
         .detail {
           position: absolute;
@@ -281,6 +289,10 @@
             font-weight: 700;
             line-height: 1.3;
             color: #000;
+            cursor: pointer;
+            &:hover {
+              color: #00b577;
+            }
           }
           span {
             font-size: 18px;

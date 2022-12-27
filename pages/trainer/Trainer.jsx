@@ -1,9 +1,12 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React from "react";
 import { TrainerList } from "../../utils/DataDemo/Trainer/TrainnerData";
+import { removeAccents } from "../../utils/function";
 import styles from "./Trainer.module.scss";
 
 function Trainer(props) {
+  const router = useRouter();
   return (
     <div className={styles.trainer_page}>
       <div className="container">
@@ -28,7 +31,13 @@ function Trainer(props) {
                 <Image alt="Image" src={item.image} layout="fill"></Image>
               </div>
               <div className={styles.info}>
-                <h3>{item.name}</h3>
+                <h3
+                  onClick={() =>
+                    router.push(`/trainer/${removeAccents(item.name)}`)
+                  }
+                >
+                  {item.name}
+                </h3>
                 <p>Trainer</p>
               </div>
             </div>

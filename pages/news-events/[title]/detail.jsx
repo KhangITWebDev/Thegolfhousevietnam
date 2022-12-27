@@ -46,13 +46,19 @@ function Detail(props) {
         <div className={styles.content}>
           <div className={styles.top + " " + "col-10 m-auto"}>
             <p>
-              <strong>Q</strong>proin faucibus nec mauris a sodales, sed
-              elementum mi tincidunt. Sed eget viverra egestas nisi in
-              consequat. Fusce sodales augue a accumsan. Cras sollicitudin,
-              ipsum eget blandit pulvinar. Integer tincidunt. Cras dapibus.
-              Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.
-              Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,
-              enim.
+              <strong
+                style={{
+                  fontSize: 50,
+                }}
+              >
+                Q
+              </strong>
+              proin faucibus nec mauris a sodales, sed elementum mi tincidunt.
+              Sed eget viverra egestas nisi in consequat. Fusce sodales augue a
+              accumsan. Cras sollicitudin, ipsum eget blandit pulvinar. Integer
+              tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean
+              vulputate eleifend tellus. Aenean leo ligula, porttitor eu,
+              consequat vitae, eleifend ac, enim.
             </p>
             <p>
               Sed ut perspiciatis, unde omnis iste natus error sit voluptatem

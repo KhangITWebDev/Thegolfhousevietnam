@@ -310,37 +310,23 @@ button {
   }
 }
 #pro-shop {
-  .nav-pills .nav-link {
-    border-radius: 0px;
-    color: #000;
-    font-size: 16px;
-    font-weight: 600;
-    padding: 8px 0px;
-    width: fit-content;
-    .item {
-      padding-left: 25px;
-    }
-    .sub-item {
-      padding-left: 35px;
-      padding-right: 40px;
-    }
-    .fa-regular.fa-chevron-down {
-      margin-left: 10px;
-    }
-    .fa-solid.fa-grid-2 {
-      margin-right: 10px;
-    }
-  }
-  .rs-progress-line {
-    padding: 0px;
+  .rs-slider {
     margin-bottom: 20px;
   }
-  .nav-pills .nav-link.active {
-    background: #0b2b20;
-    color: #fff;
+  .rs-slider-progress-bar {
+    background-color: #7c8e5b;
   }
-  .tab-content {
-    width: 100%;
+  .rs-slider-handle {
+    &::before {
+      background-color: #7c8e5b;
+      border-color: #7c8e5b;
+    }
+  }
+  .rs-slider-bar {
+    border-radius: 0px;
+  }
+  .rs-slider-progress-bar {
+    border-radius: 0px;
   }
   .swiper {
     width: 100%;
@@ -1104,12 +1090,16 @@ button {
     position: relative;
     .content {
       padding: 70px 90px 135px;
+      img {
+        cursor: pointer;
+      }
       p {
         font-size: 22px;
         font-weight: 400;
         line-height: 1.3;
         margin-top: 40px;
         text-align: center;
+        cursor: text;
       }
       .icon {
         font-size: 80px;
@@ -1122,6 +1112,10 @@ button {
         line-height: 1.3;
         font-weight: 700;
         text-align: center;
+        cursor: pointer;
+        &:hover {
+          color: #00b577;
+        }
       }
       span {
         font-size: 20px;
@@ -1129,18 +1123,6 @@ button {
         line-height: 1.3;
       }
     }
-    // .btn-content {
-    //   background: #00b577;
-    //   color: #fff;
-    //   font-size: 16px;
-    //   font-weight: 700;
-    //   text-transform: capitalize;
-    //   padding: 8px 40px;
-    //   border: 2px solid #00b577;
-    //   &:hover {
-    //     background: transparent;
-    //   }
-    // }
   }
 }
 #course-team {
@@ -1194,6 +1176,7 @@ button {
         line-height: 1.3;
         margin-top: 40px;
         text-align: center;
+        cursor: text;
       }
       .icon {
         font-size: 80px;
@@ -1207,6 +1190,10 @@ button {
         font-weight: 700;
         text-align: center;
         margin-top: 30px;
+        cursor: pointer;
+        &:hover {
+          color: #00b577;
+        }
       }
       span {
         font-size: 20px;
@@ -1258,9 +1245,9 @@ button {
     }
   }
   .swiper-slide {
-    // margin-top: 65px;
     height: 480px;
     position: relative;
+    cursor: pointer;
     .detail {
       height: 480px;
       position: absolute;
@@ -1268,7 +1255,7 @@ button {
       width: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: end;
+      justify-content: flex-end;
     }
     &:nth-child(1) {
       .detail {
@@ -1294,6 +1281,7 @@ button {
       position: relative;
       height: 280px;
       z-index: -999999999;
+      cursor: pointer;
     }
     .icon {
       background-color: #fff;
@@ -1347,14 +1335,16 @@ button {
         padding-right: 28px;
       }
     }
-    &:hover .info button,
-    &:focus .info button {
-      span {
-        left: 0;
-        margin-right: 10px;
-      }
-      i {
-        left: 0;
+    &:hover .info,
+    &:focus .info {
+      button {
+        span {
+          left: 0;
+          margin-right: 10px;
+        }
+        i {
+          left: 0;
+        }
       }
     }
   }
@@ -1408,6 +1398,10 @@ button {
         padding-left: 10px;
         padding-right: 10px;
         color: #000;
+        cursor: pointer;
+        &:hover {
+          color: #00b577;
+        }
       }
       span,
       p {
@@ -1835,6 +1829,10 @@ button {
         padding-right: 15px;
         padding-left: 15px;
         color: #000;
+        cursor: pointer;
+        &:hover {
+          color: #00b577;
+        }
       }
       p {
         font-size: 20px;
@@ -1866,6 +1864,24 @@ button {
     //     left: 0;
     //   }
     // }
+  }
+}
+#trainer-detail {
+  .rs-progress-line-bg {
+    background-color: #7c8e5b;
+  }
+  .rs-progress-line-inner {
+    height: 8px;
+    border-radius: 0px;
+  }
+  .rs-progress-line-outer {
+    border-radius: 0px;
+  }
+  .rs-progress-line-bg {
+    border-radius: 0px;
+  }
+  .rs-progress-line {
+    padding: 0px;
   }
 }
 #tab-desc {
@@ -2385,7 +2401,6 @@ button {
   }
 }
 .btn-down {
-  margin-top: 30px;
   background-color: transparent;
   border: none !important;
   font-size: 22px;

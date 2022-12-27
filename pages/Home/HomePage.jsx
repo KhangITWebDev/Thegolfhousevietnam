@@ -44,8 +44,8 @@ const slideLogo = [
   "/images/Home/Donors/donor2.png",
   "/images/Home/Donors/donor3.png",
   "/images/Home/Donors/donor4.png",
-  "/images/Home/Donors/donor4.png",
-  "/images/Home/Donors/donor4.png",
+  "/images/Home/Donors/donor5.png",
+  "/images/Home/Donors/donor2.png",
 ];
 const slideCourse = [
   {
@@ -244,8 +244,11 @@ function HomePage(props) {
                 1920: {
                   slidesPerView: 5,
                 },
+                1440: {
+                  slidesPerView: 5,
+                },
                 1280: {
-                  slidesPerView: 4,
+                  slidesPerView: 5,
                 },
                 992: {
                   slidesPerView: 4,
@@ -267,7 +270,7 @@ function HomePage(props) {
             >
               {slideLogo.map((item) => (
                 <SwiperSlide key={item}>
-                  <Image alt="item 1" src={item} width={160} height={150} />
+                  <Image alt="item 1" src={item} width={120} height={120} />
                 </SwiperSlide>
               ))}
             </Swiper>

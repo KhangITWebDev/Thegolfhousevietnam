@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Select, { components } from "react-select";
-import { Progress } from "rsuite";
+import { Progress, Slider } from "rsuite";
 import Pagination from "../../components/pagination/pagination";
 import { ShopList } from "../../utils/DataDemo/Home/dataHome";
 import { removeAccents } from "../../utils/function";
@@ -58,9 +58,8 @@ const options = [
 
 function ProShop(props) {
   const [show1, setShow1] = useState(true);
+  const [value, setValue] = React.useState(30);
   const router = useRouter();
-  const [activePage, setActivePage] = React.useState(1);
-  const [nodeValue, setNodeValue] = useState("golf-balls");
   const data = usePagination(ShopList, 6);
   const DropdownIndicator = (props) => {
     return (
@@ -75,11 +74,6 @@ function ProShop(props) {
       </components.DropdownIndicator>
     );
   };
-  const page = [1, 2];
-  const [percent, setPercent] = React.useState(30);
-  const status = percent === 100 ? "success" : null;
-  const color = percent === 100 ? "#7C8E5B" : "#7C8E5B";
-
   return (
     <div className={styles.proshop_page}>
       <div className="container">
@@ -174,11 +168,13 @@ function ProShop(props) {
                 <li>Gậy Golf (4)</li>
               </ul>
               <h5>Lọc sản phẩm</h5>
-              <Progress.Line
-                percent={percent}
-                strokeColor={color}
-                status={status}
-                showInfo={false}
+              <Slider
+                progress
+                value={value}
+                tooltip={false}
+                onChange={(value) => {
+                  setValue(value);
+                }}
               />
               <span>Giá: 500.000 - 2.000.000 VND</span>
               <div className="button justify-content-start">

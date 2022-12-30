@@ -93,7 +93,7 @@ function Detail(props) {
                 <i className="fa-light fa-chevron-down"></i>
               </div>
               <div className="button">
-                <button>Đăng ký</button>
+                <button>Thêm vào giỏ hàng</button>
               </div>
               <i className="fa-light fa-heart"></i>
             </div>

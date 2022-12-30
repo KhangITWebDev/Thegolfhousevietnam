@@ -1,26 +1,17 @@
 export const TrainerList = [
   {
     image: "/images/Trainer/trainer1.png",
-    name: "Lewis Dawn",
+    name: "Jacques Du Toit, PGA",
+    desc: "Bậc thầy kỹ thuật",
   },
   {
     image: "/images/Trainer/trainer2.png",
-    name: "Jennie Kim",
+    name: "HLV Ryan O’Flaherty",
+    desc: "Người truyền lửa",
   },
   {
     image: "/images/Trainer/trainer3.png",
-    name: "Marry Alina",
-  },
-  {
-    image: "/images/Trainer/trainer4.png",
-    name: "John Cena",
-  },
-  {
-    image: "/images/Trainer/trainer5.png",
-    name: "Molina",
-  },
-  {
-    image: "/images/Trainer/trainer6.png",
-    name: "Enzo Fernandez",
+    name: "HLV Nguyễn Thế Vinh",
+    desc: "Golfer hàng đầu Việt Nam",
   },
 ];

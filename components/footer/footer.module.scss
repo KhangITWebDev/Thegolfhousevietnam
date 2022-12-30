@@ -4,9 +4,13 @@
     padding-top: 52px;
   }
   .menu {
+    width: fit-content;
     margin-top: 45px;
+    @media screen and (max-width: 992px) {
+      justify-content: space-between;
+    }
     &_item {
-      font-size: 18px;
+      font-size: 22px;
       color: #fff;
       font-weight: 700;
       cursor: pointer;
@@ -24,6 +28,30 @@
       &:not(:last-child) {
         margin-right: 12px;
         margin-left: 12px;
+      }
+      @media screen and (max-width: 992px) {
+        width: 33.3333%;
+        margin: 0px !important;
+        &:nth-child(2),
+        &:nth-child(5) {
+          text-align: center;
+        }
+        &:nth-child(3),
+        &:nth-child(6) {
+          text-align: right;
+        }
+        &:nth-child(4),
+        &:nth-child(5),
+        &:nth-child(6) {
+          margin-top: 30px !important;
+        }
+      }
+      @media screen and (max-width: 576px) {
+        width: 100%;
+        text-align: center !important;
+        &:not(:first-child) {
+          margin-top: 30px !important;
+        }
       }
     }
   }

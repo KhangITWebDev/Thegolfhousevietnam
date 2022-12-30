@@ -26,7 +26,10 @@ function Trainer(props) {
         </div>
         <div className="d-flex flex-wrap">
           {TrainerList.map((item, index) => (
-            <div key={index} className={"col-4" + " " + styles.item}>
+            <div
+              key={index}
+              className={"col-12 col-lg-4 col-sm-6" + " " + styles.item}
+            >
               <div className={styles.image}>
                 <Image alt="Image" src={item.image} layout="fill"></Image>
               </div>
@@ -38,13 +41,13 @@ function Trainer(props) {
                 >
                   {item.name}
                 </h3>
-                <p>Trainer</p>
+                <p>{item.desc}</p>
               </div>
             </div>
           ))}
         </div>
         <div className="button">
-          <button>Xem thêm</button>
+          <button>Xem tất cả</button>
         </div>
       </div>
     </div>

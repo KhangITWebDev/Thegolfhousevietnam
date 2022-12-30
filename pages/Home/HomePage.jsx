@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Home.module.scss";
 import Image from "next/image";
-import MainLayout from "../../components/layout/mainLayout";
+import CountUp, { useCountUp } from "react-countup";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,27 +15,39 @@ import { removeAccents } from "../../utils/function";
 
 const slideHome = [
   {
-    img: "/images/Home/slide3.png",
-    title: "THE GOLF HOUSE",
-    subTitle: "Working on a new you",
-    textButton: "Đăng ký",
-    urlButton: "/academy/sign-up",
-    openNewTab: false,
-  },
-  {
     img: "/images/Home/slide1.png",
-    title: "BẮT ĐẦU",
-    subTitle: "Hãy bắt đầu với niềm đam mê Golf của bạn",
-    textButton: "Đăng ký",
-    urlButton: "/academy/sign-up",
+    title: "ACADEMY",
+    subTitle:
+      "<p>Dù bạn là người mới bắt đầu tìm hiểu, hay người chơi Golf muốn nâng cao trình độ.</p> <p>Học viện The Golf House luôn có lộ trình phù hợp cho bạn!</p>",
+    textButton: "Tìm hiểu thêm",
+    urlButton: "/academy",
     openNewTab: false,
   },
   {
     img: "/images/Home/slide2.png",
-    title: "BẮT ĐẦU",
-    subTitle: "Hãy bắt đầu với niềm đam mê Golf của bạn",
-    textButton: "Đăng ký",
-    urlButton: "/academy/sign-up",
+    title: "PROSHOP",
+    subTitle:
+      "<p>Gậy, quần áo, phụ kiện chơi Golf,... </p><p>Một địa điểm với đầy đủ mọi sản phẩm hỗ trợ bạn trong hành trình khám phá Golf của mình.</p>",
+    textButton: "Tìm hiểu thêm",
+    urlButton: "/proshop",
+    openNewTab: false,
+  },
+  {
+    img: "/images/Home/slide3.png",
+    title: "HAIR, NAIL & SPA",
+    subTitle:
+      "<p>Chăm sóc bản thân sau thời gian tập luyện là điều cần thiết.</p> <p>Tận hưởng thời gian thư giãn tuyệt vời với các dịch vụ chăm sóc tóc,chăm sóc da, massage cao cấp.</p>",
+    textButton: "Tìm hiểu thêm",
+    urlButton: "",
+    openNewTab: false,
+  },
+  {
+    img: "/images/Home/slide4.png",
+    title: "VIP LOUNGE",
+    subTitle:
+      "<p>Không gian riêng tư, rộng rãi, được thiết kề phù hợp cho những hoạt động giải trí kết nối cộng đồng chung niềm đam mê.</p>",
+    textButton: "Tìm hiểu thêm",
+    urlButton: "",
     openNewTab: false,
   },
 ];
@@ -101,7 +113,7 @@ function HomePage(props) {
           }}
           centeredSlides={true}
           autoplay={{
-            delay: 3000,
+            delay: 5000,
             disableOnInteraction: false,
           }}
           slidesPerView={1}
@@ -118,48 +130,53 @@ function HomePage(props) {
         >
           {slideHome.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className={styles.image}>
+              <div className={styles.image_container}>
                 <Image alt={"Image"} src={item.img} layout="fill" />
                 <div className="content">
                   <div className="container h-100">
                     <div className="d-flex h-100 justify-content-center align-items-center flex-column">
                       <h1>{item.title}</h1>
-                      <p>{item.subTitle}</p>
-                      <div>
-                        <button className="btn-content">
+                      <div
+                        dangerouslySetInnerHTML={{ __html: item.subTitle }}
+                      ></div>
+                      <div className="w-100 d-flex justify-content-center">
+                        <button
+                          className="btn-content"
+                          onClick={(e) =>
+                            item.urlButton.length > 0 && item.urlButton != ""
+                              ? router.push(item.urlButton)
+                              : commingSoon(e)
+                          }
+                        >
                           {item.textButton}
                         </button>
                       </div>
                     </div>
-                    <button
-                      className="btn-prev"
-                      onClick={() => swiper.slidePrev()}
-                    >
-                      <i className="fa-thin fa-arrow-left"></i>
-                    </button>
-                    <button
-                      className="btn-next"
-                      onClick={() => swiper.slideNext()}
-                    >
-                      <i className="fa-thin fa-arrow-right"></i>
-                    </button>
                   </div>
                 </div>
               </div>
             </SwiperSlide>
           ))}
+          <button className="btn-prev" onClick={() => swiper.slidePrev()}>
+            <i className="fa-thin fa-arrow-left"></i>
+          </button>
+          <button className="btn-next" onClick={() => swiper.slideNext()}>
+            <i className="fa-thin fa-arrow-right"></i>
+          </button>
         </Swiper>
       </div>
       <div className="container">
-        <div className={styles.intro}>
-          <div className={styles.top + " " + "d-flex align-items-start"}>
-            <div className="col-6">
+        {/* <div className={styles.intro}>
+          <div
+            className={styles.top + " " + "d-flex flex-wrap align-items-start"}
+          >
+            <div className="col-12 col-md-6">
               <span>GIỚI THIỆU</span>
               <h2>
                 Tham gia <br /> The Golf House
               </h2>
             </div>
-            <div className="col-6">
+            <div className="col-12 col-md-6">
               <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. <br /> <br /> Lorem Ipsum has been the industry{"'"}s
@@ -168,11 +185,20 @@ function HomePage(props) {
               </p>
             </div>
           </div>
-          <div className={"d-flex" + " " + styles.list}>
+          <div className={"d-flex flex-wrap" + " " + styles.list}>
             {IntroList.map((item, index) => (
-              <div className={"col-3" + " " + styles.item} key={index}>
-                <div className={styles.info + " " + "d-flex flex-column"}>
-                  <div>
+              <div
+                className={"col-12 col-sm-6 col-lg-3" + " " + styles.item}
+                key={index}
+              >
+                <div
+                  className={
+                    styles.info +
+                    " " +
+                    "d-flex flex-column align-items-center align-items-sm-start"
+                  }
+                >
+                  <div className="d-flex flex-column align-items-center align-items-sm-start">
                     <Image
                       alt="Intro 1"
                       src={item.image}
@@ -181,7 +207,7 @@ function HomePage(props) {
                     />
                     <h5>{item.title}</h5>
                   </div>
-                  <div className="mt-auto">
+                  <div className="mt-auto w-100">
                     <button className="d-flex align-items-center">
                       <span>Xem thêm</span>
                       <i className="fa-light fa-arrow-right"></i>
@@ -191,41 +217,49 @@ function HomePage(props) {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
         <div className={styles.membership}>
-          <div className="d-flex align-items-center">
-            <div className={"col-6" + " " + styles.left}>
+          <div className="d-flex flex-wrap align-items-center">
+            <div className={"col-12 col-md-6" + " " + styles.left}>
               <div
                 className={
                   styles.header + " " + "d-flex flex-column align-items-end"
                 }
               >
-                <h2>2022</h2>
+                <CountUp start={1000} end={2022} delay={0} duration={2}>
+                  {({ countUpRef }) => (
+                    <div>
+                      <h2 ref={countUpRef}>2022</h2>
+                    </div>
+                  )}
+                </CountUp>
                 <span>Bắt đầu</span>
               </div>
               <div className={styles.image1}>
                 <Image
                   alt="Image 1"
                   src="/images/Home/MemberShip/mem1.png"
-                  width={434}
-                  height={580}
+                  width="100%"
+                  height="100%"
+                  layout="responsive"
                 />
               </div>
-              <div className={styles.image2}>
+              {/* <div className={styles.image2}>
                 <Image
                   alt="Image 2"
                   src="/images/Home/MemberShip/mem2.png"
                   width={300}
                   height={361}
                 />
-              </div>
+              </div> */}
             </div>
-            <div className={"col-6" + " " + styles.right}>
-              <span>THÀNH VIÊN KHOÁ HỌC</span>
-              <h3>Lộ trình học hợp lý</h3>
+            <div className={"col-12 col-md-6" + " " + styles.right}>
+              <span>THE GOLF HOUSE</span>
+              <h3>Hệ sinh thái The Golf House Vietnam</h3>
               <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.{" "}
+                Tại The Golf House Vietnam, tạo nên môi trường giúp học viên
+                trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu
+                tiên hàng đầu của chúng tôi.
               </p>
               <p>
                 <span>T2-T6: 9 AM - 21 PM</span> <br />
@@ -237,7 +271,7 @@ function HomePage(props) {
             </div>
           </div>
         </div>
-        <div className={styles.donar} id="donar">
+        {/* <div className={styles.donar} id="donar">
           <div className="">
             <Swiper
               breakpoints={{
@@ -254,18 +288,19 @@ function HomePage(props) {
                   slidesPerView: 4,
                 },
                 767: {
-                  slidesPerView: 2,
+                  slidesPerView: 3,
                 },
                 480: {
-                  slidesPerView: 1,
+                  slidesPerView: 2,
                 },
               }}
-              // slidesPerView={5}
+              slidesPerView={1}
+              loop={true}
               spaceBetween={30}
               // pagination={{
-              //   clickable: false,
+              //   clickable: true,
               // }}
-              modules={[Pagination]}
+              modules={[Pagination, Navigation]}
               className="mySwiper"
             >
               {slideLogo.map((item) => (
@@ -275,27 +310,36 @@ function HomePage(props) {
               ))}
             </Swiper>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className={styles.bannerv2}>
-        <Image alt="Image 1" src="/images/Home/bannerv2.png" layout="fill" />
+        <Image
+          alt="Image 1"
+          src="/images/Home/bannerv2.png"
+          layout="responsive"
+          width="100%"
+          height="100%"
+        />
         <div className={styles.content}>
           <div className="container h-100">
             <div className="d-flex h-100 justify-content-center align-items-center flex-column">
-              <span>KHOÁ HỌC</span>
-              <h1>Nhiều sân Golf hiện đại</h1>
-              <p></p>
-              <div>
-                <button className="btn-content">Đăng ký</button>
+              <span>ĐỘI NGŨ HUẤN LUYỆN</span>
+              <h1>Huấn luyện viên</h1>
+              <p>
+                Huấn luyện viên đạt chuẩn PGA, VGA dày dặn kinh nghiệm chơi và
+                giảng dạy Golf.
+              </p>
+              <div onClick={() => router.push("/trainer")}>
+                <button className="btn-content">Tìm hiểu thêm</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className={styles.trainer}>
+      {/* <div className={styles.trainer}>
         <div className="container">
-          <div className="d-flex">
-            <div className="col-5">
+          <div className="d-flex flex-wrap">
+            <div className="col-12 col-lg-5">
               <div className={styles.content}>
                 <span>HUẤN LUYỆN VIÊN</span>
                 <h2>Dày dặn kinh nghiệm</h2>
@@ -306,9 +350,9 @@ function HomePage(props) {
                 <button>Đăng ký</button>
               </div>
             </div>
-            <div className="col-7">
-              <div className={"d-flex" + " " + styles.list}>
-                <div className={"col-6" + " " + styles.item}>
+            <div className="col-12 col-lg-7">
+              <div className={"d-flex flex-wrap" + " " + styles.list}>
+                <div className={"col-12 col-sm-6" + " " + styles.item}>
                   <div className={styles.info}>
                     <Image
                       alt="Trainer 1"
@@ -321,7 +365,7 @@ function HomePage(props) {
                     </div>
                   </div>
                 </div>
-                <div className={"col-6" + " " + styles.item}>
+                <div className={"col-12 col-sm-6" + " " + styles.item}>
                   <div className={styles.info}>
                     <Image
                       alt="Trainer 2"
@@ -338,7 +382,7 @@ function HomePage(props) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className={styles.team} id="team">
         <div className="container">
           <Swiper
@@ -375,15 +419,17 @@ function HomePage(props) {
                     height={100}
                   />
                   <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry{"'"}
-                    s standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book.
+                    Cũng như tất cả các môn thể thao khác, Golf muốn phát triển
+                    bắt buộc hệ thống golf chuyên nghiệp phải mạnh, được xây
+                    dựng bài bản. Tôi tin rằng mô hình của The Golf House
+                    Vietnam chắc chắn sẽ góp phần giải quyết bài toán đó. Tôi sẽ
+                    cống hiến hết mình để đưa Golf chuyên nghiệp phát triển tại
+                    thị trường Việt Nam, giúp đào tạo một thế hệ Golfer giúp
+                    Golf Việt Nam vươn tầm khu vực và thế giới.
                   </p>
                   <span className="icon">“</span>
-                  <h2>La Lisa</h2>
-                  <span>Nhân viên kinh doanh</span>
+                  <h2>Ryan O’Flaherty</h2>
+                  <span>Giám đốc điều hành</span>
                 </div>
               </div>
             </SwiperSlide>
@@ -392,20 +438,21 @@ function HomePage(props) {
                 <div className="content d-flex flex-column align-items-center">
                   <Image
                     alt="Avatar"
-                    src="/images/Home/Team/team1.png"
+                    src="/images/Home/Team/team2.png"
                     width={100}
                     height={100}
                   />
                   <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry{"'"}
-                    s standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book.
+                    Trong 19 năm làm việc trong ngành Golf, tôi đã học hỏi và
+                    trải nghiệm nhiều lối kỹ thuật đa dạng từ Mỹ, Nam Phi tới
+                    châu Âu, giảng dạy cho nhiều lứa tuổi khác nhau, bao gồm cả
+                    trẻ nhỏ. Tôi tự tin sẽ mang những kiến thức của mình tới The
+                    Golf House Vietnam để khám phá ra cách Swing hiệu quả nhất
+                    cho từng học viên.
                   </p>
                   <span className="icon">“</span>
-                  <h2>La Lisa</h2>
-                  <span>Nhân viên kinh doanh</span>
+                  <h2>Jacques Du Toit</h2>
+                  <span>HLV PGA</span>
                 </div>
               </div>
             </SwiperSlide>
@@ -432,7 +479,7 @@ function HomePage(props) {
           <Image alt="Img 1" src="/images/Home/More/img4.png" layout="fill" />
         </div>
       </div>
-      <div className={styles.course} id="course">
+      {/* <div className={styles.course} id="course">
         <div className={styles.top}>
           <div className="container">
             <span>KHOÁ HỌC</span>
@@ -451,17 +498,11 @@ function HomePage(props) {
                 1920: {
                   slidesPerView: 4,
                 },
-                1280: {
-                  slidesPerView: 3,
-                },
                 992: {
                   slidesPerView: 3,
                 },
-                767: {
+                576: {
                   slidesPerView: 2,
-                },
-                480: {
-                  slidesPerView: 1,
                 },
               }}
               spaceBetween={30}
@@ -480,7 +521,6 @@ function HomePage(props) {
                       <div className="image">
                         <Image alt="Intro 1" src={item.image} layout="fill" />
                       </div>
-                      {/* <div className="detail"></div> */}
                       <div className="detail">
                         <div className="icon">
                           <Image
@@ -511,8 +551,8 @@ function HomePage(props) {
             </Swiper>
           </div>
         </div>
-      </div>
-      <div className={styles.shop}>
+      </div> */}
+      {/* <div className={styles.shop}>
         <div className="container">
           <div className="heading">
             <span className="text-center">SHOP</span>
@@ -528,13 +568,13 @@ function HomePage(props) {
                   1440: {
                     slidesPerView: 4,
                   },
-                  1280: {
+                  1080: {
                     slidesPerView: 4,
                   },
-                  992: {
+                  768: {
                     slidesPerView: 3,
                   },
-                  767: {
+                  576: {
                     slidesPerView: 2,
                   },
                   480: {
@@ -588,33 +628,44 @@ function HomePage(props) {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className={styles.news}>
         <div className="container">
           <div className="heading">
             <span className="text-center">TIN TỨC</span>
             <h2 className="text-center">Các tin tức, sự kiện</h2>
           </div>
-          <div className={"d-flex" + " " + styles.list}>
+          <div
+            className={
+              "d-flex flex-wrap justify-content-center" + " " + styles.list
+            }
+          >
             {NewsList.map((item, index) => (
-              <div key={index} className={"col-4" + " " + styles.item}>
-                <div className={styles.info}>
-                  <div className={styles.image}>
-                    <Image
-                      alt={"Image" + index + 1}
-                      src={item.image}
-                      layout="fill"
-                    ></Image>
+              <div
+                key={index}
+                className={"col-12 col-sm-6 col-lg-4" + " " + styles.item}
+              >
+                <div className={styles.info + " " + "h-100 d-flex flex-column"}>
+                  <div>
+                    <div className={styles.image}>
+                      <Image
+                        alt={"Image" + index + 1}
+                        src={item.image}
+                        layout="fill"
+                      ></Image>
+                    </div>
+                    <h5
+                      onClick={() =>
+                        router.push(`/news-events/${removeAccents(item.title)}`)
+                      }
+                    >
+                      {item.title}
+                    </h5>
                   </div>
-                  <h5
-                    onClick={() =>
-                      router.push(`/news-events/${removeAccents(item.title)}`)
-                    }
-                  >
-                    {item.title}
-                  </h5>
-                  <span>{item.time}</span>
-                  <p>{item.desc}</p>
+                  <div className={styles.bottom}>
+                    <span>{item.time}</span>
+                    <p>{item.desc}</p>
+                  </div>
                 </div>
               </div>
             ))}

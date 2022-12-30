@@ -1,22 +1,27 @@
 export const IntroList = [
   {
     image: "/images/Course/itro1.png",
-    title: "Giải đấu",
-    desc: "Được tham gia những giải đấu cọ xát trong quá trình khoá học",
+    title: "Giáo trình",
+    desc: "Đầy đủ 3 yếu tố: kỹ thuật, văn hóa và luật.",
   },
   {
     image: "/images/Course/itro2.png",
-    title: "Cơ sở vật chất",
-    desc: "Cơ sở vật chất mới và hiện đại bậc nhất",
+    title: "Đội ngũ HLV",
+    desc: "Huấn luyện viên quốc tế PGA, VGA.",
   },
   {
     image: "/images/Course/itro3.png",
-    title: "Trang thiết bị hiện đại",
-    desc: "Trang bị cho học viên các thiết bị hiện đại nhằm mang đến trãi nghiệm tốt nhất",
+    title: "Công nghệ",
+    desc: "Trang thiết bị hiện đại áp dụng công nghệ tiên tiến.",
   },
   {
     image: "/images/Course/itro4.png",
-    title: "Học viên",
-    desc: "Tự hào có hơn 1000 học viên đã và đang tham gia các khoá học",
+    title: "Cộng đồng",
+    desc: "Tạo nên cộng đồng chung niềm đam mê với nhiều hoạt động kết nối.",
+  },
+  {
+    image: "/images/Course/itro5.png",
+    title: "Chi phí",
+    desc: "Cạnh tranh và phù hợp với mọi đối tượng người chơi..",
   },
 ];

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
+import CountUp from "react-countup";
 import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./Academy.module.scss";
@@ -18,14 +19,20 @@ function Academy(props) {
           </button>
         </div>
         <div className={styles.intro}>
-          <div className="d-flex align-items-center">
-            <div className={"col-6" + " " + styles.left}>
+          <div className="d-flex flex-wrap align-items-center">
+            <div className={"col-12 col-md-6" + " " + styles.left}>
               <div
                 className={
                   styles.header + " " + "d-flex flex-column align-items-end"
                 }
               >
-                <h2>2022</h2>
+                <CountUp start={1000} end={2022} delay={0} duration={1.4}>
+                  {({ countUpRef }) => (
+                    <div>
+                      <h2 ref={countUpRef}>2022</h2>
+                    </div>
+                  )}
+                </CountUp>
                 <span>Bắt đầu</span>
               </div>
               <div className={styles.image1}>
@@ -45,7 +52,7 @@ function Academy(props) {
                 />
               </div>
             </div>
-            <div className={"col-6" + " " + styles.right}>
+            <div className={"col-12 col-md-6" + " " + styles.right}>
               <span>THE GOLF HOUSE</span>
               <h3>Học Golf bài bản cùng chuyên gia</h3>
               <p>
@@ -142,14 +149,11 @@ function Academy(props) {
                       TGH hợp tác với hệ thông sân golf và resort trải rộng trên
                       cả nước, cung cấp những buổi ra sân thực tê với nhiều dạng
                       địa hình sân, nâng cao thực chiến và sự tự tin của học
-                      viên.
-                    </p>
-                    <p>
-                      Không chỉ đào tạo chuyên môn, TGH chú trọng phát triển
-                      cộng đồng khi trở thành đôi tác chiên lược của các Hiệp
-                      hội Golf tại Việt Nam, phôi hợp đăng cai tổ chức các Giải
-                      đấu như HUBA Golf của Hiệp hội Doanh nhân TP Hồ Chí Minh,
-                      Giải Best of the Best,...
+                      viên. Không chỉ đào tạo chuyên môn, TGH chú trọng phát
+                      triển cộng đồng khi trở thành đôi tác chiên lược của các
+                      Hiệp hội Golf tại Việt Nam, phôi hợp đăng cai tổ chức các
+                      Giải đấu như HUBA Golf của Hiệp hội Doanh nhân TP Hồ Chí
+                      Minh, Giải Best of the Best,...
                     </p>
                   </div>
                   <div
@@ -200,11 +204,13 @@ function Academy(props) {
               </div>
             </Swiper>
           </div>
-          <div className={"d-flex" + " " + styles.detail}>
-            <div className="col-4">
-              <h5>Giới thiệu học viện</h5>
+          <div className={"d-flex flex-wrap" + " " + styles.detail}>
+            <div className="col-2 col-md-4">
+              <h5>
+                Giới thiệu <br /> học viện
+              </h5>
             </div>
-            <div className={"col-8" + " " + styles.image}>
+            <div className={"col-10 col-md-8 flex-wrap" + " " + styles.image}>
               <Image
                 alt="Image Course"
                 src="/images/Booking/bookinCourse.png"
@@ -216,8 +222,8 @@ function Academy(props) {
       </div>
       <div className={styles.academy_detail}>
         <div className="container">
-          <div className="d-flex">
-            <div className={"col-6" + " " + styles.item}>
+          <div className="d-flex flex-wrap">
+            <div className={"col-12 col-md-6" + " " + styles.item}>
               <div className={styles.content}>
                 <div className={styles.image}>
                   <Image
@@ -244,7 +250,7 @@ function Academy(props) {
                 </div>
               </div>
             </div>
-            <div className={"col-6" + " " + styles.item}>
+            <div className={"col-12 col-md-6" + " " + styles.item}>
               <div className={styles.content}>
                 <div className={styles.image}>
                   <Image
@@ -284,7 +290,13 @@ function Academy(props) {
         </div>
       </div>
       <div className={styles.bannerv2}>
-        <Image alt="Image 1" src="/images/Academy/banner.png" layout="fill" />
+        <Image
+          alt="Image 1"
+          src="/images/Academy/banner.png"
+          layout="responsive"
+          width="100%"
+          height="100%"
+        />
         <div className={styles.content}>
           <div className="container h-100">
             <div className="d-flex h-100 justify-content-center align-items-center flex-column">

@@ -14,33 +14,53 @@ const customStyles = {
     fontSize: 17,
     color: state.isSelected ? "#fff" : "#000",
     cursor: "pointer",
+    backgroundColor: state.isSelected ? "#00B577" : "transparent",
   }),
   singleValue: (provided, state) => ({
     ...provided,
     color: "#000",
     fontSize: 17,
+    "@media screen and (max-width: 576px)": {
+      fontSize: 15,
+    },
     fontWeight: 700,
+    margin: 0,
   }),
   dropdownIndicator: (base) => ({
     ...base,
     color: "#000",
   }),
   indicatorSeparator: () => ({ display: "none" }),
+  valueContainer: (provided, state) => ({
+    ...provided,
+    paddingLeft: 0,
+    paddingRight: 0,
+  }),
   container: (provided, state) => ({
     ...provided,
-    width: 300,
+    width: 200,
+    "@media screen and (max-width: 576px)": {
+      width: "100%",
+    },
   }),
   input: (base, state) => ({
     ...base,
     color: "#000",
     fontSize: 17,
+    "@media screen and (max-width: 576px)": {
+      fontSize: 15,
+    },
     fontWeight: 700,
+    margin: 0,
   }),
   control: (base, state) => ({
     ...base,
     backgroundColor: "tranparent",
     cursor: "pointer",
     color: "#000",
+    "@media screen and (max-width: 480px)": {
+      padding: 0,
+    },
     border: state.isFocused ? 0 : 0,
     boxShadow: state.isFocused ? 0 : 0,
     "&:hover": {
@@ -85,20 +105,44 @@ function ProShop(props) {
             <i className="fa-regular fa-chevron-down"></i>
           </button>
         </div>
+      </div>
+      <div className={styles.bannerv2}>
+        <Image alt="Image 1" src="/images/Proshop/banner.png" layout="fill" />
+        <div className={styles.bannerv2_content}>
+          <div className="container h-100">
+            <div className="d-flex h-100 justify-content-center align-items-center flex-column">
+              <span>PROSHOP</span>
+              <h1>Chương trình khuyến mãi 50%</h1>
+              {/* <p>
+                Huấn luyện viên đạt chuẩn PGA, VGA dày dặn kinh nghiệm chơi và
+                giảng dạy Golf.
+              </p> */}
+              <div onClick={() => router.push("/trainer")}>
+                <button className="btn-content">Tìm hiểu thêm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="container">
         <div
-          className={"d-flex align-items-start" + " " + styles.content}
+          className={
+            "d-flex flex-wrap align-items-start" + " " + styles.content
+          }
           id="pro-shop"
         >
-          <div className={"col-8" + " " + styles.left}>
+          <div className={"col-12 col-lg-7" + " " + styles.left}>
             <div
               className={
-                "d-flex justify-content-between align-items-center" +
+                "d-flex flex-wrap justify-content-between align-items-center" +
                 " " +
                 styles.header
               }
             >
-              <span>Hiển thị 6 trên 10 kết quả</span>
-              <div>
+              <span className="col-12 col-sm-6">
+                Hiển thị 6 trên 10 kết quả
+              </span>
+              <div className="col-12 col-sm-6 d-flex justify-content-start justify-content-sm-end">
                 <Select
                   options={options}
                   styles={customStyles}
@@ -109,7 +153,10 @@ function ProShop(props) {
             </div>
             <div className={"d-flex flex-wrap" + " " + styles.product}>
               {data.currentDatas.map((item, index) => (
-                <div key={index} className={"col-6" + " " + styles.item}>
+                <div
+                  key={index}
+                  className={"col-12 col-sm-6" + " " + styles.item}
+                >
                   <div
                     className={
                       styles.info +
@@ -148,45 +195,61 @@ function ProShop(props) {
               <Pagination data={data} />
             </div>
           </div>
-          <div className={"col-4" + " " + styles.right}>
+          <div className={"col-12 col-lg-5" + " " + styles.right}>
             <div className={styles.tabs}>
-              <h5>Mới nhất</h5>
-              <span>Không có sản phẩm nào</span>
-              <h5>Tìm kiếm</h5>
-              <div className="input-position">
-                <div className="icon">
-                  <i className="fa-regular fa-magnifying-glass"></i>
+              <div className={"d-flex flex-wrap" + " " + styles.top}>
+                <div className="col-12 col-lg-12 col-md-6">
+                  <h5>Mới nhất</h5>
+                  <span>Không có sản phẩm nào</span>
                 </div>
-                <input type="text" placeholder="Tìm sản phẩm ..." />
+                <div className="col-12 col-lg-12 col-md-6">
+                  <h5>Tìm kiếm</h5>
+                  <div className="input-position">
+                    <div className="icon">
+                      <i className="fa-regular fa-magnifying-glass"></i>
+                    </div>
+                    <input type="text" placeholder="Tìm sản phẩm ..." />
+                  </div>
+                </div>
               </div>
-              <h5>Loại sản phẩm</h5>
-              <ul>
-                <li>Phụ kiện (1)</li>
-                <li>Trang phục (1)</li>
-                <li>Bóng Golf (1)</li>
-                <li>Combo Golf (2)</li>
-                <li>Gậy Golf (4)</li>
-              </ul>
-              <h5>Lọc sản phẩm</h5>
-              <Slider
-                progress
-                value={value}
-                tooltip={false}
-                onChange={(value) => {
-                  setValue(value);
-                }}
-              />
-              <span>Giá: 500.000 - 2.000.000 VND</span>
-              <div className="button justify-content-start">
-                <button>Lọc</button>
+              <div className={"d-flex flex-wrap" + " " + styles.center}>
+                <div className="col-12 col-lg-12 col-md-6">
+                  <h5>Loại sản phẩm</h5>
+                  <ul>
+                    <li>Phụ kiện (1)</li>
+                    <li>Trang phục (1)</li>
+                    <li>Bóng Golf (1)</li>
+                    <li>Combo Golf (2)</li>
+                    <li>Gậy Golf (4)</li>
+                  </ul>
+                </div>
+                <div className="col-12 col-lg-12 col-md-6">
+                  <h5>Lọc sản phẩm</h5>
+                  <Slider
+                    progress
+                    value={value}
+                    tooltip={false}
+                    onChange={(value) => {
+                      setValue(value);
+                    }}
+                  />
+                  <span>Giá: 500.000 - 2.000.000 VND</span>
+                  <div className="button justify-content-start">
+                    <button>Lọc</button>
+                  </div>
+                </div>
               </div>
-              <h5>Thẻ</h5>
-              <div className={styles.tag}>
-                <button>Giảm giá</button>
-                <button>Mới</button>
-                <button>KM</button>
-                <button>Nổi bật</button>
-                <button>Shop</button>
+              <div className={"d-flex flex-wrap" + " " + styles.bottom}>
+                <div className="col-12 col-lg-12 col-md-6">
+                  <h5>Thẻ</h5>
+                  <div className={styles.tag}>
+                    <button>Giảm giá</button>
+                    <button>Mới</button>
+                    <button>KM</button>
+                    <button>Nổi bật</button>
+                    <button>Shop</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

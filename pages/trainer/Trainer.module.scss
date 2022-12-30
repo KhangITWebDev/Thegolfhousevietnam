@@ -18,6 +18,26 @@
     &:nth-child(6) {
       padding-left: 20px;
     }
+    @media screen and (max-width: 992px) {
+      &:nth-child(odd) {
+        padding-right: 20px;
+        padding-left: 0px;
+      }
+      &:nth-child(even) {
+        padding-left: 20px;
+        padding-right: 0px;
+      }
+    }
+    @media screen and (max-width: 576px) {
+      &:nth-child(odd) {
+        padding-right: 0px;
+        padding-left: 0px;
+      }
+      &:nth-child(even) {
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+    }
     .image {
       position: relative;
       width: 100%;

@@ -20,7 +20,7 @@ function Footer(props) {
               height={87}
             />
           </div>
-          <div className={styles.menu + " " + "d-flex"}>
+          <div className={styles.menu + " " + "d-flex flex-wrap"}>
             <div className={styles.menu_item}>Trang chủ</div>
             <div className={styles.menu_item}>Về chúng tôi</div>
             <div className={styles.menu_item}>Giới thiệu</div>

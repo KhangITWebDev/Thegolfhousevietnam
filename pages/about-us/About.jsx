@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import CountUp from "react-countup";
 import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { removeAccents } from "../../utils/function";
@@ -31,14 +32,20 @@ function About(props) {
     <div className={styles.about_page}>
       <div className="container">
         <div className={styles.membership} id="founder">
-          <div className="d-flex align-items-center">
-            <div className={"col-6" + " " + styles.left}>
+          <div className="d-flex flex-wrap align-items-center">
+            <div className={"col-12 col-md-6" + " " + styles.left}>
               <div
                 className={
                   styles.header + " " + "d-flex flex-column align-items-end"
                 }
               >
-                <h2>2022</h2>
+                <CountUp start={1000} end={2022} delay={0} duration={2}>
+                  {({ countUpRef }) => (
+                    <div>
+                      <h2 ref={countUpRef}>2022</h2>
+                    </div>
+                  )}
+                </CountUp>
                 <span>Bắt đầu</span>
               </div>
               <div className={styles.image1}>
@@ -58,7 +65,7 @@ function About(props) {
                 />
               </div>
             </div>
-            <div className={"col-6" + " " + styles.right}>
+            <div className={"col-12 col-md-6" + " " + styles.right}>
               <span>VỀ CHÚNG TÔI</span>
               <h3>Nhà sáng lập</h3>
               <p>
@@ -87,10 +94,11 @@ function About(props) {
             }}
           >
             <SwiperSlide>
-              <div className="detail d-flex flex-row-reverse">
-                <div className="col-4 d-flex flex-column justify-content-between">
-                  <h5>
-                    Lio <br /> Holding
+              <div className="detail d-flex flex-wrap-reverse  flex-row-reverse justify-content-start">
+                <div className="col-12 col-sm-4 d-flex flex-column justify-content-between">
+                  <h5 className="d-flex flex-row flex-sm-column">
+                    <strong>Lio</strong>
+                    <strong>Holding</strong>
                   </h5>
                   <div className="info">
                     <div className="d-flex justify-content-between navigation">
@@ -134,7 +142,7 @@ function About(props) {
                     </div>
                   </div>
                 </div>
-                <div className="col-8 image">
+                <div className="col-12 col-sm-8 image">
                   <Image
                     alt="Image Course"
                     src="/images/About/about2.png"
@@ -144,10 +152,11 @@ function About(props) {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className="detail d-flex flex-row-reverse">
-                <div className="col-4 d-flex flex-column justify-content-between">
-                  <h5>
-                    Lio <br /> Holding
+              <div className="detail d-flex flex-wrap-reverse flex-row-reverse">
+                <div className="col-12 col-sm-4 d-flex flex-column justify-content-between">
+                  <h5 className="d-flex flex-row flex-sm-column">
+                    <strong>Lio</strong>
+                    <strong>Holding</strong>
                   </h5>
                   <div className="info">
                     <div className="d-flex justify-content-between navigation">
@@ -191,7 +200,7 @@ function About(props) {
                     </div>
                   </div>
                 </div>
-                <div className="col-8 image">
+                <div className="col-12 col-sm-8 image">
                   <Image
                     alt="Image Course"
                     src="/images/About/about3.png"
@@ -211,47 +220,68 @@ function About(props) {
               <i className="fa-regular fa-chevron-down"></i>
             </button>
           </div>
-          <div className={"d-flex" + " " + styles.contain}>
-            <div className="col-6">
-              <div className={styles.info_left}>
-                <div className={styles.image}>
-                  <Image
-                    alt="Image"
-                    src="/images/About/new1.png"
-                    layout="fill"
-                  />
+          <div className={"d-flex flex-wrap" + " " + styles.contain}>
+            <div className="col-12 col-lg-6">
+              <div
+                className={
+                  styles.info_left +
+                  " " +
+                  "d-flex flex-column flex-lg-column flex-sm-row"
+                }
+              >
+                <div
+                  className={"col-12 col-lg-12 col-sm-4" + " " + styles.wrap}
+                >
+                  <div className={styles.image}>
+                    <Image
+                      alt="Image"
+                      src="/images/About/new1.png"
+                      layout="fill"
+                    />
+                  </div>
                 </div>
-                <h3
-                  onClick={() =>
-                    router.push(
-                      `/news-events/${removeAccents(
-                        "Quỹ thưởng LPGA Tour 2023 vượt mốc 100 triệu USD"
-                      )}`
-                    )
+                <div
+                  className={
+                    "d-flex flex-column justify-content-start justify-content-lg-between col-12 col-lg-12 col-sm-8" +
+                    " " +
+                    styles.content
                   }
                 >
-                  Quỹ thưởng LPGA Tour 2023 vượt mốc 100 triệu USD
-                </h3>
-                <span>1 giờ trước</span>
-                <p>
-                  Đấu trường golf nữ hạng nhât Mỹ sẽ chi tổng cộng 101,4 triệu
-                  USD tiên thưởng cho mùa tới, theo công bố ngày 18/11.
-                </p>
+                  <h3
+                    onClick={() =>
+                      router.push(
+                        `/news-events/${removeAccents(
+                          "Quỹ thưởng LPGA Tour 2023 vượt mốc 100 triệu USD"
+                        )}`
+                      )
+                    }
+                  >
+                    Quỹ thưởng LPGA Tour 2023 vượt mốc 100 triệu USD
+                  </h3>
+                  <span>1 giờ trước</span>
+                  <p>
+                    Đấu trường golf nữ hạng nhât Mỹ sẽ chi tổng cộng 101,4 triệu
+                    USD tiên thưởng cho mùa tới, theo công bố ngày 18/11.
+                  </p>
+                </div>
               </div>
             </div>
-            <div className="col-6">
+            <div className="col-12 col-lg-6">
               <div className={styles.right + " " + "d-flex flex-column"}>
                 {newList.map((item, index) => {
                   return (
-                    <div className={styles.item + " " + "d-flex"} key={index}>
-                      <div className={styles.wrapp + " " + "col-4"}>
+                    <div
+                      className={styles.item + " " + "d-flex flex-wrap"}
+                      key={index}
+                    >
+                      <div className={styles.wrapp + " " + "col-12 col-lg-4"}>
                         <div className={styles.image}>
                           <Image alt="Image" src={item.image} layout="fill" />
                         </div>
                       </div>
                       <div
                         className={
-                          "d-flex flex-column justify-content-between col-8" +
+                          "d-flex flex-column justify-content-start  justify-content-lg-between col-12 col-lg-8" +
                           " " +
                           styles.content
                         }

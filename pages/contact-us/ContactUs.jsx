@@ -46,11 +46,8 @@ function ContactUs(props) {
               992: {
                 slidesPerView: 3,
               },
-              767: {
+              576: {
                 slidesPerView: 2,
-              },
-              480: {
-                slidesPerView: 1,
               },
             }}
             slidesPerView={1}
@@ -90,13 +87,13 @@ function ContactUs(props) {
         </div>
       </div>
       <div className={styles.form}>
-        <div className="d-flex">
-          <div className={"col-6" + " " + styles.left}>
+        <div className="d-flex flex-wrap">
+          <div className={"col-12 col-md-6" + " " + styles.left}>
             <Image alt="map" src="/images/Contact/Map.png" layout="fill" />
           </div>
-          <div className={"col-6" + " " + styles.right}>
+          <div className={"col-12 col-md-6" + " " + styles.right}>
             <div>
-              <div className="heading align-items-start">
+              <div className="heading align-items-start w-100">
                 <span>LIÊN HỆ VỚI CHÚNG TÔI</span>
                 <h2 className={styles.title_page}>Để lại thông tin với TGH</h2>
               </div>

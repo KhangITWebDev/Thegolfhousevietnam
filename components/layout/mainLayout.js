@@ -87,16 +87,27 @@ function MainLayout({ children }) {
     <>
       <div className="wrapper-project">
         {router.pathname === "/" ? (
-          <HeaderMain
-            appearance="subtle"
-            activeKey={activeKey}
-            onSelect={setActiveKey}
-          />
+          !visible ? (
+            <HeaderMain
+              appearance="subtle"
+              activeKey={activeKey}
+              onSelect={setActiveKey}
+              visible={visible}
+            />
+          ) : (
+            <HeaderAccademy
+              appearance="subtle"
+              activeKey={activeKey}
+              onSelect={setActiveKey}
+              visible={visible}
+            />
+          )
         ) : (
           <HeaderAccademy
             appearance="subtle"
             activeKey={activeKey}
             onSelect={setActiveKey}
+            visible={visible}
           />
         )}
         <div>{children}</div>

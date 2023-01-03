@@ -9,6 +9,8 @@ import Swal from "sweetalert2";
 export default function HeaderMoblie({
   onSelect,
   activeKey,
+  handleShowCart,
+  handleShowSearch,
   visible,
   ...props
 }) {
@@ -31,6 +33,13 @@ export default function HeaderMoblie({
       });
     });
   }, []);
+  useEffect(() => {
+    $(".close").on("click", () => {
+      $(".custom-menu").css({
+        transform: "scaleY(0)",
+      });
+    });
+  }, []);
   return (
     <div id="navbar-mobile">
       <Navbar {...props} className="custom-nav">
@@ -49,111 +58,9 @@ export default function HeaderMoblie({
                 height={87}
               />
             </Navbar.Brand>
-            {/* {show && (
-              <div className="left d-flex">
-                <Nav.Item
-                  eventKey="1"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    router.push("/");
-                  }}
-                >
-                  Trang chủ
-                </Nav.Item>
-                <Nav.Menu title="Về Chúng Tôi" id="drop1">
-                  <Nav.Item
-                    eventKey="2"
-                    onClick={() => {
-                      router.push("/about-us#founder");
-                    }}
-                  >
-                    Nhà sáng lập
-                  </Nav.Item>
-                  <Nav.Item
-                    eventKey="3"
-                    onClick={() => {
-                      router.push("/about-us#about");
-                    }}
-                  >
-                    Lio Holding
-                  </Nav.Item>
-                  <Nav.Item
-                    eventKey="4"
-                    onClick={() => {
-                      router.push("/about-us#news");
-                    }}
-                  >
-                    Tin tức, sự kiện
-                  </Nav.Item>
-                </Nav.Menu>
-                <Nav.Item
-                  eventKey="5"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    router.push("/academy");
-                  }}
-                >
-                  Học viện
-                </Nav.Item>
-                <Nav.Item
-                  eventKey="6"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    router.push("/trainer");
-                  }}
-                >
-                  HLV
-                </Nav.Item>
-                <Nav.Menu title="Đào Tạo">
-                  <Nav.Item
-                    eventKey="7"
-                    onClick={(e) => {
-                      router.push("/course#course");
-                    }}
-                  >
-                    Khoá học
-                  </Nav.Item>
-                  <Nav.Item
-                    eventKey="8"
-                    onClick={() => {
-                      // $("html,body").animate(
-                      //   {
-                      //     scrollTop: $("#calendar").offset().top,
-                      //   },
-                      //   "slow"
-                      // );
-                      router.push("/course#calendar");
-                    }}
-                  >
-                    Đặt lịch học
-                  </Nav.Item>
-                </Nav.Menu>
-                <Nav.Item
-                  eventKey="9"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    router.push("/proshop");
-                  }}
-                >
-                  Proshop
-                </Nav.Item>
-                <Nav.Item eventKey="10" onClick={commingSoon}>
-                  Dịch vụ khác
-                </Nav.Item>
-                <Nav.Item
-                  eventKey="11"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    router.push("/contact-us");
-                  }}
-                >
-                  Liên hệ
-                </Nav.Item>
-              </div>
-            )} */}
             <div className="d-flex align-items-center">
               <div className="right d-flex">
-                <Nav.Item eventKey="11">
+                <Nav.Item eventKey="1" onClick={handleShowCart}>
                   <div className="cart">
                     <i className="fa-light fa-bag-shopping"></i>
                     <span className="d-flex justify-content-center align-items-center">
@@ -161,16 +68,10 @@ export default function HeaderMoblie({
                     </span>
                   </div>
                 </Nav.Item>
-                <Nav.Item eventKey="12">
+                <Nav.Item eventKey="2" className="search">
                   <i className="fa-light fa-magnifying-glass"></i>
                 </Nav.Item>
-                <Nav.Item
-                  eventKey="13"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setShow(!show);
-                  }}
-                >
+                <Nav.Item eventKey="3" className="bar">
                   <i className="fa-regular fa-bars"></i>
                 </Nav.Item>
               </div>
@@ -178,157 +79,156 @@ export default function HeaderMoblie({
           </Nav>
         </div>
       </Navbar>
-      {show && (
-        <Navbar
-          {...props}
-          className="custom-menu"
-          data-aos="fade-down"
-          data-aos-delay="200"
-        >
-          <Nav onSelect={onSelect} activeKey={activeKey}>
-            <div className="tool">
-              <Navbar.Brand
+      <Navbar
+        {...props}
+        className="custom-menu"
+        data-aos="fade-down"
+        data-aos-delay="200"
+        style={{ transform: "scaleY(0)" }}
+      >
+        <Nav onSelect={onSelect} activeKey={activeKey}>
+          <div className="tool">
+            <Navbar.Brand
+              onClick={(e) => {
+                e.preventDefault();
+                router.push("/");
+              }}
+            >
+              <Image
+                alt="logo"
+                src="/images/Logo/Logo12.png"
+                width={104}
+                height={87}
+              />
+            </Navbar.Brand>
+            <Nav.Item
+              eventKey="4"
+              className="close"
+              onClick={(e) => {
+                e.preventDefault();
+                setShow(false);
+              }}
+            >
+              <span>Close</span>
+              <i className="fa-regular fa-times"></i>
+            </Nav.Item>
+          </div>
+          <div className="scroll">
+            <div className="menu-link d-flex">
+              <Nav.Item
+                eventKey="5"
                 onClick={(e) => {
                   e.preventDefault();
                   router.push("/");
                 }}
               >
-                <Image
-                  alt="logo"
-                  src="/images/Logo/Logo12.png"
-                  width={104}
-                  height={87}
-                />
-              </Navbar.Brand>
-              <Nav.Item
-                eventKey="13"
-                className="close"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setShow(false);
-                }}
-              >
-                <span>Close</span>
-                <i className="fa-regular fa-times"></i>
+                Trang chủ
               </Nav.Item>
-            </div>
-            <div className="scroll">
-              <div className="menu-link d-flex">
-                <Nav.Item
-                  eventKey="1"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    router.push("/");
-                  }}
-                >
-                  Trang chủ
-                </Nav.Item>
-                <Nav.Menu title="Về Chúng Tôi" id="drop1">
-                  <Nav.Item
-                    eventKey="2"
-                    onClick={() => {
-                      router.push("/about-us#founder");
-                    }}
-                  >
-                    Nhà sáng lập
-                  </Nav.Item>
-                  <Nav.Item
-                    eventKey="3"
-                    onClick={() => {
-                      router.push("/about-us#about");
-                    }}
-                  >
-                    Lio Holding
-                  </Nav.Item>
-                  <Nav.Item
-                    eventKey="4"
-                    onClick={() => {
-                      router.push("/about-us#news");
-                    }}
-                  >
-                    Tin tức, sự kiện
-                  </Nav.Item>
-                </Nav.Menu>
-                <Nav.Item
-                  eventKey="5"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    router.push("/academy");
-                  }}
-                >
-                  Học viện
-                </Nav.Item>
+              <Nav.Menu title="Về Chúng Tôi" id="drop1">
                 <Nav.Item
                   eventKey="6"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    router.push("/trainer");
+                  onClick={() => {
+                    router.push("/about-us#founder");
                   }}
                 >
-                  HLV
-                </Nav.Item>
-                <Nav.Menu title="Đào Tạo">
-                  <Nav.Item
-                    eventKey="7"
-                    onClick={(e) => {
-                      router.push("/course#course");
-                    }}
-                  >
-                    Khoá học
-                  </Nav.Item>
-                  <Nav.Item
-                    eventKey="8"
-                    onClick={() => {
-                      // $("html,body").animate(
-                      //   {
-                      //     scrollTop: $("#calendar").offset().top,
-                      //   },
-                      //   "slow"
-                      // );
-                      router.push("/course#calendar");
-                    }}
-                  >
-                    Đặt lịch học
-                  </Nav.Item>
-                </Nav.Menu>
-                <Nav.Item
-                  eventKey="9"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    router.push("/proshop");
-                  }}
-                >
-                  Proshop
+                  Nhà sáng lập
                 </Nav.Item>
                 <Nav.Item
-                  eventKey="10"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    router.push("/orther-service");
+                  eventKey="7"
+                  onClick={() => {
+                    router.push("/about-us#about");
                   }}
                 >
-                  Dịch vụ khác
+                  Lio Holding
                 </Nav.Item>
+                <Nav.Item
+                  eventKey="8"
+                  onClick={() => {
+                    router.push("/about-us#news");
+                  }}
+                >
+                  Tin tức, sự kiện
+                </Nav.Item>
+              </Nav.Menu>
+              <Nav.Item
+                eventKey="9"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/academy");
+                }}
+              >
+                Học viện
+              </Nav.Item>
+              <Nav.Item
+                eventKey="10"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/trainer");
+                }}
+              >
+                HLV
+              </Nav.Item>
+              <Nav.Menu title="Đào Tạo">
                 <Nav.Item
                   eventKey="11"
                   onClick={(e) => {
-                    e.preventDefault();
-                    router.push("/contact-us");
+                    router.push("/course#course");
                   }}
                 >
-                  Liên hệ
+                  Khoá học
                 </Nav.Item>
-              </div>
+                <Nav.Item
+                  eventKey="12"
+                  onClick={() => {
+                    // $("html,body").animate(
+                    //   {
+                    //     scrollTop: $("#calendar").offset().top,
+                    //   },
+                    //   "slow"
+                    // );
+                    router.push("/course#calendar");
+                  }}
+                >
+                  Đặt lịch học
+                </Nav.Item>
+              </Nav.Menu>
+              <Nav.Item
+                eventKey="13"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/proshop");
+                }}
+              >
+                Proshop
+              </Nav.Item>
+              <Nav.Item
+                eventKey="15"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/orther-service");
+                }}
+              >
+                Dịch vụ khác
+              </Nav.Item>
+              <Nav.Item
+                eventKey="15"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/contact-us");
+                }}
+              >
+                Liên hệ
+              </Nav.Item>
             </div>
-            <div className="d-flex social justify-content-center">
-              <i className="fa-brands fa-facebook-f"></i>
-              <i className="fa-brands fa-youtube"></i>
-              <i className="fa-brands fa-dribbble"></i>
-              <i className="fa-brands fa-instagram"></i>
-            </div>
-          </Nav>
-        </Navbar>
-      )}
+          </div>
+          <div className="d-flex social justify-content-center">
+            <i className="fa-brands fa-facebook-f"></i>
+            <i className="fa-brands fa-youtube"></i>
+            <i className="fa-brands fa-dribbble"></i>
+            <i className="fa-brands fa-instagram"></i>
+          </div>
+        </Nav>
+      </Navbar>
     </div>
   );
 }

@@ -6,16 +6,16 @@ function OrtherService(props) {
   return (
     <div className={styles.orther_service}>
       <div className="container">
-        <div className="heading">
+        <div className="heading" data-aos="fade-up">
           <h2>Hair, Nail & Spa</h2>
         </div>
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center" data-aos="fade-down">
           <button className="btn-down">
             <i className="fa-regular fa-chevron-down"></i>
           </button>
         </div>
       </div>
-      <div className={styles.bannerv2}>
+      <div className={styles.bannerv2} data-aos="fade-up">
         <Image
           alt="Image 1"
           src="/images/OrtherService/banner1.png"
@@ -39,30 +39,30 @@ function OrtherService(props) {
         </div>
       </div>
       <div className="container">
-        <h5>Hình ảnh dịch vụ</h5>
+        <h5 data-aos="fade-down">Hình ảnh dịch vụ</h5>
         <div className={styles.list}>
-          <div className={styles.image}>
+          <div className={styles.image} data-aos="fade-right">
             <Image
               alt="Other Image"
               src="/images/OrtherService/orther5.png"
               layout="fill"
             />
           </div>
-          <div className={styles.image}>
+          <div className={styles.image} data-aos="fade-left">
             <Image
               alt="Other Image"
               src="/images/OrtherService/orther6.png"
               layout="fill"
             />
           </div>
-          <div className={styles.image}>
+          <div className={styles.image} data-aos="fade-right">
             <Image
               alt="Other Image"
               src="/images/OrtherService/orther7.png"
               layout="fill"
             />
           </div>
-          <div className={styles.image}>
+          <div className={styles.image} data-aos="fade-left">
             <Image
               alt="Other Image"
               src="/images/OrtherService/orther8.png"
@@ -72,16 +72,16 @@ function OrtherService(props) {
         </div>
       </div>
       <div className="container">
-        <div className="heading">
+        <div className="heading" data-aos="fade-up">
           <h2>VIP Lounge</h2>
         </div>
         <div className="d-flex justify-content-center">
-          <button className="btn-down">
+          <button className="btn-down" data-aos="fade-down">
             <i className="fa-regular fa-chevron-down"></i>
           </button>
         </div>
       </div>
-      <div className={styles.bannerv2}>
+      <div className={styles.bannerv2} data-aos="fade-up">
         <Image
           alt="Image 1"
           src="/images/OrtherService/banner2.png"
@@ -104,30 +104,30 @@ function OrtherService(props) {
         </div>
       </div>
       <div className="container">
-        <h5>Hình ảnh dịch vụ</h5>
+        <h5 data-aos="fade-down">Hình ảnh dịch vụ</h5>
         <div className={styles.list}>
-          <div className={styles.image}>
+          <div className={styles.image} data-aos="fade-right">
             <Image
               alt="Other Image"
               src="/images/OrtherService/orther1.png"
               layout="fill"
             />
           </div>
-          <div className={styles.image}>
+          <div className={styles.image} data-aos="fade-left">
             <Image
               alt="Other Image"
               src="/images/OrtherService/orther2.png"
               layout="fill"
             />
           </div>
-          <div className={styles.image}>
+          <div className={styles.image} data-aos="fade-right">
             <Image
               alt="Other Image"
               src="/images/OrtherService/orther3.png"
               layout="fill"
             />
           </div>
-          <div className={styles.image}>
+          <div className={styles.image} data-aos="fade-left">
             <Image
               alt="Other Image"
               src="/images/OrtherService/orther4.png"

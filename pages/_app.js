@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps }) {
     import("bootstrap/dist/js/bootstrap.bundle");
     AOS.init();
     AOS.init({
-      duration: 1000,
+      duration: 1500,
     });
   }, []);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });

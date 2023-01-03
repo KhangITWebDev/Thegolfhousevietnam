@@ -16,6 +16,9 @@ export default function HeaderAccademy({
   onSelect,
   visible,
   activeKey,
+  handleShowRightMenu,
+  handleShowSearch,
+  handleShowCart,
   ...props
 }) {
   const commingSoon = (e) => {
@@ -179,13 +182,7 @@ export default function HeaderAccademy({
                   </Nav.Item>
                 </div>
                 <div className="right d-flex">
-                  <Nav.Item
-                    eventKey="11"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setShowCart(!showCart);
-                    }}
-                  >
+                  <Nav.Item eventKey="12" onClick={handleShowCart}>
                     <div className="cart">
                       <i className="fa-light fa-bag-shopping"></i>
                       <span className="d-flex justify-content-center align-items-center">
@@ -193,16 +190,10 @@ export default function HeaderAccademy({
                       </span>
                     </div>
                   </Nav.Item>
-                  <Nav.Item eventKey="12">
+                  <Nav.Item eventKey="13" className="search">
                     <i className="fa-light fa-magnifying-glass"></i>
                   </Nav.Item>
-                  <Nav.Item
-                    eventKey="13"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setShow(!show);
-                    }}
-                  >
+                  <Nav.Item eventKey="14" className="sub-menu">
                     <i className="fa-solid fa-grid"></i>
                   </Nav.Item>
                 </div>
@@ -210,96 +201,12 @@ export default function HeaderAccademy({
             </Nav>
           </div>
         </Navbar>
-        {show && (
-          <div
-            className={styles.subMenu + " " + "sub"}
-            // style={{ display: show ? "block" : "none" }}
-            onClick={() =>
-              setTimeout(() => {
-                setShow(false);
-              }, 2000)
-            }
-          >
-            <div
-              className={
-                styles.subMenu_child +
-                " " +
-                "d-flex justify-content-between flex-column sub-child"
-              }
-              data-aos={show ? "fade-left" : "fade-right"}
-              style={{ right: show ? 0 : "-100%" }}
-            >
-              <div
-                className={
-                  "d-flex justify-content-between align-items-center" +
-                  " " +
-                  styles.header
-                }
-              >
-                <Image
-                  alt="logo"
-                  src="/images/Logo/Logo12.png"
-                  width={65}
-                  height={55}
-                />
-                <button onClick={() => setShow(false)}>
-                  <i className="fa-light fa-xmark"></i>
-                </button>
-              </div>
-              <div className={styles.center + " " + "d-flex"}>
-                <div className={styles.icon + " " + "d-flex flex-column"}>
-                  <i className="fa-brands fa-facebook-f"></i>
-                  <i className="fa-brands fa-youtube"></i>
-                  <i className="fa-brands fa-dribbble"></i>
-                  <i className="fa-brands fa-instagram"></i>
-                </div>
-                <div className={styles.text + " " + "d-flex flex-column"}>
-                  <span>Facebook</span>
-                  <span>Youtube</span>
-                  <span>Dribble</span>
-                  <span>Instagram</span>
-                </div>
-              </div>
-              <div className={styles.footer}>
-                <p>(+84) 274 035 723</p>
-                <span>info@lio.com</span>
-              </div>
-            </div>
-          </div>
-        )}
-        {showCart && (
-          <div
-            className={styles.subMenuCart + " " + "sub"}
-            // style={{ display: show ? "block" : "none" }}
-            onClick={() => setShowCart(false)}
-          >
-            <div
-              className={
-                styles.subMenuCart_child +
-                " " +
-                "d-flex justify-content-between flex-column sub-child"
-              }
-              data-aos={showCart ? "fade-left" : "fade-right"}
-            >
-              {cart.length > 0 ? (
-                ""
-              ) : (
-                <div
-                  className={
-                    "d-flex flex-column align-items-center justify-content-center h-100" +
-                    " " +
-                    styles.empty
-                  }
-                >
-                  <i className="fa-light fa-bag-shopping"></i>
-                  <p>No products in cart</p>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
       </div>
-      <HeaderMoblieBlack visible={visible} />
+      <HeaderMoblieBlack
+        visible={visible}
+        handleShowCart={handleShowCart}
+        handleShowSearch={handleShowSearch}
+      />
     </>
   );
 }

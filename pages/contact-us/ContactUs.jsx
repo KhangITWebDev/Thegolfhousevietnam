@@ -25,11 +25,11 @@ export const ContactList = [
 function ContactUs(props) {
   return (
     <div className={styles.contact_page}>
-      <div className="heading">
+      <div className="heading" data-aos="fade-up">
         <h2 className={styles.title_page}>Liên hệ</h2>
       </div>
       <div className="d-flex justify-content-center">
-        <button className="btn-down">
+        <button className="btn-down" data-aos="fade-down">
           <i className="fa-regular fa-chevron-down"></i>
         </button>
       </div>
@@ -60,7 +60,16 @@ function ContactUs(props) {
             className="mySwiper"
           >
             {ContactList.map((item, index) => (
-              <SwiperSlide key={index}>
+              <SwiperSlide
+                key={index}
+                data-aos={
+                  index === 0
+                    ? "fade-right"
+                    : index === 1
+                    ? "fade-up"
+                    : "fade-left"
+                }
+              >
                 <div className="content h-100 d-flex flex-column align-items-center">
                   <div className="image">
                     <Image
@@ -88,10 +97,16 @@ function ContactUs(props) {
       </div>
       <div className={styles.form}>
         <div className="d-flex flex-wrap">
-          <div className={"col-12 col-md-6" + " " + styles.left}>
+          <div
+            className={"col-12 col-md-6" + " " + styles.left}
+            data-aos="fade-right"
+          >
             <Image alt="map" src="/images/Contact/Map.png" layout="fill" />
           </div>
-          <div className={"col-12 col-md-6" + " " + styles.right}>
+          <div
+            className={"col-12 col-md-6" + " " + styles.right}
+            data-aos="fade-left"
+          >
             <div>
               <div className="heading align-items-start w-100">
                 <span>LIÊN HỆ VỚI CHÚNG TÔI</span>

@@ -7,20 +7,24 @@ import styles from "./Academy.module.scss";
 
 function Academy(props) {
   const [swiper, setSwiper] = useState(null);
+  const [activeSlide, setActiveSlide] = useState(0);
   return (
     <div className={styles.academy_page}>
       <div className="container">
-        <div className="heading">
+        <div className="heading" data-aos="fade-up">
           <h2 className={styles.title_page}>Học viện</h2>
         </div>
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center" data-aos="fade-up">
           <button className="btn-down">
             <i className="fa-regular fa-chevron-down"></i>
           </button>
         </div>
         <div className={styles.intro}>
           <div className="d-flex flex-wrap align-items-center">
-            <div className={"col-12 col-md-6" + " " + styles.left}>
+            <div
+              className={"col-12 col-md-6" + " " + styles.left}
+              data-aos="fade-right"
+            >
               <div
                 className={
                   styles.header + " " + "d-flex flex-column align-items-end"
@@ -52,31 +56,34 @@ function Academy(props) {
                 />
               </div>
             </div>
-            <div className={"col-12 col-md-6" + " " + styles.right}>
-              <span>THE GOLF HOUSE</span>
-              <h3>Học Golf bài bản cùng chuyên gia</h3>
-              <p>
-                Dù bạn là người mới bắt đầu tìm hiểu, hay người chơi Golf muốn
-                nâng cao trình độ. The Golf House luôn có lộ trình phụ hợp cho
-                bạn!
+            <div
+              className={
+                "col-12 col-md-6 d-flex flex-column" + " " + styles.right
+              }
+            >
+              <span data-aos="fade-left">THE GOLF HOUSE</span>
+              <h3 data-aos="fade-left">Học Golf bài bản cùng chuyên gia</h3>
+              <p data-aos="fade-left">
+                Sau chương trình học, học viên tự tin bước ra sân với đầy đủ
+                trình độ chuyên môn, đủ hiểu biết về luật và văn hóa.
               </p>
-              <div>
+              <div data-aos="fade-left">
                 <button>Đăng ký</button>
               </div>
             </div>
           </div>
         </div>
         <div className={styles.welcome} id="welcome">
-          <div className={styles.info}>
+          <div className={styles.info} data-aos="fade-right">
             <div
               className={
                 "d-flex justify-content-between" + " " + styles.navigation
               }
             >
-              <span onClick={() => swiper.slidePrev()}>
+              <span onClick={() => swiper.slidePrev()} data-aos="fade-right">
                 <i className="fa-light fa-chevron-left"></i>
               </span>
-              <span onClick={() => swiper.slideNext()}>
+              <span onClick={() => swiper.slideNext()} data-aos="fade-left">
                 <i className="fa-light fa-chevron-right"></i>
               </span>
             </div>
@@ -92,36 +99,29 @@ function Academy(props) {
               onSwiper={(s) => {
                 setSwiper(s);
               }}
+              onActiveIndexChange={(s) => setActiveSlide(s.realIndex)}
             >
               <div className={styles.content}>
                 <SwiperSlide>
-                  <div className="step_slide">
+                  <div className="step_slide" data-aos="fade-right">
                     <span>01</span>
                     <span></span>
                     <span>Đôi lời về The Golf House</span>
                   </div>
-                  <h3>Sứ mệnh</h3>
-                  <div className="desc">
+                  <h3 data-aos="fade-left">Giáo trình bài bản</h3>
+                  <div className="desc" data-aos="fade-right">
                     <p>
-                      Học viện The Golf House Việt Nam (TGH) được thành lập vào
-                      tháng 3 năm 2022 với sứ mệnh mang lại giá trị cho những
-                      người đam mê Golf và xây dựng cộng đồng Golfer Việt Nam.{" "}
-                    </p>
-                    <p>
-                      theo tiêu chuẩn PGA, đa dạng các gói học phục vụ nhu cầu
-                      của học viên theo từng giai đoạn, dù là người mới chơi hay
-                      người chơi golf muôn nâng cao kỹ năng của mình.
-                    </p>
-                    <p>
-                      TGH cung câp chương trình giảng dạy bài bản Sau khóa học,
-                      học viên tự tin bước ra sân khi được trang bị đầy đủ các
-                      yếu tố về kỹ thuật, văn hóa golf và luật chơi.
+                      Học viện đào tạo cung cấp chương trình giảng dạy bài bản
+                      theo tiêu chuẩn PGA, cá nhân hóa việc học tập thông qua lộ
+                      trình học thiết kế phù hợp cho từng lứa tuổi, theo từng
+                      cấp độ từ cơ bản tới nâng cao.
                     </p>
                   </div>
                   <div
                     className={
                       "d-flex justify-content-end" + " " + styles.see_more
                     }
+                    data-aos="fade-left"
                   >
                     <button className="d-flex align-items-center">
                       <span>Xem thêm</span>
@@ -130,36 +130,25 @@ function Academy(props) {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="step_slide">
+                  <div className="step_slide" data-aos="fade-right">
                     <span>02</span>
                     <span></span>
                     <span>Đôi lời về The Golf House</span>
                   </div>
-                  <h3>Cơ sở vật chất</h3>
-                  <div className="desc">
+                  <h3 data-aos="fade-left">Đội ngũ HLV quốc tế</h3>
+                  <div data-aos="fade-right" className="desc">
                     <p>
-                      Trang thiêt bị hiện đại ứng dụng công nghệ tiên tiến như
-                      hệ thông Sky track, máy phân tích kỹ thuật Dr.Swing phân
-                      tích từng động tác với thông sô chính xác, phục vụ việc
-                      rèn luyện kỹ thuật trong nhà với sự hướng dẫn tận tình của
-                      huân luyện viên quôc tê giàu kinh nghiệm giảng dạy và chơi
-                      Golf
-                    </p>
-                    <p>
-                      TGH hợp tác với hệ thông sân golf và resort trải rộng trên
-                      cả nước, cung cấp những buổi ra sân thực tê với nhiều dạng
-                      địa hình sân, nâng cao thực chiến và sự tự tin của học
-                      viên. Không chỉ đào tạo chuyên môn, TGH chú trọng phát
-                      triển cộng đồng khi trở thành đôi tác chiên lược của các
-                      Hiệp hội Golf tại Việt Nam, phôi hợp đăng cai tổ chức các
-                      Giải đấu như HUBA Golf của Hiệp hội Doanh nhân TP Hồ Chí
-                      Minh, Giải Best of the Best,...
+                      Học viên được học tập với thiết bị hiện đại, luyện tập kỹ
+                      thuật trong nhà với sự hướng dẫn tận tình của huấn luyện
+                      viên chuẩn quốc tế, với nhiều năm kinh nghiệm chơi và
+                      giảng dạy Golf.
                     </p>
                   </div>
                   <div
                     className={
                       "d-flex justify-content-end" + " " + styles.see_more
                     }
+                    data-aos="fade-left"
                   >
                     <button className="d-flex align-items-center">
                       <span>Xem thêm</span>
@@ -168,29 +157,78 @@ function Academy(props) {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="step_slide">
+                  <div className="step_slide" data-aos="fade-right">
                     <span>03</span>
                     <span></span>
                     <span>Đôi lời về The Golf House</span>
                   </div>
-                  <h3>Môi trường phát triển</h3>
-                  <div className="desc">
+                  <h3 data-aos="fade-left">Công nghệ tiên tiến</h3>
+                  <div data-aos="fade-right" className="desc">
                     <p>
-                      Tại The Golf House, việc kiên tạo môi trường giúp việc học
-                      tập và chơi golf trở nên đơn giản và hiệu quả nhất luôn là
-                      ưu tiên hàng đâu của chúng tôi. TGH tập trung xây dựng
-                      chuôi các dịch vụ đa dạng bao gôm Học viện - Pro shop -
-                      Hair, Nail & Spa - Golf 3D - VIP Lounge trong cùng một địa
-                      điểm. Giúp người học và chơi Golf tận dụng thời gian dành
-                      cho môn thể thao mình yêu thích một cách tôi ưu nhât: vừa
-                      nâng cao kỹ năng golf, vừa thư giãn, vừa giao lưu với
-                      những người chung niềm đam mê. Với khẩu hiệu “Working on a
-                      new you”, The Golf House Việt Nam hô trợ học viên - những
-                      người yêu Golf trở thành phiên bản tốt hơn của bản thân
-                      với lối sống tích cực và năng động.
+                      Trang thiết bị hiện đại thông minh, phân tích các thông số
+                      chi tiết như: khoảng cách đánh bóng, tốc độ bóng, tốc độ
+                      đầu gậy, hệ số va chạm. Dựa vào các thông số được tính
+                      toán nhanh gọn, chính xác, người chơi rút kinh nghiệm và
+                      khắc phục những điểm yếu, từ đó dần cải thiện kỹ thuật của
+                      mình.
+                    </p>
+                    <p>
+                      Hệ thống Skytrack tập trong nhà mang đến trải nghiệm chuẩn
+                      xác và sống động như khi tập Golf ngoài trời.
                     </p>
                   </div>
                   <div
+                    className={
+                      "d-flex justify-content-end" + " " + styles.see_more
+                    }
+                    data-aos="fade-left"
+                  >
+                    <button className="d-flex align-items-center">
+                      <span>Xem thêm</span>
+                      <i className="fa-regular fa-arrow-right"></i>
+                    </button>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="step_slide" data-aos="fade-right">
+                    <span>04</span>
+                    <span></span>
+                    <span>Đôi lời về The Golf House</span>
+                  </div>
+                  <h3 data-aos="fade-left">Cộng đồng tích cực</h3>
+                  <div className="desc" data-aos="fade-right">
+                    <p>
+                      Tạo nên cộng đồng chung niềm đam mê với nhiều hoạt động
+                      kết nối. Với khẩu hiệu “Working on a new you”, The Golf
+                      House Vietnam trở thành người bạn đồng hành của người yêu
+                      Golf, cùng mỗi người trở thành phiên bản tốt hơn của bản
+                      thân với lối sống tích cực và năng động.{" "}
+                    </p>
+                  </div>
+                  <div
+                    className={
+                      "d-flex justify-content-end" + " " + styles.see_more
+                    }
+                    data-aos="fade-left"
+                  >
+                    <button className="d-flex align-items-center">
+                      <span>Xem thêm</span>
+                      <i className="fa-regular fa-arrow-right"></i>
+                    </button>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="step_slide" data-aos="fade-right ">
+                    <span>05</span>
+                    <span></span>
+                    <span>Đôi lời về The Golf House</span>
+                  </div>
+                  <h3 data-aos="fade-left">Chi phí hợp lý</h3>
+                  <div data-aos="fade-right" className="desc">
+                    <p>Cạnh tranh và phù hợp với mọi đối tượng người chơi.</p>
+                  </div>
+                  <div
+                    data-aos="fade-left"
                     className={
                       "d-flex justify-content-end" + " " + styles.see_more
                     }
@@ -205,15 +243,18 @@ function Academy(props) {
             </Swiper>
           </div>
           <div className={"d-flex flex-wrap" + " " + styles.detail}>
-            <div className="col-2 col-md-4">
+            <div className="col-2 col-md-4" data-aos="fade-right">
               <h5>
                 Giới thiệu <br /> học viện
               </h5>
             </div>
-            <div className={"col-10 col-md-8 flex-wrap" + " " + styles.image}>
+            <div
+              className={"col-10 col-md-8 flex-wrap" + " " + styles.image}
+              data-aos="fade-left"
+            >
               <Image
                 alt="Image Course"
-                src="/images/Booking/bookinCourse.png"
+                src={`/images/Academy/AcademyInfo/info${activeSlide + 1}.png`}
                 layout="fill"
               ></Image>
             </div>
@@ -221,82 +262,83 @@ function Academy(props) {
         </div>
       </div>
       <div className={styles.academy_detail}>
-        <div className="container">
-          <div className="d-flex flex-wrap">
-            <div className={"col-12 col-md-6" + " " + styles.item}>
-              <div className={styles.content}>
-                <div className={styles.image}>
-                  <Image
-                    alt="Image 1"
-                    src="/images/Academy/Detail/detail1.png"
-                    layout="fill"
-                  />
-                </div>
-                <div className={styles.info}>
-                  <h5>Không gian tập luyện</h5>
-                  <p>
-                    <ul>
-                      <li>Không gian trong nhà rộng rãi và tiện nghi</li>
-                      <li>Mô phỏng địa hình cỏ trên sân tập Golf ngoài trời</li>
-                      <li>Khu tập đẩy, gạt bóng chuyên nghiệp và tách biệt</li>
-                    </ul>
-                  </p>
-                </div>
-                <div className="mt-auto">
-                  <button className="d-flex align-items-center">
-                    <span>Xem thêm</span>
-                    <i className="fa-light fa-arrow-right"></i>
-                  </button>
-                </div>
+        <div className="d-flex flex-wrap">
+          <div
+            className={"col-12 col-md-3" + " " + styles.item}
+            data-aos="fade-up"
+          >
+            <div className={styles.image}>
+              <Image
+                alt="Image 1"
+                src="/images/Academy/Detail/detail1.png"
+                layout="fill"
+              />
+            </div>
+            <div className={styles.content}>
+              <div className={styles.info}>
+                <h5>Không gian tập luyện</h5>
+                <p>Subtitle</p>
               </div>
             </div>
-            <div className={"col-12 col-md-6" + " " + styles.item}>
-              <div className={styles.content}>
-                <div className={styles.image}>
-                  <Image
-                    alt="Image 2"
-                    src="/images/Academy/Detail/detail2.png"
-                    layout="fill"
-                  />
-                </div>
-                <div className={styles.info}>
-                  <div>
-                    <h5>Trang thiết bị</h5>
-                    <p>
-                      <ul>
-                        <li>
-                          Máy Dr Swing phân tích chuẩn xác động tác để có sự
-                          điều chỉnh và cải thiện kịp thời kỹ thuật Swing{" "}
-                        </li>
-                        <li>
-                          Hệ thống Skytrack, Golf 3D tái hiện lại không gian tập
-                          Golf ngoài trời, tạo cảm giác trung thực và sống động
-                          như đang được trải nghiệm chơi golf thực tế.
-                        </li>
-                        <li>Gậy và bóng tập được cung cấp miễn phí.</li>
-                      </ul>
-                    </p>
-                  </div>
-                  <div className="mt-auto">
-                    <button className="d-flex align-items-center">
-                      <span>Xem thêm</span>
-                      <i className="fa-light fa-arrow-right"></i>
-                    </button>
-                  </div>
-                </div>
+          </div>
+          <div
+            className={"col-12 col-md-3" + " " + styles.item}
+            data-aos="fade-down"
+          >
+            <div className={styles.image}>
+              <Image
+                alt="Image 2"
+                src="/images/Academy/Detail/detail2.png"
+                layout="fill"
+              />
+            </div>
+            <div className={styles.content}>
+              <div className={styles.info}>
+                <h5>Trang thiết bị</h5>
+                <p>Subtitle</p>
+              </div>
+            </div>
+          </div>
+          <div
+            className={"col-12 col-md-3" + " " + styles.item}
+            data-aos="fade-up"
+          >
+            <div className={styles.image}>
+              <Image
+                alt="Image 1"
+                src="/images/Academy/Detail/detail3.png"
+                layout="fill"
+              />
+            </div>
+            <div className={styles.content}>
+              <div className={styles.info}>
+                <h5>Không gian tập luyện</h5>
+                <p>Subtitle</p>
+              </div>
+            </div>
+          </div>
+          <div
+            className={"col-12 col-md-3" + " " + styles.item}
+            data-aos="fade-down"
+          >
+            <div className={styles.image}>
+              <Image
+                alt="Image 2"
+                src="/images/Academy/Detail/detail2.png"
+                layout="fill"
+              />
+            </div>
+            <div className={styles.content}>
+              <div className={styles.info}>
+                <h5>Trang thiết bị</h5>
+                <p>Subtitle</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className={styles.bannerv2}>
-        <Image
-          alt="Image 1"
-          src="/images/Academy/banner.png"
-          layout="responsive"
-          width="100%"
-          height="100%"
-        />
+      <div className={styles.bannerv2} data-aos="fade-up">
+        <Image alt="Image 1" src="/images/Academy/banner.png" layout="fill" />
         <div className={styles.content}>
           <div className="container h-100">
             <div className="d-flex h-100 justify-content-center align-items-center flex-column">
@@ -307,7 +349,7 @@ function Academy(props) {
                 Q.2, TPHCM
               </p>
               <div>
-                <button className="btn-content">Đăng ký</button>
+                <button className="btn-content">Bản Đồ</button>
               </div>
             </div>
           </div>

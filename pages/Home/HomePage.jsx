@@ -99,7 +99,7 @@ function HomePage(props) {
   };
   return (
     <div className={styles.home_page}>
-      <div className={styles.banner} id="banner">
+      <div className={styles.banner} id="banner" data-aos="fade-up">
         <Swiper
           effect={"creative"}
           creativeEffect={{
@@ -135,12 +135,14 @@ function HomePage(props) {
                 <div className="content">
                   <div className="container h-100">
                     <div className="d-flex h-100 justify-content-center align-items-center flex-column">
-                      <h1>{item.title}</h1>
+                      <h1 data-aos="fade-right">{item.title}</h1>
                       <div
+                        data-aos="fade-left"
                         dangerouslySetInnerHTML={{ __html: item.subTitle }}
                       ></div>
                       <div className="w-100 d-flex justify-content-center">
                         <button
+                          data-aos="fade-right"
                           className="btn-content"
                           onClick={(e) =>
                             item.urlButton.length > 0 && item.urlButton != ""
@@ -220,7 +222,10 @@ function HomePage(props) {
         </div> */}
         <div className={styles.membership}>
           <div className="d-flex flex-wrap align-items-center">
-            <div className={"col-12 col-md-6" + " " + styles.left}>
+            <div
+              className={"col-12 col-md-6" + " " + styles.left}
+              data-aos="fade-right"
+            >
               <div
                 className={
                   styles.header + " " + "d-flex flex-column align-items-end"
@@ -239,9 +244,7 @@ function HomePage(props) {
                 <Image
                   alt="Image 1"
                   src="/images/Home/MemberShip/mem1.png"
-                  width="100%"
-                  height="100%"
-                  layout="responsive"
+                  layout="fill"
                 />
               </div>
               {/* <div className={styles.image2}>
@@ -254,18 +257,14 @@ function HomePage(props) {
               </div> */}
             </div>
             <div className={"col-12 col-md-6" + " " + styles.right}>
-              <span>THE GOLF HOUSE</span>
-              <h3>Hệ sinh thái The Golf House Vietnam</h3>
-              <p>
+              <span data-aos="fade-left">THE GOLF HOUSE</span>
+              <h3 data-aos="fade-left">Hệ sinh thái The Golf House Vietnam</h3>
+              <p data-aos="fade-left">
                 Tại The Golf House Vietnam, tạo nên môi trường giúp học viên
                 trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu
                 tiên hàng đầu của chúng tôi.
               </p>
-              <p>
-                <span>T2-T6: 9 AM - 21 PM</span> <br />
-                <span>T7: 9 AM - 20 PM</span>
-              </p>
-              <div>
+              <div data-aos="fade-left">
                 <button>Đăng ký</button>
               </div>
             </div>
@@ -312,24 +311,18 @@ function HomePage(props) {
           </div>
         </div> */}
       </div>
-      <div className={styles.bannerv2}>
-        <Image
-          alt="Image 1"
-          src="/images/Home/bannerv2.png"
-          layout="responsive"
-          width="100%"
-          height="100%"
-        />
+      <div className={styles.bannerv2} data-aos="fade-up">
+        <Image alt="Image 1" src="/images/Home/bannerv2.png" layout="fill" />
         <div className={styles.content}>
           <div className="container h-100">
             <div className="d-flex h-100 justify-content-center align-items-center flex-column">
-              <span>ĐỘI NGŨ HUẤN LUYỆN</span>
-              <h1>Huấn luyện viên</h1>
-              <p>
+              <span data-aos="fade-right">ĐỘI NGŨ HUẤN LUYỆN</span>
+              <h1 data-aos="fade-left">Huấn luyện viên</h1>
+              <p data-aos="fade-right">
                 Huấn luyện viên đạt chuẩn PGA, VGA dày dặn kinh nghiệm chơi và
                 giảng dạy Golf.
               </p>
-              <div onClick={() => router.push("/trainer")}>
+              <div data-aos="fade-left" onClick={() => router.push("/trainer")}>
                 <button className="btn-content">Tìm hiểu thêm</button>
               </div>
             </div>
@@ -383,7 +376,7 @@ function HomePage(props) {
           </div>
         </div>
       </div> */}
-      <div className={styles.team} id="team">
+      <div className={styles.team} id="team" data-aos="fade-up">
         <div className="container">
           <Swiper
             effect={"creative"}
@@ -417,8 +410,9 @@ function HomePage(props) {
                     src="/images/Home/Team/team1.png"
                     width={100}
                     height={100}
+                    data-aos="fade-right"
                   />
-                  <p>
+                  <p data-aos="fade-left">
                     Cũng như tất cả các môn thể thao khác, Golf muốn phát triển
                     bắt buộc hệ thống golf chuyên nghiệp phải mạnh, được xây
                     dựng bài bản. Tôi tin rằng mô hình của The Golf House
@@ -427,9 +421,11 @@ function HomePage(props) {
                     thị trường Việt Nam, giúp đào tạo một thế hệ Golfer giúp
                     Golf Việt Nam vươn tầm khu vực và thế giới.
                   </p>
-                  <span className="icon">“</span>
-                  <h2>Ryan O’Flaherty</h2>
-                  <span>Giám đốc điều hành</span>
+                  <span className="icon" data-aos="fade-right">
+                    “
+                  </span>
+                  <h2 data-aos="fade-left">Ryan O’Flaherty</h2>
+                  <span data-aos="fade-right">Giám đốc điều hành</span>
                 </div>
               </div>
             </SwiperSlide>
@@ -441,8 +437,9 @@ function HomePage(props) {
                     src="/images/Home/Team/team2.png"
                     width={100}
                     height={100}
+                    data-aos="fade-right"
                   />
-                  <p>
+                  <p data-aos="fade-left">
                     Trong 19 năm làm việc trong ngành Golf, tôi đã học hỏi và
                     trải nghiệm nhiều lối kỹ thuật đa dạng từ Mỹ, Nam Phi tới
                     châu Âu, giảng dạy cho nhiều lứa tuổi khác nhau, bao gồm cả
@@ -450,9 +447,11 @@ function HomePage(props) {
                     Golf House Vietnam để khám phá ra cách Swing hiệu quả nhất
                     cho từng học viên.
                   </p>
-                  <span className="icon">“</span>
-                  <h2>Jacques Du Toit</h2>
-                  <span>HLV PGA</span>
+                  <span data-aos="fade-right" className="icon">
+                    “
+                  </span>
+                  <h2 data-aos="fade-left">Jacques Du Toit</h2>
+                  <span data-aos="fade-right">HLV PGA</span>
                 </div>
               </div>
             </SwiperSlide>
@@ -466,16 +465,16 @@ function HomePage(props) {
         </div>
       </div>
       <div className={styles.moreImage}>
-        <div className={styles.item}>
+        <div className={styles.item} data-aos="fade-right">
           <Image alt="Img 1" src="/images/Home/More/img1.png" layout="fill" />
         </div>
-        <div className={styles.item}>
+        <div className={styles.item} data-aos="fade-down">
           <Image alt="Img 1" src="/images/Home/More/img2.png" layout="fill" />
         </div>
-        <div className={styles.item}>
+        <div className={styles.item} data-aos="fade-up">
           <Image alt="Img 1" src="/images/Home/More/img3.png" layout="fill" />
         </div>
-        <div className={styles.item}>
+        <div className={styles.item} data-aos="fade-left">
           <Image alt="Img 1" src="/images/Home/More/img4.png" layout="fill" />
         </div>
       </div>
@@ -631,7 +630,7 @@ function HomePage(props) {
       </div> */}
       <div className={styles.news}>
         <div className="container">
-          <div className="heading">
+          <div className="heading" data-aos="fade-up">
             <span className="text-center">TIN TỨC</span>
             <h2 className="text-center">Các tin tức, sự kiện</h2>
           </div>
@@ -644,6 +643,13 @@ function HomePage(props) {
               <div
                 key={index}
                 className={"col-12 col-sm-6 col-lg-4" + " " + styles.item}
+                data-aos={
+                  index === 0
+                    ? "fade-right"
+                    : index === 1
+                    ? "fade-down"
+                    : "fade-left"
+                }
               >
                 <div className={styles.info + " " + "h-100 d-flex flex-column"}>
                   <div>
@@ -670,7 +676,7 @@ function HomePage(props) {
               </div>
             ))}
           </div>
-          <div className="button">
+          <div className="button" data-aos="fade-up">
             <button onClick={() => router.push("/news-events")}>
               Xem thêm
             </button>

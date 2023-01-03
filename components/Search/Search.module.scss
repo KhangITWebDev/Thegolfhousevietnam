@@ -1,0 +1,62 @@
+.subMenuCart {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 2002;
+  background: rgba(0, 0, 0, 0.2);
+  top: 0px;
+  &_child {
+    background-color: #221c16;
+    width: 100%;
+    z-index: 2003;
+    padding: 50px;
+    transition: 0.5s;
+    @keyframes rotation {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(359deg);
+      }
+    }
+    .close {
+      background-color: transparent;
+      border: none;
+      i {
+        color: #fff;
+        font-size: 32px;
+        margin-left: 10px;
+        transition: transform 0.5s;
+        animation: rotation 0.8s linear;
+      }
+      &:hover {
+        i {
+          transform: rotate(360deg);
+        }
+      }
+    }
+    .input {
+      position: relative;
+      margin-top: 50px;
+      margin-bottom: 50px;
+      border-bottom: 2px solid #38322c;
+      input {
+        width: 100%;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        background-color: transparent;
+        font-size: 32px;
+        border: none;
+        color: #fff;
+      }
+      i {
+        position: absolute;
+        top: 50%;
+        right: 0px;
+        transform: translateY(-50%);
+        font-size: 28px;
+        color: #fff;
+      }
+    }
+  }
+}

@@ -169,6 +169,8 @@ function Course(props) {
   }
   const [detailIndex, setDetailIndex] = useState(2);
   useEffect(() => {
+    $("#course-team .swiper-pagination").attr("data-aos", "fade-up");
+    $("react-datepicker__day-names").attr("data-aos", "fade-right");
     $("#course-team .swiper-pagination-bullet").each(function (indexC) {
       $(this).css({
         backgroundImage: `url(/images/Home/Team/team${indexC + 3}.png)`,
@@ -194,80 +196,197 @@ function Course(props) {
   return (
     <div className={styles.course_page}>
       <div className="container">
-        <div className={"heading" + " " + styles.header}>
+        <div className={"heading" + " " + styles.header} data-aos="fade-up">
           <span>Chương trình đào tạo</span>
           <h2 className={styles.title_page}>Học thử miễn phí</h2>
+          <div className="button" onClick={handleOpen}>
+            <button>Đăng ký</button>
+          </div>
         </div>
         <div className={styles.training} id="training">
-          <div className="">
-            <Swiper
-              breakpoints={{
-                1920: {
-                  slidesPerView: 5,
-                },
-                1280: {
-                  slidesPerView: 5,
-                },
-                992: {
-                  slidesPerView: 4,
-                },
-                768: {
-                  slidesPerView: 3,
-                },
-                450: {
-                  slidesPerView: 2,
-                },
-              }}
-              slidesPerView={1}
-              spaceBetween={30}
-              pagination={{
-                clickable: true,
-              }}
-              modules={[Pagination, Navigation]}
-              className="mySwiper"
+          <div className={styles.list + " " + "d-flex flex-wrap"}>
+            <div
+              className={
+                "col-4 d-flex justify-content-center align-items-center" +
+                " " +
+                styles.item
+              }
+              data-aos="fade-right"
             >
-              {IntroList.map((item, index) => (
-                <SwiperSlide key={index}>
-                  <div className="content h-100 d-flex flex-column align-items-center">
-                    <div className="image-container">
-                      <Image
-                        alt="item 1"
-                        src="/images/Course/bg.png"
-                        width={81}
-                        height={76}
-                      />
-                      <div className="image">
-                        <Image
-                          alt="item 1"
-                          src={item.image}
-                          width={38}
-                          height={38}
-                        />
-                      </div>
-                    </div>
-                    <div className="info d-flex flex-column align-items-center">
-                      <h5 className="text-center">{item.title}</h5>
-                      <p className="text-center">{item.desc}</p>
-                    </div>
-                    <div className="mt-auto">
-                      <button className="d-flex align-items-center">
-                        <span>Xem thêm</span>
-                        <i className="fa-light fa-arrow-right"></i>
-                      </button>
-                    </div>
+              <h2>
+                Lợi ích học golf tại <span>The Golf House?</span>
+              </h2>
+            </div>
+            <div
+              className={
+                "col-4 d-flex flex-column align-items-center" +
+                " " +
+                styles.item
+              }
+            >
+              <div className={styles.content} data-aos="fade-down">
+                <div className={styles.image_container}>
+                  <Image
+                    alt="item 1"
+                    src="/images/Course/bg.png"
+                    width={142}
+                    height={136}
+                  />
+                  <div className={styles.image}>
+                    <Image
+                      alt="item 1"
+                      src="/images/Course/itro1.png"
+                      width={66}
+                      height={66}
+                    />
                   </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+                </div>
+                <div className="info d-flex flex-column align-items-center">
+                  <h5 className="text-center">Giáo trình</h5>
+                  <p className="text-center">
+                    Đầy đủ 3 yếu tố: kỹ thuật, <br /> văn hóa và luật.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              className={
+                "col-4 d-flex flex-column align-items-center" +
+                " " +
+                styles.item
+              }
+            >
+              <div className={styles.content} data-aos="fade-left">
+                <div className={styles.image_container}>
+                  <Image
+                    alt="item 1"
+                    src="/images/Course/bg.png"
+                    width={142}
+                    height={136}
+                  />
+                  <div className={styles.image}>
+                    <Image
+                      alt="item 1"
+                      src="/images/Course/itro2.png"
+                      width={66}
+                      height={66}
+                    />
+                  </div>
+                </div>
+                <div className="info d-flex flex-column align-items-center">
+                  <h5 className="text-center">Đội ngũ HLV</h5>
+                  <p className="text-center">
+                    Huấn luyện viên quốc tế PGA, VGA.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              className={
+                "col-4 d-flex flex-column align-items-center" +
+                " " +
+                styles.item
+              }
+            >
+              <div className={styles.content} data-aos="fade-right">
+                <div className={styles.image_container}>
+                  <Image
+                    alt="item 1"
+                    src="/images/Course/bg.png"
+                    width={142}
+                    height={136}
+                  />
+                  <div className={styles.image}>
+                    <Image
+                      alt="item 1"
+                      src="/images/Course/itro3.png"
+                      width={66}
+                      height={66}
+                    />
+                  </div>
+                </div>
+                <div className="info d-flex flex-column align-items-center">
+                  <h5 className="text-center">Công nghệ</h5>
+                  <p className="text-center">
+                    Trang thiết bị hiện đại áp dụng <br /> công nghệ tiên tiến.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              className={
+                "col-4 d-flex flex-column align-items-center" +
+                " " +
+                styles.item
+              }
+            >
+              <div className={styles.content} data-aos="fade-up">
+                <div className={styles.image_container}>
+                  <Image
+                    alt="item 1"
+                    src="/images/Course/bg.png"
+                    width={142}
+                    height={136}
+                  />
+                  <div className={styles.image}>
+                    <Image
+                      alt="item 1"
+                      src="/images/Course/itro4.png"
+                      width={66}
+                      height={66}
+                    />
+                  </div>
+                </div>
+                <div className="info d-flex flex-column align-items-center">
+                  <h5 className="text-center">Cộng đồng</h5>
+                  <p className="text-center">
+                    Tạo nên cộng đồng chung niềm đam mê <br /> với nhiều hoạt
+                    động kết nối.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              className={
+                "col-4 d-flex flex-column align-items-center" +
+                " " +
+                styles.item
+              }
+            >
+              <div className={styles.content} data-aos="fade-left">
+                <div className={styles.image_container}>
+                  <Image
+                    alt="item 1"
+                    src="/images/Course/bg.png"
+                    width={142}
+                    height={136}
+                  />
+                  <div className={styles.image}>
+                    <Image
+                      alt="item 1"
+                      src="/images/Course/itro5.png"
+                      width={66}
+                      height={66}
+                    />
+                  </div>
+                </div>
+                <div className="info d-flex flex-column align-items-center">
+                  <h5 className="text-center">Chi phí</h5>
+                  <p className="text-center">
+                    Cạnh tranh và phù hợp với <br /> đối tượng người chơi.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <div className={styles.course} id="course">
         <div className={styles.top}>
           <div className="container">
-            <span>KHOÁ HỌC</span>
-            <h2>Các khoá học của The Golf House</h2>
-            <p>
+            <span data-aos="fade-right">KHOÁ HỌC</span>
+            <h2 data-aos="fade-right">Các khoá học của The Golf House</h2>
+            <p data-aos="fade-right">
               Dù bạn là người mới bắt đầu tìm hiểu, hay người chơi Golf muốn
               nâng cao trình độ. The Golf House luôn có lộ trình phù hợp cho
               bạn!
@@ -275,7 +394,7 @@ function Course(props) {
           </div>
         </div>
         <div className="container">
-          <div className="list">
+          <div className="list" data-aos="fade-left">
             <Swiper
               breakpoints={{
                 1920: {
@@ -297,8 +416,8 @@ function Course(props) {
               onSwiper={(s) => setSwiper3(s)}
               className="mySwiper"
             >
-              {slideCourse.map((item) => (
-                <SwiperSlide key={item}>
+              {slideCourse.map((item, index) => (
+                <SwiperSlide key={index}>
                   <div className="d-flex flex-column info">
                     <div>
                       <div className="image">
@@ -342,7 +461,7 @@ function Course(props) {
               <div className="swiper-slide">
                 <div className="d-flex flex-column info">
                   <div>
-                    <div className="image">
+                    <div className="image" data-aos="fade-right">
                       <Image
                         alt="Intro 1"
                         src={slideCourse[detailIndex]?.image}
@@ -351,17 +470,23 @@ function Course(props) {
                     </div>
                     {/* <div className="detail"></div> */}
                     <div className="detail d-flex justify-content-end">
-                      <h5 onClick={handleOpen}>
+                      <h5 onClick={handleOpen} data-aos="fade-right">
                         {slideCourse[detailIndex]?.title}
                       </h5>
-                      <span>Dành cho người tười 4-13 tuổi</span>
-                      <h4>
+                      <span data-aos="fade-right">
+                        Dành cho người tười 4-13 tuổi
+                      </span>
+                      <h4 data-aos="fade-right">
                         20.000.000 VND <p>/tháng</p>
                       </h4>
-                      <p>
+                      <p data-aos="fade-right">
                         Học hằng tuần <br /> Giảm giá 10%
                       </p>
-                      <div className="button" onClick={handleOpen}>
+                      <div
+                        data-aos="fade-right"
+                        className="button"
+                        onClick={handleOpen}
+                      >
                         <button>Đăng ký</button>
                       </div>
                     </div>
@@ -370,14 +495,18 @@ function Course(props) {
               </div>
             </div>
             <div className="heading col-12 col-lg-8 flex-wrap align-items-start">
-              <span>THÔNG TIN KHOÁ HỌC</span>
-              <h2>Chi tiết khoá Junior</h2>
-              <p>Khoá học dành cho trẻ em đam mê Golf từ 4-13 tuổi.</p>
+              <span data-aos="fade-left">THÔNG TIN KHOÁ HỌC</span>
+              <h2 data-aos="fade-left">Chi tiết khoá Junior</h2>
+              <p data-aos="fade-left">
+                Khoá học dành cho trẻ em đam mê Golf từ 4-13 tuổi.
+              </p>
               <ul>
-                <li>Lịch học linh động & phù hợp với lịch học tại trường</li>
-                <li>Tối đa 4 học viên/lớp</li>
-                <li>60 phút/buổi</li>
-                <li>Miễn phí phí gậy tập và bóng</li>
+                <li data-aos="fade-left">
+                  Lịch học linh động & phù hợp với lịch học tại trường
+                </li>
+                <li data-aos="fade-left">Tối đa 4 học viên/lớp</li>
+                <li data-aos="fade-left">60 phút/buổi</li>
+                <li data-aos="fade-left">Miễn phí phí gậy tập và bóng</li>
               </ul>
             </div>
           </div>
@@ -412,16 +541,18 @@ function Course(props) {
             <SwiperSlide>
               <div className="container">
                 <div className="content d-flex flex-column align-items-center">
-                  <span className="icon">“</span>
-                  <p>
+                  <span className="icon" data-aos="fade-down">
+                    “
+                  </span>
+                  <p data-aos="fade-left">
                     Từ một nhân viên văn phòng không mặn mà với hoạt động thể
                     thao, tôi tìm thấy niềm đam mê với Golf tại The Golf House.
                     Đến với Golf, tôi thấy cuộc sống trở nên vui vẻ và thú vị.
                     Đặc biệt, Golf rèn cho tôi tính kiên nhẫn và một lối sống
                     tích cực năng động hơn.
                   </p>
-                  <h2>Nguyễn Ngọc</h2>
-                  <span>Nhân viên văn phòng</span>
+                  <h2 data-aos="fade-right">Nguyễn Ngọc</h2>
+                  <span data-aos="fade-left">Nhân viên văn phòng</span>
                 </div>
               </div>
             </SwiperSlide>
@@ -467,7 +598,7 @@ function Course(props) {
       </div>
       <div className={styles.calendar} id="calendar">
         <div className="container">
-          <div className="heading">
+          <div className="heading" data-aos="fade-down">
             <h2>Đặt lịch học</h2>
           </div>
           <div className="d-flex justify-content-center">
@@ -477,6 +608,7 @@ function Course(props) {
           </div>
           <div className={styles.content}>
             <DatePicker
+              data-aos="fade-up"
               selected={startDate}
               onChange={(date) => {
                 setStartDate(date);
@@ -512,7 +644,7 @@ function Course(props) {
                 prevMonthButtonDisabled,
                 nextMonthButtonDisabled,
               }) => (
-                <div className="custom-header">
+                <div className="custom-header" data-aos="fade-left">
                   <button
                     onClick={decreaseMonth}
                     disabled={prevMonthButtonDisabled}

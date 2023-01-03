@@ -27,19 +27,23 @@ const newList = [
 
 function About(props) {
   const [swiper, setSwiper] = useState(null);
+  const [activeSlide, setActiveSlide] = useState(0);
   const router = useRouter();
   return (
     <div className={styles.about_page}>
       <div className="container">
         <div className={styles.membership} id="founder">
           <div className="d-flex flex-wrap align-items-center">
-            <div className={"col-12 col-md-6" + " " + styles.left}>
+            <div
+              className={"col-12 col-md-6" + " " + styles.left}
+              data-aos="fade-right"
+            >
               <div
                 className={
                   styles.header + " " + "d-flex flex-column align-items-end"
                 }
               >
-                <CountUp start={1000} end={2022} delay={0} duration={2}>
+                <CountUp start={1000} end={2022} delay={0} duration={1.5}>
                   {({ countUpRef }) => (
                     <div>
                       <h2 ref={countUpRef}>2022</h2>
@@ -59,27 +63,220 @@ function About(props) {
               <div className={styles.image2}>
                 <Image
                   alt="Image 2"
-                  src="/images/Home/MemberShip/mem2.png"
+                  src="/images/About/about-intro1.png"
                   width={300}
                   height={361}
                 />
               </div>
             </div>
-            <div className={"col-12 col-md-6" + " " + styles.right}>
-              <span>VỀ CHÚNG TÔI</span>
-              <h3>Nhà sáng lập</h3>
-              <p>
-                Học viện The Golf House Việt Nam (TGH) được thành lập vào tháng
-                3 năm 2022 với sứ mệnh mang lại giá trị cho những người đam mê
-                Golf và xây dựng cộng đồng Golfer Việt Nam.
+            <div
+              className={"col-12 col-md-6" + " " + styles.right}
+              data-aos="fade-left"
+            >
+              <span data-aos="fade-left">VỀ CHÚNG TÔI</span>
+              <h3 data-aos="fade-left">Nhà sáng lập</h3>
+              <p data-aos="fade-left">
+                Học viện The Golf House Việt Nam được sáng lập bởi Nguyễn Gia
+                Bảo (Bảo Bảo) - một doanh nhân, nữ Golfer với hơn 17 năm kinh
+                nghiệm cùng nhiều thành tích thi đấu ấn tượng trong và ngoài
+                nước.
               </p>
-              <div>
+              <div data-aos="fade-left">
                 <button>Đăng ký</button>
               </div>
             </div>
           </div>
         </div>
+        <div className={styles.vision} id="vision">
+          <div className={styles.info} data-aos="fade-right">
+            <Swiper
+              effect={"flip"}
+              grabCursor={true}
+              slidesPerView={1}
+              spaceBetween={30}
+              pagination={false}
+              modules={[Pagination, Navigation]}
+              className="mySwiper"
+              // onActiveIndexChange={(s) => setActiveSlide(s.realIndex)}
+            >
+              <div className={styles.content}>
+                <SwiperSlide>
+                  <div className="step_slide" data-aos="fade-right">
+                    <span>01</span>
+                    <span></span>
+                    <span>Về chúng tôi</span>
+                  </div>
+                  <h3 data-aos="fade-left">Tầm nhìn</h3>
+                  <div className="desc" data-aos="fade-right">
+                    <p>
+                      Học viện đào tạo cung cấp chương trình giảng dạy bài bản
+                      theo tiêu chuẩn PGA, cá nhân hóa việc học tập thông qua lộ
+                      trình học thiết kế phù hợp cho từng lứa tuổi, theo từng
+                      cấp độ từ cơ bản tới nâng cao.
+                    </p>
+                  </div>
+                  <h3 data-aos="fade-left">Sứ mệnh</h3>
+                  <div className="desc" data-aos="fade-right">
+                    <p>
+                      Xây dựng các học viện trên cả nước và thành công đào tạo
+                      thế hệ Golfer mới
+                    </p>
+                  </div>
+                  <div
+                    className={
+                      "d-flex justify-content-end" + " " + styles.see_more
+                    }
+                    data-aos="fade-left"
+                  >
+                    <button className="d-flex align-items-center">
+                      <span>Xem thêm</span>
+                      <i className="fa-regular fa-arrow-right"></i>
+                    </button>
+                  </div>
+                </SwiperSlide>
+              </div>
+            </Swiper>
+          </div>
+          <div className={"d-flex flex-wrap" + " " + styles.detail}>
+            <div className="col-2 col-md-4" data-aos="fade-right">
+              <h5>
+                Tầm nhìn <br /> Sứ Mệnh
+              </h5>
+            </div>
+            <div
+              className={"col-10 col-md-8 flex-wrap" + " " + styles.image}
+              data-aos="fade-left"
+            >
+              <Image
+                alt="Image Course"
+                src="/images/About/vision.png"
+                layout="fill"
+              ></Image>
+            </div>
+          </div>
+        </div>
         <div className={styles.welcome} id="about">
+          <div className={styles.info} data-aos="fade-left">
+            <div
+              className={
+                "d-flex justify-content-between" + " " + styles.navigation
+              }
+            >
+              <span onClick={() => swiper.slidePrev()}>
+                <i className="fa-light fa-chevron-left"></i>
+              </span>
+              <span onClick={() => swiper.slideNext()}>
+                <i className="fa-light fa-chevron-right"></i>
+              </span>
+            </div>
+            <Swiper
+              effect={"flip"}
+              grabCursor={true}
+              slidesPerView={1}
+              spaceBetween={30}
+              loop={true}
+              pagination={false}
+              modules={[Pagination, Navigation]}
+              className="mySwiper"
+              onSwiper={(s) => {
+                setSwiper(s);
+              }}
+              onActiveIndexChange={(s) => setActiveSlide(s.realIndex)}
+            >
+              <div className={styles.content}>
+                <SwiperSlide>
+                  <div className="step_slide" data-aos="fade-left">
+                    <span>01</span>
+                    <span></span>
+                    <span>Lio Holding</span>
+                  </div>
+                  <h3 data-aos="fade-right">The Golf House Vietnam</h3>
+                  <div className="desc" data-aos="fade-left">
+                    <p>
+                      The Golf House Vietnam là thành viên thuộc tập đoàn Lio
+                      Holdings. Lio Holdings hoạt động trong lĩnh vực đào tạo,
+                      cung cấp các dịch vụ và tổ chức các sự kiện giải trí về
+                      Golf & Motorsport mang tầm quốc tế tại thị trường Việt
+                      Nam. Với sứ mệnh khai phá và định hướng thị trường, Lio
+                      Holdings mong muốn mang Golf & Motorsport đến gần với
+                      người yêu thích các bộ môn này tại Việt Nam. Bằng việc xây
+                      dựng hệ sinh thái các dịch vụ phục vụ cho ngành Golf &
+                      Motorsport, Lio Holdings tạo nên môi trường đào tạo và
+                      chơi Golf tiệm cận với trình độ quốc tế, đào tạo và tổ
+                      chức các hoạt động Motorsport tại Việt Nam đạt chuẩn thế
+                      giới.
+                    </p>
+                  </div>
+                  <div
+                    className={
+                      "d-flex justify-content-end" + " " + styles.see_more
+                    }
+                    data-aos="fade-right"
+                  >
+                    <button className="d-flex align-items-center">
+                      <span>Xem thêm</span>
+                      <i className="fa-regular fa-arrow-right"></i>
+                    </button>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="step_slide">
+                    <span>02</span>
+                    <span></span>
+                    <span>Lio Holding</span>
+                  </div>
+                  <h3>Đội ngũ HLV quốc tế</h3>
+                  <div className="desc">
+                    <p>
+                      Học viện The Golf House Việt Nam (TGH) được thành lập vào
+                      tháng 3 năm 2022 với sứ mệnh mang lại giá trị cho những
+                      người đam mê Golf và xây dựng cộng đồng Golfer Việt Nam.
+                    </p>
+                    <p>
+                      TGH cung câp chương trình giảng dạy bài bản theo tiêu
+                      chuẩn PGA, đa dạng các gói học phục vụ nhu cầu của học
+                      viên theo từng giai đoạn, dù là người mới chơi hay người
+                      chơi golf muôn nâng cao kỹ năng của mình.
+                    </p>
+                    <p>
+                      Sau khóa học, học viên tự tin bước ra sân khi được trang
+                      bị đầy đủ các yếu tố về kỹ thuật, văn hóa golf và luật
+                      chơi.
+                    </p>
+                  </div>
+                  <div
+                    className={
+                      "d-flex justify-content-end" + " " + styles.see_more
+                    }
+                  >
+                    <button className="d-flex align-items-center">
+                      <span>Xem thêm</span>
+                      <i className="fa-regular fa-arrow-right"></i>
+                    </button>
+                  </div>
+                </SwiperSlide>
+              </div>
+            </Swiper>
+          </div>
+          <div className={"d-flex flex-wrap" + " " + styles.detail}>
+            <div
+              className={"col-10 col-md-8 flex-wrap" + " " + styles.image}
+              data-aos="fade-right"
+            >
+              <Image
+                alt="Image Course"
+                src={`/images/About/about${activeSlide + 1}.png`}
+                layout="fill"
+              ></Image>
+            </div>
+            <div className="col-2 col-md-4" data-aos="fade-left">
+              <h5>
+                Lio <br /> Holding
+              </h5>
+            </div>
+          </div>
+        </div>
+        {/* <div className={styles.welcome} id="about">
           <Swiper
             effect={"flip"}
             grabCursor={true}
@@ -210,18 +407,18 @@ function About(props) {
               </div>
             </SwiperSlide>
           </Swiper>
-        </div>
+        </div> */}
         <div className={styles.news} id="news">
-          <div className="heading">
+          <div className="heading" data-aos="fade-up">
             <h2 className={styles.title_page}>Tin tức, Sự kiện</h2>
           </div>
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center" data-aos="fade-down">
             <button className="btn-down">
               <i className="fa-regular fa-chevron-down"></i>
             </button>
           </div>
           <div className={"d-flex flex-wrap" + " " + styles.contain}>
-            <div className="col-12 col-lg-6">
+            <div className="col-12 col-lg-6" data-aos="fade-right">
               <div
                 className={
                   styles.info_left +
@@ -274,7 +471,10 @@ function About(props) {
                       className={styles.item + " " + "d-flex flex-wrap"}
                       key={index}
                     >
-                      <div className={styles.wrapp + " " + "col-12 col-lg-4"}>
+                      <div
+                        className={styles.wrapp + " " + "col-12 col-lg-4"}
+                        data-aos="fade-left"
+                      >
                         <div className={styles.image}>
                           <Image alt="Image" src={item.image} layout="fill" />
                         </div>
@@ -304,7 +504,7 @@ function About(props) {
               </div>
             </div>
           </div>
-          <div className="button">
+          <div className="button" data-aos="fade-up">
             <button onClick={() => router.push("/news-events")}>
               Xem thêm
             </button>

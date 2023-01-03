@@ -96,7 +96,7 @@ function ProShop(props) {
   };
   return (
     <div className={styles.proshop_page}>
-      <div className="container">
+      <div className="container" data-aos="fade-up">
         <div className="heading">
           <h2>Proshop</h2>
         </div>
@@ -106,13 +106,13 @@ function ProShop(props) {
           </button>
         </div>
       </div>
-      <div className={styles.bannerv2}>
+      <div className={styles.bannerv2} data-aos="fade-up">
         <Image alt="Image 1" src="/images/Proshop/banner.png" layout="fill" />
         <div className={styles.bannerv2_content}>
           <div className="container h-100">
-            <div className="d-flex h-100 justify-content-center align-items-center flex-column">
-              <span>PROSHOP</span>
-              <h1>Chương trình khuyến mãi 50%</h1>
+            <div className="d-flex h-100 justify-content-end align-items-center flex-column">
+              {/* <span>PROSHOP</span>
+              <h1>Chương trình khuyến mãi 50%</h1> */}
               {/* <p>
                 Huấn luyện viên đạt chuẩn PGA, VGA dày dặn kinh nghiệm chơi và
                 giảng dạy Golf.
@@ -131,7 +131,10 @@ function ProShop(props) {
           }
           id="pro-shop"
         >
-          <div className={"col-12 col-lg-7" + " " + styles.left}>
+          <div
+            className={"col-12 col-lg-7" + " " + styles.left}
+            data-aos="fade-right"
+          >
             <div
               className={
                 "d-flex flex-wrap justify-content-between align-items-center" +
@@ -139,10 +142,13 @@ function ProShop(props) {
                 styles.header
               }
             >
-              <span className="col-12 col-sm-6">
+              <span className="col-12 col-sm-6" data-aos="fade-right">
                 Hiển thị 6 trên 10 kết quả
               </span>
-              <div className="col-12 col-sm-6 d-flex justify-content-start justify-content-sm-end">
+              <div
+                className="col-12 col-sm-6 d-flex justify-content-start justify-content-sm-end"
+                data-aos="fade-left"
+              >
                 <Select
                   options={options}
                   styles={customStyles}
@@ -195,7 +201,10 @@ function ProShop(props) {
               <Pagination data={data} />
             </div>
           </div>
-          <div className={"col-12 col-lg-5" + " " + styles.right}>
+          <div
+            className={"col-12 col-lg-5" + " " + styles.right}
+            data-aos="fade-left"
+          >
             <div className={styles.tabs}>
               <div className={"d-flex flex-wrap" + " " + styles.top}>
                 <div className="col-12 col-lg-12 col-md-6">

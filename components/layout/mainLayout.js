@@ -4,11 +4,17 @@ import Footer from "../footer/footer";
 import HeaderMain from "../HeaderMain/HeaderMain";
 import $ from "jquery";
 import HeaderAccademy from "../HeaderAcademy/HeaderAcademy";
+import RightMenu from "../RightMenu/RightMenu";
+import Cart from "../Cart/cart";
+import Search from "../Search/Search";
 
 function MainLayout({ children }) {
+  const cart = [];
   const [activeKey, setActiveKey] = React.useState(1);
   const [visible, setVisible] = useState(false);
-
+  const [showRight, setShowRight] = useState(false);
+  const [showCart, setShowCart] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
   const toggleVisible = () => {
     const scrolled = document.documentElement.scrollTop;
     if (scrolled > 10) {
@@ -23,6 +29,12 @@ function MainLayout({ children }) {
       behavior: "smooth",
     });
   };
+  const handleShowRightMenu = () => setShowRight(!showRight);
+  const handleCloseRightMenu = () => setShowRight();
+  const handleShowCart = () => setShowCart(!showCart);
+  const handleCloseCart = () => setShowCart(false);
+  const handleShowSearch = () => setShowSearch(!showSearch);
+  const handleCloseSearch = () => setShowSearch(false);
   window.addEventListener("scroll", toggleVisible);
   const router = useRouter();
   useEffect(() => {
@@ -56,33 +68,19 @@ function MainLayout({ children }) {
           break;
       }
     });
-    // $(".rs-dropdown-item").each(function (index) {
-    //   switch (router.asPath) {
-    //     case "/about-us#founder": {
-    //       $(".rs-dropdown-item")[0].classList.add("rs-dropdown-item-active");
-    //       break;
-    //     }
-    //     case "/about-us#about": {
-    //       $(".rs-dropdown-item")[1].classList.add("rs-dropdown-item-active");
-    //       break;
-    //     }
-    //     case "/about-us#news": {
-    //       $(".rs-dropdown-item")[2].classList.add("rs-dropdown-item-active");
-    //       break;
-    //     }
-    //     case "/course/#course": {
-    //       $(".rs-dropdown-item")[3].classList.add("rs-dropdown-item-active");
-    //       break;
-    //     }
-    //     case "/course/#calendar": {
-    //       $(".rs-dropdown-item")[4].classList.add("rs-dropdown-item-active");
-    //       break;
-    //     }
-    //     default:
-    //       break;
-    //   }
-    // });
-  }, []);
+  }, [router]);
+  $(".search").on("click", () => {
+    $(".search-dialog").css("transform", "scaleY(1)");
+  });
+  $(".cart").on("click", () => {
+    $(".cart-dialog").css("transform", "scaleY(1)");
+  });
+  $(".sub-menu").on("click", () => {
+    $(".sub").css("transform", "scaleX(1)");
+  });
+  $(".bar").on("click", () => {
+    $(".custom-menu").css("transform", "scaleY(1)");
+  });
   return (
     <>
       <div className="wrapper-project">
@@ -93,6 +91,9 @@ function MainLayout({ children }) {
               activeKey={activeKey}
               onSelect={setActiveKey}
               visible={visible}
+              handleShowRightMenu={handleShowRightMenu}
+              handleShowCart={handleShowCart}
+              handleShowSearch={handleShowSearch}
             />
           ) : (
             <HeaderAccademy
@@ -100,6 +101,9 @@ function MainLayout({ children }) {
               activeKey={activeKey}
               onSelect={setActiveKey}
               visible={visible}
+              handleShowRightMenu={handleShowRightMenu}
+              handleShowCart={handleShowCart}
+              handleShowSearch={handleShowSearch}
             />
           )
         ) : (
@@ -108,8 +112,14 @@ function MainLayout({ children }) {
             activeKey={activeKey}
             onSelect={setActiveKey}
             visible={visible}
+            handleShowCart={handleShowCart}
+            handleShowRightMenu={handleShowRightMenu}
+            handleShowSearch={handleShowSearch}
           />
         )}
+        <RightMenu handleCloseRightMenu={handleCloseRightMenu} />
+        <Cart handleCloseCart={handleCloseCart} cart={cart} />
+        <Search handleCloseSearch={handleCloseSearch} />
         <div>{children}</div>
         <button
           className="btn-scroll"

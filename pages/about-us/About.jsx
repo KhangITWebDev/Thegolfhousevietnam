@@ -59,6 +59,7 @@ function About(props) {
                   src="/images/About/about-intro.png"
                   width={434}
                   height={580}
+                  objectFit="cover"
                 />
               </div>
               <div className={styles.image2} data-aos="fade-left">
@@ -67,6 +68,7 @@ function About(props) {
                   src="/images/About/about-intro1.png"
                   width={300}
                   height={361}
+                  objectFit="cover"
                 />
               </div>
             </div>
@@ -89,6 +91,27 @@ function About(props) {
           </div>
         </div>
         <div className={styles.vision} id="vision">
+          <h5 className={styles.mobile}>
+            <span>Tầm nhìn</span> <span>sứ mệnh</span>
+          </h5>
+          <div className={"d-flex flex-wrap" + " " + styles.detail}>
+            <div className="col-2 col-md-4" data-aos="fade-right">
+              <h5>
+                <span>Tầm nhìn</span> <span>Sứ mệnh</span>
+              </h5>
+            </div>
+            <div
+              className={"col-10 col-md-8 flex-wrap" + " " + styles.image}
+              data-aos="fade-left"
+            >
+              <Image
+                alt="Image Course"
+                src="/images/About/vision.png"
+                layout="fill"
+                objectFit="cover"
+              ></Image>
+            </div>
+          </div>
           <div className={styles.info} data-aos="fade-right">
             <Swiper
               effect={"flip"}
@@ -137,26 +160,6 @@ function About(props) {
                 </SwiperSlide>
               </div>
             </Swiper>
-          </div>
-          <h5 className={styles.mobile}>
-            <span>Tầm nhìn</span> <span>Sứ Mệnh</span>
-          </h5>
-          <div className={"d-flex flex-wrap" + " " + styles.detail}>
-            <div className="col-2 col-md-4" data-aos="fade-right">
-              <h5>
-                <span>Tầm nhìn</span> <span>Sứ Mệnh</span>
-              </h5>
-            </div>
-            <div
-              className={"col-10 col-md-8 flex-wrap" + " " + styles.image}
-              data-aos="fade-left"
-            >
-              <Image
-                alt="Image Course"
-                src="/images/About/vision.png"
-                layout="fill"
-              ></Image>
-            </div>
           </div>
         </div>
         <div className={styles.welcome} id="about">

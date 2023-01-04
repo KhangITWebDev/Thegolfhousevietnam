@@ -203,11 +203,13 @@ function Course(props) {
             <button>Đăng ký</button>
           </div>
         </div>
+      </div>
+      <div className="container">
         <div className={styles.training} id="training">
           <div className={styles.list + " " + "d-flex flex-wrap"}>
             <div
               className={
-                "col-4 d-flex justify-content-center align-items-center" +
+                "col-12 col-md-6 col-lg-4 d-flex justify-content-center align-items-center" +
                 " " +
                 styles.item
               }
@@ -219,7 +221,7 @@ function Course(props) {
             </div>
             <div
               className={
-                "col-4 d-flex flex-column align-items-center" +
+                "col-12 col-md-6 col-lg-4 d-flex flex-column align-items-center" +
                 " " +
                 styles.item
               }
@@ -231,6 +233,7 @@ function Course(props) {
                     src="/images/Course/bg.png"
                     width={142}
                     height={136}
+                    objectFit="cover"
                   />
                   <div className={styles.image}>
                     <Image
@@ -238,6 +241,7 @@ function Course(props) {
                       src="/images/Course/itro1.png"
                       width={66}
                       height={66}
+                      objectFit="cover"
                     />
                   </div>
                 </div>
@@ -251,7 +255,7 @@ function Course(props) {
             </div>
             <div
               className={
-                "col-4 d-flex flex-column align-items-center" +
+                "col-12 col-md-6 col-lg-4 d-flex flex-column align-items-center" +
                 " " +
                 styles.item
               }
@@ -263,6 +267,7 @@ function Course(props) {
                     src="/images/Course/bg.png"
                     width={142}
                     height={136}
+                    objectFit="cover"
                   />
                   <div className={styles.image}>
                     <Image
@@ -270,6 +275,7 @@ function Course(props) {
                       src="/images/Course/itro2.png"
                       width={66}
                       height={66}
+                      objectFit="cover"
                     />
                   </div>
                 </div>
@@ -283,7 +289,7 @@ function Course(props) {
             </div>
             <div
               className={
-                "col-4 d-flex flex-column align-items-center" +
+                "col-12 col-md-6 col-lg-4 d-flex flex-column align-items-center" +
                 " " +
                 styles.item
               }
@@ -293,6 +299,7 @@ function Course(props) {
                   <Image
                     alt="item 1"
                     src="/images/Course/bg.png"
+                    objectFit="cover"
                     width={142}
                     height={136}
                   />
@@ -302,6 +309,7 @@ function Course(props) {
                       src="/images/Course/itro3.png"
                       width={66}
                       height={66}
+                      objectFit="cover"
                     />
                   </div>
                 </div>
@@ -315,7 +323,7 @@ function Course(props) {
             </div>
             <div
               className={
-                "col-4 d-flex flex-column align-items-center" +
+                "col-12 col-md-6 col-lg-4 d-flex flex-column align-items-center" +
                 " " +
                 styles.item
               }
@@ -327,6 +335,7 @@ function Course(props) {
                     src="/images/Course/bg.png"
                     width={142}
                     height={136}
+                    objectFit="cover"
                   />
                   <div className={styles.image}>
                     <Image
@@ -334,6 +343,7 @@ function Course(props) {
                       src="/images/Course/itro4.png"
                       width={66}
                       height={66}
+                      objectFit="cover"
                     />
                   </div>
                 </div>
@@ -348,7 +358,7 @@ function Course(props) {
             </div>
             <div
               className={
-                "col-4 d-flex flex-column align-items-center" +
+                "col-12 col-md-6 col-lg-4 d-flex flex-column align-items-center" +
                 " " +
                 styles.item
               }
@@ -360,6 +370,7 @@ function Course(props) {
                     src="/images/Course/bg.png"
                     width={142}
                     height={136}
+                    objectFit="cover"
                   />
                   <div className={styles.image}>
                     <Image
@@ -367,6 +378,7 @@ function Course(props) {
                       src="/images/Course/itro5.png"
                       width={66}
                       height={66}
+                      objectFit="cover"
                     />
                   </div>
                 </div>
@@ -421,7 +433,12 @@ function Course(props) {
                   <div className="d-flex flex-column info">
                     <div>
                       <div className="image">
-                        <Image alt="Intro 1" src={item.image} layout="fill" />
+                        <Image
+                          alt="Intro 1"
+                          src={item.image}
+                          layout="fill"
+                          objectFit="cover"
+                        />
                       </div>
                       <div className="detail">
                         <div className="icon">
@@ -466,6 +483,7 @@ function Course(props) {
                         alt="Intro 1"
                         src={slideCourse[detailIndex]?.image}
                         layout="fill"
+                        objectFit="cover"
                       />
                     </div>
                     {/* <div className="detail"></div> */}

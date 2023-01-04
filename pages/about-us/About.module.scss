@@ -190,7 +190,7 @@
       margin-top: 150px;
     }
     @media screen and (max-width: 576px) {
-      margin-top: 200px;
+      margin-top: 100px;
     }
     .info {
       position: absolute;
@@ -204,11 +204,20 @@
       @media screen and (max-width: 768px) {
         width: 450px;
         bottom: 50%;
-        transform: translateY(50%);
+        height: 65% !important;
+        transform: translateY(40%);
       }
       @media screen and (max-width: 576px) {
         width: 90%;
-        height: 55% !important;
+        height: 65% !important;
+        left: 50%;
+        transform: translateX(-50%) translateY(35%);
+      }
+      @media screen and (max-width: 480px) {
+        width: 90%;
+        height: 80% !important;
+        left: 50%;
+        transform: translateX(-50%) translateY(20%);
       }
       height: auto;
       z-index: 1;
@@ -259,6 +268,13 @@
       @media screen and (max-width: 576px) {
         font-size: 36px;
       }
+      @media screen and (max-width: 376px) {
+        flex-direction: column;
+        text-align: left;
+        span {
+          margin: 0px !important;
+        }
+      }
     }
     .detail {
       h5 {
@@ -287,6 +303,12 @@
       .image {
         position: relative;
         height: 900px;
+        @media screen and (max-width: 768px) {
+          height: 700px;
+        }
+        @media screen and (max-width: 376px) {
+          height: 800px;
+        }
         img {
           object-fit: cover;
         }
@@ -297,6 +319,12 @@
     margin-bottom: 100px;
     margin-top: 300px;
     position: relative;
+    @media screen and (max-width: 768px) {
+      margin-top: 150px;
+    }
+    @media screen and (max-width: 576px) {
+      margin-top: 100px;
+    }
     .info {
       position: absolute;
       top: 0;
@@ -309,10 +337,24 @@
       @media screen and (max-width: 768px) {
         width: 450px;
         bottom: 50%;
-        transform: translateY(50%);
+        right: 50%;
+        height: 70%;
+        transform: translateY(30%) translateX(50%);
       }
       @media screen and (max-width: 576px) {
         width: 90%;
+        height: 65%;
+        transform: translateY(40%) translateX(50%);
+      }
+      @media screen and (max-width: 480px) {
+        width: 90%;
+        height: 80%;
+        transform: translateY(18%) translateX(50%);
+      }
+      @media screen and (max-width: 376px) {
+        width: 90%;
+        height: 85%;
+        transform: translateY(15%) translateX(50%);
       }
       height: auto;
       z-index: 1;
@@ -339,6 +381,38 @@
         }
       }
     }
+    .mobile {
+      font-size: 57px;
+      font-weight: 700;
+      display: none;
+      flex-direction: column;
+      line-height: 1.3;
+      color: #000;
+      @media screen and (max-width: 992px) {
+        font-size: 45px;
+      }
+      @media screen and (max-width: 768px) {
+        z-index: 1003;
+        margin-bottom: 50px;
+        display: flex;
+        flex-direction: row;
+        span {
+          &:nth-child(2) {
+            margin-left: 15px;
+          }
+        }
+      }
+      @media screen and (max-width: 576px) {
+        font-size: 36px;
+      }
+      @media screen and (max-width: 376px) {
+        flex-direction: column;
+        text-align: left;
+        span {
+          margin: 0px !important;
+        }
+      }
+    }
     .detail {
       h5 {
         font-size: 57px;
@@ -351,6 +425,7 @@
         }
         @media screen and (max-width: 768px) {
           position: absolute;
+          display: none;
           z-index: 1003;
           transform: translateY(-50px);
         }
@@ -404,6 +479,9 @@
           cursor: pointer;
           @media screen and (max-width: 992px) {
             height: 130px;
+          }
+          @media screen and (max-width: 576px) {
+            height: 332px;
           }
         }
         @media screen and (max-width: 992px) {
@@ -509,6 +587,9 @@
           position: relative;
           height: 130px;
           cursor: pointer;
+          @media screen and (max-width: 576px) {
+            height: 332px;
+          }
         }
         h3 {
           font-size: 16px;

@@ -27,8 +27,11 @@ function Detail(props) {
   return (
     <div className={styles.detail_page}>
       <div className="container">
-        <div className="d-flex justify-content-start top" id="proshop-detail">
-          <div className="col-6 slide">
+        <div
+          className="d-flex flex-wrap justify-content-start top"
+          id="proshop-detail"
+        >
+          <div className="col-12 col-lg-6 slide">
             <Swiper
               pagination={{
                 clickable: true,
@@ -42,6 +45,7 @@ function Detail(props) {
                     alt="Image"
                     src="/images/Proshop/ps1.png"
                     layout="fill"
+                    objectFit="cover"
                   />
                 </div>
               </SwiperSlide>
@@ -65,10 +69,10 @@ function Detail(props) {
               </SwiperSlide>
             </Swiper>
           </div>
-          <div className="col-6 content">
+          <div className="col-12 col-lg-6 content">
             <span className="sale">-10%</span>
             <h2>Bóng Golf</h2>
-            <div className="d-flex justify-content-between align-items-center">
+            <div className="d-flex flex-wrap justify-content-between align-items-center">
               <p className="price">
                 <span>800.000</span> 720.000 VND
               </p>

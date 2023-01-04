@@ -46,6 +46,7 @@ function Academy(props) {
                   src="/images/Academy/Intro/intro1.png"
                   width={434}
                   height={580}
+                  objectFit="cover"
                 />
               </div>
               <div className={styles.image2} data-aos="fade-left">
@@ -54,6 +55,7 @@ function Academy(props) {
                   src="/images/Academy/Intro/intro2.png"
                   width={300}
                   height={361}
+                  objectFit="cover"
                 />
               </div>
             </div>
@@ -243,20 +245,24 @@ function Academy(props) {
               </div>
             </Swiper>
           </div>
+          <h5 className={styles.mobile}>
+            <span> Giới thiệu</span> <span>học viện</span>
+          </h5>
           <div className={"d-flex flex-wrap" + " " + styles.detail}>
-            <div className="col-2 col-md-4" data-aos="fade-right">
+            <div className="col-2 col-sm-4" data-aos="fade-right">
               <h5>
                 Giới thiệu <br /> học viện
               </h5>
             </div>
             <div
-              className={"col-10 col-md-8 flex-wrap" + " " + styles.image}
+              className={"col-12 col-sm-8 flex-wrap" + " " + styles.image}
               data-aos="fade-left"
             >
               <Image
                 alt="Image Course"
                 src={`/images/Academy/AcademyInfo/info${activeSlide + 1}.png`}
                 layout="fill"
+                objectFit="cover"
               ></Image>
             </div>
           </div>
@@ -265,7 +271,7 @@ function Academy(props) {
       <div className={styles.academy_detail}>
         <div className="d-flex flex-wrap">
           <div
-            className={"col-12 col-md-3" + " " + styles.item}
+            className={"col-12 col-lg-3 col-md-6" + " " + styles.item}
             data-aos="fade-up"
           >
             <div className={styles.image}>
@@ -273,6 +279,7 @@ function Academy(props) {
                 alt="Image 1"
                 src="/images/Academy/Detail/detail1.png"
                 layout="fill"
+                objectFit="cover"
               />
             </div>
             <div className={styles.content}>
@@ -283,7 +290,7 @@ function Academy(props) {
             </div>
           </div>
           <div
-            className={"col-12 col-md-3" + " " + styles.item}
+            className={"col-12 col-lg-3 col-md-6" + " " + styles.item}
             data-aos="fade-down"
           >
             <div className={styles.image}>
@@ -291,6 +298,7 @@ function Academy(props) {
                 alt="Image 2"
                 src="/images/Academy/Detail/detail2.png"
                 layout="fill"
+                objectFit="cover"
               />
             </div>
             <div className={styles.content}>
@@ -301,7 +309,7 @@ function Academy(props) {
             </div>
           </div>
           <div
-            className={"col-12 col-md-3" + " " + styles.item}
+            className={"col-12 col-lg-3 col-md-6" + " " + styles.item}
             data-aos="fade-up"
           >
             <div className={styles.image}>
@@ -309,6 +317,7 @@ function Academy(props) {
                 alt="Image 1"
                 src="/images/Academy/Detail/detail3.png"
                 layout="fill"
+                objectFit="cover"
               />
             </div>
             <div className={styles.content}>
@@ -319,7 +328,7 @@ function Academy(props) {
             </div>
           </div>
           <div
-            className={"col-12 col-md-3" + " " + styles.item}
+            className={"col-12 col-lg-3 col-md-6" + " " + styles.item}
             data-aos="fade-down"
           >
             <div className={styles.image}>
@@ -327,6 +336,7 @@ function Academy(props) {
                 alt="Image 2"
                 src="/images/Academy/Detail/detail2.png"
                 layout="fill"
+                objectFit="cover"
               />
             </div>
             <div className={styles.content}>
@@ -339,7 +349,12 @@ function Academy(props) {
         </div>
       </div>
       <div className={styles.bannerv2} data-aos="fade-up">
-        <Image alt="Image 1" src="/images/Academy/banner.png" layout="fill" />
+        <Image
+          alt="Image 1"
+          src="/images/Academy/banner.png"
+          layout="fill"
+          // objectFit="cover"
+        />
         <div className={styles.content}>
           <div className="container h-100">
             <div className="d-flex h-100 justify-content-center align-items-center flex-column">

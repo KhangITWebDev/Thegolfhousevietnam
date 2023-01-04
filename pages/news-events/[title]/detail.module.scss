@@ -33,6 +33,7 @@
         font-weight: 700;
         color: #fff;
         margin-top: 15px;
+        text-align: center;
         margin-bottom: 20px;
       }
       .tool {
@@ -99,6 +100,10 @@
       span {
         font-size: 65px;
         color: #b4a461;
+      }
+      @media screen and (max-width: 768px) {
+        padding-left: 40px;
+        padding-right: 40px;
       }
     }
     .image_bottom {
@@ -203,37 +208,40 @@
     background: #f8f8f4;
     padding: 36px 30px;
     .content {
-      padding-left: 22px;
-      h5 {
-        font-size: 22px;
-        font-weight: 700;
-        line-height: 1.3;
-        color: #515150;
+      padding-left: 10px;
+    }
+    h5 {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: #515150;
+      cursor: pointer;
+      @media screen and (max-width: 768px) {
+        margin-top: 20px;
+      }
+      &:hover {
+        color: #00b577;
+      }
+    }
+    span {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.3;
+      color: #6e6d68;
+    }
+    p {
+      margin-top: 10px;
+      font-size: 20px;
+    }
+    .social {
+      margin-top: 15px;
+      i {
+        font-size: 16px;
+        color: #6e6d68;
+        margin-right: 20px;
         cursor: pointer;
         &:hover {
           color: #00b577;
-        }
-      }
-      span {
-        font-size: 18px;
-        font-weight: 400;
-        line-height: 1.3;
-        color: #6e6d68;
-      }
-      p {
-        margin-top: 10px;
-        font-size: 20px;
-      }
-      .social {
-        margin-top: 15px;
-        i {
-          font-size: 16px;
-          color: #6e6d68;
-          margin-right: 20px;
-          cursor: pointer;
-          &:hover {
-            color: #00b577;
-          }
         }
       }
     }
@@ -254,29 +262,57 @@
   }
   .news {
     padding-top: 80px;
-    padding-bottom: 80px;
+    margin-bottom: 80px;
     .list {
       margin-top: 80px;
       .item {
         &:nth-child(1) {
-          padding-right: 20px;
+          padding-right: 10px;
+          @media screen and (max-width: 576px) {
+            padding-right: 0px;
+          }
         }
         &:nth-child(2) {
-          padding-right: 20px;
-          padding-left: 20px;
+          padding-right: 10px;
+          padding-left: 10px;
+          @media screen and (max-width: 992px) {
+            padding-right: 0px;
+          }
+          @media screen and (max-width: 576px) {
+            padding-right: 0px;
+            padding-left: 0px;
+            margin-top: 50px;
+          }
         }
         &:nth-child(3) {
-          padding-left: 20px;
+          padding-left: 10px;
+          @media screen and (max-width: 992px) {
+            padding-left: 0px;
+            padding-right: 20px;
+            margin-top: 50px;
+          }
+          @media screen and (max-width: 576px) {
+            padding-left: 0px;
+            margin-top: 50px;
+          }
         }
         .info {
           .image {
             position: relative;
             height: 240px;
             width: 100%;
-            cursor: pointer;
+            img {
+              object-fit: cover;
+            }
+            // @media screen and (max-width: 576px) {
+            //   height: 350px;
+            // }
+            // @media screen and (max-width: 375px) {
+            //   height: 300px;
+            // }
           }
           h5 {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 700;
             line-height: 1.3;
             color: #000;
@@ -288,13 +324,13 @@
             }
           }
           span {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 500;
             line-height: 1.3;
             color: #c4c4c4;
           }
           p {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 400;
             line-height: 1.3;
             margin-top: 15px;

@@ -5,12 +5,6 @@
     height: 500px;
     position: relative;
     margin-top: 88px;
-    @media screen and (max-width: 768px) {
-      height: 400px;
-    }
-    @media screen and (max-width: 675px) {
-      height: 350px;
-    }
     &_content {
       // .container.h-100 {
       //   position: relative;
@@ -90,6 +84,9 @@
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 21px;
     margin-bottom: 80px;
+    @media screen and (max-width: 768px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
     .image {
       position: relative;
       width: 100%;

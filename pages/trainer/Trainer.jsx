@@ -38,11 +38,11 @@ function Trainer(props) {
             trong việc giảng dạy và chơi Golf
           </p>
         </div>
-        <div className="d-flex flex-wrap">
+        <div className="d-flex flex-wrap justify-content-center">
           {TrainerList.map((item, index) => (
             <div
               key={index}
-              className={"col-12 col-lg-4 col-sm-6" + " " + styles.item}
+              className={"col-12 col-lg-4 col-md-6" + " " + styles.item}
               data-aos={
                 index === 0
                   ? "fade-right"
@@ -61,7 +61,12 @@ function Trainer(props) {
                     : "fade-left"
                 }
               >
-                <Image alt="Image" src={item.image} layout="fill"></Image>
+                <Image
+                  alt="Image"
+                  src={item.image}
+                  layout="fill"
+                  objectFit="cover"
+                ></Image>
               </div>
               <div className={styles.info}>
                 <h3
@@ -115,13 +120,14 @@ function Trainer(props) {
               <h2>{TrainerList[showDetailIndex]?.name}</h2>
             </div>
             <h3>{TrainerList[showDetailIndex]?.tag}</h3>
-            <div className="d-flex align-items-start">
-              <div className="col-6 left">
+            <div className="d-flex flex-wrap align-items-start">
+              <div className="col-12 col-md-6 left">
                 <div className="image">
                   <Image
                     alt="Iamge Detail"
                     src={TrainerList[showDetailIndex]?.image}
                     layout="fill"
+                    objectFit="cover"
                   />
                 </div>
                 <div className="social d-flex">
@@ -131,7 +137,7 @@ function Trainer(props) {
                   <i className="fa-brands fa-instagram"></i>
                 </div>
               </div>
-              <div className={"col-6 right"}>
+              <div className="col-12 col-md-6 right">
                 <div className="info">
                   <h5>Lý thuyết</h5>
                   <span>{TrainerList[showDetailIndex]?.info.theory}%</span>

@@ -15,7 +15,12 @@ function Detail(props) {
   return (
     <div className={styles.detail_page}>
       <div className={styles.banner}>
-        <Image src="/images/NewsEvents/detail.png" alt="Image" layout="fill" />
+        <Image
+          src="/images/NewsEvents/detail.png"
+          alt="Image"
+          layout="fill"
+          objectFit="cover"
+        />
         <div className={styles.content}>
           <div className="container h-100">
             <div className="d-flex h-100 justify-content-center align-items-center flex-column">
@@ -44,7 +49,7 @@ function Detail(props) {
       </div>
       <div className="container">
         <div className={styles.content}>
-          <div className={styles.top + " " + "col-10 m-auto"}>
+          <div className={styles.top + " " + "col-12 col-md-10 m-auto"}>
             <p>
               <strong
                 style={{
@@ -92,7 +97,7 @@ function Detail(props) {
               ></Image>
             </div>
           </div>
-          <div className="col-10 m-auto">
+          <div className="col-12 col-md-10 m-auto">
             <div className={styles.top}>
               <p>
                 Ut perspiciatis, unde omnis iste natus error sit voluptatem
@@ -155,7 +160,7 @@ function Detail(props) {
               ></Image>
             </div>
           </div>
-          <div className="col-10 m-auto">
+          <div className="col-12 col-md-10 m-auto">
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -171,14 +176,14 @@ function Detail(props) {
               egestas. Curabitur placerat finibus lacus.
             </p>
           </div>
-          <div className="col-10 m-auto">
+          <div className="col-12 col-md-10 m-auto">
             <div className={styles.tag}>
               <button>Mới</button>
               <button>Nổi bật</button>
             </div>
           </div>
         </div>
-        <div className="col-10 m-auto">
+        <div className="col-12 col-md-10 m-auto">
           <div
             className={
               styles.bonus +
@@ -196,16 +201,17 @@ function Detail(props) {
               <i className="fa-light fa-link"></i>
             </div>
           </div>
-          <div className={styles.comment + " " + "d-flex"}>
-            <div className={styles.avatar}>
+          <div className={styles.comment + " " + "d-flex flex-wrap"}>
+            <div className={styles.avatar + " " + "col-12 col-md-2"}>
               <Image
                 alt="Iamge"
                 src="/images/NewsEvents/avatar2.png"
                 width={70}
                 height={70}
+                objectFit="cover"
               ></Image>
             </div>
-            <div className={styles.content}>
+            <div className={styles.content + "col-12 col-md-10"}>
               <h5>Ái Như</h5>
               <span>NHÀ BÁO</span>
               <p>
@@ -243,15 +249,23 @@ function Detail(props) {
           <div className="heading">
             <h2 className="text-center">Tin tức khác</h2>
           </div>
-          <div className={"d-flex" + " " + styles.list}>
+          <div
+            className={
+              "d-flex flex-wrap justify-content-center" + " " + styles.list
+            }
+          >
             {NewsList.map((item, index) => (
-              <div key={index} className={"col-4" + " " + styles.item}>
+              <div
+                key={index}
+                className={"col-12 col-sm-6 col-lg-4" + " " + styles.item}
+              >
                 <div className={styles.info}>
                   <div className={styles.image}>
                     <Image
                       alt={"Image" + index + 1}
                       src={item.image}
                       layout="fill"
+                      objectFit="cover"
                     ></Image>
                   </div>
                   <h5>{item.title}</h5>

@@ -107,7 +107,12 @@ function ProShop(props) {
         </div>
       </div>
       <div className={styles.bannerv2} data-aos="fade-up">
-        <Image alt="Image 1" src="/images/Proshop/banner.png" layout="fill" />
+        <Image
+          alt="Image 1"
+          src="/images/Proshop/banner.png"
+          layout="fill"
+          objectFit="cover"
+        />
         <div className={styles.bannerv2_content}>
           <div className="container h-100">
             <div className="d-flex h-100 justify-content-end align-items-center flex-column">
@@ -176,6 +181,7 @@ function ProShop(props) {
                         src={item.image}
                         width={250}
                         height={250}
+                        objectFit="cover"
                       ></Image>
                     </div>
                     <h5

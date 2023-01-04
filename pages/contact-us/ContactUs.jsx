@@ -35,41 +35,9 @@ function ContactUs(props) {
       </div>
       <div className={styles.training} id="contact">
         <div className="container">
-          <Swiper
-            breakpoints={{
-              1920: {
-                slidesPerView: 3,
-              },
-              1280: {
-                slidesPerView: 3,
-              },
-              992: {
-                slidesPerView: 3,
-              },
-              576: {
-                slidesPerView: 2,
-              },
-            }}
-            slidesPerView={1}
-            spaceBetween={30}
-            // pagination={{
-            //   clickable: true,
-            // }}
-            pagination={false}
-            // modules={[Pagination, Navigation]}
-            className="mySwiper"
-          >
+          <div className="d-flex flex-wrap justify-content-center">
             {ContactList.map((item, index) => (
-              <SwiperSlide
-                key={index}
-                data-aos={
-                  index === 0
-                    ? "fade-right"
-                    : index === 1
-                    ? "fade-up"
-                    : "fade-left"
-                }
-              >
+              <div key={index} className="item col-12 col-sm-6 col-lg-4">
                 <div className="content h-100 d-flex flex-column align-items-center">
                   <div
                     className="image"
@@ -86,6 +54,7 @@ function ContactUs(props) {
                       src={item.image}
                       width={85}
                       height={85}
+                      objectFit="cover"
                     />
                   </div>
                   <div className="info d-flex flex-column align-items-center">
@@ -119,21 +88,26 @@ function ContactUs(props) {
                     </button>
                   </div>
                 </div>
-              </SwiperSlide>
+              </div>
             ))}
-          </Swiper>
+          </div>
         </div>
       </div>
       <div className={styles.form}>
         <div className="d-flex flex-wrap">
           <div
-            className={"col-12 col-md-6" + " " + styles.left}
+            className={"col-12 col-lg-6" + " " + styles.left}
             data-aos="fade-right"
           >
-            <Image alt="map" src="/images/Contact/Map.png" layout="fill" />
+            <Image
+              alt="map"
+              src="/images/Contact/Map.png"
+              layout="fill"
+              objectFit="cover"
+            />
           </div>
           <div
-            className={"col-12 col-md-6" + " " + styles.right}
+            className={"col-12 col-lg-6" + " " + styles.right}
             data-aos="fade-left"
           >
             <div>

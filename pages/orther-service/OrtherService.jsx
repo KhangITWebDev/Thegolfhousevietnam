@@ -20,6 +20,7 @@ function OrtherService(props) {
           alt="Image 1"
           src="/images/OrtherService/banner1.png"
           layout="fill"
+          objectFit="cover"
         />
         <div className={styles.bannerv2_content}>
           <div className="container h-100">
@@ -46,6 +47,7 @@ function OrtherService(props) {
               alt="Other Image"
               src="/images/OrtherService/orther5.png"
               layout="fill"
+              objectFit="cover"
             />
           </div>
           <div className={styles.image} data-aos="fade-left">
@@ -53,6 +55,7 @@ function OrtherService(props) {
               alt="Other Image"
               src="/images/OrtherService/orther6.png"
               layout="fill"
+              objectFit="cover"
             />
           </div>
           <div className={styles.image} data-aos="fade-right">
@@ -60,6 +63,7 @@ function OrtherService(props) {
               alt="Other Image"
               src="/images/OrtherService/orther7.png"
               layout="fill"
+              objectFit="cover"
             />
           </div>
           <div className={styles.image} data-aos="fade-left">
@@ -67,6 +71,7 @@ function OrtherService(props) {
               alt="Other Image"
               src="/images/OrtherService/orther8.png"
               layout="fill"
+              objectFit="cover"
             />
           </div>
         </div>
@@ -86,6 +91,7 @@ function OrtherService(props) {
           alt="Image 1"
           src="/images/OrtherService/banner2.png"
           layout="fill"
+          objectFit="cover"
         />
         <div className={styles.bannerv2_content}>
           <div className="container h-100">
@@ -111,6 +117,7 @@ function OrtherService(props) {
               alt="Other Image"
               src="/images/OrtherService/orther1.png"
               layout="fill"
+              objectFit="cover"
             />
           </div>
           <div className={styles.image} data-aos="fade-left">
@@ -118,6 +125,7 @@ function OrtherService(props) {
               alt="Other Image"
               src="/images/OrtherService/orther2.png"
               layout="fill"
+              objectFit="cover"
             />
           </div>
           <div className={styles.image} data-aos="fade-right">
@@ -125,6 +133,7 @@ function OrtherService(props) {
               alt="Other Image"
               src="/images/OrtherService/orther3.png"
               layout="fill"
+              objectFit="cover"
             />
           </div>
           <div className={styles.image} data-aos="fade-left">
@@ -132,6 +141,7 @@ function OrtherService(props) {
               alt="Other Image"
               src="/images/OrtherService/orther4.png"
               layout="fill"
+              objectFit="cover"
             />
           </div>
         </div>

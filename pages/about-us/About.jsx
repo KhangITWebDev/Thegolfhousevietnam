@@ -95,13 +95,13 @@ function About(props) {
             <span>Tầm nhìn</span> <span>sứ mệnh</span>
           </h5>
           <div className={"d-flex flex-wrap" + " " + styles.detail}>
-            <div className="col-2 col-md-4" data-aos="fade-right">
+            <div className="col-2 col-sm-4" data-aos="fade-right">
               <h5>
                 <span>Tầm nhìn</span> <span>Sứ mệnh</span>
               </h5>
             </div>
             <div
-              className={"col-10 col-md-8 flex-wrap" + " " + styles.image}
+              className={"col-12 col-sm-8 flex-wrap" + " " + styles.image}
               data-aos="fade-left"
             >
               <Image
@@ -265,18 +265,20 @@ function About(props) {
               </div>
             </Swiper>
           </div>
+          <h5 className={styles.mobile}>Lio Holding</h5>
           <div className={"d-flex flex-wrap" + " " + styles.detail}>
             <div
-              className={"col-10 col-md-8 flex-wrap" + " " + styles.image}
+              className={"col-12 col-sm-8 flex-wrap" + " " + styles.image}
               data-aos="fade-right"
             >
               <Image
                 alt="Image Course"
                 src={`/images/About/about${activeSlide + 1}.png`}
                 layout="fill"
+                objectFit="cover"
               ></Image>
             </div>
-            <div className="col-2 col-md-4" data-aos="fade-left">
+            <div className="col-2 col-sm-4" data-aos="fade-left">
               <h5>
                 Lio <br /> Holding
               </h5>
@@ -441,6 +443,7 @@ function About(props) {
                       alt="Image"
                       src="/images/About/new1.png"
                       layout="fill"
+                      objectFit="cover"
                     />
                   </div>
                 </div>
@@ -479,16 +482,24 @@ function About(props) {
                       key={index}
                     >
                       <div
-                        className={styles.wrapp + " " + "col-12 col-lg-4"}
+                        className={
+                          styles.wrapp + " " + "col-12 col-lg-4 col-sm-4"
+                        }
                         data-aos="fade-left"
                       >
                         <div className={styles.image}>
-                          <Image alt="Image" src={item.image} layout="fill" />
+                          <Image
+                            alt="Image"
+                            src={item.image}
+                            layout="fill"
+                            objectFit="cover"
+                            data-aos="fade-left"
+                          />
                         </div>
                       </div>
                       <div
                         className={
-                          "d-flex flex-column justify-content-start  justify-content-lg-between col-12 col-lg-8" +
+                          "d-flex flex-column justify-content-start  justify-content-lg-between col-12 col-lg-8 col-sm-8" +
                           " " +
                           styles.content
                         }
@@ -499,11 +510,12 @@ function About(props) {
                               `/news-events/${removeAccents(item.title)}`
                             )
                           }
+                          data-aos="fade-left"
                         >
                           {item.title}
                         </h3>
-                        <span>1 giờ trước</span>
-                        <p>{item.desc}</p>
+                        <span data-aos="fade-left">1 giờ trước</span>
+                        <p data-aos="fade-left">{item.desc}</p>
                       </div>
                     </div>
                   );

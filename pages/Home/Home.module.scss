@@ -571,13 +571,18 @@
       @media screen and (max-width: 1279.98px) {
         // height: 80vw;
       }
+      img {
+        object-fit: cover;
+      }
       &:nth-child(1) {
         grid-area: a;
         @media screen and (max-width: 768px) {
-          height: auto;
+          height: 300px;
         }
         @media screen and (max-width: 576px) {
-          height: 300px;
+          img {
+            object-fit: cover;
+          }
         }
       }
       &:nth-child(2) {
@@ -606,9 +611,6 @@
       &:nth-child(4) {
         grid-area: d;
         @media screen and (max-width: 768px) {
-          height: auto;
-        }
-        @media screen and (max-width: 576px) {
           height: 300px;
         }
       }

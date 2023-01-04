@@ -132,7 +132,7 @@ export default function HeaderMoblieBlack({
               <Nav.Menu
                 title="Về Chúng Tôi"
                 onClick={(e) => {
-                  router.push("/about");
+                  router.push("/about-us");
                 }}
               >
                 <Nav.Item

@@ -138,10 +138,13 @@ function About(props) {
               </div>
             </Swiper>
           </div>
+          <h5 className={styles.mobile}>
+            <span>Tầm nhìn</span> <span>Sứ Mệnh</span>
+          </h5>
           <div className={"d-flex flex-wrap" + " " + styles.detail}>
             <div className="col-2 col-md-4" data-aos="fade-right">
               <h5>
-                Tầm nhìn <br /> Sứ Mệnh
+                <span>Tầm nhìn</span> <span>Sứ Mệnh</span>
               </h5>
             </div>
             <div

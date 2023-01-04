@@ -5,13 +5,10 @@
       height: 720px;
       position: relative;
       @media screen and (max-width: 992px) {
-        height: 600px;
-      }
-      @media screen and (max-width: 768px) {
-        height: 550px;
-      }
-      @media screen and (max-width: 576px) {
-        height: 500px;
+        // height: 600px;
+        img {
+          object-fit: cover;
+        }
       }
     }
   }
@@ -213,21 +210,16 @@
         // top: 0px;
         // left: 0px;
         z-index: 1000;
+        img {
+          object-fit: cover;
+        }
         @media screen and (max-width: 992px) {
           // width: 600px !important;
           height: 500px !important;
         }
-        @media screen and (max-width: 768px) {
-          height: 800px !important;
-        }
-        @media screen and (max-width: 576px) {
-          // max-width: 1500px !important;
-          height: 650px !important;
-        }
-        @media screen and (max-width: 480px) {
-          // max-width: 1500px !important;
-          height: 500px !important;
-        }
+        // @media screen and (max-width: 768px) {
+        //   height: 800px !important;
+        // }
         @media screen and (max-width: 376px) {
           // max-width: 1500px !important;
           height: 350px !important;
@@ -357,7 +349,9 @@
     position: relative;
     margin-top: 88px;
     @media screen and (max-width: 992px) {
-      height: 400px;
+      img {
+        object-fit: cover;
+      }
     }
     @media screen and (max-width: 576px) {
       height: 600px;
@@ -563,6 +557,14 @@
         "a b"
         "c d";
     }
+    @media screen and (max-width: 576px) {
+      grid-template-areas:
+        "a"
+        "b"
+        "c"
+        "d";
+      grid-gap: 10px;
+    }
     .item {
       position: relative;
       height: 600px;
@@ -574,6 +576,9 @@
         @media screen and (max-width: 768px) {
           height: auto;
         }
+        @media screen and (max-width: 576px) {
+          height: 300px;
+        }
       }
       &:nth-child(2) {
         grid-area: b;
@@ -584,6 +589,9 @@
         // @media screen and (max-width: 768px) {
         //   height: 40vw;
         // }
+        @media screen and (max-width: 576px) {
+          height: 300px;
+        }
       }
       &:nth-child(3) {
         grid-area: c;
@@ -591,11 +599,17 @@
         @media screen and (max-width: 1280px) {
           // height: 40vw;
         }
+        @media screen and (max-width: 576px) {
+          height: 300px;
+        }
       }
       &:nth-child(4) {
         grid-area: d;
         @media screen and (max-width: 768px) {
           height: auto;
+        }
+        @media screen and (max-width: 576px) {
+          height: 300px;
         }
       }
     }
@@ -726,12 +740,15 @@
             position: relative;
             height: 240px;
             width: 100%;
-            @media screen and (max-width: 576px) {
-              height: 350px;
+            img {
+              object-fit: cover;
             }
-            @media screen and (max-width: 375px) {
-              height: 300px;
-            }
+            // @media screen and (max-width: 576px) {
+            //   height: 350px;
+            // }
+            // @media screen and (max-width: 375px) {
+            //   height: 300px;
+            // }
           }
           h5 {
             font-size: 24px;

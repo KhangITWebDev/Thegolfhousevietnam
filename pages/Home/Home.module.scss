@@ -213,36 +213,25 @@
         // top: 0px;
         // left: 0px;
         z-index: 1000;
-        // @media screen and (max-width: 1150.98px) {
-        //   img {
-        //     max-width: 600px !important;
-        //     max-height: 450px !important;
-        //   }
-        // }
-        // @media screen and (max-width: 992px) {
-        //   img {
-        //     max-width: 600px !important;
-        //     max-height: 400px !important;
-        //   }
-        // }
-        // @media screen and (max-width: 768px) {
-        //   img {
-        //     max-width: 1500px !important;
-        //     max-height: 800px !important;
-        //   }
-        // }
-        // @media screen and (max-width: 576px) {
-        //   img {
-        //     max-width: 1500px !important;
-        //     max-height: 400px !important;
-        //   }
-        // }
-        // @media screen and (max-width: 376px) {
-        //   img {
-        //     max-width: 1500px !important;
-        //     max-height: 300px !important;
-        //   }
-        // }
+        @media screen and (max-width: 992px) {
+          // width: 600px !important;
+          height: 500px !important;
+        }
+        @media screen and (max-width: 768px) {
+          height: 800px !important;
+        }
+        @media screen and (max-width: 576px) {
+          // max-width: 1500px !important;
+          height: 650px !important;
+        }
+        @media screen and (max-width: 480px) {
+          // max-width: 1500px !important;
+          height: 500px !important;
+        }
+        @media screen and (max-width: 376px) {
+          // max-width: 1500px !important;
+          height: 350px !important;
+        }
       }
       // .image2 {
       //   position: relative;
@@ -295,11 +284,11 @@
       }
       @media screen and (max-width: 768px) {
         padding-left: 0px;
-        margin-top: 250px;
+        margin-top: 10px;
       }
       @media screen and (max-width: 576px) {
         padding-left: 0px;
-        margin-top: 100px;
+        margin-top: 10px;
       }
       span {
         font-size: 20px;
@@ -369,6 +358,9 @@
     margin-top: 88px;
     @media screen and (max-width: 992px) {
       height: 400px;
+    }
+    @media screen and (max-width: 576px) {
+      height: 600px;
     }
     .content {
       .container.h-100 {

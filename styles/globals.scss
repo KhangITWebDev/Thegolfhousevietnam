@@ -847,6 +847,7 @@ button {
   .custom-nav {
     position: fixed;
     width: 100%;
+    max-width: 1440px;
     z-index: 2000;
     top: 0px;
     height: auto;
@@ -1017,6 +1018,7 @@ button {
   }
   .custom-nav {
     position: fixed;
+    max-width: 1440px;
     width: 100%;
     z-index: -999999;
     opacity: -1;

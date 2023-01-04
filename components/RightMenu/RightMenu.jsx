@@ -3,6 +3,7 @@ import React from "react";
 import styles from "./RightMenu.module.scss";
 import $ from "jquery";
 import { useEffect } from "react";
+import Aos from "aos";
 
 function RightMenu({ handleCloseRightMenu }) {
   useEffect(() => {
@@ -38,23 +39,24 @@ function RightMenu({ handleCloseRightMenu }) {
             src="/images/Logo/Logo12.png"
             width={65}
             height={55}
+            data-aos="fade-right"
           />
-          <button onClick={handleCloseRightMenu}>
+          <button onClick={handleCloseRightMenu} data-aos="fade-left">
             <i className="fa-light fa-xmark"></i>
           </button>
         </div>
         <div className={styles.center + " " + "d-flex"}>
           <div className={styles.icon + " " + "d-flex flex-column"}>
-            <i className="fa-brands fa-facebook-f"></i>
-            <i className="fa-brands fa-youtube"></i>
-            <i className="fa-brands fa-dribbble"></i>
-            <i className="fa-brands fa-instagram"></i>
+            <i className="fa-brands fa-facebook-f" data-aos="fade-right"></i>
+            <i data-aos="fade-left" className="fa-brands fa-youtube"></i>
+            <i data-aos="fade-right" className="fa-brands fa-dribbble"></i>
+            <i data-aos="fade-left" className="fa-brands fa-instagram"></i>
           </div>
           <div className={styles.text + " " + "d-flex flex-column"}>
-            <span>Facebook</span>
-            <span>Youtube</span>
-            <span>Dribble</span>
-            <span>Instagram</span>
+            <span data-aos="fade-left">Facebook</span>
+            <span data-aos="fade-right">Youtube</span>
+            <span data-aos="fade-left">Dribble</span>
+            <span data-aos="fade-right">Instagram</span>
           </div>
         </div>
         <div className={styles.footer}>

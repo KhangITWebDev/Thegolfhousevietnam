@@ -25,8 +25,8 @@ function OrtherService(props) {
           <div className="container h-100">
             <div className="d-flex h-100 justify-content-center align-items-center flex-column">
               {/* <span></span> */}
-              <h1>Hair, Nail & Spa</h1>
-              <p>
+              <h1 data-aos="fade-right">Hair, Nail & Spa</h1>
+              <p data-aos="fade-left">
                 Chăm sóc bản thân sau thời gian tập luyện là điều cần thiết. Tận
                 hưởng thời gian thư giãn tuyệt vời với các dịch vụ chăm sóc
                 tóc,chăm sóc da, massage cao cấp.
@@ -91,8 +91,8 @@ function OrtherService(props) {
           <div className="container h-100">
             <div className="d-flex h-100 justify-content-center align-items-center flex-column">
               {/* <span></span> */}
-              <h1>VIP Lounge</h1>
-              <p>
+              <h1 data-aos="fade-right">VIP Lounge</h1>
+              <p data-aos="fade-left">
                 Không gian riêng tư, rộng rãi, được thiết kề phù hợp cho những
                 hoạt động giải trí kết nối cộng đồng chung niềm đam mê.
               </p>

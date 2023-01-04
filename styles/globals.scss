@@ -883,7 +883,7 @@ button {
       padding: 20px !important;
       border-radius: 0px;
       width: 163px;
-      top: calc(100% + 10px);
+      // ;
     }
     .rs-navbar-brand,
     .rs-navbar-item {
@@ -930,6 +930,12 @@ button {
         }
       }
       .rs-navbar-item-active {
+        &::after {
+          width: 100%;
+        }
+      }
+      .rs-dropdown-item-active {
+        background-color: transparent !important;
         &::after {
           width: 100%;
         }
@@ -1049,7 +1055,6 @@ button {
       padding: 20px !important;
       border-radius: 0px;
       width: 50%;
-      top: calc(100% + 10px);
     }
     .rs-navbar-brand,
     .rs-navbar-item {
@@ -1151,11 +1156,11 @@ button {
     top: 0px;
     height: 100%;
     background-color: #000;
+    overflow: auto;
     @media screen and (min-width: 1280px) {
       z-index: -999999999;
       opacity: -1;
     }
-
     .rs-navbar-nav {
       padding-left: 50px;
       padding-right: 50px;
@@ -1169,10 +1174,10 @@ button {
         align-items: center;
         justify-content: space-between;
       }
-      .scroll {
-        height: 300px;
-        overflow: auto;
-      }
+      // .scroll {
+      //   height: 300px;
+      //   overflow: auto;
+      // }
       .menu-link {
         display: flex;
         flex-direction: column;

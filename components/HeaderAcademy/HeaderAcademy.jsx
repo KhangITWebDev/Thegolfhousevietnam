@@ -85,7 +85,12 @@ export default function HeaderAccademy({
                   >
                     Trang chủ
                   </Nav.Item>
-                  <Nav.Menu title="Về Chúng Tôi">
+                  <Nav.Menu
+                    title="Về Chúng Tôi"
+                    onClick={() => {
+                      router.push("/about-us");
+                    }}
+                  >
                     <Nav.Item
                       eventKey="2"
                       onClick={() => {
@@ -129,7 +134,12 @@ export default function HeaderAccademy({
                   >
                     HLV
                   </Nav.Item>
-                  <Nav.Menu title="Đào Tạo">
+                  <Nav.Menu
+                    title="Đào Tạo"
+                    onClick={(e) => {
+                      router.push("/course");
+                    }}
+                  >
                     <Nav.Item
                       eventKey="7"
                       onClick={(e) => {

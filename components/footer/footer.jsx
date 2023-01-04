@@ -6,8 +6,10 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper";
 import styles from "./footer.module.scss";
+import { useRouter } from "next/router";
 
 function Footer(props) {
+  const router = useRouter();
   return (
     <div className={styles.footer} id="footer">
       <div className="container">
@@ -21,22 +23,58 @@ function Footer(props) {
             />
           </div>
           <div className={styles.menu + " " + "d-flex flex-wrap"}>
-            <div className={styles.menu_item} data-aos="fade-right">
+            <div
+              className={styles.menu_item}
+              data-aos="fade-right"
+              onClick={(e) => {
+                router.push("/");
+              }}
+            >
               Trang chủ
             </div>
-            <div className={styles.menu_item} data-aos="fade-right">
+            <div
+              className={styles.menu_item}
+              data-aos="fade-right"
+              onClick={(e) => {
+                router.push("/about-us");
+              }}
+            >
               Về chúng tôi
             </div>
-            <div className={styles.menu_item} data-aos="fade-right">
+            <div
+              className={styles.menu_item}
+              data-aos="fade-right"
+              onClick={(e) => {
+                router.push("/academy");
+              }}
+            >
               Giới thiệu
             </div>
-            <div className={styles.menu_item} data-aos="fade-left">
+            <div
+              className={styles.menu_item}
+              data-aos="fade-left"
+              onClick={(e) => {
+                router.push("/proshop");
+              }}
+            >
               Proshop
             </div>
-            <div className={styles.menu_item} data-aos="fade-left">
+            <div
+              className={styles.menu_item}
+              data-aos="fade-left"
+              onClick={(e) => {
+                router.push("/orther-service");
+              }}
+            >
               Dịch vụ khác
             </div>
-            <div className={styles.menu_item} data-aos="fade-left">
+            <div
+              className={styles.menu_item}
+              data-aos="fade-left"
+              onClick={(e) => {
+                router.push("/contact-us");
+              }}
+            >
               Liên hệ
             </div>
           </div>

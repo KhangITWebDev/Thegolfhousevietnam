@@ -42,6 +42,7 @@ function About(props) {
                 className={
                   styles.header + " " + "d-flex flex-column align-items-end"
                 }
+                data-aos="fade-down"
               >
                 <CountUp start={1000} end={2022} delay={0} duration={1.5}>
                   {({ countUpRef }) => (
@@ -52,7 +53,7 @@ function About(props) {
                 </CountUp>
                 <span>Bắt đầu</span>
               </div>
-              <div className={styles.image1}>
+              <div className={styles.image1} data-aos="fade-right">
                 <Image
                   alt="Image 1"
                   src="/images/About/about-intro.png"
@@ -60,7 +61,7 @@ function About(props) {
                   height={580}
                 />
               </div>
-              <div className={styles.image2}>
+              <div className={styles.image2} data-aos="fade-left">
                 <Image
                   alt="Image 2"
                   src="/images/About/about-intro1.png"

@@ -124,7 +124,12 @@ export default function HeaderMoblie({
               >
                 Trang chủ
               </Nav.Item>
-              <Nav.Menu title="Về Chúng Tôi" id="drop1">
+              <Nav.Menu
+                title="Về Chúng Tôi"
+                onClick={(e) => {
+                  router.push("/about");
+                }}
+              >
                 <Nav.Item
                   eventKey="6"
                   onClick={() => {
@@ -168,7 +173,12 @@ export default function HeaderMoblie({
               >
                 HLV
               </Nav.Item>
-              <Nav.Menu title="Đào Tạo">
+              <Nav.Menu
+                title="Đào Tạo"
+                onClick={(e) => {
+                  router.push("/course");
+                }}
+              >
                 <Nav.Item
                   eventKey="11"
                   onClick={(e) => {

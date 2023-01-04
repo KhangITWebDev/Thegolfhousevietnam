@@ -21,17 +21,17 @@ function Trainer(props) {
   return (
     <div className={styles.trainer_page}>
       <div className="container">
-        <div className="heading" data-aos="fade-up">
+        <div className="heading" data-aos="fade-right">
           <h2 className={styles.title_page}>Đội ngũ huấn luyện</h2>
         </div>
-        <div className="d-flex justify-content-center" data-aos="fade-up">
+        <div className="d-flex justify-content-center" data-aos="fade-down">
           <button className="btn-down">
             <i className="fa-regular fa-chevron-down"></i>
           </button>
         </div>
         <div
           className="d-flex justify-content-center heading"
-          data-aos="fade-up"
+          data-aos="fade-left"
         >
           <p>
             HLV chuyên nghiệp đạt chuẩn VGA hoặc PGA, nhiều năm kinh nghiệm
@@ -51,12 +51,42 @@ function Trainer(props) {
                   : "fade-left"
               }
             >
-              <div className={styles.image}>
+              <div
+                className={styles.image}
+                data-aos={
+                  index === 0
+                    ? "fade-right"
+                    : index === 1
+                    ? "fade-down"
+                    : "fade-left"
+                }
+              >
                 <Image alt="Image" src={item.image} layout="fill"></Image>
               </div>
               <div className={styles.info}>
-                <h3 onClick={() => handleOpen(index)}>{item.name}</h3>
-                <p>{item.tag}</p>
+                <h3
+                  onClick={() => handleOpen(index)}
+                  data-aos={
+                    index === 0
+                      ? "fade-right"
+                      : index === 1
+                      ? "fade-up"
+                      : "fade-left"
+                  }
+                >
+                  {item.name}
+                </h3>
+                <p
+                  data-aos={
+                    index === 0
+                      ? "fade-right"
+                      : index === 1
+                      ? "fade-up"
+                      : "fade-left"
+                  }
+                >
+                  {item.tag}
+                </p>
               </div>
             </div>
           ))}

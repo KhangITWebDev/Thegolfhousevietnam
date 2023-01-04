@@ -559,15 +559,17 @@ function Course(props) {
             <SwiperSlide>
               <div className="container">
                 <div className="content d-flex flex-column align-items-center">
-                  <span className="icon">“</span>
-                  <p>
+                  <span className="icon" data-aos="fade-down">
+                    “
+                  </span>
+                  <p data-aos="fade-left">
                     Là một người chơi Golf hơn 10 năm, tôi gặp khó khăn trong
                     việc xuống Handicap. Nhờ các HLV tại The Golf House phân
                     tích các lỗi sai kỹ thuật mà tôi đã hiểu được vấn đề cần
                     chỉnh sửa để có thể chơi Golf tốt hơn.
                   </p>
-                  <h2>Trần Trung</h2>
-                  <span>Nhân viên văn phòng</span>
+                  <h2 data-aos="fade-right">Trần Trung</h2>
+                  <span data-aos="fade-left">Nhân viên văn phòng</span>
                 </div>
               </div>
             </SwiperSlide>

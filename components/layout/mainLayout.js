@@ -81,6 +81,25 @@ function MainLayout({ children }) {
   $(".bar").on("click", () => {
     $(".custom-menu").css("transform", "scaleY(1)");
   });
+  $(".rs-dropdown").on({
+    mouseenter: function () {
+      if ($(this).index() === 1) {
+        $(".rs-dropdown-menu")[0].removeAttribute("hidden");
+      } else {
+        $(".rs-dropdown-menu")[1].removeAttribute("hidden");
+      }
+    },
+    mouseleave: function () {
+      if ($(this).index() === 1) {
+        $(".rs-dropdown-menu")[0].setAttribute("hidden", "");
+      } else {
+        $(".rs-dropdown-menu")[1].setAttribute("hidden", "");
+      }
+    },
+  });
+  // $("#memu-about").on("mouseenter", () => {
+  //   console.log($(".rs-dropdown-menu"));
+  // });
   return (
     <>
       <div className="wrapper-project">

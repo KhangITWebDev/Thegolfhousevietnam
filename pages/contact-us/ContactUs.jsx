@@ -71,7 +71,16 @@ function ContactUs(props) {
                 }
               >
                 <div className="content h-100 d-flex flex-column align-items-center">
-                  <div className="image">
+                  <div
+                    className="image"
+                    data-aos={
+                      index === 0
+                        ? "fade-right"
+                        : index === 1
+                        ? "fade-down"
+                        : "fade-left"
+                    }
+                  >
                     <Image
                       alt="item 1"
                       src={item.image}
@@ -80,8 +89,28 @@ function ContactUs(props) {
                     />
                   </div>
                   <div className="info d-flex flex-column align-items-center">
-                    <h5 className="text-center">{item.title}</h5>
-                    <div dangerouslySetInnerHTML={{ __html: item.desc }}></div>
+                    <h5
+                      className="text-center"
+                      data-aos={
+                        index === 0
+                          ? "fade-right"
+                          : index === 1
+                          ? "fade-up"
+                          : "fade-left"
+                      }
+                    >
+                      {item.title}
+                    </h5>
+                    <div
+                      data-aos={
+                        index === 0
+                          ? "fade-right"
+                          : index === 1
+                          ? "fade-up"
+                          : "fade-left"
+                      }
+                      dangerouslySetInnerHTML={{ __html: item.desc }}
+                    ></div>
                   </div>
                   <div className="mt-auto">
                     <button className="d-flex align-items-center">
@@ -109,29 +138,31 @@ function ContactUs(props) {
           >
             <div>
               <div className="heading align-items-start w-100">
-                <span>LIÊN HỆ VỚI CHÚNG TÔI</span>
-                <h2 className={styles.title_page}>Để lại thông tin với TGH</h2>
+                <span data-aos="fade-left">LIÊN HỆ VỚI CHÚNG TÔI</span>
+                <h2 data-aos="fade-left" className={styles.title_page}>
+                  Để lại thông tin với TGH
+                </h2>
               </div>
               <form action="">
-                <div className="form-group">
+                <div className="form-group" data-aos="fade-left">
                   <label htmlFor="" className="form-label">
                     Họ tên
                   </label>
                   <input type="text" className="form-control" />
                 </div>
-                <div className="form-group">
+                <div className="form-group" data-aos="fade-left">
                   <label htmlFor="" className="form-label">
                     Email
                   </label>
                   <input type="text" className="form-control" />
                 </div>
-                <div className="form-group">
+                <div className="form-group" data-aos="fade-left">
                   <label htmlFor="" className="form-label">
                     Điện Thoại
                   </label>
                   <input type="text" className="form-control" />
                 </div>
-                <div className="form-group">
+                <div className="form-group" data-aos="fade-left">
                   <label htmlFor="" className="form-label">
                     Ghi chú
                   </label>
@@ -141,7 +172,7 @@ function ContactUs(props) {
                     rows="3"
                   ></textarea>
                 </div>
-                <div className="button">
+                <div className="button" data-aos="fade-left">
                   <button>Gửi</button>
                 </div>
               </form>

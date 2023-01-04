@@ -14,7 +14,7 @@ function Academy(props) {
         <div className="heading" data-aos="fade-up">
           <h2 className={styles.title_page}>Học viện</h2>
         </div>
-        <div className="d-flex justify-content-center" data-aos="fade-up">
+        <div className="d-flex justify-content-center" data-aos="fade-down">
           <button className="btn-down">
             <i className="fa-regular fa-chevron-down"></i>
           </button>
@@ -29,6 +29,7 @@ function Academy(props) {
                 className={
                   styles.header + " " + "d-flex flex-column align-items-end"
                 }
+                data-aos="fade-down"
               >
                 <CountUp start={1000} end={2022} delay={0} duration={1.4}>
                   {({ countUpRef }) => (
@@ -39,7 +40,7 @@ function Academy(props) {
                 </CountUp>
                 <span>Bắt đầu</span>
               </div>
-              <div className={styles.image1}>
+              <div className={styles.image1} data-aos="fade-right">
                 <Image
                   alt="Image 1"
                   src="/images/Academy/Intro/intro1.png"
@@ -47,7 +48,7 @@ function Academy(props) {
                   height={580}
                 />
               </div>
-              <div className={styles.image2}>
+              <div className={styles.image2} data-aos="fade-left">
                 <Image
                   alt="Image 2"
                   src="/images/Academy/Intro/intro2.png"

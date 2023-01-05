@@ -485,7 +485,6 @@ function About(props) {
                         className={
                           styles.wrapp + " " + "col-12 col-lg-4 col-sm-4"
                         }
-                        data-aos="fade-left"
                       >
                         <div className={styles.image}>
                           <Image
@@ -510,12 +509,12 @@ function About(props) {
                               `/news-events/${removeAccents(item.title)}`
                             )
                           }
-                          data-aos="fade-left"
+                          data-aos="fade-right"
                         >
                           {item.title}
                         </h3>
                         <span data-aos="fade-left">1 giờ trước</span>
-                        <p data-aos="fade-left">{item.desc}</p>
+                        <p data-aos="fade-right">{item.desc}</p>
                       </div>
                     </div>
                   );

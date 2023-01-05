@@ -202,7 +202,7 @@ button {
   }
 }
 .wrapper-project {
-  max-width: 1440px;
+  max-width: 1920px;
   width: 100%;
   margin: 0 auto !important;
   position: relative;
@@ -376,6 +376,7 @@ button {
       width: 80px;
       height: 80px;
       margin: 0px;
+      border: 1px solid #bbbbbb;
       &:not(:first-child) {
         margin-top: 15px;
       }
@@ -399,7 +400,8 @@ button {
     .image {
       position: relative;
       height: 433px !important;
-      width: 410px !important;
+      width: 70% !important;
+      border: 1px solid #bbbbbb;
       @media screen and (max-width: 992px) {
         width: 80% !important;
       }
@@ -408,7 +410,7 @@ button {
   .slide {
     padding-right: 30px;
     @media screen and (max-width: 1280px) {
-      padding-right: 15px;
+      padding-right: 20px;
     }
     @media screen and (max-width: 992px) {
       padding-right: 0px;
@@ -417,7 +419,7 @@ button {
   .content {
     padding-left: 30px;
     @media screen and (max-width: 1280px) {
-      padding-left: 15px;
+      padding-left: 20px;
     }
     @media screen and (max-width: 992px) {
       padding-left: 0px;
@@ -452,6 +454,7 @@ button {
     .rate {
       padding-right: 5px;
       padding-left: 5px;
+      padding-top: 15px;
       @media screen and (max-width: 1280px) and (min-width: 992px) {
         padding-left: 0px;
       }
@@ -507,36 +510,66 @@ button {
     }
     .button {
       margin-top: 0px;
+      width: auto !important;
       @media screen and (max-width: 1280px) and (min-width: 992px) {
         justify-content: start;
         margin-top: 30px;
+        height: 50px;
+        width: calc(80%) !important;
         button {
           margin-left: 0px;
+          width: 100%;
         }
       }
+      @media screen and (max-width: 768px) {
+        button {
+          width: auto !important;
+        }
+      }
+
       @media screen and (max-width: 576px) {
         justify-content: start;
         margin-top: 30px;
+        width: calc(80%) !important;
         button {
           margin-left: 0px;
+          height: 65px;
+          width: 100% !important;
         }
       }
+      @media screen and (max-width: 480px) {
+        width: 100% !important;
+        button {
+          width: 100% !important;
+        }
+      }
+
       button {
         margin-top: 0px;
       }
     }
     .fa-heart {
       @media screen and (max-width: 1280px) and (min-width: 992px) {
-        margin-top: 45px;
-        margin-left: 0px;
+        margin-top: 30px;
+        width: 50px !important;
+        height: 50px !important;
+        margin-left: 20px;
       }
       @media screen and (max-width: 576px) {
-        margin-top: 45px;
+        margin-top: 30px;
+        margin-left: 20px;
+        height: 65px !important;
+        width: 65px !important;
+      }
+      @media screen and (max-width: 480px) {
+        margin-top: 30px;
         margin-left: 0px;
+        height: 65px !important;
+        width: 65px !important;
       }
       background: #ffffff;
       box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.25);
-      width: 45px;
+      width: 45px !important;
       height: 45px !important;
       display: flex;
       justify-content: center;
@@ -570,6 +603,13 @@ button {
   margin-bottom: 100px;
   .nav-tabs {
     border-bottom: none;
+    @media screen and (max-width: 768px) {
+      display: flex;
+      width: 100%;
+      .nav-item {
+        width: 50%;
+      }
+    }
   }
   .nav-link {
     border-radius: 0px;
@@ -577,15 +617,28 @@ button {
     font-size: 22px;
     font-weight: 500;
     padding: 11px 80px;
-    background-color: #f8f8f4;
+
     width: 100%;
     margin-right: 35px;
     border: none;
-    border-top: 1px solid #f8f8f4;
-  }
-  .nav-link.active {
     border-top: 1px solid #000;
     background-color: transparent;
+    @media screen and (max-width: 768px) {
+      padding: 11px 0px;
+      margin-right: 0px;
+    }
+    // @media screen and (max-width: 576px) {
+    //   padding: 11px 30px;
+    //   margin-right: 0px;
+    // }
+    // @media screen and (max-width: 376px) {
+    //   padding: 11px 30px;
+    //   margin-right: 0px;
+    // }
+  }
+  .nav-link.active {
+    border-top: 1px solid #f8f8f4;
+    background-color: #f8f8f4;
   }
   .tab-content {
     margin-top: 40px;
@@ -908,7 +961,7 @@ button {
   .custom-nav {
     position: fixed;
     width: 100%;
-    max-width: 1440px;
+    max-width: 1920px;
     z-index: 2000;
     top: 0px;
     height: auto;
@@ -922,6 +975,18 @@ button {
       justify-content: space-between;
       padding-left: 50px;
       padding-right: 50px;
+      @media screen and (min-width: 1520px) {
+        padding-left: 150px !important;
+        padding-right: 150px !important;
+      }
+      @media screen and (min-width: 1800px) {
+        padding-left: 230px !important;
+        padding-right: 230px !important;
+      }
+      @media screen and (min-width: 1920px) {
+        padding-left: 250px;
+        padding-right: 250px;
+      }
       @media screen and (max-width: 768px) {
         padding-left: 20px;
         padding-right: 20px;
@@ -1079,7 +1144,7 @@ button {
   }
   .custom-nav {
     position: fixed;
-    max-width: 1440px;
+    max-width: 1920px;
     width: 100%;
     z-index: -999999;
     opacity: -1;
@@ -2636,6 +2701,18 @@ button {
 .container {
   padding-left: 100px !important;
   padding-right: 100px !important;
+  @media screen and (min-width: 1520px) {
+    padding-left: 200px !important;
+    padding-right: 200px !important;
+  }
+  @media screen and (min-width: 1800px) {
+    padding-left: 280px !important;
+    padding-right: 280px !important;
+  }
+  @media screen and (min-width: 1920px) {
+    padding-left: 300px !important;
+    padding-right: 300px !important;
+  }
   max-width: 100% !important;
   @media screen and (max-width: 992px) {
     padding-left: 50px !important;

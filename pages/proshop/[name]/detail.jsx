@@ -1,19 +1,34 @@
+import $ from "jquery";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import { Tab, Tabs } from "react-bootstrap";
+import Swal from "sweetalert2";
 import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { NewsList } from "../../../utils/DataDemo/Home/dataHome";
-import { NewsEventsData } from "../../../utils/DataDemo/News-Events/NewsEventsData";
-import { removeAccents } from "../../../utils/function";
-import $ from "jquery";
 import styles from "./detail.module.scss";
 import TabDescription from "./TabDescription/TabDescription";
 
 function Detail(props) {
   const router = useRouter();
+  const [qty, setQty] = useState(1);
+  const decreasement = () => {
+    console.log(qty);
+    if (qty <= 1) {
+      Swal.fire({
+        title: "Lỗi",
+        text: "Số lượng phải lớn hơn 0",
+        icon: "error",
+        showCancelButton: false,
+        confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setQty(1);
+        }
+      });
+    }
+  };
   useEffect(() => {
     $("#proshop-detail .swiper-pagination-bullet").each(function (indexC) {
       $(this).css({
@@ -72,7 +87,7 @@ function Detail(props) {
           <div className="col-12 col-lg-6 content">
             <span className="sale">-10%</span>
             <h2>Bóng Golf</h2>
-            <div className="d-flex flex-wrap justify-content-between align-items-center">
+            <div className="d-flex flex-wrap justify-content-lg-between align-items-center justify-content-start">
               <p className="price">
                 <span>800.000</span> 720.000 VND
               </p>
@@ -92,9 +107,15 @@ function Detail(props) {
             </p>
             <div className="d-flex tool">
               <div className="quantity d-flex align-items-center">
-                <span>1</span>
-                <i className="fa-light fa-chevron-up"></i>
-                <i className="fa-light fa-chevron-down"></i>
+                <span>{qty}</span>
+                <i
+                  className="fa-light fa-chevron-up"
+                  onClick={() => setQty(qty + 1)}
+                ></i>
+                <i
+                  className="fa-light fa-chevron-down"
+                  onClick={decreasement}
+                ></i>
               </div>
               <div className="button">
                 <button>Thêm vào giỏ hàng</button>

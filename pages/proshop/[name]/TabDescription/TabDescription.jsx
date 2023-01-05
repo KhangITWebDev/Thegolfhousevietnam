@@ -33,11 +33,8 @@ function TabDescription(props) {
                 992: {
                   slidesPerView: 3,
                 },
-                767: {
+                567: {
                   slidesPerView: 2,
-                },
-                480: {
-                  slidesPerView: 1,
                 },
               }}
               slidesPerView={1}

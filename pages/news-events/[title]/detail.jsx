@@ -35,6 +35,7 @@ function Detail(props) {
                     src="/images/NewsEvents/avatar.png"
                     width={18}
                     height={18}
+                    objectFit="cover"
                   ></Image>
                   <h6>Ái Như</h6>
                 </div>
@@ -87,6 +88,7 @@ function Detail(props) {
                 alt="Image"
                 src="/images/NewsEvents/detail_list1.png"
                 layout="fill"
+                objectFit="cover"
               ></Image>
             </div>
             <div className={"col-6" + " " + styles.image}>
@@ -94,6 +96,7 @@ function Detail(props) {
                 alt="Image"
                 src="/images/NewsEvents/detail_list2.png"
                 layout="fill"
+                objectFit="cover"
               ></Image>
             </div>
           </div>
@@ -157,6 +160,7 @@ function Detail(props) {
                 alt="Image"
                 src="/images/NewsEvents/detail_list3.png"
                 layout="fill"
+                objectFit="cover"
               ></Image>
             </div>
           </div>

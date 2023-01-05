@@ -377,92 +377,90 @@ function HomePage(props) {
         </div>
       </div> */}
       <div className={styles.team} id="team" data-aos="fade-up">
-        <div className="container">
-          <Swiper
-            effect={"creative"}
-            creativeEffect={{
-              prev: {
-                shadow: true,
-                translate: [0, 0, -400],
-              },
-              next: {
-                translate: ["100%", 0, 0],
-              },
-            }}
-            centeredSlides={true}
-            slidesPerView={1}
-            spaceBetween={30}
-            loop={true}
-            pagination={{
-              clickable: true,
-            }}
-            modules={[Pagination, Navigation]}
-            className="mySwiper"
-            onSwiper={(s) => {
-              setSwiper2(s);
-            }}
-          >
-            <SwiperSlide>
-              <div className="container">
-                <div className="content d-flex flex-column align-items-center">
-                  <Image
-                    alt="Avatar"
-                    src="/images/Home/Team/team1.png"
-                    width={100}
-                    height={100}
-                    data-aos="fade-right"
-                  />
-                  <p data-aos="fade-left">
-                    Cũng như tất cả các môn thể thao khác, Golf muốn phát triển
-                    bắt buộc hệ thống golf chuyên nghiệp phải mạnh, được xây
-                    dựng bài bản. Tôi tin rằng mô hình của The Golf House
-                    Vietnam chắc chắn sẽ góp phần giải quyết bài toán đó. Tôi sẽ
-                    cống hiến hết mình để đưa Golf chuyên nghiệp phát triển tại
-                    thị trường Việt Nam, giúp đào tạo một thế hệ Golfer giúp
-                    Golf Việt Nam vươn tầm khu vực và thế giới.
-                  </p>
-                  <span className="icon" data-aos="fade-right">
-                    “
-                  </span>
-                  <h2 data-aos="fade-left">Ryan O’Flaherty</h2>
-                  <span data-aos="fade-right">Giám đốc điều hành</span>
-                </div>
+        <Swiper
+          effect={"creative"}
+          creativeEffect={{
+            prev: {
+              shadow: true,
+              translate: [0, 0, -400],
+            },
+            next: {
+              translate: ["100%", 0, 0],
+            },
+          }}
+          centeredSlides={true}
+          slidesPerView={1}
+          spaceBetween={30}
+          loop={true}
+          pagination={{
+            clickable: true,
+          }}
+          modules={[Pagination, Navigation]}
+          className="mySwiper"
+          onSwiper={(s) => {
+            setSwiper2(s);
+          }}
+        >
+          <SwiperSlide>
+            <div className="container">
+              <div className="content d-flex flex-column align-items-center">
+                <Image
+                  alt="Avatar"
+                  src="/images/Home/Team/team1.png"
+                  width={100}
+                  height={100}
+                  data-aos="fade-right"
+                />
+                <p data-aos="fade-left">
+                  Cũng như tất cả các môn thể thao khác, Golf muốn phát triển
+                  bắt buộc hệ thống golf chuyên nghiệp phải mạnh, được xây dựng
+                  bài bản. Tôi tin rằng mô hình của The Golf House Vietnam chắc
+                  chắn sẽ góp phần giải quyết bài toán đó. Tôi sẽ cống hiến hết
+                  mình để đưa Golf chuyên nghiệp phát triển tại thị trường Việt
+                  Nam, giúp đào tạo một thế hệ Golfer giúp Golf Việt Nam vươn
+                  tầm khu vực và thế giới.
+                </p>
+                <span className="icon" data-aos="fade-right">
+                  “
+                </span>
+                <h2 data-aos="fade-left">Ryan O’Flaherty</h2>
+                <span data-aos="fade-right">Giám đốc điều hành</span>
               </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="container">
-                <div className="content d-flex flex-column align-items-center">
-                  <Image
-                    alt="Avatar"
-                    src="/images/Home/Team/team2.png"
-                    width={100}
-                    height={100}
-                    data-aos="fade-right"
-                  />
-                  <p data-aos="fade-left">
-                    Trong 19 năm làm việc trong ngành Golf, tôi đã học hỏi và
-                    trải nghiệm nhiều lối kỹ thuật đa dạng từ Mỹ, Nam Phi tới
-                    châu Âu, giảng dạy cho nhiều lứa tuổi khác nhau, bao gồm cả
-                    trẻ nhỏ. Tôi tự tin sẽ mang những kiến thức của mình tới The
-                    Golf House Vietnam để khám phá ra cách Swing hiệu quả nhất
-                    cho từng học viên.
-                  </p>
-                  <span data-aos="fade-right" className="icon">
-                    “
-                  </span>
-                  <h2 data-aos="fade-left">Jacques Du Toit</h2>
-                  <span data-aos="fade-right">HLV PGA</span>
-                </div>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="container">
+              <div className="content d-flex flex-column align-items-center">
+                <Image
+                  alt="Avatar"
+                  src="/images/Home/Team/team2.png"
+                  width={100}
+                  height={100}
+                  data-aos="fade-right"
+                />
+                <p data-aos="fade-left">
+                  Trong 19 năm làm việc trong ngành Golf, tôi đã học hỏi và trải
+                  nghiệm nhiều lối kỹ thuật đa dạng từ Mỹ, Nam Phi tới châu Âu,
+                  giảng dạy cho nhiều lứa tuổi khác nhau, bao gồm cả trẻ nhỏ.
+                  Tôi tự tin sẽ mang những kiến thức của mình tới The Golf House
+                  Vietnam để khám phá ra cách Swing hiệu quả nhất cho từng học
+                  viên.
+                </p>
+                <span data-aos="fade-right" className="icon">
+                  “
+                </span>
+                <h2 data-aos="fade-left">Jacques Du Toit</h2>
+                <span data-aos="fade-right">HLV PGA</span>
               </div>
-            </SwiperSlide>
-            <button className="btn-prev" onClick={() => swiper2.slidePrev()}>
-              <i className="fa-thin fa-arrow-left"></i>
-            </button>
-            <button className="btn-next" onClick={() => swiper2.slideNext()}>
-              <i className="fa-thin fa-arrow-right"></i>
-            </button>
-          </Swiper>
-        </div>
+            </div>
+          </SwiperSlide>
+          <button className="btn-prev" onClick={() => swiper2.slidePrev()}>
+            <i className="fa-thin fa-arrow-left"></i>
+          </button>
+          <button className="btn-next" onClick={() => swiper2.slideNext()}>
+            <i className="fa-thin fa-arrow-right"></i>
+          </button>
+        </Swiper>
       </div>
       <div className={styles.moreImage}>
         <div className={styles.item} data-aos="fade-right">

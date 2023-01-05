@@ -353,7 +353,7 @@ function Academy(props) {
           alt="Image 1"
           src="/images/Academy/banner.png"
           layout="fill"
-          // objectFit="cover"
+          objectFit="cover"
         />
         <div className={styles.content}>
           <div className="container h-100">

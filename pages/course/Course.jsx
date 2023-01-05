@@ -13,88 +13,14 @@ import Select, { components } from "react-select";
 import { vi } from "date-fns/locale"; // the locale you want
 import { Button, Loader, Modal, Placeholder } from "rsuite";
 import Link from "next/link";
+import SignUp from "../../components/Modal/SignUp";
+import SignIn from "../../components/Modal/SignIn";
+import Sucess from "../../components/Modal/Sucess";
+import CheckInfo from "../../components/Modal/CheckInfo";
+import SignUpTrial from "../../components/Modal/SignUpTrial";
+import SucessTrial from "../../components/Modal/SucessTrial";
 registerLocale("vi", vi);
-const customStyles = {
-  option: (provided, state) => ({
-    ...provided,
-    fontSize: 16,
-    "@media screen and (max-width: 992px)": {
-      fontSize: 14,
-    },
-    "@media screen and (max-width: 576px)": {
-      fontSize: 14,
-    },
-    color: state.isSelected ? "#fff" : "#000",
-    backgroundColor: state.isSelected ? "#00B577" : "transparent",
-    cursor: "pointer",
-  }),
-  singleValue: (provided, state) => ({
-    ...provided,
-    color: "#A6A6A6",
-    fontSize: 18,
-    "@media screen and (max-width: 992px)": {
-      fontSize: 16,
-    },
-    "@media screen and (max-width: 576px)": {
-      fontSize: 14,
-    },
-    fontWeight: 500,
-  }),
-  // dropdownIndicator: (base) => ({
-  //   ...base,
-  //   color: "#000",
-  // }),
-  indicatorSeparator: () => ({ display: "none" }),
-  container: (provided, state) => ({
-    ...provided,
-    width: "100%",
-    border: "1px solid #979797",
-    borderRadius: 4,
-  }),
-  input: (base, state) => ({
-    ...base,
-    color: "#A6A6A6",
-    fontSize: 18,
-    "@media screen and (max-width: 992px)": {
-      fontSize: 16,
-    },
-    "@media screen and (max-width: 576px)": {
-      fontSize: 14,
-    },
-    fontWeight: 500,
-  }),
-  control: (base, state) => ({
-    ...base,
-    backgroundColor: "tranparent",
-    paddingLeft: 20,
-    paddingRight: 20,
-    "@media screen and (max-width: 992px)": {
-      paddingLeft: 12,
-      paddingRight: 12,
-    },
-    paddingTop: 6,
-    paddingBottom: 6,
-    cursor: "pointer",
-    color: "#A6A6A6",
-    border: "1px solid #979797",
-    border: state.isFocused ? 0 : 0,
-    boxShadow: state.isFocused ? 0 : 0,
-    "&:hover": {
-      border: state.isFocused ? 0 : 0,
-    },
-  }),
-};
 
-const options = [
-  { value: "1", label: "Khoá lẻ" },
-  { value: "2", label: "Khoá học" },
-  { value: "3", label: "Khoá Junior" },
-  { value: "4", label: "Tập luyện theo giờ" },
-];
-const options2 = [
-  { value: "1", label: "Chọn tỉnh/thành phố" },
-  { value: "2", label: "Thành phố Hồ Chí Minh" },
-];
 const slideCourse = [
   {
     image: "/images/Home/Course/img1.jpg",
@@ -123,31 +49,42 @@ function Course(props) {
   const [swiper2, setSwiper2] = React.useState(null);
   const [swiper3, setSwiper3] = React.useState(null);
   const [open, setOpen] = React.useState(false);
-  const [rows, setRows] = React.useState(0);
   const handleOpen = () => {
     setOpen(true);
+    setOpen1(false);
     setOpen2(false);
     setOpen3(false);
     setOpen4(false);
   };
   const handleClose = () => setOpen(false);
-  const handleEntered = () => {
-    setTimeout(() => setRows(80), 2000);
+  const [open1, setOpen1] = React.useState(false);
+  const handleOpen1 = () => {
+    setOpen1(true);
+    setOpen2(false);
+    setOpen3(false);
+    setOpen4(false);
+    setOpen(false);
+    setOpen5(false);
   };
+  const handleClose1 = () => setOpen1(false);
   const [open2, setOpen2] = React.useState(false);
   const handleOpen2 = () => {
     setOpen2(true);
     setOpen(false);
+    setOpen1(false);
     setOpen3(false);
     setOpen4(false);
+    setOpen5(false);
   };
   const handleClose2 = () => setOpen2(false);
   const [open3, setOpen3] = React.useState(false);
   const handleOpen3 = () => {
     setOpen3(true);
     setOpen2(false);
+    setOpen1(false);
     setOpen(false);
     setOpen4(false);
+    setOpen5(false);
   };
   const handleClose3 = () => setOpen3(false);
   const [open4, setOpen4] = React.useState(false);
@@ -155,9 +92,21 @@ function Course(props) {
     setOpen4(true);
     setOpen2(false);
     setOpen3(false);
+    setOpen1(false);
     setOpen(false);
+    setOpen5(false);
   };
   const handleClose4 = () => setOpen4(false);
+  const [open5, setOpen5] = React.useState(false);
+  const handleOpen5 = () => {
+    setOpen5(true);
+    setOpen4(false);
+    setOpen2(false);
+    setOpen3(false);
+    setOpen1(false);
+    setOpen(false);
+  };
+  const handleClose5 = () => setOpen5(false);
   function insertAtIndex(i) {
     if (i === 0) {
       $("#calendar .react-datepicker__month").prepend("<div>okay things</div>");
@@ -180,27 +129,14 @@ function Course(props) {
       });
     });
   }, []);
-  const DropdownIndicator = (props) => {
-    return (
-      <components.DropdownIndicator {...props}>
-        <i
-          className="fa-solid fa-caret-down"
-          style={{
-            fontSize: 20,
-            color: "#A6A6A6",
-          }}
-        ></i>
-      </components.DropdownIndicator>
-    );
-  };
   return (
     <div className={styles.course_page}>
       <div className="container">
         <div className={"heading" + " " + styles.header} data-aos="fade-up">
           <span>Chương trình đào tạo</span>
           <h2 className={styles.title_page}>Học thử miễn phí</h2>
-          <div className="button" onClick={handleOpen}>
-            <button>Đăng ký</button>
+          <div className="button">
+            <button onClick={handleOpen1}>Đăng ký</button>
           </div>
         </div>
       </div>
@@ -429,7 +365,7 @@ function Course(props) {
               className="mySwiper"
             >
               {slideCourse.map((item, index) => (
-                <SwiperSlide key={index}>
+                <SwiperSlide key={index} onClick={() => setDetailIndex(index)}>
                   <div className="d-flex flex-column info">
                     <div>
                       <div className="image">
@@ -514,7 +450,9 @@ function Course(props) {
             </div>
             <div className="heading col-12 col-lg-8 flex-wrap align-items-start">
               <span data-aos="fade-left">THÔNG TIN KHOÁ HỌC</span>
-              <h2 data-aos="fade-left">Chi tiết khoá Junior</h2>
+              <h2 data-aos="fade-left" style={{}}>
+                Chi tiết {slideCourse[detailIndex]?.title.toLocaleLowerCase()}
+              </h2>
               <p data-aos="fade-left">
                 Khoá học dành cho trẻ em đam mê Golf từ 4-13 tuổi.
               </p>
@@ -684,211 +622,24 @@ function Course(props) {
           </div>
         </div>
       </div>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        id="modal-signup"
-        data-aos="fade-down"
-        data-aos-delay="800"
-      >
-        <Modal.Header>
-          <Modal.Title>Đăng ký học</Modal.Title>
-          <button onClick={handleClose}>
-            <i className="fa-light fa-times"></i>
-          </button>
-        </Modal.Header>
-        <Modal.Body>
-          <h5>Chào mừng trở lại, vui lòng đăng ký thông tin:</h5>
-          <form
-            action=""
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleOpen3();
-            }}
-          >
-            <div className="form-group">
-              <label htmlFor="" className="form-label">
-                Họ tên
-              </label>
-              <input type="text" className="form-control" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="" className="form-label">
-                Email
-              </label>
-              <input type="text" className="form-control" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="" className="form-label">
-                Điện Thoại
-              </label>
-              <input type="text" className="form-control" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="" className="form-label">
-                Khóa học
-              </label>
-              <Select
-                options={options}
-                styles={customStyles}
-                defaultValue={options[detailIndex]}
-                components={{ DropdownIndicator }}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="" className="form-label">
-                Tỉnh/Thành phố
-              </label>
-              <Select
-                options={options2}
-                styles={customStyles}
-                defaultValue={options2[0]}
-                components={{ DropdownIndicator }}
-              />
-            </div>
-            <div className="button" onClick={handleOpen3}>
-              <button>Đăng ký</button>
-            </div>
-          </form>
-        </Modal.Body>
-      </Modal>
-      <Modal
-        open={open2}
-        onClose={handleClose2}
-        id="modal-signup"
-        data-aos="fade-down"
-        data-aos-delay="800"
-      >
-        <Modal.Header>
-          <Modal.Title>Yêu cầu khi đặt lịch</Modal.Title>
-          <button onClick={handleClose2}>
-            <i className="fa-light fa-times"></i>
-          </button>
-        </Modal.Header>
-        <Modal.Body>
-          <h5>Chào mừng trở lại, vui lòng đăng nhập:</h5>
-          <form action="">
-            <div className="form-group">
-              <label htmlFor="" className="form-label">
-                Email
-              </label>
-              <input type="text" className="form-control" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="" className="form-label">
-                Mật khẩu
-              </label>
-              <input type="text" className="form-control" />
-            </div>
-            <div style={{ marginTop: 20 }}>
-              <Link href="">
-                <a className="link">Quên mật khẩu?</a>
-              </Link>
-            </div>
-            <div className="button">
-              <button>Đăng nhập</button>
-            </div>
-          </form>
-        </Modal.Body>
-      </Modal>
-      <Modal
-        open={open3}
-        onClose={handleClose3}
-        onEntered={handleEntered}
-        onExited={() => {
-          setRows(0);
-        }}
-        id="modal-notify"
-      >
-        <Modal.Header>
-          <Modal.Title></Modal.Title>
-          <button onClick={handleClose3}>
-            <i className="fa-light fa-times"></i>
-          </button>
-        </Modal.Header>
-        {rows ? (
-          <Modal.Body>
-            <i className="fa-regular fa-circle-check"></i>
-            <h5>Chúc mừng bạn đã đặt lịch thành công</h5>
-            <h6>Vui lòng kiểm tra lại thông tin của bạn!</h6>
-            <div className="button" onClick={handleOpen4}>
-              <button>Kiểm tra</button>
-            </div>
-          </Modal.Body>
-        ) : (
-          <div style={{ textAlign: "center" }}>
-            <Loader size="md" />
-          </div>
-        )}
-      </Modal>
-      <Modal
-        open={open4}
-        onClose={handleClose4}
-        id="modal-checkinfo"
-        data-aos="fade-down"
-        data-aos-delay="800"
-      >
-        <Modal.Header>
-          <Modal.Title>Thông tin đặt lịch của bạn</Modal.Title>
-          <button onClick={handleClose4}>
-            <i className="fa-light fa-times"></i>
-          </button>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="d-flex flex-column">
-            <div className="d-flex information_column">
-              <h6 className="col-4 col-sm-3">
-                <i className="fa-light fa-memo"></i>
-                <span>Khoá học:</span>
-              </h6>
-              <div className="col-8 col-sm-9">
-                <h6 className="desc">Khoá Junior</h6>
-              </div>
-            </div>
-            <div className="d-flex information_column">
-              <h6 className="col-4 col-sm-3">
-                <i className="fa-light fa-user-alt"></i>
-                <span>Tên:</span>
-              </h6>
-              <div className="col-8 col-sm-9">
-                <h6 className="desc">Thành Vinh</h6>
-              </div>
-            </div>
-            <div className="d-flex information_column">
-              <h6 className="col-4 col-sm-3">
-                <i className="fa-light fa-clock"></i>
-                <span>Thời gian:</span>
-              </h6>
-              <div className="col-8 col-sm-9">
-                <h6 className="desc">Thứ 3 9:40:22, 20 tháng 12, 2022</h6>
-              </div>
-            </div>
-            <div className="d-flex information_column">
-              <h6 className="col-4 col-sm-3">
-                <i className="fa-light fa-location-dot"></i>
-                <span>Địa điểm:</span>
-              </h6>
-              <div className="col-8 col-sm-9">
-                <h6 className="desc">
-                  85-87 Nguyen Co Thach, An Loi Đong, Q.2, TPHCM
-                </h6>
-              </div>
-            </div>
-            <div className="d-flex information_column">
-              <h6 className="col-4 col-sm-3">
-                <i className="fa-light fa-file-lines"></i>
-                <span>Chi tiết:</span>
-              </h6>
-              <div className="col-8 col-sm-9">
-                <h6 className="desc">
-                  Tên: Thanh Vinh <br /> Số điện thoại: 0378759723 <br />
-                  Email: admin@example.com
-                </h6>
-              </div>
-            </div>
-          </div>
-        </Modal.Body>
-      </Modal>
+      {open && (
+        <SignUp
+          handleClose={handleClose}
+          detailIndex={detailIndex}
+          handleOpen3={handleOpen3}
+        />
+      )}
+      {open1 && (
+        <SignUpTrial handleClose={handleClose1} handleOpen5={handleOpen5} />
+      )}
+      {open2 && <SignIn handleClose2={handleClose2} />}
+      {open3 && (
+        <Sucess handleClose3={handleClose3} handleOpen4={handleOpen4} />
+      )}
+      {open4 && <CheckInfo handleClose4={handleClose4} />}
+      {open5 && (
+        <SucessTrial handleClose5={handleClose5} handleOpen4={handleOpen4} />
+      )}
     </div>
   );
 }

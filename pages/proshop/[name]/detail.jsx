@@ -14,7 +14,7 @@ function Detail(props) {
   const router = useRouter();
   const [qty, setQty] = useState(1);
   const decreasement = () => {
-    console.log(qty);
+    setQty(qty - 1);
     if (qty <= 1) {
       Swal.fire({
         title: "Lỗi",

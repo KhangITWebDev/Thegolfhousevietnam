@@ -25,7 +25,7 @@ registerLocale("vi", vi);
 const slideCourse = [
   {
     image: "/images/Home/Course/img1.jpg",
-    title: "Khoá lẻ",
+    title: "Lớp lẻ",
     icon: "/images/Home/Course/icon1.png",
   },
   {
@@ -109,23 +109,17 @@ function Course(props) {
     setOpen(false);
   };
   const handleClose5 = () => setOpen5(false);
-  // const startWeek = moment().startOf("month").week();
-  // const endWeek = moment().endOf("month").week();
-  // let calendar = [];
-  // for (var week = startWeek; week < endWeek; week++) {
-  //   calendar.push({
-  //     week: week,
-  //     days: Array(7)
-  //       .fill(0)
-  //       .map((n, i) =>
-  //         moment()
-  //           .week(week)
-  //           .startOf("week")
-  //           .clone()
-  //           .add(n + i, "day")
-  //       ),
-  //   });
-  // }
+  useEffect(() => {
+    $("#course-team .swiper-pagination").attr("data-aos", "fade-up");
+    $("#course-team .swiper-pagination-bullet").each(function (indexC) {
+      $(this).css({
+        backgroundImage: `url(/images/Home/Team/team${indexC + 3}.png)`,
+        backgroundPosition: "center",
+        backgroundSize: "contain",
+        opacity: 1,
+      });
+    });
+  }, []);
   const [detailIndex, setDetailIndex] = useState(2);
   return (
     <div className={styles.course_page}>
@@ -384,12 +378,12 @@ function Course(props) {
                           />
                         </div>
                         <h5>{item.title}</h5>
-                        <div className="tool">
+                        {/* <div className="tool">
                           <button className="d-flex align-items-center">
                             <span>Nhận tư vấn</span>
                             <i className="fa-light fa-arrow-right"></i>
                           </button>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>
@@ -428,14 +422,14 @@ function Course(props) {
                       <span data-aos="fade-right">
                         Dành cho người tười 4-13 tuổi
                       </span>
-                      <h4 data-aos="fade-right">
+                      {/* <h4 data-aos="fade-right">
                         20.000.000 VND <p>/tháng</p>
-                      </h4>
+                      </h4> */}
                       <p data-aos="fade-right">
-                        Học hằng tuần <br /> Giảm giá 10%
+                        {/* Học hằng tuần <br /> Giảm giá 10% */}
                       </p>
                       <div data-aos="fade-right" className="button">
-                        <button onClick={handleOpen1}>Đăng ký</button>
+                        <button onClick={handleOpen1}>Nhận Tư Vấn</button>
                       </div>
                     </div>
                   </div>

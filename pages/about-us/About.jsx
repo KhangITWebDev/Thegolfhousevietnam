@@ -82,11 +82,16 @@ function About(props) {
                 Học viện The Golf House Việt Nam được sáng lập bởi Nguyễn Gia
                 Bảo (Bảo Bảo) - một doanh nhân, nữ Golfer với hơn 17 năm kinh
                 nghiệm cùng nhiều thành tích thi đấu ấn tượng trong và ngoài
-                nước.
+                nước. Với niềm đam mê vô tận với bộ môn hấp dẫn nhất hành tinh
+                này và nhận thấy {"mỏ kim cương"} Golf tại Việt Nam còn vô vàn
+                cơ hội phát triển, Gia Bảo cũng những người cộng sự đã chung sức
+                xây dựng hệ sinh thái The Golf House vào tháng 2 năm 2022 với
+                những hoài bão mới về tương lai phát triển cộng đồng Golf Việt
+                Nam vươn tầm quốc tế.
               </p>
-              <div data-aos="fade-left">
+              {/* <div data-aos="fade-left">
                 <button>Đăng ký</button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -126,8 +131,8 @@ function About(props) {
               <div className={styles.content}>
                 <SwiperSlide>
                   <div className="step_slide" data-aos="fade-right">
-                    <span>01</span>
-                    <span></span>
+                    {/* <span>01</span>
+                    <span></span> */}
                     <span>Về chúng tôi</span>
                   </div>
                   <h3 data-aos="fade-left">Tầm nhìn</h3>
@@ -152,10 +157,10 @@ function About(props) {
                     }
                     data-aos="fade-left"
                   >
-                    <button className="d-flex align-items-center">
+                    {/* <button className="d-flex align-items-center">
                       <span>Xem thêm</span>
                       <i className="fa-regular fa-arrow-right"></i>
-                    </button>
+                    </button> */}
                   </div>
                 </SwiperSlide>
               </div>
@@ -193,8 +198,8 @@ function About(props) {
               <div className={styles.content}>
                 <SwiperSlide>
                   <div className="step_slide" data-aos="fade-left">
-                    <span>01</span>
-                    <span></span>
+                    {/* <span>01</span>
+                    <span></span> */}
                     <span>Lio Holding</span>
                   </div>
                   <h3 data-aos="fade-right">The Golf House Vietnam</h3>
@@ -228,8 +233,8 @@ function About(props) {
                 </SwiperSlide>
                 <SwiperSlide>
                   <div className="step_slide">
-                    <span>02</span>
-                    <span></span>
+                    {/* <span>02</span>
+                    <span></span> */}
                     <span>Lio Holding</span>
                   </div>
                   <h3>Đội ngũ HLV quốc tế</h3>
@@ -417,7 +422,7 @@ function About(props) {
             </SwiperSlide>
           </Swiper>
         </div> */}
-        <div className={styles.news} id="news">
+        {/* <div className={styles.news} id="news">
           <div className="heading" data-aos="fade-up">
             <h2 className={styles.title_page}>Tin tức, Sự kiện</h2>
           </div>
@@ -527,7 +532,7 @@ function About(props) {
               Xem thêm
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -107,8 +107,8 @@ function Academy(props) {
               <div className={styles.content}>
                 <SwiperSlide>
                   <div className="step_slide" data-aos="fade-right">
-                    <span>01</span>
-                    <span></span>
+                    {/* <span>01</span>
+                    <span></span> */}
                     <span>Đôi lời về The Golf House</span>
                   </div>
                   <h3 data-aos="fade-left">Giáo trình bài bản</h3>
@@ -120,7 +120,7 @@ function Academy(props) {
                       cấp độ từ cơ bản tới nâng cao.
                     </p>
                   </div>
-                  <div
+                  {/* <div
                     className={
                       "d-flex justify-content-end" + " " + styles.see_more
                     }
@@ -130,12 +130,12 @@ function Academy(props) {
                       <span>Xem thêm</span>
                       <i className="fa-regular fa-arrow-right"></i>
                     </button>
-                  </div>
+                  </div> */}
                 </SwiperSlide>
                 <SwiperSlide>
                   <div className="step_slide" data-aos="fade-right">
-                    <span>02</span>
-                    <span></span>
+                    {/* <span>02</span>
+                    <span></span> */}
                     <span>Đôi lời về The Golf House</span>
                   </div>
                   <h3 data-aos="fade-left">Đội ngũ HLV quốc tế</h3>
@@ -147,7 +147,7 @@ function Academy(props) {
                       giảng dạy Golf.
                     </p>
                   </div>
-                  <div
+                  {/* <div
                     className={
                       "d-flex justify-content-end" + " " + styles.see_more
                     }
@@ -157,12 +157,12 @@ function Academy(props) {
                       <span>Xem thêm</span>
                       <i className="fa-regular fa-arrow-right"></i>
                     </button>
-                  </div>
+                  </div> */}
                 </SwiperSlide>
                 <SwiperSlide>
                   <div className="step_slide" data-aos="fade-right">
-                    <span>03</span>
-                    <span></span>
+                    {/* <span>03</span>
+                    <span></span> */}
                     <span>Đôi lời về The Golf House</span>
                   </div>
                   <h3 data-aos="fade-left">Công nghệ tiên tiến</h3>
@@ -180,7 +180,7 @@ function Academy(props) {
                       xác và sống động như khi tập Golf ngoài trời.
                     </p>
                   </div>
-                  <div
+                  {/* <div
                     className={
                       "d-flex justify-content-end" + " " + styles.see_more
                     }
@@ -190,12 +190,12 @@ function Academy(props) {
                       <span>Xem thêm</span>
                       <i className="fa-regular fa-arrow-right"></i>
                     </button>
-                  </div>
+                  </div> */}
                 </SwiperSlide>
                 <SwiperSlide>
                   <div className="step_slide" data-aos="fade-right">
-                    <span>04</span>
-                    <span></span>
+                    {/* <span>04</span>
+                    <span></span> */}
                     <span>Đôi lời về The Golf House</span>
                   </div>
                   <h3 data-aos="fade-left">Cộng đồng tích cực</h3>
@@ -208,7 +208,7 @@ function Academy(props) {
                       thân với lối sống tích cực và năng động.{" "}
                     </p>
                   </div>
-                  <div
+                  {/* <div
                     className={
                       "d-flex justify-content-end" + " " + styles.see_more
                     }
@@ -218,19 +218,19 @@ function Academy(props) {
                       <span>Xem thêm</span>
                       <i className="fa-regular fa-arrow-right"></i>
                     </button>
-                  </div>
+                  </div> */}
                 </SwiperSlide>
                 <SwiperSlide>
                   <div className="step_slide" data-aos="fade-right ">
-                    <span>05</span>
-                    <span></span>
+                    {/* <span>05</span>
+                    <span></span> */}
                     <span>Đôi lời về The Golf House</span>
                   </div>
                   <h3 data-aos="fade-left">Chi phí hợp lý</h3>
                   <div data-aos="fade-right" className="desc">
                     <p>Cạnh tranh và phù hợp với mọi đối tượng người chơi.</p>
                   </div>
-                  <div
+                  {/* <div
                     data-aos="fade-left"
                     className={
                       "d-flex justify-content-end" + " " + styles.see_more
@@ -240,7 +240,7 @@ function Academy(props) {
                       <span>Xem thêm</span>
                       <i className="fa-regular fa-arrow-right"></i>
                     </button>
-                  </div>
+                  </div> */}
                 </SwiperSlide>
               </div>
             </Swiper>
@@ -285,7 +285,7 @@ function Academy(props) {
             <div className={styles.content}>
               <div className={styles.info}>
                 <h5>Không gian tập luyện</h5>
-                <p>Subtitle</p>
+                {/* <p>Subtitle</p> */}
               </div>
             </div>
           </div>
@@ -304,7 +304,7 @@ function Academy(props) {
             <div className={styles.content}>
               <div className={styles.info}>
                 <h5>Trang thiết bị</h5>
-                <p>Subtitle</p>
+                {/* <p>Subtitle</p> */}
               </div>
             </div>
           </div>
@@ -322,8 +322,8 @@ function Academy(props) {
             </div>
             <div className={styles.content}>
               <div className={styles.info}>
-                <h5>Không gian tập luyện</h5>
-                <p>Subtitle</p>
+                <h5>Golf 3D, hệ thống Sky track</h5>
+                {/* <p>Subtitle</p> */}
               </div>
             </div>
           </div>
@@ -341,8 +341,8 @@ function Academy(props) {
             </div>
             <div className={styles.content}>
               <div className={styles.info}>
-                <h5>Trang thiết bị</h5>
-                <p>Subtitle</p>
+                <h5>Máy Dr.Swing</h5>
+                {/* <p>Subtitle</p> */}
               </div>
             </div>
           </div>

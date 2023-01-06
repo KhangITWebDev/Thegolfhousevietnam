@@ -34,26 +34,26 @@ function Calendar({ value, onChange, openSignIn }) {
     if (isToday(day)) return "today";
     return "next";
   };
-  const currMonth = () => value.format("MMMM");
-  const currYear = () => value.format("YYYY");
+  const currMonth = () => value.month() + 1;
+  const currYear = () => value.year();
   const prevMonth = () => value.clone().subtract(1, "month");
   const nextMonth = () => value.clone().add(1, "month");
   const isMonth = () => value.isSame(new Date(), "month");
   const [show, setShow] = useState(-1);
   return (
     <div className="calendar">
-      <div className="header">
+      <div className="header" data-aos="fade-left">
         <div onClick={() => !isMonth() && onChange(prevMonth())}>
           {!isMonth() ? <i className="fa-light fa-arrow-left"></i> : null}
         </div>
         <div>
-          {currMonth()} {currYear()}
+          Tháng {currMonth()} năm {currYear()}
         </div>
         <div onClick={() => onChange(nextMonth())}>
           <i className="fa-light fa-arrow-right"></i>
         </div>
       </div>
-      <div className="day-names">
+      <div className="day-names" data-aos="fade-right">
         {dayNames.map((d) => (
           <div className="week" key={d}>
             {d}
@@ -63,7 +63,7 @@ function Calendar({ value, onChange, openSignIn }) {
       <div className="body">
         {calendar.map((week, index) => (
           <>
-            <div key={index} className="day-in-week">
+            <div key={index} className="day-in-week" data-aos="fade-left">
               {week.map((day) => (
                 <div
                   className="day"
@@ -80,7 +80,7 @@ function Calendar({ value, onChange, openSignIn }) {
               ))}
             </div>
             {show === index && (
-              <div className="schedule">
+              <div className="schedule" data-aos="fade-down">
                 <div className="content">
                   <h4 className="top">
                     Đặt lịch vào ngày {value.date()} tháng {value.month() + 1},{" "}

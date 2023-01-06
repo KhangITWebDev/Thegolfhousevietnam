@@ -4,14 +4,26 @@ import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Tab, Tabs } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { getProshopData } from "../../../store/redux/ProshopReducer/proshop.action";
+import { removeAccents } from "../../../utils/function";
 import styles from "./detail.module.scss";
 import TabDescription from "./TabDescription/TabDescription";
 
 function Detail(props) {
   const router = useRouter();
+  const proshopDetail = useSelector((state) =>
+    state.ProshopReducer.proshopList.find(
+      (x) => removeAccents(x.ten_vt || "") === router.query.name
+    )
+  );
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProshopData());
+  }, [dispatch]);
   const [qty, setQty] = useState(1);
   const decreasement = () => {
     setQty(qty - 1);
@@ -32,7 +44,7 @@ function Detail(props) {
   useEffect(() => {
     $("#proshop-detail .swiper-pagination-bullet").each(function (indexC) {
       $(this).css({
-        backgroundImage: `url(/images/Proshop/ps1.png)`,
+        backgroundImage: `url(/images/Logo/Logo12.png)`,
         backgroundPosition: "center",
         backgroundSize: "contain",
         opacity: 1,
@@ -54,50 +66,37 @@ function Detail(props) {
               modules={[Pagination, Navigation]}
               className="mySwiper"
             >
-              <SwiperSlide>
-                <div className="image">
-                  <Image
-                    alt="Image"
-                    src="/images/Proshop/ps1.png"
-                    layout="fill"
-                    objectFit="cover"
-                  />
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="image">
-                  <Image
-                    alt="Image"
-                    src="/images/Proshop/ps1.png"
-                    layout="fill"
-                  />
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="image">
-                  <Image
-                    alt="Image"
-                    src="/images/Proshop/ps1.png"
-                    layout="fill"
-                  />
-                </div>
-              </SwiperSlide>
+              {Array(3)
+                .fill()
+                .map((item, index) => (
+                  <SwiperSlide key={index}>
+                    <div className="image">
+                      <Image
+                        alt="Image"
+                        src="/images/Logo/Logo12.png"
+                        layout="fill"
+                        objectFit="cover"
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))}
             </Swiper>
           </div>
           <div className="col-12 col-lg-6 content">
-            <span className="sale">-10%</span>
-            <h2>Bóng Golf</h2>
+            {/* <span className="sale">-10%</span> */}
+            <h2>{proshopDetail?.ten_vt}</h2>
             <div className="d-flex flex-wrap justify-content-lg-between align-items-center justify-content-start">
               <p className="price">
-                <span>800.000</span> 720.000 VND
+                {/* <span>800.000</span> 720.000 VND */}
+                {proshopDetail?.gia_ban_le.toLocaleString("vi-Vi")} VND
               </p>
-              <div className="rate">
+              {/* <div className="rate">
                 {Array(5)
                   .fill()
                   .map((i) => (
                     <i className="fa-solid fa-star" key={i}></i>
                   ))}
-              </div>
+              </div> */}
             </div>
             <p>
               Dicta sunt explicabo. Nemo enim ipsam voluptatem voluptas sit odit
@@ -124,13 +123,13 @@ function Detail(props) {
             </div>
             <div className="bonus">
               <p>
-                <strong>Danh mục:</strong> Bóng golf
+                <strong>Danh mục:</strong> {proshopDetail?.ten_nvt}
               </p>
               <p>
                 <strong>Thẻ:</strong> Giảm giá, Mới
               </p>
               <p>
-                <strong>Mã sản phẩm:</strong> 2381
+                <strong>Mã sản phẩm:</strong> {proshopDetail?.ma_vt}
               </p>
             </div>
           </div>
@@ -143,7 +142,7 @@ function Detail(props) {
               className="mb-3"
             >
               <Tab eventKey="desc" title="Mô tả">
-                <TabDescription />
+                <TabDescription proshopDetail={proshopDetail} />
               </Tab>
               <Tab eventKey="rate" title="Đánh giá (1)">
                 <p>

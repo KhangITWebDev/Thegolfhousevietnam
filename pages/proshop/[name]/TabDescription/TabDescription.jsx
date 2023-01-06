@@ -1,11 +1,26 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { getProshopData } from "../../../../store/redux/ProshopReducer/proshop.action";
 import { ShopList } from "../../../../utils/DataDemo/Home/dataHome";
+import { removeAccents } from "../../../../utils/function";
 import styles from "./TabDescription.module.scss";
 
-function TabDescription(props) {
+function TabDescription({ proshopDetail }) {
+  const router = useRouter();
+  const related = useSelector((state) =>
+    state.ProshopReducer.proshopList.filter(
+      (x) => x.ten_nvt === proshopDetail?.ten_nvt
+    )
+  );
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProshopData());
+  }, [dispatch]);
   return (
     <div className="tab-desc">
       <p>
@@ -45,21 +60,28 @@ function TabDescription(props) {
               modules={[Pagination, Navigation]}
               className="mySwiper"
             >
-              {ShopList.map((item, index) => (
-                <SwiperSlide key={index}>
+              {related.map((item, index) => (
+                <SwiperSlide
+                  key={index}
+                  onClick={() =>
+                    router.push(`/proshop/${removeAccents(item.ten_vt)}`)
+                  }
+                >
                   <div className="content h-100 d-flex flex-column align-items-center">
                     <div className="image">
                       <Image
                         alt="item 1"
-                        src={item.image}
-                        width={250}
-                        height={250}
+                        src="/images/Logo/Logo12.png"
+                        width={150}
+                        height={150}
                       />
                     </div>
                     <div className="info h-100 d-flex flex-column align-items-center">
-                      <h5 className="text-center">{item.name}</h5>
+                      <h5 className="text-center">{item.ten_vt}</h5>
                       <div className="mt-auto">
-                        <p className="text-center">{item.price}</p>
+                        <p className="text-center">
+                          {item.gia_ban_le.toLocaleString("vi-Vi")} VND
+                        </p>
                       </div>
                     </div>
                   </div>

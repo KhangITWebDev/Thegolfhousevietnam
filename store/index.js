@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 import DemoReducer from "../store/redux/DemoReducer/demo.reducer";
 import NewsReducer from "../store/redux/NewsEvents/news.reducer";
 import TrainerReducer from "../store/redux/Trainer/trainer.reducer";
+import ProshopReducer from "../store/redux/ProshopReducer/proshop.reducer";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -12,6 +13,7 @@ const reducer = combineReducers({
   DemoReducer,
   NewsReducer,
   TrainerReducer,
+  ProshopReducer,
 });
 
 export const store = createStore(

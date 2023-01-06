@@ -1,9 +1,12 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Select, { components } from "react-select";
 import { Progress, Slider } from "rsuite";
 import Pagination from "../../components/pagination/pagination";
+import { getProshopData } from "../../store/redux/ProshopReducer/proshop.action";
 import { ShopList } from "../../utils/DataDemo/Home/dataHome";
 import { removeAccents } from "../../utils/function";
 import { usePagination } from "../../utils/usePagination";
@@ -15,6 +18,8 @@ const customStyles = {
     color: state.isSelected ? "#fff" : "#000",
     cursor: "pointer",
     backgroundColor: state.isSelected ? "#00B577" : "transparent",
+    zIndex: 3000,
+    position: "relative",
   }),
   singleValue: (provided, state) => ({
     ...provided,
@@ -35,10 +40,12 @@ const customStyles = {
     ...provided,
     paddingLeft: 0,
     paddingRight: 0,
+    zIndex: 3000,
   }),
   container: (provided, state) => ({
     ...provided,
     width: 200,
+    zIndex: 5000,
     "@media screen and (max-width: 576px)": {
       width: "100%",
     },
@@ -79,8 +86,13 @@ const options = [
 function ProShop(props) {
   const [show1, setShow1] = useState(true);
   const [value, setValue] = React.useState(30);
+  const proshopData = useSelector((state) => state.ProshopReducer.proshopList);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProshopData());
+  }, [dispatch]);
+  console.log(proshopData);
   const router = useRouter();
-  const data = usePagination(ShopList, 6);
   const DropdownIndicator = (props) => {
     return (
       <components.DropdownIndicator {...props}>
@@ -94,6 +106,16 @@ function ProShop(props) {
       </components.DropdownIndicator>
     );
   };
+  const coast = proshopData.filter((x) => x.ten_nvt === "Áo");
+  const trousers = proshopData.filter((x) => x.ten_nvt === "Quần");
+  const skirt = proshopData
+    .filter((x) => x.ten_nvt === "Váy")
+    .concat(proshopData.filter((x) => x.ten_nvt === "Chân Váy"));
+  const glove = proshopData.filter((x) => x.ten_nvt === "Găng tay");
+  const shose = proshopData.filter((x) => x.ten_nvt === "Giày");
+  const golfClubs = proshopData.filter((x) => x.ten_nvt === "Gậy");
+  const golfBall = proshopData.filter((x) => x.ten_nvt.includes("Bóng"));
+  const data = usePagination(proshopData, 6);
   return (
     <div className={styles.proshop_page}>
       <div className="container" data-aos="fade-up">
@@ -148,7 +170,7 @@ function ProShop(props) {
               }
             >
               <span className="col-12 col-sm-6" data-aos="fade-right">
-                Hiển thị 6 trên 10 kết quả
+                Hiển thị 6 trên {proshopData.length} kết quả
               </span>
               <div
                 className="col-12 col-sm-6 d-flex justify-content-start justify-content-sm-end"
@@ -175,30 +197,30 @@ function ProShop(props) {
                       "d-flex flex-column align-items-center"
                     }
                   >
-                    <div className={styles.image}>
+                    <div className={styles.image} style={{ zIndex: 1003 }}>
                       <Image
                         alt={"Image" + index + 1}
-                        src={item.image}
-                        width={250}
-                        height={250}
+                        src="/images/Logo/Logo12.png"
+                        width={100}
+                        height={100}
                         objectFit="cover"
                       ></Image>
                     </div>
                     <h5
                       onClick={() =>
-                        router.push(`/proshop/${removeAccents(item.name)}`)
+                        router.push(`/proshop/${removeAccents(item.ten_vt)}`)
                       }
                     >
-                      {item.name}
+                      {item.ten_vt}
                     </h5>
-                    <p>{item.price}</p>
-                    <div className={"d-flex" + " " + styles.rate}>
+                    <p>{item.gia_ban_le.toLocaleString("vi-VI")} VND</p>
+                    {/* <div className={"d-flex" + " " + styles.rate}>
                       {Array(item.rate)
                         .fill()
                         .map((i) => (
                           <i className="fa-solid fa-star" key={i}></i>
                         ))}
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               ))}
@@ -231,11 +253,13 @@ function ProShop(props) {
                 <div className="col-12 col-lg-12 col-md-6">
                   <h5>Loại sản phẩm</h5>
                   <ul>
-                    <li>Phụ kiện (1)</li>
-                    <li>Trang phục (1)</li>
-                    <li>Bóng Golf (1)</li>
-                    <li>Combo Golf (2)</li>
-                    <li>Gậy Golf (4)</li>
+                    <li>Áo ({coast.length})</li>
+                    <li>Quần ({trousers.length})</li>
+                    <li onClick={() => filter("Váy")}>Váy ({skirt.length})</li>
+                    <li>Giày ({shose.length})</li>
+                    <li>Găng tay ({glove.length})</li>
+                    <li>Bóng Golf ({golfBall.length})</li>
+                    <li>Gậy Golf ({golfClubs.length})</li>
                   </ul>
                 </div>
                 <div className="col-12 col-lg-12 col-md-6">

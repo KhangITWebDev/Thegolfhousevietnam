@@ -101,9 +101,15 @@
     }
     .product {
       .item {
-        img {
-          cursor: pointer;
+        .image {
+          position: relative;
+          z-index: -1 !important;
         }
+        // img {
+        //   cursor: pointer;
+        //   position: relative;
+        //   z-index: 0 !important;
+        // }
         margin-top: 30px;
         &:nth-child(odd) {
           padding-right: 15px;

@@ -12,12 +12,13 @@ import styles from "./NewsEvents.module.scss";
 
 function NewsEvents(props) {
 	const { news } = useSelector((state) => state.NewsReducer);
+	console.log(news, "news");
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getNewData());
 	}, [dispatch]);
 
-	const data = usePagination(news, 6);
+	const data = usePagination(news, 2);
 	const router = useRouter();
 
 	const findIndex = news.findIndex(
@@ -25,6 +26,20 @@ function NewsEvents(props) {
 	);
 
 	const newsDetail = news[findIndex] ? news[findIndex] : NewsEventsData[0];
+
+	// update data.currentData khi nhập input search
+	const handleSearchInput = (e) => {
+		const value = e.target.value;
+		const dataSearch = news.filter((x) =>
+			removeAccents(x.title).includes(removeAccents(value))
+		);
+		if (value !== "") {
+			console.log(dataSearch);
+			data.setPerData(dataSearch);
+		} else {
+			data.setPerData(news);
+		}
+	};
 
 	// custom date ngày tháng năm
 	const customDate = () => {
@@ -36,27 +51,6 @@ function NewsEvents(props) {
 		return `${day} tháng ${month}, ${year}`;
 	};
 
-	// Thời gian từ lúc đăng đến hiện tại
-	// const time = (time) => {
-	// 	const date = new Date(time);
-	// 	const now = new Date();
-	// 	const diff = now.getTime() - date.getTime();
-	// 	const diffMonth = Math.floor(diff / (1000 * 3600 * 24 * 30));
-	// 	const diffDays = Math.floor(diff / (1000 * 3600 * 24));
-	// 	const diffHours = Math.floor(diff / (1000 * 3600));
-	// 	const diffMinutes = Math.floor(diff / (1000 * 60));
-	// 	if (diffMonth > 0) {
-	// 		return `${diffMonth} tháng trước`;
-	// 	} else if (diffDays > 0) {
-	// 		return `${diffDays} ngày trước`;
-	// 	} else if (diffHours > 0) {
-	// 		return `${diffHours} giờ trước`;
-	// 	} else if (diffMinutes > 0) {
-	// 		return `${diffMinutes} phút trước`;
-	// 	} else {
-	// 		return "Vừa xong";
-	// 	}
-	// };
 	return (
 		<div className={styles.news_page}>
 			<div className="container">
@@ -201,6 +195,9 @@ function NewsEvents(props) {
 										<input
 											type="text"
 											placeholder="Tìm sản phẩm ..."
+											onChange={(e) => {
+												handleSearchInput(e);
+											}}
 										/>
 									</div>
 								</div>

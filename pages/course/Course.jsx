@@ -19,6 +19,7 @@ import Sucess from "../../components/Modal/Sucess";
 import CheckInfo from "../../components/Modal/CheckInfo";
 import SignUpTrial from "../../components/Modal/SignUpTrial";
 import SucessTrial from "../../components/Modal/SucessTrial";
+import Calendar from "./Calendar";
 registerLocale("vi", vi);
 
 const slideCourse = [
@@ -45,6 +46,7 @@ const slideCourse = [
 ];
 
 function Course(props) {
+  const [value, setValue] = useState(moment());
   const [startDate, setStartDate] = useState(new Date());
   const [swiper2, setSwiper2] = React.useState(null);
   const [swiper3, setSwiper3] = React.useState(null);
@@ -107,28 +109,24 @@ function Course(props) {
     setOpen(false);
   };
   const handleClose5 = () => setOpen5(false);
-  function insertAtIndex(i) {
-    if (i === 0) {
-      $("#calendar .react-datepicker__month").prepend("<div>okay things</div>");
-      return;
-    }
-    $("#calendar .react-datepicker__month  > div:nth-child(" + i + ")").after(
-      "<div>great things</div>"
-    );
-  }
+  // const startWeek = moment().startOf("month").week();
+  // const endWeek = moment().endOf("month").week();
+  // let calendar = [];
+  // for (var week = startWeek; week < endWeek; week++) {
+  //   calendar.push({
+  //     week: week,
+  //     days: Array(7)
+  //       .fill(0)
+  //       .map((n, i) =>
+  //         moment()
+  //           .week(week)
+  //           .startOf("week")
+  //           .clone()
+  //           .add(n + i, "day")
+  //       ),
+  //   });
+  // }
   const [detailIndex, setDetailIndex] = useState(2);
-  useEffect(() => {
-    $("#course-team .swiper-pagination").attr("data-aos", "fade-up");
-    $("react-datepicker__day-names").attr("data-aos", "fade-right");
-    $("#course-team .swiper-pagination-bullet").each(function (indexC) {
-      $(this).css({
-        backgroundImage: `url(/images/Home/Team/team${indexC + 3}.png)`,
-        backgroundPosition: "center",
-        backgroundSize: "contain",
-        opacity: 1,
-      });
-    });
-  }, []);
   return (
     <div className={styles.course_page}>
       <div className="container">
@@ -436,12 +434,8 @@ function Course(props) {
                       <p data-aos="fade-right">
                         Học hằng tuần <br /> Giảm giá 10%
                       </p>
-                      <div
-                        data-aos="fade-right"
-                        className="button"
-                        onClick={handleOpen}
-                      >
-                        <button>Đăng ký</button>
+                      <div data-aos="fade-right" className="button">
+                        <button onClick={handleOpen1}>Đăng ký</button>
                       </div>
                     </div>
                   </div>
@@ -565,7 +559,7 @@ function Course(props) {
             </button>
           </div>
           <div className={styles.content}>
-            <DatePicker
+            {/* <DatePicker
               data-aos="fade-up"
               selected={startDate}
               onChange={(date) => {
@@ -618,7 +612,14 @@ function Course(props) {
                   </button>
                 </div>
               )}
-            />
+            /> */}
+            <div>
+              <Calendar
+                value={value}
+                onChange={setValue}
+                openSignIn={handleOpen2}
+              />
+            </div>
           </div>
         </div>
       </div>

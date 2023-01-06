@@ -9,7 +9,7 @@ import Cart from "../Cart/cart";
 import Search from "../Search/Search";
 
 function MainLayout({ children }) {
-  const cart = [];
+  const cart = [1];
   const [activeKey, setActiveKey] = React.useState(1);
   const [visible, setVisible] = useState(false);
   const [showRight, setShowRight] = useState(false);

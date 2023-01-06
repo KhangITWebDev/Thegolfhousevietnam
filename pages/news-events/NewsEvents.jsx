@@ -7,6 +7,7 @@ import Pagination from "../../components/pagination/pagination";
 import { NewsEventsData } from "../../utils/DataDemo/News-Events/NewsEventsData";
 import { removeAccents } from "../../utils/function";
 import { usePagination } from "../../utils/usePagination";
+import { time } from "../../utils/function";
 import styles from "./NewsEvents.module.scss";
 
 function NewsEvents(props) {
@@ -36,26 +37,26 @@ function NewsEvents(props) {
 	};
 
 	// Thời gian từ lúc đăng đến hiện tại
-	const time = (time) => {
-		const date = new Date(time);
-		const now = new Date();
-		const diff = now.getTime() - date.getTime();
-		const diffMonth = Math.floor(diff / (1000 * 3600 * 24 * 30));
-		const diffDays = Math.floor(diff / (1000 * 3600 * 24));
-		const diffHours = Math.floor(diff / (1000 * 3600));
-		const diffMinutes = Math.floor(diff / (1000 * 60));
-		if (diffMonth > 0) {
-			return `${diffMonth} tháng trước`;
-		} else if (diffDays > 0) {
-			return `${diffDays} ngày trước`;
-		} else if (diffHours > 0) {
-			return `${diffHours} giờ trước`;
-		} else if (diffMinutes > 0) {
-			return `${diffMinutes} phút trước`;
-		} else {
-			return "Vừa xong";
-		}
-	};
+	// const time = (time) => {
+	// 	const date = new Date(time);
+	// 	const now = new Date();
+	// 	const diff = now.getTime() - date.getTime();
+	// 	const diffMonth = Math.floor(diff / (1000 * 3600 * 24 * 30));
+	// 	const diffDays = Math.floor(diff / (1000 * 3600 * 24));
+	// 	const diffHours = Math.floor(diff / (1000 * 3600));
+	// 	const diffMinutes = Math.floor(diff / (1000 * 60));
+	// 	if (diffMonth > 0) {
+	// 		return `${diffMonth} tháng trước`;
+	// 	} else if (diffDays > 0) {
+	// 		return `${diffDays} ngày trước`;
+	// 	} else if (diffHours > 0) {
+	// 		return `${diffHours} giờ trước`;
+	// 	} else if (diffMinutes > 0) {
+	// 		return `${diffMinutes} phút trước`;
+	// 	} else {
+	// 		return "Vừa xong";
+	// 	}
+	// };
 	return (
 		<div className={styles.news_page}>
 			<div className="container">

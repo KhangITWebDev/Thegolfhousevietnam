@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 export function usePagination(datas, itemsPerPage) {
 	const perItem = itemsPerPage;
 	const [perData, setPerData] = useState(datas);
-  useEffect(() => {
-    setPerData(datas);
-  }, [datas]);
+	useEffect(() => {
+		setPerData(datas);
+	}, [datas]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [firstPage, setFirstPage] = useState(0);
 	const [lastPage, setLastPage] = useState(3);

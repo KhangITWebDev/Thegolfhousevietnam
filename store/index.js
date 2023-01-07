@@ -5,6 +5,7 @@ import NewsReducer from "../store/redux/NewsEvents/news.reducer";
 import TrainerReducer from "../store/redux/Trainer/trainer.reducer";
 import ProshopReducer from "../store/redux/ProshopReducer/proshop.reducer";
 import BannerReducer from "../store/redux/Banner/banner.reducer";
+import CourseReducer from "../store/redux/CourseReducer/course.reducer";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -16,6 +17,7 @@ const reducer = combineReducers({
   TrainerReducer,
   ProshopReducer,
   BannerReducer,
+  CourseReducer,
 });
 
 export const store = createStore(

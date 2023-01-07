@@ -34,15 +34,15 @@
     .total {
       display: none;
     }
+    .dots {
+      display: none;
+    }
     .dots_show {
       cursor: text;
       &:hover {
         color: inherit;
         border: 1px solid rgba($color: #000000, $alpha: 0.5);
       }
-    }
-    .dots {
-      display: none;
     }
   }
 }

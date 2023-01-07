@@ -20,6 +20,8 @@ import CheckInfo from "../../components/Modal/CheckInfo";
 import SignUpTrial from "../../components/Modal/SignUpTrial";
 import SucessTrial from "../../components/Modal/SucessTrial";
 import Calendar from "./Calendar";
+import { useDispatch, useSelector } from "react-redux";
+import { getCourseData } from "../../store/redux/CourseReducer/course.action";
 registerLocale("vi", vi);
 
 const slideCourse = [
@@ -121,6 +123,13 @@ function Course(props) {
     });
   }, []);
   const [detailIndex, setDetailIndex] = useState(2);
+
+  const courseData = useSelector((state) => state.CourseReducer.courseList);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCourseData());
+  }, [dispatch]);
+  console.log(courseData);
   return (
     <div className={styles.course_page}>
       <div className="container">
@@ -349,21 +358,21 @@ function Course(props) {
               }}
               spaceBetween={30}
               slidesPerView={1}
-              pagination={{
-                clickable: true,
-              }}
+              // pagination={{
+              //   clickable: true,
+              // }}
               modules={[Pagination, Navigation]}
               onSwiper={(s) => setSwiper3(s)}
               className="mySwiper"
             >
-              {slideCourse.map((item, index) => (
+              {courseData.map((item, index) => (
                 <SwiperSlide key={index} onClick={() => setDetailIndex(index)}>
                   <div className="d-flex flex-column info">
                     <div>
                       <div className="image">
                         <Image
                           alt="Intro 1"
-                          src={item.image}
+                          src={slideCourse[0].image}
                           layout="fill"
                           objectFit="cover"
                         />
@@ -372,12 +381,12 @@ function Course(props) {
                         <div className="icon">
                           <Image
                             alt="Intro 1"
-                            src={item.icon}
+                            src={slideCourse[0].icon}
                             width={52}
                             height={52}
                           />
                         </div>
-                        <h5>{item.title}</h5>
+                        <h5>{item.ten_vt}</h5>
                         {/* <div className="tool">
                           <button className="d-flex align-items-center">
                             <span>Nhận tư vấn</span>
@@ -409,7 +418,7 @@ function Course(props) {
                     <div className="image" data-aos="fade-right">
                       <Image
                         alt="Intro 1"
-                        src={slideCourse[detailIndex]?.image}
+                        src={slideCourse[0].image}
                         layout="fill"
                         objectFit="cover"
                       />
@@ -417,7 +426,7 @@ function Course(props) {
                     {/* <div className="detail"></div> */}
                     <div className="detail d-flex justify-content-end">
                       <h5 onClick={handleOpen} data-aos="fade-right">
-                        {slideCourse[detailIndex]?.title}
+                        {courseData[detailIndex]?.ten_vt}
                       </h5>
                       <span data-aos="fade-right">
                         Dành cho người tười 4-13 tuổi

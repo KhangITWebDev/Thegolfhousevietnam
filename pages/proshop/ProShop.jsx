@@ -4,8 +4,9 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Select, { components } from "react-select";
-import { Progress, Slider } from "rsuite";
+import { Progress, RangeSlider, Slider } from "rsuite";
 import Pagination from "../../components/pagination/pagination";
+import { getBannerData } from "../../store/redux/Banner/banner.action";
 import { getProshopData } from "../../store/redux/ProshopReducer/proshop.action";
 import { ShopList } from "../../utils/DataDemo/Home/dataHome";
 import { removeAccents } from "../../utils/function";
@@ -85,13 +86,20 @@ const options = [
 
 function ProShop(props) {
   const [show1, setShow1] = useState(true);
-  const [value, setValue] = React.useState(30);
+  const [value, setValue] = React.useState([0, 1]);
+  const maxFilterPrice = 200000000;
+  const minFilterPrice = 500000;
   const proshopData = useSelector((state) => state.ProshopReducer.proshopList);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProshopData());
   }, [dispatch]);
-  console.log(proshopData);
+  const { banners } = useSelector((state) => state.BannerReducer);
+  useEffect(() => {
+    dispatch(getBannerData());
+  }, [dispatch]);
+
+  const bannerProshop = banners.filter((item) => item.danh_muc === "Proshop");
   const router = useRouter();
   const DropdownIndicator = (props) => {
     return (
@@ -116,6 +124,68 @@ function ProShop(props) {
   const golfClubs = proshopData.filter((x) => x.ten_nvt === "Gậy");
   const golfBall = proshopData.filter((x) => x.ten_nvt.includes("Bóng"));
   const data = usePagination(proshopData, 6);
+  const filter = (type) => {
+    data.setCurrentPage(1);
+    switch (type) {
+      case "Váy": {
+        data.setPerData(skirt);
+        break;
+      }
+      case "Áo": {
+        data.setPerData(coast);
+        break;
+      }
+      case "Quần": {
+        data.setPerData(trousers);
+        break;
+      }
+      case "Gậy": {
+        data.setPerData(golfClubs);
+        break;
+      }
+      case "Găng tay": {
+        data.setPerData(glove);
+        break;
+      }
+      case "Giày": {
+        data.setPerData(shose);
+        break;
+      }
+      case "Bóng": {
+        data.setPerData(golfBall);
+        break;
+      }
+      default: {
+        data.setPerData(proshopData);
+        break;
+      }
+    }
+  };
+  const handleSearchInput = (e) => {
+    const value = e.target.value;
+    const dataSearch = proshopData.filter((x) =>
+      removeAccents(x.ten_vt)
+        .toLowerCase()
+        .includes(removeAccents(value).toLowerCase())
+    );
+    if (value !== "") {
+      data.setPerData(dataSearch);
+      data.setCurrentPage(1);
+    } else {
+      data.setPerData(proshopData);
+      data.setCurrentPage(1);
+    }
+  };
+  const filterPrice = () => {
+    let priceMin = maxFilterPrice * (value[0] / 100);
+    let priceMax = maxFilterPrice * (value[1] / 100);
+    const dataSearch = proshopData.filter(
+      (x) => x.gia_ban_le >= priceMin && x.gia_ban_le <= priceMax
+    );
+    console.log(dataSearch);
+    data.setPerData(dataSearch);
+    data.setCurrentPage(1);
+  };
   return (
     <div className={styles.proshop_page}>
       <div className="container" data-aos="fade-up">
@@ -130,10 +200,12 @@ function ProShop(props) {
       </div>
       <div className={styles.bannerv2} data-aos="fade-up">
         <Image
+          loader={({ src }) =>
+            `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+          }
           alt="Image 1"
-          src="/images/Proshop/banner.png"
+          src={bannerProshop[0]?.hinh_anh}
           layout="fill"
-          objectFit="cover"
         />
         <div className={styles.bannerv2_content}>
           <div className="container h-100">
@@ -144,8 +216,10 @@ function ProShop(props) {
                 Huấn luyện viên đạt chuẩn PGA, VGA dày dặn kinh nghiệm chơi và
                 giảng dạy Golf.
               </p> */}
-              <div onClick={() => router.push("/trainer")}>
-                <button className="btn-content">Tìm hiểu thêm</button>
+              <div onClick={() => router.push(bannerProshop[0]?.link)}>
+                <button className="btn-content">
+                  {bannerProshop[0]?.action}
+                </button>
               </div>
             </div>
           </div>
@@ -245,7 +319,13 @@ function ProShop(props) {
                     <div className="icon">
                       <i className="fa-regular fa-magnifying-glass"></i>
                     </div>
-                    <input type="text" placeholder="Tìm sản phẩm ..." />
+                    <input
+                      type="text"
+                      placeholder="Tìm sản phẩm ..."
+                      onChange={(e) => {
+                        handleSearchInput(e);
+                      }}
+                    />
                   </div>
                 </div>
               </div>
@@ -253,28 +333,53 @@ function ProShop(props) {
                 <div className="col-12 col-lg-12 col-md-6">
                   <h5>Loại sản phẩm</h5>
                   <ul>
-                    <li>Áo ({coast.length})</li>
-                    <li>Quần ({trousers.length})</li>
+                    <li onClick={() => filter("Áo")}>Áo ({coast.length})</li>
+                    <li onClick={() => filter("Quần")}>
+                      Quần ({trousers.length})
+                    </li>
                     <li onClick={() => filter("Váy")}>Váy ({skirt.length})</li>
-                    <li>Giày ({shose.length})</li>
-                    <li>Găng tay ({glove.length})</li>
-                    <li>Bóng Golf ({golfBall.length})</li>
-                    <li>Gậy Golf ({golfClubs.length})</li>
+                    <li onClick={() => filter("Giày")}>
+                      Giày ({shose.length})
+                    </li>
+                    <li onClick={() => filter("Găng tay")}>
+                      Găng tay ({glove.length})
+                    </li>
+                    <li onClick={() => filter("Bóng")}>
+                      Bóng Golf ({golfBall.length})
+                    </li>
+                    <li onClick={() => filter("Gậy")}>
+                      Gậy Golf ({golfClubs.length})
+                    </li>
                   </ul>
                 </div>
                 <div className="col-12 col-lg-12 col-md-6">
                   <h5>Lọc sản phẩm</h5>
-                  <Slider
-                    progress
-                    value={value}
+                  <RangeSlider
+                    defaultValue={[10, 50]}
                     tooltip={false}
                     onChange={(value) => {
-                      setValue(value);
+                      if (value[1] === 0) {
+                        setValue([1, 2]);
+                      } else {
+                        setValue(value);
+                      }
                     }}
                   />
-                  <span>Giá: 500.000 - 2.000.000 VND</span>
+                  <span>
+                    Giá:{" "}
+                    {value[0] === 0
+                      ? minFilterPrice.toLocaleString("vi-VI")
+                      : Math.floor(
+                          maxFilterPrice * (value[0] / 100)
+                        ).toLocaleString("vi-VI")}{" "}
+                    -{" "}
+                    {Math.floor(
+                      maxFilterPrice * (value[1] / 100)
+                    ).toLocaleString("vi-VI")}{" "}
+                    VND
+                  </span>
                   <div className="button justify-content-start">
-                    <button>Lọc</button>
+                    <button onClick={() => filterPrice()}>Lọc</button>
                   </div>
                 </div>
               </div>

@@ -39,20 +39,20 @@ function Pagination({ data }) {
             id={data.totalPages}
             style={{
               paddingLeft:
-                data.currentPage === data.totalPages ||
-                data.currentPage === data.totalPages - 1 ||
+                data.totalPages <= 4 ||
                 data.currentPage === data.totalPages - 2 ||
-                data.totalPages <= 4
+                data.currentPage === data.totalPages - 1 ||
+                data.currentPage === data.totalPages
                   ? 0
                   : 10,
             }}
           >
             <span
               className={
-                data.currentPage === data.totalPages ||
-                data.currentPage === data.totalPages - 1 ||
+                data.totalPages <= 4 ||
                 data.currentPage === data.totalPages - 2 ||
-                data.totalPages <= 4
+                data.currentPage === data.totalPages - 1 ||
+                data.currentPage === data.totalPages
                   ? [styles.page_link, styles.dots].join(" ")
                   : [styles.page_link, styles.dots_show].join(" ")
               }
@@ -60,16 +60,16 @@ function Pagination({ data }) {
               <i className="fal fa-ellipsis-h"></i>
             </span>
           </li>
-          <li
+          {/* <li
             className={styles.page_item}
             key={data.totalPages}
             id={data.totalPages}
             onClick={() => data.handleClick(Number(data.totalPages))}
             style={{
               paddingLeft:
-                data.currentPage === data.totalPages ||
+                data.totalPages <= 3 ||
                 data.currentPage === data.totalPages - 1 ||
-                data.totalPages <= 3
+                data.currentPage === data.totalPages
                   ? // || func.currentPage === func.totalPages - 2
                     0
                   : 10,
@@ -77,9 +77,9 @@ function Pagination({ data }) {
           >
             <span
               className={
-                data.currentPage === data.totalPages ||
+                data.totalPages <= 3 ||
                 data.currentPage === data.totalPages - 1 ||
-                data.totalPages <= 3
+                data.currentPage === data.totalPages
                   ? // ||
                     // func.totalPages <= 4
                     [styles.page_link, styles.total].join(" ")
@@ -88,7 +88,7 @@ function Pagination({ data }) {
             >
               {data.totalPages}
             </span>
-          </li>
+          </li> */}
           <li
             className={styles.page_item}
             onClick={() => data.handleNext()}

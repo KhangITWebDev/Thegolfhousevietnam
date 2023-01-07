@@ -31,7 +31,7 @@ function NewsEvents(props) {
   const handleSearchInput = (e) => {
     const value = e.target.value;
     const dataSearch = news.filter((x) =>
-      removeAccents(x.title).includes(removeAccents(value))
+      removeAccents(x.title).includes(removeAccents(value.toLowerCase()))
     );
     if (value !== "") {
       console.log(dataSearch);
@@ -147,7 +147,7 @@ function NewsEvents(props) {
                     </div>
                     <input
                       type="text"
-                      placeholder="Tìm tin tức ..."
+                      placeholder="Tìm sản phẩm ..."
                       onChange={(e) => {
                         handleSearchInput(e);
                       }}
@@ -158,35 +158,41 @@ function NewsEvents(props) {
                   className={"col-12 col-lg-12 col-md-6" + " " + styles.post}
                 >
                   <h5 data-aos="fade-left">Bài viết đã xem</h5>
-                  <div
-                    className={"d-flex align-items-center" + " " + styles.head}
-                  >
-                    <h4 data-aos="fade-right">{newsDetail.cate_name}</h4>
-                    <i className="fa-sharp fa-solid fa-circle"></i>
-                    <span data-aos="fade-left">{customDate()}</span>
-                  </div>
-                  <div
-                    className={
-                      styles.watched + " " + "d-flex align-items-center"
-                    }
-                  >
-                    <div className={styles.watched_image}>
-                      <Image
-                        loader={({ src }) =>
-                          `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
-                        }
-                        alt="Image"
-                        src={newsDetail.picture}
-                        width={90}
-                        height={70}
-                        objectFit="cover"
-                        data-aos="fade-right"
-                      />
+                  {newsDetail.cate_name && (
+                    <div
+                      className={
+                        "d-flex align-items-center" + " " + styles.head
+                      }
+                    >
+                      <h4 data-aos="fade-right">{newsDetail.cate_name}</h4>
+                      <i className="fa-sharp fa-solid fa-circle"></i>
+                      <span data-aos="fade-left">{customDate()}</span>
                     </div>
-                    <div className={styles.watched_info}>
-                      <h5 data-aos="fade-left">{newsDetail.title}</h5>
+                  )}
+                  {newsDetail.picture && (
+                    <div
+                      className={
+                        styles.watched + " " + "d-flex align-items-center"
+                      }
+                    >
+                      <div className={styles.watched_image}>
+                        <Image
+                          loader={({ src }) =>
+                            `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                          }
+                          alt="Image"
+                          src={newsDetail.picture}
+                          width={90}
+                          height={70}
+                          objectFit="cover"
+                          data-aos="fade-right"
+                        />
+                      </div>
+                      <div className={styles.watched_info}>
+                        <h5 data-aos="fade-left">{newsDetail.title}</h5>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
                 <div
                   className={styles.tags + " " + "col-12 col-lg-12 col-md-6"}

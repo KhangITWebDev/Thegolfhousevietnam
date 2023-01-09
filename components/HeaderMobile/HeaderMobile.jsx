@@ -42,8 +42,21 @@ export default function HeaderMoblie({
   }, []);
   return (
     <div id="navbar-mobile">
-      <Navbar {...props} className="custom-nav">
-        <div className="">
+      <Navbar
+        {...props}
+        className="custom-nav"
+        style={
+          visible
+            ? {
+                position: "fixed",
+                background: "#fff",
+                transition: "all 0.5s",
+                boxShadow: "0px 3px 11px rgba(0, 0, 0, 0.25)",
+              }
+            : {}
+        }
+      >
+        <div className="h-100">
           <Nav onSelect={onSelect} activeKey={activeKey}>
             <Navbar.Brand
               onClick={(e) => {

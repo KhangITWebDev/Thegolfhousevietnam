@@ -41,7 +41,12 @@ function OrtherService(props) {
             <div className="d-flex h-100 justify-content-center align-items-center flex-column">
               {/* <span></span> */}
               <h1 data-aos="fade-right">{bannerHairNailSpa[0]?.tieu_de}</h1>
-              <p data-aos="fade-left">{bannerHairNailSpa[0]?.mo_ta}</p>
+              <div
+                data-aos="fade-left"
+                dangerouslySetInnerHTML={{
+                  __html: bannerHairNailSpa[0]?.mo_ta,
+                }}
+              ></div>
               {/* <div onClick={() => router.push("/trainer")}>
                 <button className="btn-content">Tìm hiểu thêm</button>
               </div> */}
@@ -111,7 +116,12 @@ function OrtherService(props) {
             <div className="d-flex h-100 justify-content-center align-items-center flex-column">
               {/* <span></span> */}
               <h1 data-aos="fade-right">{BAnnerVipLounge[0]?.tieu_de}</h1>
-              <p data-aos="fade-left">{BAnnerVipLounge[0]?.mo_ta}</p>
+              <div
+                data-aos="fade-left"
+                dangerouslySetInnerHTML={{
+                  __html: BAnnerVipLounge[0]?.mo_ta,
+                }}
+              ></div>
               {/* <div onClick={() => router.push("/trainer")}>
                 <button className="btn-content">Tìm hiểu thêm</button>
               </div> */}

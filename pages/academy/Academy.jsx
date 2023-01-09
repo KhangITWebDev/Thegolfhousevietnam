@@ -1,13 +1,24 @@
 import Image from "next/image";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import CountUp from "react-countup";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { getBannerData } from "../../store/redux/Banner/banner.action";
 import styles from "./Academy.module.scss";
 
 function Academy(props) {
   const [swiper, setSwiper] = useState(null);
   const [activeSlide, setActiveSlide] = useState(0);
+  const dispatch = useDispatch();
+  const { banners } = useSelector((state) => state.BannerReducer);
+  useEffect(() => {
+    dispatch(getBannerData());
+  }, [dispatch]);
+  const bannerLocation = banners.filter(
+    (item) => item.danh_muc === "Location Academy"
+  );
   return (
     <div className={styles.academy_page}>
       <div className="container">
@@ -350,22 +361,28 @@ function Academy(props) {
       </div>
       <div className={styles.bannerv2} data-aos="fade-up">
         <Image
+          loader={({ src }) =>
+            `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+          }
           alt="Image 1"
-          src="/images/Academy/banner.png"
+          src={bannerLocation[0]?.hinh_anh}
           layout="fill"
           objectFit="cover"
+          data-aos="fade-right"
         />
         <div className={styles.content}>
           <div className="container h-100">
             <div className="d-flex h-100 justify-content-center align-items-center flex-column">
-              <span>VỊ TRÍ</span>
-              <h1>Địa điểm The Golf House</h1>
-              <p>
-                <strong>Địa chỉ:</strong> 85-87 Nguyễn Cơ Thạch, An Lợi Đông,
-                Q.2, TPHCM
-              </p>
+              <span data-aos="fade-left">VỊ TRÍ</span>
+              <h1 data-aos="fade-right">{bannerLocation[0]?.tieu_de}</h1>
+              <div
+                data-aos="fade-left"
+                dangerouslySetInnerHTML={{ __html: bannerLocation[0]?.mo_ta }}
+              ></div>
               <div>
-                <button className="btn-content">Bản Đồ</button>
+                <button className="btn-content" data-aos="fade-right">
+                  Bản Đồ
+                </button>
               </div>
             </div>
           </div>

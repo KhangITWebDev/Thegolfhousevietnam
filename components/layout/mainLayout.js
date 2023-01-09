@@ -12,6 +12,7 @@ function MainLayout({ children }) {
   const cart = [1];
   const [activeKey, setActiveKey] = React.useState(1);
   const [visible, setVisible] = useState(false);
+  const [visibleHome, setVisibleHome] = useState(false);
   const [showRight, setShowRight] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
@@ -21,6 +22,11 @@ function MainLayout({ children }) {
       setVisible(true);
     } else if (scrolled <= 10) {
       setVisible(false);
+    }
+    if (scrolled > 900) {
+      setVisibleHome(true);
+    } else if (scrolled <= 900) {
+      setVisibleHome(false);
     }
   };
   const scrollToTop = () => {
@@ -104,27 +110,15 @@ function MainLayout({ children }) {
     <>
       <div className="wrapper-project">
         {router.pathname === "/" ? (
-          !visible ? (
-            <HeaderMain
-              appearance="subtle"
-              activeKey={activeKey}
-              onSelect={setActiveKey}
-              visible={visible}
-              handleShowRightMenu={handleShowRightMenu}
-              handleShowCart={handleShowCart}
-              handleShowSearch={handleShowSearch}
-            />
-          ) : (
-            <HeaderAccademy
-              appearance="subtle"
-              activeKey={activeKey}
-              onSelect={setActiveKey}
-              visible={visible}
-              handleShowRightMenu={handleShowRightMenu}
-              handleShowCart={handleShowCart}
-              handleShowSearch={handleShowSearch}
-            />
-          )
+          <HeaderMain
+            appearance="subtle"
+            activeKey={activeKey}
+            onSelect={setActiveKey}
+            visible={visibleHome}
+            handleShowRightMenu={handleShowRightMenu}
+            handleShowCart={handleShowCart}
+            handleShowSearch={handleShowSearch}
+          />
         ) : (
           <HeaderAccademy
             appearance="subtle"

@@ -38,7 +38,21 @@ export default function HeaderMain({
   return (
     <>
       <div id="navbar">
-        <Navbar {...props} className="custom-nav">
+        <Navbar
+          {...props}
+          className="custom-nav"
+          data-aos="fade-down"
+          style={
+            visible
+              ? {
+                  position: "fixed",
+                  background: "#fff",
+                  transition: "all 0.5s",
+                  boxShadow: "0px 3px 11px rgba(0, 0, 0, 0.25)",
+                }
+              : {}
+          }
+        >
           <div className="">
             <Nav onSelect={onSelect} activeKey={activeKey}>
               <Navbar.Brand

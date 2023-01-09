@@ -50,12 +50,8 @@ export const ShopList = [
 
 function Cart(props) {
   return (
-    <div
-      style={{
-        paddingTop: 200,
-      }}
-    >
-      <div className="container">
+    <div>
+      <div className="container" id="cart-page">
         <Table
           height={420}
           data={ShopList}
@@ -64,13 +60,15 @@ function Cart(props) {
           onSortColumn={(sortColumn, sortType) => {
             console.log(sortColumn, sortType);
           }}
-          rowHeight={100}
+          rowHeight={120}
         >
           <Column flexGrow={2}>
-            <HeaderCell>Sản Phẩm</HeaderCell>
+            <HeaderCell>
+              <span className="h-100 header">Sản Phẩm</span>
+            </HeaderCell>
             <Cell>
               {(rowData) => (
-                <div className="d-flex align-items-center">
+                <div className="d-flex align-items-center box-name">
                   <Image
                     alt="Image"
                     src={rowData.image}
@@ -78,45 +76,59 @@ function Cart(props) {
                     height={80}
                     objectFit="cover"
                   ></Image>
-                  <h5>{rowData.name}</h5>
+                  <h5 className="data">{rowData.name}</h5>
                 </div>
               )}
             </Cell>
           </Column>
           <Column flexGrow={1}>
-            <HeaderCell>Giá</HeaderCell>
+            <HeaderCell>
+              <span className="h-100 header">Giá</span>
+            </HeaderCell>
             <Cell>
               {(rowData) => (
-                <span className="h-100 d-flex align-items-center">
+                <span className="h-100 d-flex align-items-center data">
                   {rowData.price.toLocaleString("vi-VI")} VND
                 </span>
               )}
             </Cell>
           </Column>
           <Column flexGrow={1}>
-            <HeaderCell>Số lượng</HeaderCell>
+            <HeaderCell>
+              <span className="h-100 header">Số lượng</span>
+            </HeaderCell>
             <Cell>
               {(rowData) => (
-                <span className="h-100 d-flex align-items-center">
-                  {rowData.qty}
-                </span>
+                <div className="d-flex align-items-center h-100">
+                  <div className="quantity">
+                    <span className="h-100 d-flex align-items-center data">
+                      {rowData.qty}
+                    </span>
+                    <i className="fa-light fa-chevron-up"></i>
+                    <i className="fa-light fa-chevron-down"></i>
+                  </div>
+                </div>
               )}
             </Cell>
           </Column>
           <Column flexGrow={1}>
-            <HeaderCell>Tổng</HeaderCell>
+            <HeaderCell>
+              <span className="h-100 header">Tổng</span>
+            </HeaderCell>
             <Cell>
               {(rowData) => (
-                <span className="h-100 d-flex align-items-center">
+                <span className="h-100 d-flex align-items-center data">
                   {(rowData.price * rowData.qty).toLocaleString("vi-VI")} VND
                 </span>
               )}
             </Cell>
           </Column>
           <Column flexGrow={1}>
-            <HeaderCell>Remove</HeaderCell>
+            <HeaderCell>
+              <span className="h-100 header">Remove</span>
+            </HeaderCell>
             <Cell>
-              <span className="h-100 d-flex align-items-center">
+              <span className="h-100 d-flex align-items-center data">
                 <i className="fa-light fa-xmark"></i>
               </span>
             </Cell>

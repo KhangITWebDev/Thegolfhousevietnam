@@ -164,12 +164,10 @@ function HomePage(props) {
                       <h1 data-aos="fade-right">{item.tieu_de}</h1>
                       <div
                         data-aos="fade-left"
-                        // dangerouslySetInnerHTML={{
-                        // 	__html: item.subTitle,
-                        // }}
-                      >
-                        <p>{item.mo_ta}</p>
-                      </div>
+                        dangerouslySetInnerHTML={{
+                          __html: item.mo_ta,
+                        }}
+                      ></div>
                       <div className="w-100 d-flex justify-content-center">
                         <button
                           data-aos="fade-right"
@@ -355,13 +353,20 @@ function HomePage(props) {
           <div className="container h-100">
             <div className="d-flex h-100 justify-content-center align-items-center flex-column">
               <span data-aos="fade-right">ĐỘI NGŨ HUẤN LUYỆN</span>
-              <h1 data-aos="fade-left">Huấn luyện viên</h1>
-              <p data-aos="fade-right">
-                Huấn luyện viên đạt chuẩn PGA, VGA dày dặn kinh nghiệm chơi và
-                giảng dạy Golf.
-              </p>
-              <div data-aos="fade-left" onClick={() => router.push("/trainer")}>
-                <button className="btn-content">Tìm hiểu thêm</button>
+              <h1 data-aos="fade-left">{trainerHome[0]?.tieu_de}</h1>
+              <div
+                data-aos="fade-right"
+                dangerouslySetInnerHTML={{
+                  __html: trainerHome[0]?.mo_ta,
+                }}
+              ></div>
+              <div
+                data-aos="fade-left"
+                onClick={() => router.push(trainerHome[0]?.link)}
+              >
+                <button className="btn-content">
+                  {trainerHome[0]?.action}
+                </button>
               </div>
             </div>
           </div>

@@ -206,6 +206,7 @@ function ProShop(props) {
           alt="Image 1"
           src={bannerProshop[0]?.hinh_anh}
           layout="fill"
+          objectFit="cover"
         />
         <div className={styles.bannerv2_content}>
           <div className="container h-100">

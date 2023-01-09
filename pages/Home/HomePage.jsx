@@ -147,7 +147,7 @@ function HomePage(props) {
             setSwiper(s);
           }}
         >
-          {bannerHome.slice(0, 4).map((item, index) => (
+          {bannerHome.slice(0, 5).map((item, index) => (
             <SwiperSlide key={index}>
               <div className={styles.image_container}>
                 <Image

@@ -64,19 +64,21 @@ function Cart(props) {
           onSortColumn={(sortColumn, sortType) => {
             console.log(sortColumn, sortType);
           }}
+          rowHeight={100}
         >
-          <Column flexGrow={2} height={300}>
+          <Column flexGrow={2}>
             <HeaderCell>Sản Phẩm</HeaderCell>
             <Cell>
               {(rowData) => (
-                <div>
+                <div className="d-flex align-items-center">
                   <Image
                     alt="Image"
                     src={rowData.image}
-                    width={150}
-                    height={150}
+                    width={80}
+                    height={80}
                     objectFit="cover"
                   ></Image>
+                  <h5>{rowData.name}</h5>
                 </div>
               )}
             </Cell>
@@ -85,19 +87,27 @@ function Cart(props) {
             <HeaderCell>Giá</HeaderCell>
             <Cell>
               {(rowData) => (
-                <span>{rowData.price.toLocaleString("vi-VI")} VND</span>
+                <span className="h-100 d-flex align-items-center">
+                  {rowData.price.toLocaleString("vi-VI")} VND
+                </span>
               )}
             </Cell>
           </Column>
           <Column flexGrow={1}>
             <HeaderCell>Số lượng</HeaderCell>
-            <Cell dataKey="qty" />
+            <Cell>
+              {(rowData) => (
+                <span className="h-100 d-flex align-items-center">
+                  {rowData.qty}
+                </span>
+              )}
+            </Cell>
           </Column>
           <Column flexGrow={1}>
             <HeaderCell>Tổng</HeaderCell>
             <Cell>
               {(rowData) => (
-                <span>
+                <span className="h-100 d-flex align-items-center">
                   {(rowData.price * rowData.qty).toLocaleString("vi-VI")} VND
                 </span>
               )}
@@ -106,7 +116,9 @@ function Cart(props) {
           <Column flexGrow={1}>
             <HeaderCell>Remove</HeaderCell>
             <Cell>
-              <i className="fa-light fa-xmark"></i>
+              <span className="h-100 d-flex align-items-center">
+                <i className="fa-light fa-xmark"></i>
+              </span>
             </Cell>
           </Column>
         </Table>

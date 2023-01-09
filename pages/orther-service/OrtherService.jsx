@@ -1,8 +1,19 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getBannerData } from "../../store/redux/Banner/banner.action";
 import styles from "./OrtherService.module.scss";
 
 function OrtherService(props) {
+  const dispatch = useDispatch();
+  const { banners } = useSelector((state) => state.BannerReducer);
+  useEffect(() => {
+    dispatch(getBannerData());
+  }, [dispatch]);
+  const bannerHairNailSpa = banners.filter(
+    (x) => x.danh_muc === "Hair Nail Spa"
+  );
+  const BAnnerVipLounge = banners.filter((x) => x.danh_muc === "VIP Lounge");
   return (
     <div className={styles.orther_service}>
       <div className="container">
@@ -17,8 +28,11 @@ function OrtherService(props) {
       </div>
       <div className={styles.bannerv2} data-aos="fade-up">
         <Image
+          loader={({ src }) =>
+            `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+          }
           alt="Image 1"
-          src="/images/OrtherService/banner1.png"
+          src={bannerHairNailSpa[0]?.hinh_anh}
           layout="fill"
           objectFit="cover"
         />
@@ -26,12 +40,8 @@ function OrtherService(props) {
           <div className="container h-100">
             <div className="d-flex h-100 justify-content-center align-items-center flex-column">
               {/* <span></span> */}
-              <h1 data-aos="fade-right">Hair, Nail & Spa</h1>
-              <p data-aos="fade-left">
-                Chăm sóc bản thân sau thời gian tập luyện là điều cần thiết. Tận
-                hưởng thời gian thư giãn tuyệt vời với các dịch vụ chăm sóc
-                tóc,chăm sóc da, massage cao cấp.
-              </p>
+              <h1 data-aos="fade-right">{bannerHairNailSpa[0]?.tieu_de}</h1>
+              <p data-aos="fade-left">{bannerHairNailSpa[0]?.mo_ta}</p>
               {/* <div onClick={() => router.push("/trainer")}>
                 <button className="btn-content">Tìm hiểu thêm</button>
               </div> */}
@@ -88,8 +98,11 @@ function OrtherService(props) {
       </div>
       <div className={styles.bannerv2} data-aos="fade-up">
         <Image
+          loader={({ src }) =>
+            `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+          }
           alt="Image 1"
-          src="/images/OrtherService/banner2.png"
+          src={BAnnerVipLounge[0]?.hinh_anh}
           layout="fill"
           objectFit="cover"
         />
@@ -97,11 +110,8 @@ function OrtherService(props) {
           <div className="container h-100">
             <div className="d-flex h-100 justify-content-center align-items-center flex-column">
               {/* <span></span> */}
-              <h1 data-aos="fade-right">VIP Lounge</h1>
-              <p data-aos="fade-left">
-                Không gian riêng tư, rộng rãi, được thiết kề phù hợp cho những
-                hoạt động giải trí kết nối cộng đồng chung niềm đam mê.
-              </p>
+              <h1 data-aos="fade-right">{BAnnerVipLounge[0]?.tieu_de}</h1>
+              <p data-aos="fade-left">{BAnnerVipLounge[0]?.mo_ta}</p>
               {/* <div onClick={() => router.push("/trainer")}>
                 <button className="btn-content">Tìm hiểu thêm</button>
               </div> */}

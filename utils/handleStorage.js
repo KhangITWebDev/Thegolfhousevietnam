@@ -1,6 +1,7 @@
 export const LOCAL_STORAGE = {
   USERS: "user-list",
   USER_LOGIN: "user-login",
+  CART: "cart",
 };
 export const getLocalStorage = (name) => {
   if (typeof window !== "undefined") {

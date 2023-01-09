@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Nav, Navbar } from "rsuite";
 import Swal from "sweetalert2";
+import { getLocalStorage, LOCAL_STORAGE } from "../../utils/handleStorage";
 import HeaderMoblie from "../HeaderMobile/HeaderMobile";
 import styles from "./headerMain.module.scss";
 
@@ -27,6 +28,7 @@ export default function HeaderMain({
     });
   };
   const router = useRouter();
+  const cart = getLocalStorage(LOCAL_STORAGE.CART);
   const [show, setShow] = useState(false);
   useEffect(() => {
     $(".rs-navbar-item").each(function (index) {
@@ -104,7 +106,7 @@ export default function HeaderMain({
                     <Nav.Item
                       eventKey="4"
                       onClick={() => {
-                        router.push("/about-us#news");
+                        router.push("/news-events");
                       }}
                     >
                       Tin tức, sự kiện
@@ -190,7 +192,7 @@ export default function HeaderMain({
                     <div className="cart">
                       <i className="fa-light fa-bag-shopping"></i>
                       <span className="d-flex justify-content-center align-items-center">
-                        1
+                        {cart.length}
                       </span>
                     </div>
                   </Nav.Item>

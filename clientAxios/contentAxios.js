@@ -1,22 +1,22 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import queryString from "query-string";
-const trainerClientAxios = axios.create({
+const ContentAxios = axios.create({
   // baseURL: "https://lio-holding-api.vercel.app",
   // baseURL: process.env.API_URL,
-  baseURL: "https://hrms-lio.fostech.vn",
+  baseURL: "https://api.fostech.vn/api/60939744ac969b4078488026",
   timeout: 20000,
   headers: {
-    // "content-type": "application/json",
-    // "Access-Control-Allow-Origin": "*",
+    "content-type": "application/json",
   },
   paramsSerializer: (params) => queryString.stringify(params),
 });
 
-trainerClientAxios.interceptors.request.use(
+ContentAxios.interceptors.request.use(
   (config) => {
     //Handle token here ...
-    // config.headers.authorization = `Bearer INZUJvYkwC4kwQYoAl7wZffBfRkTbR9F`;
+    const token = Cookies.get("token");
+    if (token) config.headers.authorization = `Bearer ${token}`;
 
     return config;
   },
@@ -24,7 +24,7 @@ trainerClientAxios.interceptors.request.use(
     console.error(err);
   }
 );
-trainerClientAxios.interceptors.response.use(
+ContentAxios.interceptors.response.use(
   (res) => {
     if (res && res.data) return res.data;
     return res;
@@ -37,4 +37,4 @@ trainerClientAxios.interceptors.response.use(
   }
 );
 
-export default trainerClientAxios;
+export default ContentAxios;

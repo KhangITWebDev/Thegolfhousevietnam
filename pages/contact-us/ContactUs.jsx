@@ -1,7 +1,10 @@
 import Image from "next/image";
 import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
 import styles from "./ContactUs.module.scss";
 
 export const ContactList = [
@@ -23,10 +26,27 @@ export const ContactList = [
 ];
 
 function ContactUs(props) {
+  const dispatch = useDispatch();
+  const { contents } = useSelector((state) => state.ContentReducer);
+  useEffect(() => {
+    dispatch(getContentData());
+  }, [dispatch]);
+  const sectionContactList = contents.filter(
+    (item) => item.category === "63bc447139d2a23b06d8e3c3"
+  );
+  const sectionTitlePage = contents.filter(
+    (item) => item.category === "63bc466939d2a23b06d8f125"
+  );
+  const sectionTitleForm = contents.filter(
+    (item) => item.category === "63bc47b439d2a23b06d8fddc"
+  );
+  const sectionBannerContact = contents.filter(
+    (item) => item.category === "63bc470139d2a23b06d8f551"
+  );
   return (
     <div className={styles.contact_page}>
       <div className="heading" data-aos="fade-up">
-        <h2 className={styles.title_page}>Liên hệ</h2>
+        <h2 className={styles.title_page}>{sectionTitlePage[0]?.title}</h2>
       </div>
       <div className="d-flex justify-content-center">
         <button className="btn-down" data-aos="fade-down">
@@ -36,7 +56,7 @@ function ContactUs(props) {
       <div className={styles.training} id="contact">
         <div className="container">
           <div className="d-flex flex-wrap justify-content-center">
-            {ContactList.map((item, index) => (
+            {sectionContactList.slice(0, 3).map((item, index) => (
               <div key={index} className="item col-12 col-sm-6 col-lg-4">
                 <div className="content h-100 d-flex flex-column align-items-center">
                   <div
@@ -51,7 +71,10 @@ function ContactUs(props) {
                   >
                     <Image
                       alt="item 1"
-                      src={item.image}
+                      loader={({ src }) =>
+                        `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                      }
+                      src={item.images[item.images.length - 1].source}
                       width={85}
                       height={85}
                       objectFit="cover"
@@ -78,15 +101,15 @@ function ContactUs(props) {
                           ? "fade-up"
                           : "fade-left"
                       }
-                      dangerouslySetInnerHTML={{ __html: item.desc }}
+                      dangerouslySetInnerHTML={{ __html: item.content }}
                     ></div>
                   </div>
-                  <div className="mt-auto">
+                  {/* <div className="mt-auto">
                     <button className="d-flex align-items-center">
                       <span>Xem thêm</span>
                       <i className="fa-light fa-arrow-right"></i>
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             ))}
@@ -101,7 +124,14 @@ function ContactUs(props) {
           >
             <Image
               alt="map"
-              src="/images/Contact/Map.png"
+              loader={({ src }) =>
+                `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+              }
+              src={
+                sectionBannerContact[0]?.images[
+                  sectionBannerContact[0]?.images.length - 1
+                ]?.source
+              }
               layout="fill"
               objectFit="cover"
             />
@@ -112,9 +142,11 @@ function ContactUs(props) {
           >
             <div>
               <div className="heading align-items-start w-100">
-                <span data-aos="fade-left">LIÊN HỆ VỚI CHÚNG TÔI</span>
+                <span data-aos="fade-left">
+                  {sectionTitleForm[0]?.sub_title}
+                </span>
                 <h2 data-aos="fade-left" className={styles.title_page}>
-                  Để lại thông tin với TGH
+                  {sectionTitleForm[0]?.title}
                 </h2>
               </div>
               <form action="">

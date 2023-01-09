@@ -2,6 +2,7 @@ import Image from "next/image";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBannerData } from "../../store/redux/Banner/banner.action";
+import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
 import styles from "./OrtherService.module.scss";
 
 function OrtherService(props) {
@@ -10,6 +11,22 @@ function OrtherService(props) {
   useEffect(() => {
     dispatch(getBannerData());
   }, [dispatch]);
+  const { contents } = useSelector((state) => state.ContentReducer);
+  useEffect(() => {
+    dispatch(getContentData());
+  }, [dispatch]);
+  const sectionTitleHaỉrNailSpa = contents.filter(
+    (item) => item.category === "63bc43b239d2a23b06d8def1"
+  );
+  const sectionTitleVipLouge = contents.filter(
+    (item) => item.category === "63bc439839d2a23b06d8dede"
+  );
+  const imageHairNailSpa = contents.filter(
+    (item) => item.category === "63bc3ef239d2a23b06d8c4d9"
+  );
+  const imageVipLouge = contents.filter(
+    (item) => item.category === "63bc3f2439d2a23b06d8c50f"
+  );
   const bannerHairNailSpa = banners.filter(
     (x) => x.danh_muc === "Hair Nail Spa"
   );
@@ -18,7 +35,7 @@ function OrtherService(props) {
     <div className={styles.orther_service}>
       <div className="container">
         <div className="heading" data-aos="fade-up">
-          <h2>Hair, Nail & Spa</h2>
+          <h2>{sectionTitleHaỉrNailSpa[0]?.title}</h2>
         </div>
         <div className="d-flex justify-content-center" data-aos="fade-down">
           <button className="btn-down">
@@ -57,43 +74,26 @@ function OrtherService(props) {
       <div className="container">
         <h5 data-aos="fade-down">Hình ảnh dịch vụ</h5>
         <div className={styles.list}>
-          <div className={styles.image} data-aos="fade-right">
-            <Image
-              alt="Other Image"
-              src="/images/OrtherService/orther5.png"
-              layout="fill"
-              objectFit="cover"
-            />
-          </div>
-          <div className={styles.image} data-aos="fade-left">
-            <Image
-              alt="Other Image"
-              src="/images/OrtherService/orther6.png"
-              layout="fill"
-              objectFit="cover"
-            />
-          </div>
-          <div className={styles.image} data-aos="fade-right">
-            <Image
-              alt="Other Image"
-              src="/images/OrtherService/orther7.png"
-              layout="fill"
-              objectFit="cover"
-            />
-          </div>
-          <div className={styles.image} data-aos="fade-left">
-            <Image
-              alt="Other Image"
-              src="/images/OrtherService/orther8.png"
-              layout="fill"
-              objectFit="cover"
-            />
-          </div>
+          {imageHairNailSpa[0]?.images?.slice(0, 4).map((item, index) => {
+            return (
+              <div key={index} className={styles.image} data-aos="fade-right">
+                <Image
+                  alt="Other Image"
+                  loader={({ src }) =>
+                    `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                  }
+                  src={item.source}
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
       <div className="container">
         <div className="heading" data-aos="fade-up">
-          <h2>VIP Lounge</h2>
+          <h2>{sectionTitleVipLouge[0]?.title}</h2>
         </div>
         <div className="d-flex justify-content-center">
           <button className="btn-down" data-aos="fade-down">
@@ -132,38 +132,21 @@ function OrtherService(props) {
       <div className="container">
         <h5 data-aos="fade-down">Hình ảnh dịch vụ</h5>
         <div className={styles.list}>
-          <div className={styles.image} data-aos="fade-right">
-            <Image
-              alt="Other Image"
-              src="/images/OrtherService/orther1.png"
-              layout="fill"
-              objectFit="cover"
-            />
-          </div>
-          <div className={styles.image} data-aos="fade-left">
-            <Image
-              alt="Other Image"
-              src="/images/OrtherService/orther2.png"
-              layout="fill"
-              objectFit="cover"
-            />
-          </div>
-          <div className={styles.image} data-aos="fade-right">
-            <Image
-              alt="Other Image"
-              src="/images/OrtherService/orther3.png"
-              layout="fill"
-              objectFit="cover"
-            />
-          </div>
-          <div className={styles.image} data-aos="fade-left">
-            <Image
-              alt="Other Image"
-              src="/images/OrtherService/orther4.png"
-              layout="fill"
-              objectFit="cover"
-            />
-          </div>
+          {imageVipLouge[0]?.images?.slice(0, 4).map((item, index) => {
+            return (
+              <div key={index} className={styles.image} data-aos="fade-right">
+                <Image
+                  alt="Other Image"
+                  loader={({ src }) =>
+                    `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                  }
+                  src={item.source}
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

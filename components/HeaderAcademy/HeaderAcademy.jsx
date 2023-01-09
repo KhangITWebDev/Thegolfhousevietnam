@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 import { Dropdown } from "react-bootstrap";
 import Cookies from "js-cookie";
-import { LOCAL_STORAGE } from "../../utils/handleStorage";
+import { getLocalStorage, LOCAL_STORAGE } from "../../utils/handleStorage";
 import $ from "jquery";
 import { Nav, Navbar } from "rsuite";
 import HeaderMoblie from "../HeaderMobile/HeaderMobile";
@@ -32,7 +32,7 @@ export default function HeaderAccademy({
     });
   };
   const router = useRouter();
-  const cart = [];
+  const cart = getLocalStorage(LOCAL_STORAGE.CART);
   const [show, setShow] = useState(false);
   const [showCart, setShowCart] = useState(false);
   // useEffect(() => {
@@ -110,7 +110,7 @@ export default function HeaderAccademy({
                     <Nav.Item
                       eventKey="4"
                       onClick={() => {
-                        router.push("/about-us#news");
+                        router.push("/news-events");
                       }}
                     >
                       Tin tức, sự kiện
@@ -196,7 +196,7 @@ export default function HeaderAccademy({
                     <div className="cart">
                       <i className="fa-light fa-bag-shopping"></i>
                       <span className="d-flex justify-content-center align-items-center">
-                        1
+                        {cart.length}
                       </span>
                     </div>
                   </Nav.Item>

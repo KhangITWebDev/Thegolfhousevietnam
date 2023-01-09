@@ -22,6 +22,7 @@ import SucessTrial from "../../components/Modal/SucessTrial";
 import Calendar from "./Calendar";
 import { useDispatch, useSelector } from "react-redux";
 import { getCourseData } from "../../store/redux/CourseReducer/course.action";
+import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
 registerLocale("vi", vi);
 
 const slideCourse = [
@@ -129,15 +130,29 @@ function Course(props) {
   useEffect(() => {
     dispatch(getCourseData());
   }, [dispatch]);
-  console.log(courseData);
+  const { contents } = useSelector((state) => state.ContentReducer);
+  useEffect(() => {
+    dispatch(getContentData());
+  }, [dispatch]);
+  const sectionTitlePage = contents.filter(
+    (item) => item.category === "63bc373939d2a23b06d898a2"
+  );
+  const sectionTitleCourse = contents.filter(
+    (item) => item.category === "63bc3d3739d2a23b06d8bafb"
+  );
+  const sectionIntroduction = contents.filter(
+    (item) => item.category === "63bc39c139d2a23b06d8a316"
+  );
   return (
     <div className={styles.course_page}>
       <div className="container">
         <div className={"heading" + " " + styles.header} data-aos="fade-up">
-          <span>Chương trình đào tạo</span>
-          <h2 className={styles.title_page}>Học thử miễn phí</h2>
+          <span>{sectionTitlePage[0]?.sub_title}</span>
+          <h2 className={styles.title_page}>{sectionTitlePage[0]?.title}</h2>
           <div className="button">
-            <button onClick={handleOpen1}>Đăng ký</button>
+            <button onClick={handleOpen1}>
+              {sectionTitlePage[0]?.text_button}
+            </button>
           </div>
         </div>
       </div>
@@ -175,7 +190,14 @@ function Course(props) {
                   <div className={styles.image}>
                     <Image
                       alt="item 1"
-                      src="/images/Course/itro1.png"
+                      loader={({ src }) =>
+                        `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                      }
+                      src={
+                        sectionIntroduction[0]?.images[
+                          sectionIntroduction[0]?.images?.length - 1
+                        ]?.source
+                      }
                       width={66}
                       height={66}
                       objectFit="cover"
@@ -183,10 +205,15 @@ function Course(props) {
                   </div>
                 </div>
                 <div className="info d-flex flex-column align-items-center">
-                  <h5 className="text-center">Giáo trình</h5>
-                  <p className="text-center">
-                    Đầy đủ 3 yếu tố: kỹ thuật, <br /> văn hóa và luật.
-                  </p>
+                  <h5 className="text-center">
+                    {sectionIntroduction[0]?.title}
+                  </h5>
+                  <p
+                    className="text-center"
+                    dangerouslySetInnerHTML={{
+                      __html: sectionIntroduction[0]?.content,
+                    }}
+                  ></p>
                 </div>
               </div>
             </div>
@@ -209,7 +236,14 @@ function Course(props) {
                   <div className={styles.image}>
                     <Image
                       alt="item 1"
-                      src="/images/Course/itro2.png"
+                      loader={({ src }) =>
+                        `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                      }
+                      src={
+                        sectionIntroduction[1]?.images[
+                          sectionIntroduction[1]?.images?.length - 1
+                        ]?.source
+                      }
                       width={66}
                       height={66}
                       objectFit="cover"
@@ -217,10 +251,15 @@ function Course(props) {
                   </div>
                 </div>
                 <div className="info d-flex flex-column align-items-center">
-                  <h5 className="text-center">Đội ngũ HLV</h5>
-                  <p className="text-center">
-                    Huấn luyện viên quốc tế PGA, VGA.
-                  </p>
+                  <h5 className="text-center">
+                    {sectionIntroduction[1]?.title}
+                  </h5>
+                  <p
+                    className="text-center"
+                    dangerouslySetInnerHTML={{
+                      __html: sectionIntroduction[1]?.content,
+                    }}
+                  ></p>
                 </div>
               </div>
             </div>
@@ -236,14 +275,21 @@ function Course(props) {
                   <Image
                     alt="item 1"
                     src="/images/Course/bg.png"
-                    objectFit="cover"
                     width={142}
                     height={136}
+                    objectFit="cover"
                   />
                   <div className={styles.image}>
                     <Image
                       alt="item 1"
-                      src="/images/Course/itro3.png"
+                      loader={({ src }) =>
+                        `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                      }
+                      src={
+                        sectionIntroduction[2]?.images[
+                          sectionIntroduction[2]?.images?.length - 1
+                        ]?.source
+                      }
                       width={66}
                       height={66}
                       objectFit="cover"
@@ -251,10 +297,15 @@ function Course(props) {
                   </div>
                 </div>
                 <div className="info d-flex flex-column align-items-center">
-                  <h5 className="text-center">Công nghệ</h5>
-                  <p className="text-center">
-                    Trang thiết bị hiện đại áp dụng <br /> công nghệ tiên tiến.
-                  </p>
+                  <h5 className="text-center">
+                    {sectionIntroduction[2]?.title}
+                  </h5>
+                  <p
+                    className="text-center"
+                    dangerouslySetInnerHTML={{
+                      __html: sectionIntroduction[2]?.content,
+                    }}
+                  ></p>
                 </div>
               </div>
             </div>
@@ -277,7 +328,14 @@ function Course(props) {
                   <div className={styles.image}>
                     <Image
                       alt="item 1"
-                      src="/images/Course/itro4.png"
+                      loader={({ src }) =>
+                        `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                      }
+                      src={
+                        sectionIntroduction[3]?.images[
+                          sectionIntroduction[3]?.images?.length - 1
+                        ]?.source
+                      }
                       width={66}
                       height={66}
                       objectFit="cover"
@@ -285,11 +343,15 @@ function Course(props) {
                   </div>
                 </div>
                 <div className="info d-flex flex-column align-items-center">
-                  <h5 className="text-center">Cộng đồng</h5>
-                  <p className="text-center">
-                    Tạo nên cộng đồng chung niềm đam mê <br /> với nhiều hoạt
-                    động kết nối.
-                  </p>
+                  <h5 className="text-center">
+                    {sectionIntroduction[3]?.title}
+                  </h5>
+                  <p
+                    className="text-center"
+                    dangerouslySetInnerHTML={{
+                      __html: sectionIntroduction[3]?.content,
+                    }}
+                  ></p>
                 </div>
               </div>
             </div>
@@ -312,7 +374,14 @@ function Course(props) {
                   <div className={styles.image}>
                     <Image
                       alt="item 1"
-                      src="/images/Course/itro5.png"
+                      loader={({ src }) =>
+                        `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                      }
+                      src={
+                        sectionIntroduction[4]?.images[
+                          sectionIntroduction[4]?.images?.length - 1
+                        ]?.source
+                      }
                       width={66}
                       height={66}
                       objectFit="cover"
@@ -320,10 +389,15 @@ function Course(props) {
                   </div>
                 </div>
                 <div className="info d-flex flex-column align-items-center">
-                  <h5 className="text-center">Chi phí</h5>
-                  <p className="text-center">
-                    Cạnh tranh và phù hợp với <br /> đối tượng người chơi.
-                  </p>
+                  <h5 className="text-center">
+                    {sectionIntroduction[4]?.title}
+                  </h5>
+                  <p
+                    className="text-center"
+                    dangerouslySetInnerHTML={{
+                      __html: sectionIntroduction[4]?.content,
+                    }}
+                  ></p>
                 </div>
               </div>
             </div>
@@ -333,13 +407,16 @@ function Course(props) {
       <div className={styles.course} id="course">
         <div className={styles.top}>
           <div className="container">
-            <span data-aos="fade-right">KHOÁ HỌC</span>
-            <h2 data-aos="fade-right">Các khoá học của The Golf House</h2>
-            <p data-aos="fade-right">
-              Dù bạn là người mới bắt đầu tìm hiểu, hay người chơi Golf muốn
-              nâng cao trình độ. The Golf House luôn có lộ trình phù hợp cho
-              bạn!
-            </p>
+            <span data-aos="fade-right">
+              {sectionTitleCourse[0]?.sub_title}
+            </span>
+            <h2 data-aos="fade-right">{sectionTitleCourse[0]?.title}</h2>
+            <p
+              data-aos="fade-right"
+              dangerouslySetInnerHTML={{
+                __html: sectionTitleCourse[0]?.content,
+              }}
+            ></p>
           </div>
         </div>
         <div className="container">
@@ -386,7 +463,7 @@ function Course(props) {
                             height={52}
                           />
                         </div>
-                        <h5>{item.ten_vt}</h5>
+                        <h5>{item.name}</h5>
                         {/* <div className="tool">
                           <button className="d-flex align-items-center">
                             <span>Nhận tư vấn</span>
@@ -426,7 +503,7 @@ function Course(props) {
                     {/* <div className="detail"></div> */}
                     <div className="detail d-flex justify-content-end">
                       <h5 onClick={handleOpen} data-aos="fade-right">
-                        {courseData[detailIndex]?.ten_vt}
+                        {courseData[detailIndex]?.name}
                       </h5>
                       <span data-aos="fade-right">
                         Dành cho người tười 4-13 tuổi
@@ -448,7 +525,8 @@ function Course(props) {
             <div className="heading col-12 col-lg-8 flex-wrap align-items-start">
               <span data-aos="fade-left">THÔNG TIN KHOÁ HỌC</span>
               <h2 data-aos="fade-left" style={{}}>
-                Chi tiết {slideCourse[detailIndex]?.title.toLocaleLowerCase()}
+                Chi tiết khóa{" "}
+                {courseData[detailIndex]?.name?.toLocaleLowerCase()}
               </h2>
               <p data-aos="fade-left">
                 Khoá học dành cho trẻ em đam mê Golf từ 4-13 tuổi.

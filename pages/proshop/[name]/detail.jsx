@@ -10,6 +10,11 @@ import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { getProshopData } from "../../../store/redux/ProshopReducer/proshop.action";
 import { removeAccents } from "../../../utils/function";
+import {
+  getLocalStorage,
+  LOCAL_STORAGE,
+  setLocalStorage,
+} from "../../../utils/handleStorage";
 import styles from "./detail.module.scss";
 import TabDescription from "./TabDescription/TabDescription";
 
@@ -51,6 +56,21 @@ function Detail(props) {
       });
     });
   }, []);
+  const handleAddToCart = (item) => {
+    const cart = getLocalStorage(LOCAL_STORAGE.CART);
+    if (cart) {
+      const find = cart.findIndex((x) => x._id === item._id);
+      if (find < 0) {
+        cart.push({ ...item, qty: 1 });
+        setLocalStorage(LOCAL_STORAGE.CART, cart);
+      } else {
+        cart[find].qty += 1;
+        setLocalStorage(LOCAL_STORAGE.CART, cart);
+      }
+    } else {
+      setLocalStorage(LOCAL_STORAGE.CART, { ...item, qty: 1 });
+    }
+  };
   return (
     <div className={styles.detail_page}>
       <div className="container">
@@ -117,7 +137,9 @@ function Detail(props) {
                 ></i>
               </div>
               <div className="button">
-                <button>Thêm vào giỏ hàng</button>
+                <button onClick={() => handleAddToCart(proshopDetail)}>
+                  Thêm vào giỏ hàng
+                </button>
               </div>
               <i className="fa-light fa-heart"></i>
             </div>

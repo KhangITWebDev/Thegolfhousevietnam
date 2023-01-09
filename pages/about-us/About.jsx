@@ -1,9 +1,11 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CountUp from "react-countup";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
 import { removeAccents } from "../../utils/function";
 import styles from "./About.module.scss";
 
@@ -29,6 +31,20 @@ function About(props) {
   const [swiper, setSwiper] = useState(null);
   const [activeSlide, setActiveSlide] = useState(0);
   const router = useRouter();
+  const dispatch = useDispatch();
+  const { contents } = useSelector((state) => state.ContentReducer);
+  useEffect(() => {
+    dispatch(getContentData());
+  }, [dispatch]);
+  const sectionFounder = contents.filter(
+    (item) => item.category === "63bc121139d2a23b06d86e59"
+  );
+  const sectionVision = contents.filter(
+    (item) => item.category === "63bc14c639d2a23b06d87101"
+  );
+  const sectionIntro = contents.filter(
+    (item) => item.category === "63bc185f39d2a23b06d87263"
+  );
   return (
     <div className={styles.about_page}>
       <div className="container">
@@ -38,7 +54,7 @@ function About(props) {
               className={"col-12 col-md-6" + " " + styles.left}
               data-aos="fade-right"
             >
-              <div
+              {/* <div
                 className={
                   styles.header + " " + "d-flex flex-column align-items-end"
                 }
@@ -52,11 +68,18 @@ function About(props) {
                   )}
                 </CountUp>
                 <span>Bắt đầu</span>
-              </div>
+              </div> */}
               <div className={styles.image1} data-aos="fade-right">
                 <Image
                   alt="Image 1"
-                  src="/images/About/about-intro.png"
+                  loader={({ src }) =>
+                    `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                  }
+                  src={
+                    sectionFounder[0]?.images[
+                      sectionFounder[0]?.images.length - 2
+                    ]?.source
+                  }
                   width={434}
                   height={580}
                   objectFit="cover"
@@ -65,7 +88,14 @@ function About(props) {
               <div className={styles.image2} data-aos="fade-left">
                 <Image
                   alt="Image 2"
-                  src="/images/About/about-intro1.png"
+                  loader={({ src }) =>
+                    `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                  }
+                  src={
+                    sectionFounder[0]?.images[
+                      sectionFounder[0]?.images.length - 1
+                    ]?.source
+                  }
                   width={300}
                   height={361}
                   objectFit="cover"
@@ -76,19 +106,12 @@ function About(props) {
               className={"col-12 col-md-6" + " " + styles.right}
               data-aos="fade-left"
             >
-              <span data-aos="fade-left">VỀ CHÚNG TÔI</span>
-              <h3 data-aos="fade-left">Nhà sáng lập</h3>
-              <p data-aos="fade-left">
-                Học viện The Golf House Việt Nam được sáng lập bởi Nguyễn Gia
-                Bảo (Bảo Bảo) - một doanh nhân, nữ Golfer với hơn 17 năm kinh
-                nghiệm cùng nhiều thành tích thi đấu ấn tượng trong và ngoài
-                nước. Với niềm đam mê vô tận với bộ môn hấp dẫn nhất hành tinh
-                này và nhận thấy {"mỏ kim cương"} Golf tại Việt Nam còn vô vàn
-                cơ hội phát triển, Gia Bảo cũng những người cộng sự đã chung sức
-                xây dựng hệ sinh thái The Golf House vào tháng 2 năm 2022 với
-                những hoài bão mới về tương lai phát triển cộng đồng Golf Việt
-                Nam vươn tầm quốc tế.
-              </p>
+              <span data-aos="fade-left">{sectionFounder[0]?.sub_title}</span>
+              <h3 data-aos="fade-left">{sectionFounder[0]?.title}</h3>
+              <p
+                data-aos="fade-left"
+                dangerouslySetInnerHTML={{ __html: sectionFounder[0]?.content }}
+              ></p>
               {/* <div data-aos="fade-left">
                 <button>Đăng ký</button>
               </div> */}
@@ -111,7 +134,13 @@ function About(props) {
             >
               <Image
                 alt="Image Course"
-                src="/images/About/vision.png"
+                loader={({ src }) =>
+                  `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                }
+                src={
+                  sectionVision[0]?.images[sectionVision[0]?.images.length - 1]
+                    ?.source
+                }
                 layout="fill"
                 objectFit="cover"
               ></Image>
@@ -130,38 +159,13 @@ function About(props) {
             >
               <div className={styles.content}>
                 <SwiperSlide>
-                  <div className="step_slide" data-aos="fade-right">
-                    {/* <span>01</span>
-                    <span></span> */}
-                    <span>Về chúng tôi</span>
-                  </div>
-                  <h3 data-aos="fade-left">Tầm nhìn</h3>
-                  <div className="desc" data-aos="fade-right">
-                    <p>
-                      Học viện đào tạo cung cấp chương trình giảng dạy bài bản
-                      theo tiêu chuẩn PGA, cá nhân hóa việc học tập thông qua lộ
-                      trình học thiết kế phù hợp cho từng lứa tuổi, theo từng
-                      cấp độ từ cơ bản tới nâng cao.
-                    </p>
-                  </div>
-                  <h3 data-aos="fade-left">Sứ mệnh</h3>
-                  <div className="desc" data-aos="fade-right">
-                    <p>
-                      Xây dựng các học viện trên cả nước và thành công đào tạo
-                      thế hệ Golfer mới
-                    </p>
-                  </div>
-                  <div
-                    className={
-                      "d-flex justify-content-end" + " " + styles.see_more
-                    }
-                    data-aos="fade-left"
-                  >
-                    {/* <button className="d-flex align-items-center">
-                      <span>Xem thêm</span>
-                      <i className="fa-regular fa-arrow-right"></i>
-                    </button> */}
-                  </div>
+                  <p
+                    data-aos="fade-right"
+                    className="desc"
+                    dangerouslySetInnerHTML={{
+                      __html: sectionVision[0]?.content,
+                    }}
+                  ></p>
                 </SwiperSlide>
               </div>
             </Swiper>
@@ -200,24 +204,15 @@ function About(props) {
                   <div className="step_slide" data-aos="fade-left">
                     {/* <span>01</span>
                     <span></span> */}
-                    <span>Lio Holding</span>
+                    <span>{sectionIntro[0]?.sub_title}</span>
                   </div>
-                  <h3 data-aos="fade-right">The Golf House Vietnam</h3>
+                  <h3 data-aos="fade-right">{sectionIntro[0]?.title}</h3>
                   <div className="desc" data-aos="fade-left">
-                    <p>
-                      The Golf House Vietnam là thành viên thuộc tập đoàn Lio
-                      Holdings. Lio Holdings hoạt động trong lĩnh vực đào tạo,
-                      cung cấp các dịch vụ và tổ chức các sự kiện giải trí về
-                      Golf & Motorsport mang tầm quốc tế tại thị trường Việt
-                      Nam. Với sứ mệnh khai phá và định hướng thị trường, Lio
-                      Holdings mong muốn mang Golf & Motorsport đến gần với
-                      người yêu thích các bộ môn này tại Việt Nam. Bằng việc xây
-                      dựng hệ sinh thái các dịch vụ phục vụ cho ngành Golf &
-                      Motorsport, Lio Holdings tạo nên môi trường đào tạo và
-                      chơi Golf tiệm cận với trình độ quốc tế, đào tạo và tổ
-                      chức các hoạt động Motorsport tại Việt Nam đạt chuẩn thế
-                      giới.
-                    </p>
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: sectionIntro[0]?.content,
+                      }}
+                    ></p>
                   </div>
                   <div
                     className={
@@ -232,34 +227,24 @@ function About(props) {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="step_slide">
-                    {/* <span>02</span>
+                  <div className="step_slide" data-aos="fade-left">
+                    {/* <span>01</span>
                     <span></span> */}
-                    <span>Lio Holding</span>
+                    <span>{sectionIntro[1]?.sub_title}</span>
                   </div>
-                  <h3>Đội ngũ HLV quốc tế</h3>
-                  <div className="desc">
-                    <p>
-                      Học viện The Golf House Việt Nam (TGH) được thành lập vào
-                      tháng 3 năm 2022 với sứ mệnh mang lại giá trị cho những
-                      người đam mê Golf và xây dựng cộng đồng Golfer Việt Nam.
-                    </p>
-                    <p>
-                      TGH cung câp chương trình giảng dạy bài bản theo tiêu
-                      chuẩn PGA, đa dạng các gói học phục vụ nhu cầu của học
-                      viên theo từng giai đoạn, dù là người mới chơi hay người
-                      chơi golf muôn nâng cao kỹ năng của mình.
-                    </p>
-                    <p>
-                      Sau khóa học, học viên tự tin bước ra sân khi được trang
-                      bị đầy đủ các yếu tố về kỹ thuật, văn hóa golf và luật
-                      chơi.
-                    </p>
+                  <h3 data-aos="fade-right">{sectionIntro[1]?.title}</h3>
+                  <div className="desc" data-aos="fade-left">
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: sectionIntro[1]?.content,
+                      }}
+                    ></p>
                   </div>
                   <div
                     className={
                       "d-flex justify-content-end" + " " + styles.see_more
                     }
+                    data-aos="fade-right"
                   >
                     <button className="d-flex align-items-center">
                       <span>Xem thêm</span>
@@ -278,7 +263,14 @@ function About(props) {
             >
               <Image
                 alt="Image Course"
-                src={`/images/About/about${activeSlide + 1}.png`}
+                loader={({ src }) =>
+                  `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                }
+                src={
+                  sectionIntro[activeSlide]?.images[
+                    sectionIntro[activeSlide]?.images.length - 1
+                  ]?.source
+                }
                 layout="fill"
                 objectFit="cover"
               ></Image>

@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Nav, Navbar } from "rsuite";
 import Swal from "sweetalert2";
+import { getLocalStorage, LOCAL_STORAGE } from "../../utils/handleStorage";
 // import styles from "./headerMain.module.scss";
 
 export default function HeaderMoblieBlack({
@@ -24,6 +25,7 @@ export default function HeaderMoblieBlack({
       confirmButtonText: "OK",
     });
   };
+  const cart = getLocalStorage(LOCAL_STORAGE.CART);
   const router = useRouter();
   const [show, setShow] = useState(false);
   useEffect(() => {
@@ -76,7 +78,7 @@ export default function HeaderMoblieBlack({
                   <div className="cart">
                     <i className="fa-light fa-bag-shopping"></i>
                     <span className="d-flex justify-content-center align-items-center">
-                      1
+                      {cart.length}
                     </span>
                   </div>
                 </Nav.Item>
@@ -154,7 +156,7 @@ export default function HeaderMoblieBlack({
                 <Nav.Item
                   eventKey="8"
                   onClick={() => {
-                    router.push("/about-us#news");
+                    router.push("/news-events");
                   }}
                 >
                   Tin tức, sự kiện

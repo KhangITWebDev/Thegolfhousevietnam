@@ -15,6 +15,7 @@ import {
   ShopList,
 } from "../../utils/DataDemo/Home/dataHome";
 import { removeAccents, time } from "../../utils/function";
+import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
 
 const slideHome = [
   {
@@ -96,12 +97,26 @@ function HomePage(props) {
   useEffect(() => {
     dispatch(getBannerData());
   }, [dispatch]);
-
+  const { contents } = useSelector((state) => state.ContentReducer);
+  useEffect(() => {
+    dispatch(getContentData());
+  }, [dispatch]);
   const bannerHome = banners.filter((item) => item.danh_muc === "Slide Home");
   const trainerHome = banners.filter(
     (item) => item.danh_muc === "Trainer Home"
   );
-  console.log(banners);
+  const contentGolf = contents.filter(
+    (item) => item.category === "63bbe8a6e17e4f12eead3ec1"
+  );
+  const sectionTrainer = contents.filter(
+    (item) => item.category === "63bc0be839d2a23b06d86307"
+  );
+  const sectionMoreImage = contents.filter(
+    (item) => item.category === "63bc0cd939d2a23b06d867af"
+  );
+  const sectiontitleNew = contents.filter(
+    (item) => item.category === "63bc49ef39d2a23b06d90d05"
+  );
   const router = useRouter();
   const [swiper, setSwiper] = React.useState(null);
   const [swiper2, setSwiper2] = React.useState(null);
@@ -272,7 +287,13 @@ function HomePage(props) {
               <div className={styles.image1}>
                 <Image
                   alt="Image 1"
-                  src="/images/Home/MemberShip/mem1.png"
+                  loader={({ src }) =>
+                    `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                  }
+                  src={
+                    contentGolf[0]?.images[contentGolf[0]?.images?.length - 2]
+                      ?.source
+                  }
                   layout="fill"
                 />
               </div>
@@ -286,16 +307,14 @@ function HomePage(props) {
               </div> */}
             </div>
             <div className={"col-12 col-md-6" + " " + styles.right}>
-              <span data-aos="fade-left">THE GOLF HOUSE</span>
-              <h3 data-aos="fade-left">Hệ sinh thái The Golf House Vietnam</h3>
-              <p data-aos="fade-left">
-                Tại The Golf House Vietnam, tạo nên môi trường giúp học viên
-                trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu
-                tiên hàng đầu của chúng tôi.
-              </p>
-              <div data-aos="fade-left">
+              <span data-aos="fade-left">{contentGolf[0]?.sub_title}</span>
+              <h3 data-aos="fade-left">{contentGolf[0]?.title}</h3>
+              <p
+                dangerouslySetInnerHTML={{ __html: contentGolf[0]?.content }}
+              ></p>
+              {/* <div data-aos="fade-left">
                 <button>Đăng ký</button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -346,27 +365,30 @@ function HomePage(props) {
             `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
           }
           alt="Image 1"
-          src={trainerHome[0]?.hinh_anh}
+          src={
+            sectionTrainer[0]?.images[sectionTrainer[0]?.images.length - 1]
+              .source
+          }
           layout="fill"
           objectFit="cover"
         />
         <div className={styles.content}>
           <div className="container h-100">
             <div className="d-flex h-100 justify-content-center align-items-center flex-column">
-              <span data-aos="fade-right">ĐỘI NGŨ HUẤN LUYỆN</span>
-              <h1 data-aos="fade-left">{trainerHome[0]?.tieu_de}</h1>
+              <span data-aos="fade-right">{sectionTrainer[0]?.sub_title}</span>
+              <h1 data-aos="fade-left">{sectionTrainer[0]?.title}</h1>
               <div
                 data-aos="fade-right"
                 dangerouslySetInnerHTML={{
-                  __html: trainerHome[0]?.mo_ta,
+                  __html: sectionTrainer[0]?.content,
                 }}
               ></div>
               <div
                 data-aos="fade-left"
-                onClick={() => router.push(trainerHome[0]?.link)}
+                onClick={() => router.push(sectionTrainer[0]?.url_button)}
               >
                 <button className="btn-content">
-                  {trainerHome[0]?.action}
+                  {sectionTrainer[0]?.text_button}
                 </button>
               </div>
             </div>
@@ -507,18 +529,18 @@ function HomePage(props) {
         </Swiper>
       </div>
       <div className={styles.moreImage}>
-        <div className={styles.item} data-aos="fade-right">
-          <Image alt="Img 1" src="/images/Home/More/img1.png" layout="fill" />
-        </div>
-        <div className={styles.item} data-aos="fade-down">
-          <Image alt="Img 1" src="/images/Home/More/img2.png" layout="fill" />
-        </div>
-        <div className={styles.item} data-aos="fade-up">
-          <Image alt="Img 1" src="/images/Home/More/img3.png" layout="fill" />
-        </div>
-        <div className={styles.item} data-aos="fade-left">
-          <Image alt="Img 1" src="/images/Home/More/img4.png" layout="fill" />
-        </div>
+        {sectionMoreImage[0]?.images.slice(0, 4).map((item) => (
+          <div key={item} className={styles.item} data-aos="fade-right">
+            <Image
+              alt="Img 1"
+              loader={({ src }) =>
+                `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+              }
+              src={item.source}
+              layout="fill"
+            />
+          </div>
+        ))}
       </div>
       {/* <div className={styles.course} id="course">
         <div className={styles.top}>
@@ -673,8 +695,8 @@ function HomePage(props) {
       <div className={styles.news}>
         <div className="container">
           <div className="heading" data-aos="fade-up">
-            <span className="text-center">TIN TỨC</span>
-            <h2 className="text-center">Các tin tức, sự kiện</h2>
+            <span className="text-center">{sectiontitleNew[0]?.sub_title}</span>
+            <h2 className="text-center">{sectiontitleNew[0]?.title}</h2>
           </div>
           <div
             className={

@@ -15,6 +15,7 @@ function Calendar({ value, onChange, openSignIn }) {
     "Thứ 6",
     "Thứ 7",
   ];
+  const dayNameShort = ["CN", "T2", "T3", "T4", "T5", "T6", "T7"];
 
   useEffect(() => {
     setCalendar(buildCalendar(value));
@@ -41,8 +42,8 @@ function Calendar({ value, onChange, openSignIn }) {
   const isMonth = () => value.isSame(new Date(), "month");
   const [show, setShow] = useState(-1);
   return (
-    <div className="calendar">
-      <div className="header" data-aos="fade-left">
+    <div className="calendar" data-aos="fade-down">
+      <div className="header">
         <div onClick={() => !isMonth() && onChange(prevMonth())}>
           {!isMonth() ? <i className="fa-light fa-arrow-left"></i> : null}
         </div>
@@ -53,12 +54,18 @@ function Calendar({ value, onChange, openSignIn }) {
           <i className="fa-light fa-arrow-right"></i>
         </div>
       </div>
-      <div className="day-names" data-aos="fade-right">
-        {dayNames.map((d) => (
-          <div className="week" key={d}>
-            {d}
-          </div>
-        ))}
+      <div className="day-names">
+        {window.screen.width > 768
+          ? dayNames.map((d) => (
+              <div className="week" key={d}>
+                {d}
+              </div>
+            ))
+          : dayNameShort.map((d) => (
+              <div className="week" key={d}>
+                {d}
+              </div>
+            ))}
       </div>
       <div className="body">
         {calendar.map((week, index) => (
@@ -87,7 +94,7 @@ function Calendar({ value, onChange, openSignIn }) {
                     {value.year()}
                   </h4>
                   <div className="list">
-                    <div className="d-flex justify-content-between align-items-center item">
+                    <div className="d-flex justify-content-between align-items-center flex-wrap item">
                       <div className="title d-flex align-items-center">
                         <i className="fa-light fa-clock"></i>
                         <div>
@@ -95,11 +102,11 @@ function Calendar({ value, onChange, openSignIn }) {
                           <p>3 chỗ trống</p>
                         </div>
                       </div>
-                      <div>
+                      <div className="tool">
                         <button onClick={openSignIn}>Đặt Lịch</button>
                       </div>
                     </div>
-                    <div className="d-flex justify-content-between align-items-center item">
+                    <div className="d-flex justify-content-between align-items-center flex-wrap item">
                       <div className="title d-flex align-items-center">
                         <i className="fa-light fa-clock"></i>
                         <div>
@@ -107,7 +114,7 @@ function Calendar({ value, onChange, openSignIn }) {
                           <p>3 chỗ trống</p>
                         </div>
                       </div>
-                      <div>
+                      <div className="tool">
                         <button onClick={openSignIn}>Đặt Lịch</button>
                       </div>
                     </div>

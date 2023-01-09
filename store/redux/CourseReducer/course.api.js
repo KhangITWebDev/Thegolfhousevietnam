@@ -1,10 +1,8 @@
-import fakeClientAxios from "../../../clientAxios/fakeClientAxios";
+import trainerClientAxios from "../../../clientAxios/trainerClientAxios";
 
 const getCourseAPI = async () => {
   try {
-    const resApi = await fakeClientAxios.get(
-      `/dmvt?q={"is_service":"true"}&limit=500&page=1&access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
-    );
+    const resApi = await trainerClientAxios.get(`academy/course`);
     if (resApi)
       return {
         success: true,

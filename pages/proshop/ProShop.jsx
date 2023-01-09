@@ -4,9 +4,10 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Select, { components } from "react-select";
-import { Progress, RangeSlider, Slider } from "rsuite";
+import { Loader, Progress, RangeSlider, Slider } from "rsuite";
 import Pagination from "../../components/pagination/pagination";
 import { getBannerData } from "../../store/redux/Banner/banner.action";
+import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
 import { getProshopData } from "../../store/redux/ProshopReducer/proshop.action";
 import { ShopList } from "../../utils/DataDemo/Home/dataHome";
 import { removeAccents } from "../../utils/function";
@@ -176,13 +177,20 @@ function ProShop(props) {
       data.setCurrentPage(1);
     }
   };
+  const { contents } = useSelector((state) => state.ContentReducer);
+  useEffect(() => {
+    dispatch(getContentData());
+  }, [dispatch]);
+
+  const sectiontitle = contents.filter(
+    (item) => item.category === "63bc4b5739d2a23b06d91f9e"
+  );
   const filterPrice = () => {
     let priceMin = maxFilterPrice * (value[0] / 100);
     let priceMax = maxFilterPrice * (value[1] / 100);
     const dataSearch = proshopData.filter(
       (x) => x.gia_ban_le >= priceMin && x.gia_ban_le <= priceMax
     );
-    console.log(dataSearch);
     data.setPerData(dataSearch);
     data.setCurrentPage(1);
   };
@@ -190,7 +198,7 @@ function ProShop(props) {
     <div className={styles.proshop_page}>
       <div className="container" data-aos="fade-up">
         <div className="heading">
-          <h2>Proshop</h2>
+          <h2>{sectiontitle[0]?.title}</h2>
         </div>
         <div className="d-flex justify-content-center">
           <button className="btn-down">
@@ -260,45 +268,51 @@ function ProShop(props) {
               </div>
             </div>
             <div className={"d-flex flex-wrap" + " " + styles.product}>
-              {data.currentDatas.map((item, index) => (
-                <div
-                  key={index}
-                  className={"col-12 col-sm-6" + " " + styles.item}
-                >
+              {proshopData.length <= 0 ? (
+                <div className="d-flex m-auto">
+                  <Loader size="md" content="Đang tải dữ liệu..." />
+                </div>
+              ) : (
+                data.currentDatas.map((item, index) => (
                   <div
-                    className={
-                      styles.info +
-                      " " +
-                      "d-flex flex-column align-items-center"
-                    }
+                    key={index}
+                    className={"col-12 col-sm-6" + " " + styles.item}
                   >
-                    <div className={styles.image} style={{ zIndex: 1003 }}>
-                      <Image
-                        alt={"Image" + index + 1}
-                        src="/images/Logo/Logo12.png"
-                        width={100}
-                        height={100}
-                        objectFit="cover"
-                      ></Image>
-                    </div>
-                    <h5
-                      onClick={() =>
-                        router.push(`/proshop/${removeAccents(item.ten_vt)}`)
+                    <div
+                      className={
+                        styles.info +
+                        " " +
+                        "d-flex flex-column align-items-center"
                       }
                     >
-                      {item.ten_vt}
-                    </h5>
-                    <p>{item.gia_ban_le.toLocaleString("vi-VI")} VND</p>
-                    {/* <div className={"d-flex" + " " + styles.rate}>
+                      <div className={styles.image} style={{ zIndex: 1003 }}>
+                        <Image
+                          alt={"Image" + index + 1}
+                          src="/images/Logo/Logo12.png"
+                          width={100}
+                          height={100}
+                          objectFit="cover"
+                        ></Image>
+                      </div>
+                      <h5
+                        onClick={() =>
+                          router.push(`/proshop/${removeAccents(item.ten_vt)}`)
+                        }
+                      >
+                        {item.ten_vt}
+                      </h5>
+                      <p>{item.gia_ban_le.toLocaleString("vi-VI")} VND</p>
+                      {/* <div className={"d-flex" + " " + styles.rate}>
                       {Array(item.rate)
                         .fill()
                         .map((i) => (
                           <i className="fa-solid fa-star" key={i}></i>
                         ))}
                     </div> */}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
             </div>
             <div className="d-flex justify-content-center">
               <Pagination data={data} />

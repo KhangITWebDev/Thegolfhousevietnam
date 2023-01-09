@@ -157,6 +157,7 @@ function HomePage(props) {
                   alt={"Image"}
                   src={item.hinh_anh}
                   layout="fill"
+                  objectFit="cover"
                 />
                 <div className="content">
                   <div className="container h-100">

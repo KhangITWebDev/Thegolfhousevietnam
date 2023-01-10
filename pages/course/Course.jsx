@@ -579,7 +579,18 @@ function Course(props) {
               className="mySwiper"
             >
               {slideCourse.map((item, index) => (
-                <SwiperSlide key={index} onClick={() => setDetailIndex(index)}>
+                <SwiperSlide
+                  key={index}
+                  onClick={() => {
+                    $("html,body").animate(
+                      {
+                        scrollTop: $("#course-detail").offset().top,
+                      },
+                      "slow"
+                    );
+                    setDetailIndex(index);
+                  }}
+                >
                   <div className="d-flex flex-column info">
                     <div>
                       <div className="image">

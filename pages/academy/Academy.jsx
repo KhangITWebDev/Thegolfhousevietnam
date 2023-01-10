@@ -58,6 +58,7 @@ function Academy(props) {
                 className={
                   styles.header + " " + "d-flex flex-column align-items-end"
                 }
+                style={{ opacity: 0 }}
                 data-aos="fade-down"
               >
                 <CountUp start={1000} end={2022} delay={0} duration={1.4}>

@@ -25,7 +25,7 @@ function OrtherService(props) {
     (item) => item.category === "63bc3ef239d2a23b06d8c4d9"
   );
   const imageVipLouge = contents.filter(
-    (item) => item.category === "63bc3f2439d2a23b06d8c50f"
+    (item) => item.category === "63bc3ef239d2a23b06d8c4d9"
   );
   const bannerHairNailSpa = banners.filter(
     (x) => x.danh_muc === "Hair Nail Spa"

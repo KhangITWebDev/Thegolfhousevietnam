@@ -220,10 +220,10 @@ function About(props) {
                     }
                     data-aos="fade-right"
                   >
-                    <button className="d-flex align-items-center">
+                    {/* <button className="d-flex align-items-center">
                       <span>Xem thêm</span>
                       <i className="fa-regular fa-arrow-right"></i>
-                    </button>
+                    </button> */}
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>

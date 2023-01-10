@@ -274,6 +274,7 @@ function HomePage(props) {
                 className={
                   styles.header + " " + "d-flex flex-column align-items-end"
                 }
+                style={{ opacity: 0 }}
               >
                 <CountUp start={1000} end={2022} delay={0} duration={2}>
                   {({ countUpRef }) => (

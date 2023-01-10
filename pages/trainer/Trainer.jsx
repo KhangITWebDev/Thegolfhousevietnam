@@ -157,7 +157,7 @@ function Trainer(props) {
                 </div>
               </div>
               <div className="col-12 col-md-6 right">
-                <div className="info">
+                <div className="info" style={{ opacity: 0 }}>
                   <h5>Lý thuyết</h5>
                   <span>{trainers[showDetailIndex]?.theory}%</span>
                   <Progress.Line
@@ -166,7 +166,7 @@ function Trainer(props) {
                     showInfo={false}
                   />
                 </div>
-                <div className="info">
+                <div className="info" style={{ opacity: 0 }}>
                   <h5>Thực hành</h5>
                   <span>{trainers[showDetailIndex]?.practice}%</span>
                   <Progress.Line
@@ -175,7 +175,7 @@ function Trainer(props) {
                     showInfo={false}
                   />
                 </div>
-                <div className="info">
+                <div className="info" style={{ opacity: 0 }}>
                   <h5>Lý thuyết</h5>
                   <span>{trainers[showDetailIndex]?.creation}%</span>
                   <Progress.Line

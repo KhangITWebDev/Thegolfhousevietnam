@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import styles from "./cart.module.scss";
 import $ from "jquery";
 import Image from "next/image";
-import { getLocalStorage, LOCAL_STORAGE } from "../../utils/handleStorage";
+import {
+  getLocalStorage,
+  LOCAL_STORAGE,
+  setLocalStorage,
+} from "../../utils/handleStorage";
 import { useRouter } from "next/router";
 
 function Cart({ handleCloseCart }) {
@@ -14,12 +18,16 @@ function Cart({ handleCloseCart }) {
         transform: "scaleY(0)",
       });
     });
-  }, []);
+    if (!cart) {
+      setLocalStorage(LOCAL_STORAGE.CART, []);
+    }
+  }, [cart]);
   const initialValue = 0;
-  const total = cart.reduce(
-    (accumulator, current) => accumulator + current.gia_ban_le * current.qty,
-    initialValue
-  );
+  // const total = cart.reduce(
+  //   (accumulator, current) => accumulator + current.gia_ban_le * current.qty,
+  //   initialValue
+  // );
+  const total = 1;
   return (
     <div
       className={styles.subMenuCart + " " + "cart-dialog"}

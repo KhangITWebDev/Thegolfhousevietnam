@@ -83,9 +83,9 @@ export default function HeaderMoblie({
                     </span>
                   </div>
                 </Nav.Item>
-                <Nav.Item eventKey="2" className="search">
+                {/* <Nav.Item eventKey="2" className="search">
                   <i className="fa-light fa-magnifying-glass"></i>
-                </Nav.Item>
+                </Nav.Item> */}
                 <Nav.Item eventKey="3" className="bar">
                   <i className="fa-regular fa-bars"></i>
                 </Nav.Item>

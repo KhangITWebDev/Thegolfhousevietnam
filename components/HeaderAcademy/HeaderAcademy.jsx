@@ -200,9 +200,9 @@ export default function HeaderAccademy({
                       </span>
                     </div>
                   </Nav.Item>
-                  <Nav.Item eventKey="13" className="search">
+                  {/* <Nav.Item eventKey="13" className="search">
                     <i className="fa-light fa-magnifying-glass"></i>
-                  </Nav.Item>
+                  </Nav.Item> */}
                   <Nav.Item eventKey="14" className="sub-menu">
                     <i className="fa-solid fa-grid"></i>
                   </Nav.Item>

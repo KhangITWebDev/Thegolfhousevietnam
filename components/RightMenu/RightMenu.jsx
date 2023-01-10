@@ -55,7 +55,7 @@ function RightMenu({ handleCloseRightMenu }) {
           <div className={styles.text + " " + "d-flex flex-column"}>
             <span data-aos="fade-left">Facebook</span>
             <span data-aos="fade-right">Youtube</span>
-            <span data-aos="fade-left">Dribble</span>
+            <span data-aos="fade-left">Twitter</span>
             <span data-aos="fade-right">Instagram</span>
           </div>
         </div>

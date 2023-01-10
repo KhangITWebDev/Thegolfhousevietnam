@@ -672,7 +672,7 @@ function Course(props) {
             <div className="heading col-12 col-lg-8 flex-wrap align-items-start">
               <span data-aos="fade-left">THÔNG TIN KHOÁ HỌC</span>
               <h2 data-aos="fade-left" style={{}}>
-                Chi tiết {slideCourse[detailIndex]?.title?.toLocaleLowerCase()}
+                {slideCourse[detailIndex]?.title}
               </h2>
               <p
                 dangerouslySetInnerHTML={{

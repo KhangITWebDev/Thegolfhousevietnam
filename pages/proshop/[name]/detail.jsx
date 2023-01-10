@@ -93,7 +93,7 @@ function Detail(props) {
                     <div className="image">
                       <Image
                         alt="Image"
-                        src="/images/Logo/Logo12.png"
+                        src="/images/Logo/Logo2.png"
                         layout="fill"
                         objectFit="cover"
                       />

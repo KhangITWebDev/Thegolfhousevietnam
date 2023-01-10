@@ -34,21 +34,29 @@ const slideCourse = [
     image: "/images/Home/Course/img1.jpg",
     title: "Lớp lẻ",
     icon: "/images/Home/Course/icon1.png",
+    description:
+      "<p><ul><li> Học 1:1 với HLV chuyên nghiệp</li><li>Tặng 1 buổi ra sân với mỗi 10 buổi đăng ký học</li><li>60 phút/buổi</li><li>Miễn phí gậy tập và bóng</li></ul></p>",
   },
   {
     image: "/images/Home/Course/img2.jpg",
-    title: "Khoá học",
-    icon: "/images/Home/Course/icon1.png",
+    title: "Khóa học",
+    icon: "/images/Home/Course/icon2.png",
+    description:
+      "<p><ul><li>Cam kết đầu ra</li><li>Học 1:1 với HLV chuyên nghiệp</li><li>Lộ trình bài bản từ 3 tháng tới 2 năm</li><li>Giáo trình thiết kế phù hợp từng trình độ từ sơ cấp tới nâng cao</li><li> Hỗ trợ 100% phí học lại nếu chưa đạt được trình độ đầu ra theo cam kết (điều kiện HV tham gia đầy đủ số buổi học quy định)</li><li>60 phút/buổi</li><li>Miễn phí phí gậy tập và bóng</li></ul></p>",
   },
   {
     image: "/images/Home/Course/img3.jpg",
-    title: "Khoá Junior",
-    icon: "/images/Home/Course/icon2.png",
+    title: "Khoá trẻ em",
+    icon: "/images/Home/Course/icon1.png",
+    description:
+      "<p><ul><li>Độ tuổi từ 4 - 13</li><li>Lịch học linh động & phù hợp với lịch học tại trường</li><li>Giảng viên nhiều năm kinh nghiệm hướng dẫn trẻ</li><li>Tối đa 4 học viên/lớp</li><li>60 phút/buổi</li><li>Miễn phí gậy tập và bóng</li></ul></p>",
   },
   {
-    image: "/images/Home/Course/img1.jpg",
+    image: "/images/Home/Course/img2.jpg",
     title: "Tập luyện theo giờ",
     icon: "/images/Home/Course/icon1.png",
+    description:
+      "<p><ul><li>Không gian tập luyện trong nhà tiện nghi</li><li> Thiết bị hiện đại</li><li>Chi phí hợp lý</li> </ul></p>",
   },
 ];
 
@@ -239,7 +247,7 @@ function Course(props) {
       });
     });
   }, []);
-  const [detailIndex, setDetailIndex] = useState(2);
+  const [detailIndex, setDetailIndex] = useState(1);
   const DropdownIndicator = (props) => {
     return (
       <components.DropdownIndicator {...props}>
@@ -296,7 +304,7 @@ function Course(props) {
               data-aos="fade-right"
             >
               <h2>
-                Lợi ích học golf tại <span>The Golf House?</span>
+                Lợi ích học Golf tại <span>The Golf House?</span>
               </h2>
             </div>
             <div
@@ -570,14 +578,14 @@ function Course(props) {
               onSwiper={(s) => setSwiper3(s)}
               className="mySwiper"
             >
-              {courseData.map((item, index) => (
+              {slideCourse.map((item, index) => (
                 <SwiperSlide key={index} onClick={() => setDetailIndex(index)}>
                   <div className="d-flex flex-column info">
                     <div>
                       <div className="image">
                         <Image
                           alt="Intro 1"
-                          src={slideCourse[0].image}
+                          src={item.image}
                           layout="fill"
                           objectFit="cover"
                         />
@@ -586,12 +594,12 @@ function Course(props) {
                         <div className="icon">
                           <Image
                             alt="Intro 1"
-                            src={slideCourse[0].icon}
+                            src={item.icon}
                             width={52}
                             height={52}
                           />
                         </div>
-                        <h5>{item.name}</h5>
+                        <h5>{item.title}</h5>
                         {/* <div className="tool">
                           <button className="d-flex align-items-center">
                             <span>Nhận tư vấn</span>
@@ -615,7 +623,7 @@ function Course(props) {
       </div>
       <div className={styles.course_detail} id="course-detail">
         <div className="container">
-          <div className="d-flex flex-wrap-reverse flex-lg-nowrap">
+          <div className="d-flex align-items-center flex-wrap-reverse flex-lg-nowrap">
             <div className="d-flex justify-content-center justify-content-lg-start left">
               <div className="swiper-slide">
                 <div className="d-flex flex-column info">
@@ -623,7 +631,7 @@ function Course(props) {
                     <div className="image" data-aos="fade-right">
                       <Image
                         alt="Intro 1"
-                        src={slideCourse[0].image}
+                        src={slideCourse[detailIndex]?.image}
                         layout="fill"
                         objectFit="cover"
                       />
@@ -631,17 +639,17 @@ function Course(props) {
                     {/* <div className="detail"></div> */}
                     <div className="detail d-flex justify-content-end">
                       <h5 onClick={handleOpen} data-aos="fade-right">
-                        {courseData[detailIndex]?.name}
+                        {slideCourse[detailIndex]?.title}
                       </h5>
-                      <span data-aos="fade-right">
+                      {/* <span data-aos="fade-right">
                         Dành cho người tười 4-13 tuổi
-                      </span>
+                      </span> */}
                       {/* <h4 data-aos="fade-right">
                         20.000.000 VND <p>/tháng</p>
                       </h4> */}
-                      <p data-aos="fade-right">
-                        {/* Học hằng tuần <br /> Giảm giá 10% */}
-                      </p>
+                      {/* <p data-aos="fade-right">
+                         Học hằng tuần <br /> Giảm giá 10%
+                      </p> */}
                       <div data-aos="fade-right" className="button">
                         <button onClick={handleOpen1}>Nhận Tư Vấn</button>
                       </div>
@@ -653,12 +661,11 @@ function Course(props) {
             <div className="heading col-12 col-lg-8 flex-wrap align-items-start">
               <span data-aos="fade-left">THÔNG TIN KHOÁ HỌC</span>
               <h2 data-aos="fade-left" style={{}}>
-                Chi tiết khóa{" "}
-                {courseData[detailIndex]?.name?.toLocaleLowerCase()}
+                Chi tiết {slideCourse[detailIndex]?.title?.toLocaleLowerCase()}
               </h2>
               <p
                 dangerouslySetInnerHTML={{
-                  __html: courseData[detailIndex]?.description,
+                  __html: slideCourse[detailIndex]?.description,
                 }}
                 data-aos="fade-left"
               ></p>

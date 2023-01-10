@@ -49,7 +49,7 @@ function RightMenu({ handleCloseRightMenu }) {
           <div className={styles.icon + " " + "d-flex flex-column"}>
             <i className="fa-brands fa-facebook-f" data-aos="fade-right"></i>
             <i data-aos="fade-left" className="fa-brands fa-youtube"></i>
-            <i data-aos="fade-right" className="fa-brands fa-dribbble"></i>
+            <i data-aos="fade-right" className="fa-brands fa-twitter"></i>
             <i data-aos="fade-left" className="fa-brands fa-instagram"></i>
           </div>
           <div className={styles.text + " " + "d-flex flex-column"}>

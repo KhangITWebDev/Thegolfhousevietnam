@@ -249,7 +249,7 @@ export default function HeaderMoblie({
           <div className="d-flex social justify-content-center">
             <i className="fa-brands fa-facebook-f"></i>
             <i className="fa-brands fa-youtube"></i>
-            <i className="fa-brands fa-dribbble"></i>
+            <i className="fa-brands fa-twitter"></i>
             <i className="fa-brands fa-instagram"></i>
           </div>
         </Nav>

@@ -656,17 +656,12 @@ function Course(props) {
                 Chi tiết khóa{" "}
                 {courseData[detailIndex]?.name?.toLocaleLowerCase()}
               </h2>
-              <p data-aos="fade-left">
-                Khoá học dành cho trẻ em đam mê Golf từ 4-13 tuổi.
-              </p>
-              <ul>
-                <li data-aos="fade-left">
-                  Lịch học linh động & phù hợp với lịch học tại trường
-                </li>
-                <li data-aos="fade-left">Tối đa 4 học viên/lớp</li>
-                <li data-aos="fade-left">60 phút/buổi</li>
-                <li data-aos="fade-left">Miễn phí phí gậy tập và bóng</li>
-              </ul>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: courseData[detailIndex]?.description,
+                }}
+                data-aos="fade-left"
+              ></p>
             </div>
           </div>
         </div>

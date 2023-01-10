@@ -81,7 +81,7 @@ function Footer(props) {
           <div className={styles.social + " " + "d-flex"} data-aos="fade-up">
             <i className="fa-brands fa-facebook-f"></i>
             <i className="fa-brands fa-youtube"></i>
-            <i className="fa-brands fa-dribbble"></i>
+            <i className="fa-brands fa-twitter"></i>
             <i className="fa-brands fa-instagram"></i>
           </div>
         </div>

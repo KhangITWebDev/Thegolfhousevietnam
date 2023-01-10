@@ -1,9 +1,16 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Steps, Table } from "rsuite";
+import Swal from "sweetalert2";
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
-import { getLocalStorage, LOCAL_STORAGE } from "../../utils/handleStorage";
+import {
+  getLocalStorage,
+  LOCAL_STORAGE,
+  setLocalStorage,
+} from "../../utils/handleStorage";
 const { Column, HeaderCell, Cell } = Table;
 
 export const ShopList = [
@@ -53,6 +60,7 @@ export const ShopList = [
 
 function Cart(props) {
   const [step, setStep] = React.useState(0);
+  const router = useRouter();
   const cart = getLocalStorage(LOCAL_STORAGE.CART);
   const ship = 15000;
   const dispatch = useDispatch();
@@ -68,19 +76,69 @@ function Cart(props) {
     (accumulator, current) => accumulator + current.gia_ban_le * current.qty,
     initialValue
   );
+  const [qty, setQty] = useState(1);
+  const decreasement = () => {
+    setQty(qty - 1);
+    if (qty <= 1) {
+      Swal.fire({
+        title: "Lỗi",
+        text: "Số lượng phải lớn hơn 0",
+        icon: "error",
+        showCancelButton: false,
+        confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setQty(1);
+        }
+      });
+    }
+  };
+  const handleRemove = (item) => {
+    const data = cart.filter((x) => x._id !== item._id);
+    Swal.fire({
+      title: "",
+      html: "<p>Bạn có chắc chắn xóa sản phẩm này không?</p>",
+      icon: "info",
+      showCancelButton: true,
+      confirmButtonText: "OK",
+      focusConfirm: false,
+      confirmButtonText: "<span>Đồng ý</span>",
+      cancelButtonText: "<span>Hủy bỏ</span>",
+    }).then((rs) => {
+      if (rs.isConfirmed) {
+        setLocalStorage(LOCAL_STORAGE.CART, data);
+      }
+    });
+  };
+  const handleDecreaseQty = (item) => {
+    const cart = getLocalStorage(LOCAL_STORAGE.CART);
+    const findIndex = cart.findIndex((x) => x._id === item._id);
+    cart[findIndex].qty = cart[findIndex].qty - 1;
+    setLocalStorage(LOCAL_STORAGE.CART, cart);
+    if (item.qty <= 0) {
+      alert("lỗi");
+      cart[findIndex].qty = 1;
+    }
+  };
+  const handleIncreaseQty = (item) => {
+    const cart = getLocalStorage(LOCAL_STORAGE.CART);
+    const findIndex = cart.findIndex((x) => x._id === item._id);
+    cart[findIndex].qty = cart[findIndex].qty + 1;
+    setLocalStorage(LOCAL_STORAGE.CART, cart);
+  };
   return (
     <div>
       <div className="container" id="cart-page">
+        <div className="heading">
+          <h2>{sectiontitle[0]?.title}</h2>
+        </div>
+        <div className="d-flex justify-content-center">
+          <button className="btn-down">
+            <i className="fa-regular fa-chevron-down"></i>
+          </button>
+        </div>
         {cart && cart.length > 0 ? (
           <>
-            <div className="heading">
-              <h2>{sectiontitle[0]?.title}</h2>
-            </div>
-            <div className="d-flex justify-content-center">
-              <button className="btn-down">
-                <i className="fa-regular fa-chevron-down"></i>
-              </button>
-            </div>
             <div className="process-step col-10">
               <Steps current={step}>
                 <Steps.Item title="Giỏ Hàng" />
@@ -140,8 +198,14 @@ function Cart(props) {
                         <span className="h-100 d-flex align-items-center data">
                           {rowData.qty}
                         </span>
-                        <i className="fa-light fa-chevron-up"></i>
-                        <i className="fa-light fa-chevron-down"></i>
+                        <i
+                          className="fa-light fa-chevron-up"
+                          onClick={() => handleIncreaseQty(rowData)}
+                        ></i>
+                        <i
+                          onClick={() => handleDecreaseQty(rowData)}
+                          className="fa-light fa-chevron-down"
+                        ></i>
                       </div>
                     </div>
                   )}
@@ -167,9 +231,14 @@ function Cart(props) {
                   <span className="h-100 header">Remove</span>
                 </HeaderCell>
                 <Cell>
-                  <span className="h-100 d-flex align-items-center data">
-                    <i className="fa-light fa-xmark"></i>
-                  </span>
+                  {(rowData) => (
+                    <span className="h-100 d-flex align-items-center data romove">
+                      <i
+                        onClick={() => handleRemove(rowData)}
+                        className="fa-light fa-xmark"
+                      ></i>
+                    </span>
+                  )}
                 </Cell>
               </Column>
             </Table>
@@ -215,7 +284,12 @@ function Cart(props) {
             </div>
           </>
         ) : (
-          <div>No Product in cart</div>
+          <div className="empty-cart d-flex flex-column align-items-center">
+            <h4 className="empty-text">Giỏi hàng của bạn hiện đang trống</h4>
+            <button onClick={() => router.push("/proshop")}>
+              Trở về mua hàng
+            </button>
+          </div>
         )}
       </div>
     </div>

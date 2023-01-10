@@ -12,13 +12,12 @@ import styles from "./NewsEvents.module.scss";
 
 function NewsEvents(props) {
   const { news } = useSelector((state) => state.NewsReducer);
-  console.log(news, "news");
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getNewData());
   }, [dispatch]);
 
-  const data = usePagination(news, 2);
+  const data = usePagination(news, 4);
   const router = useRouter();
 
   const findIndex = news.findIndex(
@@ -34,7 +33,6 @@ function NewsEvents(props) {
       removeAccents(x.title).includes(removeAccents(value.toLowerCase()))
     );
     if (value !== "") {
-      console.log(dataSearch);
       data.setPerData(dataSearch);
     } else {
       data.setPerData(news);
@@ -97,7 +95,7 @@ function NewsEvents(props) {
                         data-aos="fade-right"
                         onClick={() => {
                           router.push(
-                            `news-events/${removeAccents(item.title)}`
+                            `/news-events/${removeAccents(item.title)}`
                           );
                           // lưu lại id và thời gian của tin tức localstorage
                           localStorage.setItem("newsId", item._id);

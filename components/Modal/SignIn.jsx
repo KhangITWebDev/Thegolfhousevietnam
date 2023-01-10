@@ -1,8 +1,9 @@
 import Link from "next/link";
 import React from "react";
+import { Alert } from "react-bootstrap";
 import { Modal } from "rsuite";
 
-function SignIn({ handleClose2 }) {
+function SignIn({ handleClose2, errors, register, onSubmit, handleSubmit }) {
   return (
     <Modal
       open={true}
@@ -24,13 +25,27 @@ function SignIn({ handleClose2 }) {
             <label htmlFor="" className="form-label">
               Email
             </label>
-            <input type="text" className="form-control" />
+            <input
+              type="text"
+              className="form-control"
+              {...register("email")}
+            />
+            {errors?.email && (
+              <Alert variant="danger">{errors?.email?.message}</Alert>
+            )}
           </div>
           <div className="form-group">
             <label htmlFor="" className="form-label">
               Mật khẩu
             </label>
-            <input type="text" className="form-control" />
+            <input
+              type="password"
+              className="form-control"
+              {...register("password")}
+            />
+            {errors?.password && (
+              <Alert variant="danger">{errors?.password?.message}</Alert>
+            )}
           </div>
           <div style={{ marginTop: 20 }}>
             <Link href="">
@@ -38,7 +53,7 @@ function SignIn({ handleClose2 }) {
             </Link>
           </div>
           <div className="button">
-            <button>Đăng nhập</button>
+            <button onClick={handleSubmit(onSubmit)}>Đăng nhập</button>
           </div>
         </form>
       </Modal.Body>

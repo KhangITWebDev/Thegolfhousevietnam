@@ -23,6 +23,7 @@ function Trainer(props) {
   const handleClose = () => setOpen(false);
 
   const { trainers } = useSelector((state) => state.TrainerReducer);
+  console.log(trainers);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getTrainerData());
@@ -151,7 +152,7 @@ function Trainer(props) {
                 <div className="social d-flex">
                   <i className="fa-brands fa-facebook-f"></i>
                   <i className="fa-brands fa-youtube"></i>
-                  <i className="fa-brands fa-dribbble"></i>
+                  <i className="fa-brands fa-twitter"></i>
                   <i className="fa-brands fa-instagram"></i>
                 </div>
               </div>
@@ -184,11 +185,11 @@ function Trainer(props) {
                   />
                 </div>
                 <div className="desc">
-                  <div
+                  <p
                     dangerouslySetInnerHTML={{
-                      __html: trainers[showDetailIndex]?.creation,
+                      __html: trainers[showDetailIndex]?.description,
                     }}
-                  ></div>
+                  ></p>
                 </div>
               </div>
             </div>

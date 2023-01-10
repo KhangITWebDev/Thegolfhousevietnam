@@ -1,12 +1,12 @@
 import React from "react";
-import AcademyLayout from "../../components/layout/academyLayout";
+import MainLayout from "../../components/layout/mainLayout";
 import Booking from "./Booking";
 
 function index(props) {
   return (
-    <AcademyLayout>
+    <MainLayout>
       <Booking />
-    </AcademyLayout>
+    </MainLayout>
   );
 }
 

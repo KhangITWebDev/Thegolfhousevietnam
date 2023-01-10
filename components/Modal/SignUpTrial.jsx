@@ -1,6 +1,7 @@
 import React from "react";
 import { Modal } from "rsuite";
 import Select, { components } from "react-select";
+import { Alert } from "react-bootstrap";
 
 const customStyles = {
   option: (provided, state) => ({
@@ -93,7 +94,14 @@ const DropdownIndicator = (props) => {
     </components.DropdownIndicator>
   );
 };
-function SignUpTrial({ handleClose, handleOpen5 }) {
+function SignUpTrial({
+  handleClose,
+  handleOpen5,
+  errors,
+  register,
+  onSubmit,
+  handleSubmit,
+}) {
   return (
     <Modal
       open={true}
@@ -121,19 +129,36 @@ function SignUpTrial({ handleClose, handleOpen5 }) {
             <label htmlFor="" className="form-label">
               Họ tên
             </label>
-            <input type="text" className="form-control" />
+            <input type="text" className="form-control" {...register("name")} />
+            {errors?.name && (
+              <Alert variant="danger">{errors?.name?.message}</Alert>
+            )}
           </div>
           <div className="form-group">
             <label htmlFor="" className="form-label">
               Email
             </label>
-            <input type="text" className="form-control" />
+            <input
+              type="text"
+              className="form-control"
+              {...register("email")}
+            />
+            {errors?.email && (
+              <Alert variant="danger">{errors?.email?.message}</Alert>
+            )}
           </div>
           <div className="form-group">
             <label htmlFor="" className="form-label">
               Điện Thoại
             </label>
-            <input type="text" className="form-control" />
+            <input
+              type="text"
+              className="form-control"
+              {...register("phone")}
+            />
+            {errors?.phone && (
+              <Alert variant="danger">{errors?.phone?.message}</Alert>
+            )}
           </div>
           <div className="form-group">
             <label htmlFor="" className="form-label">
@@ -146,8 +171,8 @@ function SignUpTrial({ handleClose, handleOpen5 }) {
               components={{ DropdownIndicator }}
             />
           </div>
-          <div className="button" onClick={handleOpen5}>
-            <button>Đăng ký</button>
+          <div className="button">
+            <button onClick={handleSubmit(onSubmit)}>Đăng ký</button>
           </div>
         </form>
       </Modal.Body>

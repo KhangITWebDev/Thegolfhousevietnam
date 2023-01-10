@@ -253,7 +253,8 @@ function ProShop(props) {
               }
             >
               <span className="col-12 col-sm-6" data-aos="fade-right">
-                Hiển thị 6 trên {proshopData.length} kết quả
+                Hiển thị {data.currentDatas.length} trên {data.perData.length}{" "}
+                kết quả
               </span>
               <div
                 className="col-12 col-sm-6 d-flex justify-content-start justify-content-sm-end"

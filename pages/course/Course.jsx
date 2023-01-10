@@ -23,6 +23,10 @@ import Calendar from "./Calendar";
 import { useDispatch, useSelector } from "react-redux";
 import { getCourseData } from "../../store/redux/CourseReducer/course.action";
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
+import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 registerLocale("vi", vi);
 
 const slideCourse = [
@@ -48,9 +52,121 @@ const slideCourse = [
   },
 ];
 
+const customStyles = {
+  option: (provided, state) => ({
+    ...provided,
+    fontSize: 16,
+    fontWeight: 400,
+    "@media screen and (max-width: 992px)": {
+      fontSize: 14,
+    },
+    "@media screen and (max-width: 576px)": {
+      fontSize: 14,
+    },
+    color: state.isSelected ? "#fff" : "#000",
+    backgroundColor: state.isSelected ? "#00B577" : "transparent",
+    cursor: "pointer",
+  }),
+  singleValue: (provided, state) => ({
+    ...provided,
+    color: "#fff",
+    fontSize: 18,
+    "@media screen and (max-width: 992px)": {
+      fontSize: 16,
+    },
+    "@media screen and (max-width: 576px)": {
+      fontSize: 14,
+    },
+    fontWeight: 500,
+  }),
+  dropdownIndicator: (base) => ({
+    ...base,
+    color: "#ECECEC",
+  }),
+  indicatorSeparator: () => ({ display: "none" }),
+  container: (provided, state) => ({
+    ...provided,
+    width: "100%",
+  }),
+  input: (base, state) => ({
+    ...base,
+    color: "#fff",
+    fontSize: 18,
+    "@media screen and (max-width: 992px)": {
+      fontSize: 16,
+    },
+    "@media screen and (max-width: 576px)": {
+      fontSize: 14,
+    },
+    fontWeight: 500,
+  }),
+  control: (base, state) => ({
+    ...base,
+    backgroundColor: "tranparent",
+    cursor: "pointer",
+    color: "#fff",
+    border: state.isFocused ? 0 : 0,
+    boxShadow: state.isFocused ? 0 : 0,
+    "&:hover": {
+      border: state.isFocused ? 0 : 0,
+    },
+  }),
+};
+
+const options = [
+  { value: "1", label: "Nguyễn Cơ Thạch, An Lợi Đông, Quận 2, TP Hồ Chí Minh" },
+];
+
+const PHONE_REGEX = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i;
+const schema = yup.object().shape({
+  name: yup.string().required("Họ tên là trường bắt buộc"),
+  phone: yup
+    .string()
+    .required("Số điện thoại là trường bắt buộc")
+    .min(10, "Số điện thoại phải nhiều hơn 9 ký tự")
+    .max(12, "Sô điện thoại phải ít hơn 12 ký tự")
+    .matches(PHONE_REGEX, "Số điện thoại không hợp lệ"),
+  email: yup
+    .string()
+    .email("Email không hợp lệ")
+    .required("Email là trường bắt buộc"),
+});
+const schema2 = yup.object().shape({
+  email: yup
+    .string()
+    .email("Email không hợp lệ")
+    .required("Email là trường bắt buộc"),
+  password: yup.string().required("Mật khẩu là trường bắt buộc"),
+});
 function Course(props) {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+  const {
+    register: register2,
+    handleSubmit: handleSubmit2,
+    watch: watch2,
+    reset: reset2,
+    formState: { errors: errors2 },
+  } = useForm({
+    resolver: yupResolver(schema2),
+  });
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+  const onSubmit2 = (data) => {
+    router.push("/booking");
+  };
   const [value, setValue] = useState(moment());
   const [startDate, setStartDate] = useState(new Date());
+  const router = useRouter();
+  const [address, setAddress] = useState();
   const [swiper2, setSwiper2] = React.useState(null);
   const [swiper3, setSwiper3] = React.useState(null);
   const [open, setOpen] = React.useState(false);
@@ -124,7 +240,19 @@ function Course(props) {
     });
   }, []);
   const [detailIndex, setDetailIndex] = useState(2);
-
+  const DropdownIndicator = (props) => {
+    return (
+      <components.DropdownIndicator {...props}>
+        <i
+          className="fa-light fa-chevron-down"
+          style={{
+            fontSize: 24,
+            color: "white",
+          }}
+        ></i>
+      </components.DropdownIndicator>
+    );
+  };
   const courseData = useSelector((state) => state.CourseReducer.courseList);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -639,67 +767,48 @@ function Course(props) {
               <i className="fa-regular fa-chevron-down"></i>
             </button>
           </div>
+        </div>
+        <div className={styles.bannerv2}>
+          <Image
+            alt="Booking banner"
+            src="/images/Booking/bookingbanner.png"
+            layout="fill"
+            objectFit="cover"
+          />
           <div className={styles.content}>
-            {/* <DatePicker
-              data-aos="fade-up"
-              selected={startDate}
-              onChange={(date) => {
-                setStartDate(date);
-                handleOpen2();
-              }}
-              minDate={moment().toDate()}
-              shouldCloseOnSelect={false}
-              open={true}
-              locale="vi"
-              formatWeekDay={(nameOfDay) => {
-                return window.screen.width > 576
-                  ? nameOfDay
-                      .replace("Hai", "2")
-                      .replace("Ba", "3")
-                      .replace("Tư", "4")
-                      .replace("Năm", "5")
-                      .replace("Sáu", "6")
-                      .replace("Bảy", "7")
-                  : nameOfDay
-                      .replace("Thứ Hai", "T2")
-                      .replace("Thứ Ba", "T3")
-                      .replace("Thứ Tư", "T4")
-                      .replace("Thứ Năm", "T5")
-                      .replace("Thứ Sáu", "T6")
-                      .replace("Thứ Bảy", "T7")
-                      .replace("Chủ Nhật", "CN");
-              }}
-              calendarStartDay={1}
-              renderCustomHeader={({
-                date,
-                decreaseMonth,
-                increaseMonth,
-                prevMonthButtonDisabled,
-                nextMonthButtonDisabled,
-              }) => (
-                <div className="custom-header" data-aos="fade-left">
-                  <button
-                    onClick={decreaseMonth}
-                    disabled={prevMonthButtonDisabled}
+            <div className="container h-100">
+              <div className="h-100 d-flex flex-column justify-content-center align-items-center">
+                <div
+                  className={
+                    "d-flex col-10 justify-content-end align-items-center" +
+                    " " +
+                    styles.search
+                  }
+                >
+                  <div className={"col-9" + " " + styles.select_location}>
+                    <span className={styles.title}>Location</span>
+                    <div className="d-flex align-items-center">
+                      <i className="fa-solid fa-location-dot"></i>
+                      <Select
+                        options={options}
+                        styles={customStyles}
+                        defaultValue={options[0]}
+                        components={{ DropdownIndicator }}
+                        onChange={(value) => setAddress(value.label)}
+                      />
+                    </div>
+                  </div>
+                  <div
+                    className={
+                      "col-3 d-flex justify-content-center" + " " + styles.tool
+                    }
                   >
-                    <i className="fa-light fa-arrow-left"></i>
-                  </button>
-                  <h3>{convertDate(date).getMonthandYearVi}</h3>
-                  <button
-                    onClick={increaseMonth}
-                    disabled={nextMonthButtonDisabled}
-                  >
-                    <i className="fa-light fa-arrow-right"></i>
-                  </button>
+                    <button onClick={handleOpen2}>
+                      Booking <i className="fa-light fa-arrow-right"></i>
+                    </button>
+                  </div>
                 </div>
-              )}
-            /> */}
-            <div>
-              <Calendar
-                value={value}
-                onChange={setValue}
-                openSignIn={handleOpen2}
-              />
+              </div>
             </div>
           </div>
         </div>
@@ -712,9 +821,24 @@ function Course(props) {
         />
       )}
       {open1 && (
-        <SignUpTrial handleClose={handleClose1} handleOpen5={handleOpen5} />
+        <SignUpTrial
+          errors={errors}
+          register={register}
+          onSubmit={onSubmit}
+          handleSubmit={handleSubmit}
+          handleClose={handleClose1}
+          handleOpen5={handleOpen5}
+        />
       )}
-      {open2 && <SignIn handleClose2={handleClose2} />}
+      {open2 && (
+        <SignIn
+          errors={errors2}
+          register={register2}
+          onSubmit={onSubmit2}
+          handleSubmit={handleSubmit2}
+          handleClose2={handleClose2}
+        />
+      )}
       {open3 && (
         <Sucess handleClose3={handleClose3} handleOpen4={handleOpen4} />
       )}

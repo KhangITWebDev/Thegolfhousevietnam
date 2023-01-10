@@ -61,14 +61,14 @@ function Detail(props) {
     if (cart) {
       const find = cart.findIndex((x) => x._id === item._id);
       if (find < 0) {
-        cart.push({ ...item, qty: 1 });
+        cart.push({ ...item, qty: qty });
         setLocalStorage(LOCAL_STORAGE.CART, cart);
       } else {
-        cart[find].qty += 1;
+        cart[find].qty = cart[find].qty + qty;
         setLocalStorage(LOCAL_STORAGE.CART, cart);
       }
     } else {
-      setLocalStorage(LOCAL_STORAGE.CART, { ...item, qty: 1 });
+      setLocalStorage(LOCAL_STORAGE.CART, { ...item, qty: qty });
     }
   };
   return (

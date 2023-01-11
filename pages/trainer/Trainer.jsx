@@ -43,11 +43,11 @@ function Trainer(props) {
         <div className="heading" data-aos="fade-right">
           <h2 className={styles.title_page}>{sectionTitlePage[0]?.title}</h2>
         </div>
-        <div className="d-flex justify-content-center" data-aos="fade-down">
+        {/* <div className="d-flex justify-content-center" data-aos="fade-down">
           <button className="btn-down">
             <i className="fa-regular fa-chevron-down"></i>
           </button>
-        </div>
+        </div> */}
         <div
           className="d-flex justify-content-center heading"
           data-aos="fade-left"

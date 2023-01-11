@@ -43,11 +43,11 @@ function Academy(props) {
         <div className="heading" data-aos="fade-up">
           <h2 className={styles.title_page}>{sectionTitle[0]?.title}</h2>
         </div>
-        <div className="d-flex justify-content-center" data-aos="fade-down">
+        {/* <div className="d-flex justify-content-center" data-aos="fade-down">
           <button className="btn-down">
             <i className="fa-regular fa-chevron-down"></i>
           </button>
-        </div>
+        </div> */}
         <div className={styles.intro}>
           <div className="d-flex flex-wrap align-items-center">
             <div

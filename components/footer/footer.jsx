@@ -14,7 +14,7 @@ function Footer(props) {
     <div className={styles.footer} id="footer">
       <div className="container">
         <div className="d-flex flex-column align-items-center">
-          <div className={styles.logo} data-aos="fade-down">
+          <div className={styles.logo}>
             <Image
               alt="logo"
               src="/images/Logo/Logo12.png"
@@ -25,7 +25,6 @@ function Footer(props) {
           <div className={styles.menu + " " + "d-flex flex-wrap"}>
             <div
               className={styles.menu_item}
-              data-aos="fade-right"
               onClick={(e) => {
                 router.push("/");
               }}
@@ -34,7 +33,6 @@ function Footer(props) {
             </div>
             <div
               className={styles.menu_item}
-              data-aos="fade-right"
               onClick={(e) => {
                 router.push("/about-us");
               }}
@@ -43,7 +41,6 @@ function Footer(props) {
             </div>
             <div
               className={styles.menu_item}
-              data-aos="fade-right"
               onClick={(e) => {
                 router.push("/academy");
               }}
@@ -52,7 +49,6 @@ function Footer(props) {
             </div>
             <div
               className={styles.menu_item}
-              data-aos="fade-left"
               onClick={(e) => {
                 router.push("/proshop");
               }}
@@ -61,7 +57,6 @@ function Footer(props) {
             </div>
             <div
               className={styles.menu_item}
-              data-aos="fade-left"
               onClick={(e) => {
                 router.push("/orther-service");
               }}
@@ -70,7 +65,6 @@ function Footer(props) {
             </div>
             <div
               className={styles.menu_item}
-              data-aos="fade-left"
               onClick={(e) => {
                 router.push("/contact-us");
               }}
@@ -78,7 +72,7 @@ function Footer(props) {
               Liên hệ
             </div>
           </div>
-          <div className={styles.social + " " + "d-flex"} data-aos="fade-up">
+          <div className={styles.social + " " + "d-flex"}>
             <i className="fa-brands fa-facebook-f"></i>
             <i className="fa-brands fa-youtube"></i>
             <i className="fa-brands fa-twitter"></i>

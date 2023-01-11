@@ -132,11 +132,11 @@ function Cart(props) {
         <div className="heading">
           <h2>{sectiontitle[0]?.title}</h2>
         </div>
-        <div className="d-flex justify-content-center">
+        {/* <div className="d-flex justify-content-center">
           <button className="btn-down">
             <i className="fa-regular fa-chevron-down"></i>
           </button>
-        </div>
+        </div> */}
         {cart && cart.length > 0 ? (
           <>
             <div className="process-step col-10">

@@ -69,7 +69,7 @@ export default function HeaderMoblieBlack({
                 alt="logo"
                 src="/images/Logo/Logo12.png"
                 width={104}
-                height={87}
+                height={95}
               />
             </Navbar.Brand>
             <div className="d-flex align-items-center">
@@ -112,7 +112,7 @@ export default function HeaderMoblieBlack({
                 alt="logo"
                 src="/images/Logo/Logo12.png"
                 width={104}
-                height={87}
+                height={95}
               />
             </Navbar.Brand>
             <Nav.Item eventKey="4" className="close">

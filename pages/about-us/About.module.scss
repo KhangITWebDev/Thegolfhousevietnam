@@ -128,7 +128,7 @@
         }
       }
       h3 {
-        font-size: 57px;
+        font-size: 45px;
         font-weight: 700;
         margin-top: 24px;
         line-height: 1.3;
@@ -238,7 +238,7 @@
       }
     }
     .mobile {
-      font-size: 57px;
+      font-size: 45px;
       font-weight: 700;
       display: none;
       flex-direction: column;
@@ -271,7 +271,7 @@
     }
     .detail {
       h5 {
-        font-size: 57px;
+        font-size: 45px;
         font-weight: 700;
         display: flex;
         flex-direction: column;
@@ -309,7 +309,7 @@
     }
   }
   .welcome {
-    margin-bottom: 150px;
+    margin-bottom: 350px;
     margin-top: 300px;
     position: relative;
     @media screen and (max-width: 768px) {
@@ -320,7 +320,7 @@
     }
     .info {
       position: absolute;
-      top: 0;
+      bottom: 0;
       transform: translateY(50%);
       right: 0;
       width: 600px;
@@ -375,7 +375,7 @@
       }
     }
     .mobile {
-      font-size: 57px;
+      font-size: 45px;
       font-weight: 700;
       display: none;
       flex-direction: column;
@@ -408,7 +408,7 @@
     }
     .detail {
       h5 {
-        font-size: 57px;
+        font-size: 45px;
         font-weight: 700;
         line-height: 1.3;
         text-align: right;

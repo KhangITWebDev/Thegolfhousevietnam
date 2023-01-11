@@ -200,11 +200,11 @@ function ProShop(props) {
         <div className="heading">
           <h2>{sectiontitle[0]?.title}</h2>
         </div>
-        <div className="d-flex justify-content-center">
+        {/* <div className="d-flex justify-content-center">
           <button className="btn-down">
             <i className="fa-regular fa-chevron-down"></i>
           </button>
-        </div>
+        </div> */}
       </div>
       <div className={styles.bannerv2} data-aos="fade-up">
         <Image

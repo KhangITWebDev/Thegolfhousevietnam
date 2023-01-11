@@ -2,6 +2,7 @@ import React from "react";
 import { Modal } from "rsuite";
 import Select, { components } from "react-select";
 import { Alert } from "react-bootstrap";
+import { Controller } from "react-hook-form";
 
 const customStyles = {
   option: (provided, state) => ({
@@ -98,6 +99,7 @@ function SignUpTrial({
   handleClose,
   handleOpen5,
   errors,
+  control,
   register,
   onSubmit,
   handleSubmit,
@@ -164,11 +166,29 @@ function SignUpTrial({
             <label htmlFor="" className="form-label">
               Nghề nghiệp
             </label>
-            <Select
+            {/* <Select
+              {...register("job")}
               options={options}
               styles={customStyles}
               defaultValue={options[0]}
               components={{ DropdownIndicator }}
+            /> */}
+            <Controller
+              control={control}
+              defaultValue={options.map((c) => c.value)}
+              name="job"
+              render={({ field: { onChange, value, ref } }) => (
+                <Select
+                  styles={customStyles}
+                  inputRef={ref}
+                  components={{ DropdownIndicator }}
+                  // value={options.filter((c) => value.includes(c.value))}
+                  defaultValue={options[0]}
+                  onChange={(val) => onChange(val.label)}
+                  options={options}
+                  // isMulti
+                />
+              )}
             />
           </div>
           <div className="button">

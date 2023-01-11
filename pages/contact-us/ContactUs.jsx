@@ -48,11 +48,11 @@ function ContactUs(props) {
       <div className="heading" data-aos="fade-up">
         <h2 className={styles.title_page}>{sectionTitlePage[0]?.title}</h2>
       </div>
-      <div className="d-flex justify-content-center">
+      {/* <div className="d-flex justify-content-center">
         <button className="btn-down" data-aos="fade-down">
           <i className="fa-regular fa-chevron-down"></i>
         </button>
-      </div>
+      </div> */}
       <div className={styles.training} id="contact">
         <div className="container">
           <div className="d-flex flex-wrap justify-content-center">

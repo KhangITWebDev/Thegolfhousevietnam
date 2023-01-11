@@ -838,6 +838,7 @@ function Course(props) {
           errors={errors}
           register={register}
           onSubmit={onSubmit}
+          watch={watch}
           handleSubmit={handleSubmit}
           handleClose={handleClose1}
           handleOpen5={handleOpen5}

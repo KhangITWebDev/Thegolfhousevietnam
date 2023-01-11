@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal } from "rsuite";
 
-function CheckInfo({ handleClose4 }) {
+function CheckInfo({ handleClose4, watch }) {
   return (
     <Modal
       open={true}
@@ -11,14 +11,14 @@ function CheckInfo({ handleClose4 }) {
       data-aos-delay="800"
     >
       <Modal.Header>
-        <Modal.Title>Thông tin đặt lịch của bạn</Modal.Title>
+        <Modal.Title>Thông tin đăng ký học thử</Modal.Title>
         <button onClick={handleClose4}>
           <i className="fa-light fa-times"></i>
         </button>
       </Modal.Header>
       <Modal.Body>
         <div className="d-flex flex-column">
-          <div className="d-flex information_column">
+          {/* <div className="d-flex information_column">
             <h6 className="col-4 col-sm-3">
               <i className="fa-light fa-memo"></i>
               <span>Khoá học:</span>
@@ -26,37 +26,35 @@ function CheckInfo({ handleClose4 }) {
             <div className="col-8 col-sm-9">
               <h6 className="desc">Khoá Junior</h6>
             </div>
-          </div>
+          </div> */}
           <div className="d-flex information_column">
             <h6 className="col-4 col-sm-3">
               <i className="fa-light fa-user-alt"></i>
               <span>Tên:</span>
             </h6>
             <div className="col-8 col-sm-9">
-              <h6 className="desc">Thành Vinh</h6>
+              <h6 className="desc">{watch("name")}</h6>
             </div>
           </div>
           <div className="d-flex information_column">
             <h6 className="col-4 col-sm-3">
-              <i className="fa-light fa-clock"></i>
-              <span>Thời gian:</span>
+              <i className="fa-light fa-envelope"></i>
+              <span>Email:</span>
             </h6>
             <div className="col-8 col-sm-9">
-              <h6 className="desc">Thứ 3 9:40:22, 20 tháng 12, 2022</h6>
+              <h6 className="desc">{watch("email")}</h6>
             </div>
           </div>
           <div className="d-flex information_column">
             <h6 className="col-4 col-sm-3">
-              <i className="fa-light fa-location-dot"></i>
-              <span>Địa điểm:</span>
+              <i className="fa-light fa-phone"></i>
+              <span>Điện thoại:</span>
             </h6>
             <div className="col-8 col-sm-9">
-              <h6 className="desc">
-                85-87 Nguyen Co Thach, An Loi Đong, Q.2, TPHCM
-              </h6>
+              <h6 className="desc">{watch("phone")}</h6>
             </div>
           </div>
-          <div className="d-flex information_column">
+          {/* <div className="d-flex information_column">
             <h6 className="col-4 col-sm-3">
               <i className="fa-light fa-file-lines"></i>
               <span>Chi tiết:</span>
@@ -67,7 +65,7 @@ function CheckInfo({ handleClose4 }) {
                 Email: admin@example.com
               </h6>
             </div>
-          </div>
+          </div> */}
         </div>
       </Modal.Body>
     </Modal>

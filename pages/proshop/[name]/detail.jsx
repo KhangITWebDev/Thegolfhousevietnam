@@ -143,7 +143,10 @@ function Detail(props) {
                     <div className="image" id="image-proshop-detail">
                       <Image
                         alt="Image"
-                        src="/images/Logo/Logo2.png"
+                        loader={({ src }) =>
+                          `https://thegolfhousevietnam.com/${src}`
+                        }
+                        src="/images/Logo/logo2.png"
                         layout="fill"
                         objectFit="cover"
                       />

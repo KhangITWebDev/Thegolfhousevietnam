@@ -60,35 +60,6 @@ function Pagination({ data }) {
               <i className="fal fa-ellipsis-h"></i>
             </span>
           </li>
-          {/* <li
-            className={styles.page_item}
-            key={data.totalPages}
-            id={data.totalPages}
-            onClick={() => data.handleClick(Number(data.totalPages))}
-            style={{
-              paddingLeft:
-                data.totalPages <= 3 ||
-                data.currentPage === data.totalPages - 1 ||
-                data.currentPage === data.totalPages
-                  ? // || func.currentPage === func.totalPages - 2
-                    0
-                  : 10,
-            }}
-          >
-            <span
-              className={
-                data.totalPages <= 3 ||
-                data.currentPage === data.totalPages - 1 ||
-                data.currentPage === data.totalPages
-                  ? // ||
-                    // func.totalPages <= 4
-                    [styles.page_link, styles.total].join(" ")
-                  : styles.page_link
-              }
-            >
-              {data.totalPages}
-            </span>
-          </li> */}
           <li
             className={styles.page_item}
             onClick={() => data.handleNext()}

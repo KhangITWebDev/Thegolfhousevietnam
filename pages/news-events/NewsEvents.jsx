@@ -9,24 +9,18 @@ import { removeAccents } from "../../utils/function";
 import { usePagination } from "../../utils/usePagination";
 import { time } from "../../utils/function";
 import styles from "./NewsEvents.module.scss";
-
 function NewsEvents(props) {
   const { news } = useSelector((state) => state.NewsReducer);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getNewData());
   }, [dispatch]);
-
   const data = usePagination(news, 4);
   const router = useRouter();
-
   const findIndex = news.findIndex(
     (x) => removeAccents(x._id) === localStorage.getItem("newsId")
   );
-
   const newsDetail = news[findIndex] ? news[findIndex] : NewsEventsData[0];
-
-  // update data.currentData khi nhập input search
   const handleSearchInput = (e) => {
     const value = e.target.value;
     const dataSearch = news.filter((x) =>
@@ -38,8 +32,6 @@ function NewsEvents(props) {
       data.setPerData(news);
     }
   };
-
-  // custom date ngày tháng năm
   const customDate = () => {
     const date = localStorage.getItem("newsTime");
     const dateObj = new Date(date);
@@ -48,7 +40,6 @@ function NewsEvents(props) {
     const year = dateObj.getFullYear();
     return `${day} tháng ${month}, ${year}`;
   };
-
   return (
     <div className={styles.news_page}>
       <div className="container">
@@ -97,9 +88,7 @@ function NewsEvents(props) {
                           router.push(
                             `/news-events/${removeAccents(item.title)}`
                           );
-                          // lưu lại id và thời gian của tin tức localstorage
                           localStorage.setItem("newsId", item._id);
-                          // lưu thời gian ở Việt Nam
                           localStorage.setItem(
                             "newsTime",
                             new Date().toLocaleString("en-US", {

@@ -13,51 +13,6 @@ import {
 } from "../../utils/handleStorage";
 const { Column, HeaderCell, Cell } = Table;
 
-export const ShopList = [
-  {
-    image: "/images/Home/Shop/shop1.png",
-    name: "Gậy Golf",
-    price: 1200000,
-    rate: 5,
-    qty: 1,
-  },
-  {
-    image: "/images/Home/Shop/shop2.png",
-    name: "Bóng Golf",
-    price: 800000,
-    rate: 5,
-    qty: 2,
-  },
-  {
-    image: "/images/Home/Shop/shop3.png",
-    name: "Gậy Golf",
-    price: 1000000,
-    rate: 5,
-    qty: 1,
-  },
-  {
-    image: "/images/Home/Shop/shop4.png",
-    name: "Nón Golf",
-    price: 500000,
-    rate: 5,
-    qty: 3,
-  },
-  {
-    image: "/images/Home/Shop/shop5.png",
-    name: "Gậy Golf sắt lai",
-    price: 1800000,
-    rate: 5,
-    qty: 1,
-  },
-  {
-    image: "/images/Home/Shop/shop6.png",
-    name: "Gậy Golf sắt nam",
-    price: 1400000,
-    rate: 5,
-    qty: 1,
-  },
-];
-
 function Cart(props) {
   const [step, setStep] = React.useState(0);
   const router = useRouter();
@@ -132,11 +87,6 @@ function Cart(props) {
         <div className="heading">
           <h2>{sectiontitle[0]?.title}</h2>
         </div>
-        {/* <div className="d-flex justify-content-center">
-          <button className="btn-down">
-            <i className="fa-regular fa-chevron-down"></i>
-          </button>
-        </div> */}
         {cart && cart.length > 0 ? (
           <>
             <div className="process-step col-10">
@@ -295,5 +245,4 @@ function Cart(props) {
     </div>
   );
 }
-
 export default Cart;

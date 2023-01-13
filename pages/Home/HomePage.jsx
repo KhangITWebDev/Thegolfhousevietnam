@@ -1,97 +1,22 @@
-import React, { useEffect } from "react";
-import styles from "./Home.module.scss";
-import Image from "next/image";
-import CountUp, { useCountUp } from "react-countup";
-import { useRouter } from "next/router";
-import Swal from "sweetalert2";
-import { useDispatch, useSelector } from "react-redux";
-import { getNewData } from "../../store/redux/NewsEvents/news.action";
-import { getBannerData } from "../../store/redux/Banner/banner.action";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFlip, Navigation, Pagination } from "swiper";
-import {
-  IntroList,
-  NewsList,
-  ShopList,
-} from "../../utils/DataDemo/Home/dataHome";
-import { removeAccents, time } from "../../utils/function";
-import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
-import SignUpTrial from "../../components/Modal/SignUpTrial";
-import CheckInfo from "../../components/Modal/CheckInfo";
-import SucessTrial from "../../components/Modal/SucessTrial";
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
+import CountUp from "react-countup";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
+import { Autoplay, Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 import * as yup from "yup";
-
-const slideHome = [
-  {
-    img: "/images/Home/slide1.png",
-    title: "ACADEMY",
-    subTitle:
-      "<p>Dù bạn là người mới bắt đầu tìm hiểu, hay người chơi Golf muốn nâng cao trình độ.</p> <p>Học viện The Golf House luôn có lộ trình phù hợp cho bạn!</p>",
-    textButton: "Tìm hiểu thêm",
-    urlButton: "/academy",
-    openNewTab: false,
-  },
-  {
-    img: "/images/Home/slide2.png",
-    title: "PROSHOP",
-    subTitle:
-      "<p>Gậy, quần áo, phụ kiện chơi Golf,... </p><p>Một địa điểm với đầy đủ mọi sản phẩm hỗ trợ bạn trong hành trình khám phá Golf của mình.</p>",
-    textButton: "Tìm hiểu thêm",
-    urlButton: "/proshop",
-    openNewTab: false,
-  },
-  {
-    img: "/images/Home/slide3.png",
-    title: "HAIR, NAIL & SPA",
-    subTitle:
-      "<p>Chăm sóc bản thân sau thời gian tập luyện là điều cần thiết.</p> <p>Tận hưởng thời gian thư giãn tuyệt vời với các dịch vụ chăm sóc tóc,chăm sóc da, massage cao cấp.</p>",
-    textButton: "Tìm hiểu thêm",
-    urlButton: "",
-    openNewTab: false,
-  },
-  {
-    img: "/images/Home/slide4.png",
-    title: "VIP LOUNGE",
-    subTitle:
-      "<p>Không gian riêng tư, rộng rãi, được thiết kề phù hợp cho những hoạt động giải trí kết nối cộng đồng chung niềm đam mê.</p>",
-    textButton: "Tìm hiểu thêm",
-    urlButton: "",
-    openNewTab: false,
-  },
-];
-const slideLogo = [
-  "/images/Home/Donors/donor1.png",
-  "/images/Home/Donors/donor2.png",
-  "/images/Home/Donors/donor3.png",
-  "/images/Home/Donors/donor4.png",
-  "/images/Home/Donors/donor5.png",
-  "/images/Home/Donors/donor2.png",
-];
-const slideCourse = [
-  {
-    image: "/images/Home/Course/img1.jpg",
-    title: "Khoá lẻ",
-    icon: "/images/Home/Course/icon1.png",
-  },
-  {
-    image: "/images/Home/Course/img2.jpg",
-    title: "Khoá học",
-    icon: "/images/Home/Course/icon1.png",
-  },
-  {
-    image: "/images/Home/Course/img3.jpg",
-    title: "Khoá Junior",
-    icon: "/images/Home/Course/icon2.png",
-  },
-  {
-    image: "/images/Home/Course/img1.jpg",
-    title: "Tập luyện theo giờ",
-    icon: "/images/Home/Course/icon1.png",
-  },
-];
-
+import CheckInfo from "../../components/Modal/CheckInfo";
+import SignUpTrial from "../../components/Modal/SignUpTrial";
+import SucessTrial from "../../components/Modal/SucessTrial";
+import { getBannerData } from "../../store/redux/Banner/banner.action";
+import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
+import { getNewData } from "../../store/redux/NewsEvents/news.action";
+import { removeAccents, time } from "../../utils/function";
+import styles from "./Home.module.scss";
 const PHONE_REGEX = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i;
 const schema = yup.object().shape({
   name: yup.string().required("Họ tên là trường bắt buộc"),
@@ -147,7 +72,6 @@ function HomePage(props) {
   };
   const handleClose5 = () => setOpen5(false);
   const handleClose1 = () => setOpen1(false);
-
   const { banners } = useSelector((state) => state.BannerReducer);
   useEffect(() => {
     dispatch(getBannerData());
@@ -158,9 +82,6 @@ function HomePage(props) {
   }, [dispatch]);
 
   const bannerHome = banners.filter((item) => item.danh_muc === "Slide Home");
-  const trainerHome = banners.filter(
-    (item) => item.danh_muc === "Trainer Home"
-  );
   const contentGolf = contents.filter(
     (item) => item.category === "63bbe8a6e17e4f12eead3ec1"
   );
@@ -176,7 +97,6 @@ function HomePage(props) {
   const router = useRouter();
   const [swiper, setSwiper] = React.useState(null);
   const [swiper2, setSwiper2] = React.useState(null);
-  const [swiper3, setSwiper3] = React.useState(null);
   const commingSoon = (e) => {
     e.preventDefault();
     Swal.fire({
@@ -241,10 +161,9 @@ function HomePage(props) {
                             __html: item.mo_ta,
                           }}
                         ></div>
-                        <div className="w-100 d-flex justify-content-center">
+                        <div className="button w-100 d-flex justify-content-center">
                           <button
                             data-aos="fade-right"
-                            className="btn-content"
                             onClick={(e) =>
                               item.link.length > 0 && item.link != ""
                                 ? router.push(item.link)
@@ -269,79 +188,12 @@ function HomePage(props) {
           </Swiper>
         </div>
         <div className="container">
-          {/* <div className={styles.intro}>
-          <div
-            className={styles.top + " " + "d-flex flex-wrap align-items-start"}
-          >
-            <div className="col-12 col-md-6">
-              <span>GIỚI THIỆU</span>
-              <h2>
-                Tham gia <br /> The Golf House
-              </h2>
-            </div>
-            <div className="col-12 col-md-6">
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. <br /> <br /> Lorem Ipsum has been the industry{"'"}s
-                standard dummy text ever since the 1500s. Lorem Ipsum is simply
-                dummy text of the printing and typesetting industry.
-              </p>
-            </div>
-          </div>
-          <div className={"d-flex flex-wrap" + " " + styles.list}>
-            {IntroList.map((item, index) => (
-              <div
-                className={"col-12 col-sm-6 col-lg-3" + " " + styles.item}
-                key={index}
-              >
-                <div
-                  className={
-                    styles.info +
-                    " " +
-                    "d-flex flex-column align-items-center align-items-sm-start"
-                  }
-                >
-                  <div className="d-flex flex-column align-items-center align-items-sm-start">
-                    <Image
-                      alt="Intro 1"
-                      src={item.image}
-                      width={102}
-                      height={102}
-                    />
-                    <h5>{item.title}</h5>
-                  </div>
-                  <div className="mt-auto w-100">
-                    <button className="d-flex align-items-center">
-                      <span>Xem thêm</span>
-                      <i className="fa-light fa-arrow-right"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div> */}
           <div className={styles.membership}>
             <div className="d-flex flex-wrap align-items-center">
               <div
                 className={"col-12 col-md-6" + " " + styles.left}
                 data-aos="fade-right"
               >
-                <div
-                  className={
-                    styles.header + " " + "d-flex flex-column align-items-end"
-                  }
-                  style={{ opacity: 0 }}
-                >
-                  <CountUp start={1000} end={2022} delay={0} duration={2}>
-                    {({ countUpRef }) => (
-                      <div>
-                        <h2 ref={countUpRef}>2022</h2>
-                      </div>
-                    )}
-                  </CountUp>
-                  <span>Bắt đầu</span>
-                </div>
                 <div className={styles.image1}>
                   <Image
                     alt="Image 1"
@@ -352,8 +204,8 @@ function HomePage(props) {
                       contentGolf[0]?.images[contentGolf[0]?.images?.length - 2]
                         ?.source
                     }
-                    width={434}
-                    height={580}
+                    width={547}
+                    height={676}
                     objectFit="cover"
                   />
                 </div>
@@ -379,7 +231,7 @@ function HomePage(props) {
                 <p
                   dangerouslySetInnerHTML={{ __html: contentGolf[0]?.content }}
                 ></p>
-                <div data-aos="fade-left">
+                <div className="button" data-aos="fade-left">
                   <button onClick={handleOpen1}>
                     {contentGolf[0]?.text_button}
                   </button>
@@ -405,46 +257,6 @@ function HomePage(props) {
               )}
             </div>
           </div>
-          {/* <div className={styles.donar} id="donar">
-          <div className="">
-            <Swiper
-              breakpoints={{
-                1920: {
-                  slidesPerView: 5,
-                },
-                1440: {
-                  slidesPerView: 5,
-                },
-                1280: {
-                  slidesPerView: 5,
-                },
-                992: {
-                  slidesPerView: 4,
-                },
-                767: {
-                  slidesPerView: 3,
-                },
-                480: {
-                  slidesPerView: 2,
-                },
-              }}
-              slidesPerView={1}
-              loop={true}
-              spaceBetween={30}
-              // pagination={{
-              //   clickable: true,
-              // }}
-              modules={[Pagination, Navigation]}
-              className="mySwiper"
-            >
-              {slideLogo.map((item) => (
-                <SwiperSlide key={item}>
-                  <Image alt="item 1" src={item} width={120} height={120} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-        </div> */}
         </div>
         <div className={styles.bannerv2} data-aos="fade-up">
           <Image
@@ -473,64 +285,16 @@ function HomePage(props) {
                   }}
                 ></div>
                 <div
+                  className="button"
                   data-aos="fade-left"
                   onClick={() => router.push(sectionTrainer[0]?.url_button)}
                 >
-                  <button className="btn-content">
-                    {sectionTrainer[0]?.text_button}
-                  </button>
+                  <button>{sectionTrainer[0]?.text_button}</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {/* <div className={styles.trainer}>
-        <div className="container">
-          <div className="d-flex flex-wrap">
-            <div className="col-12 col-lg-5">
-              <div className={styles.content}>
-                <span>HUẤN LUYỆN VIÊN</span>
-                <h2>Dày dặn kinh nghiệm</h2>
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry.{" "}
-                </p>
-                <button>Đăng ký</button>
-              </div>
-            </div>
-            <div className="col-12 col-lg-7">
-              <div className={"d-flex flex-wrap" + " " + styles.list}>
-                <div className={"col-12 col-sm-6" + " " + styles.item}>
-                  <div className={styles.info}>
-                    <Image
-                      alt="Trainer 1"
-                      src="/images/Home/Trainer/trainer1.png"
-                      layout="fill"
-                    />
-                    <div className={styles.detail}>
-                      <h5>Lewis Dawn</h5>
-                      <span>Trainer</span>
-                    </div>
-                  </div>
-                </div>
-                <div className={"col-12 col-sm-6" + " " + styles.item}>
-                  <div className={styles.info}>
-                    <Image
-                      alt="Trainer 2"
-                      src="/images/Home/Trainer/trainer2.png"
-                      layout="fill"
-                    />
-                    <div className={styles.detail}>
-                      <h5>Jennie Kim</h5>
-                      <span>Trainer</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
         <div className={styles.team} id="team" data-aos="fade-up">
           <Swiper
             effect={"creative"}
@@ -631,156 +395,6 @@ function HomePage(props) {
             </div>
           ))}
         </div>
-        {/* <div className={styles.course} id="course">
-        <div className={styles.top}>
-          <div className="container">
-            <span>KHOÁ HỌC</span>
-            <h2>Các khoá học của The Golf House</h2>
-            <p>
-              Dù bạn là người mới bắt đầu tìm hiểu, hay người chơi Golf muốn
-              nâng cao trình độ. The Golf House luôn có lộ trình phù hợp cho
-              bạn!
-            </p>
-          </div>
-        </div>
-        <div className="container">
-          <div className="list">
-            <Swiper
-              breakpoints={{
-                1920: {
-                  slidesPerView: 4,
-                },
-                992: {
-                  slidesPerView: 3,
-                },
-                576: {
-                  slidesPerView: 2,
-                },
-              }}
-              spaceBetween={30}
-              slidesPerView={1}
-              pagination={{
-                clickable: true,
-              }}
-              modules={[Pagination, Navigation]}
-              onSwiper={(s) => setSwiper3(s)}
-              className="mySwiper"
-            >
-              {slideCourse.map((item) => (
-                <SwiperSlide key={item}>
-                  <div className="d-flex flex-column info">
-                    <div>
-                      <div className="image">
-                        <Image alt="Intro 1" src={item.image} layout="fill" />
-                      </div>
-                      <div className="detail">
-                        <div className="icon">
-                          <Image
-                            alt="Intro 1"
-                            src={item.icon}
-                            width={52}
-                            height={52}
-                          />
-                        </div>
-                        <h5>{item.title}</h5>
-                        <div className="tool">
-                          <button className="d-flex align-items-center">
-                            <span>Xem thêm</span>
-                            <i className="fa-light fa-arrow-right"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))}
-              <button className="btn-prev" onClick={() => swiper3.slidePrev()}>
-                <i className="fa-thin fa-arrow-left"></i>
-              </button>
-              <button className="btn-next" onClick={() => swiper3.slideNext()}>
-                <i className="fa-thin fa-arrow-right"></i>
-              </button>
-            </Swiper>
-          </div>
-        </div>
-      </div> */}
-        {/* <div className={styles.shop}>
-        <div className="container">
-          <div className="heading">
-            <span className="text-center">SHOP</span>
-            <h2 className="text-center">Các sản phẩm nổi bật</h2>
-          </div>
-          <div id="shop">
-            <div className="">
-              <Swiper
-                breakpoints={{
-                  1920: {
-                    slidesPerView: 4,
-                  },
-                  1440: {
-                    slidesPerView: 4,
-                  },
-                  1080: {
-                    slidesPerView: 4,
-                  },
-                  768: {
-                    slidesPerView: 3,
-                  },
-                  576: {
-                    slidesPerView: 2,
-                  },
-                  480: {
-                    slidesPerView: 1,
-                  },
-                }}
-                slidesPerView={1}
-                spaceBetween={30}
-                pagination={{
-                  clickable: true,
-                }}
-                modules={[Pagination, Navigation]}
-                className="mySwiper"
-              >
-                {ShopList.map((item, index) => (
-                  <SwiperSlide key={index}>
-                    <div className="content h-100 d-flex flex-column align-items-center">
-                      <div className="image">
-                        <Image
-                          alt="item 1"
-                          src={item.image}
-                          width={250}
-                          height={250}
-                        />
-                      </div>
-                      <div className="info h-100 d-flex flex-column align-items-center">
-                        <h5 className="text-center">{item.name}</h5>
-                        <div className="mt-auto">
-                          <p className="text-center">{item.price}</p>
-                          <div className="rate">
-                            {Array(item.rate)
-                              .fill()
-                              .map((i) => (
-                                <i key={i} className="fa-solid fa-star"></i>
-                              ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
-          </div>
-          <div className="button">
-            <button
-              style={{ marginTop: 100 }}
-              onClick={() => router.push("/proshop")}
-            >
-              Xem thêm
-            </button>
-          </div>
-        </div>
-      </div> */}
         <div className={styles.news}>
           <div className="container">
             <div className="heading" data-aos="fade-up">

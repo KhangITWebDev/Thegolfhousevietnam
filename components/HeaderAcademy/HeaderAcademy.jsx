@@ -45,20 +45,7 @@ export default function HeaderAccademy({
   return (
     <>
       <div id="navbar-academy">
-        <Navbar
-          {...props}
-          className="custom-nav"
-          data-aos="fade-down"
-          style={
-            visible
-              ? {
-                  background: "#fff",
-                  transition: "all 0.5s",
-                  boxShadow: "0px 3px 11px rgba(0, 0, 0, 0.25)",
-                }
-              : {}
-          }
-        >
+        <Navbar {...props} className="custom-nav" data-aos="fade-down">
           <div className="">
             <Nav onSelect={onSelect} activeKey={activeKey}>
               <Navbar.Brand
@@ -151,12 +138,6 @@ export default function HeaderAccademy({
                     <Nav.Item
                       eventKey="8"
                       onClick={() => {
-                        // $("html,body").animate(
-                        //   {
-                        //     scrollTop: $("#calendar").offset().top,
-                        //   },
-                        //   "slow"
-                        // );
                         router.push("/course#calendar");
                       }}
                     >
@@ -200,9 +181,7 @@ export default function HeaderAccademy({
                       </span>
                     </div>
                   </Nav.Item>
-                  {/* <Nav.Item eventKey="13" className="search">
-                    <i className="fa-light fa-magnifying-glass"></i>
-                  </Nav.Item> */}
+
                   <Nav.Item eventKey="14" className="sub-menu">
                     <i className="fa-solid fa-grid"></i>
                   </Nav.Item>

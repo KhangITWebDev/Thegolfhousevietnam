@@ -1,15 +1,11 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getNewData } from "../../../store/redux/NewsEvents/news.action";
-import { NewsList } from "../../../utils/DataDemo/Home/dataHome";
 import { NewsEventsData } from "../../../utils/DataDemo/News-Events/NewsEventsData";
-import { removeAccents } from "../../../utils/function";
-import { time } from "../../../utils/function";
+import { removeAccents, time } from "../../../utils/function";
 import styles from "./detail.module.scss";
-
 function Detail(props) {
   const { news } = useSelector((state) => state.NewsReducer);
   const dispatch = useDispatch();
@@ -26,7 +22,6 @@ function Detail(props) {
     );
   }, [news, router]);
   const newsDetail = news[findIndex] ? news[findIndex] : NewsEventsData[0];
-
   const ortherNews = news.filter((x) => x._id !== newsDetail?._id);
   return (
     <div className={styles.detail_page}>
@@ -174,9 +169,7 @@ function Detail(props) {
                   <h5
                     onClick={() => {
                       router.push(`/news-events/${removeAccents(item.title)}`);
-                      // lưu lại id và thời gian của tin tức localstorage
                       localStorage.setItem("newsId", item._id);
-                      // lưu thời gian ở Việt Nam
                       localStorage.setItem(
                         "newsTime",
                         new Date().toLocaleString("en-US", {
@@ -201,5 +194,4 @@ function Detail(props) {
     </div>
   );
 }
-
 export default Detail;

@@ -5,8 +5,6 @@ import React, { useEffect, useState } from "react";
 import { Nav, Navbar } from "rsuite";
 import Swal from "sweetalert2";
 import { getLocalStorage, LOCAL_STORAGE } from "../../utils/handleStorage";
-// import styles from "./headerMain.module.scss";
-
 export default function HeaderMoblie({
   onSelect,
   activeKey,
@@ -15,16 +13,6 @@ export default function HeaderMoblie({
   visible,
   ...props
 }) {
-  const commingSoon = (e) => {
-    e.preventDefault();
-    Swal.fire({
-      title: "Comming Soon",
-      text: "We are comming soon",
-      icon: "warning",
-      showCancelButton: false,
-      confirmButtonText: "OK",
-    });
-  };
   const router = useRouter();
   const cart = getLocalStorage(LOCAL_STORAGE.CART);
   const [show, setShow] = useState(false);
@@ -205,12 +193,6 @@ export default function HeaderMoblie({
                 <Nav.Item
                   eventKey="12"
                   onClick={() => {
-                    // $("html,body").animate(
-                    //   {
-                    //     scrollTop: $("#calendar").offset().top,
-                    //   },
-                    //   "slow"
-                    // );
                     router.push("/course#calendar");
                   }}
                 >

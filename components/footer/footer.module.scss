@@ -1,18 +1,19 @@
 .footer {
   background-color: #221c16;
+  height: auto;
   .logo {
-    padding-top: 52px;
+    padding-top: 30px;
   }
   .menu {
     width: fit-content;
-    margin-top: 45px;
+    margin-top: 20px;
     @media screen and (max-width: 992px) {
       justify-content: space-between;
     }
     &_item {
       font-size: 20px;
       color: #fff;
-      font-weight: 700;
+      font-weight: 500;
       cursor: pointer;
       transition: 0.5s linear;
       &:hover {
@@ -56,7 +57,7 @@
     }
   }
   .social {
-    margin-top: 50px;
+    margin-top: 30px;
     i {
       font-size: 18px;
       color: #fff;
@@ -99,10 +100,10 @@
     }
   }
   .copy_right {
-    margin-top: 100px;
+    margin-top: 40px;
     border-top: 1px solid #6f6f6f;
-    padding-top: 38px;
-    padding-bottom: 28px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     p {
       text-align: center;
       font-size: 16px;

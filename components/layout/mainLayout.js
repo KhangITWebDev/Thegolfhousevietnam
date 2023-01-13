@@ -6,8 +6,6 @@ import $ from "jquery";
 import HeaderAccademy from "../HeaderAcademy/HeaderAcademy";
 import RightMenu from "../RightMenu/RightMenu";
 import Cart from "../Cart/cart";
-import Search from "../Search/Search";
-
 function MainLayout({ children }) {
   const cart = [1];
   const [activeKey, setActiveKey] = React.useState(1);
@@ -15,7 +13,6 @@ function MainLayout({ children }) {
   const [visibleHome, setVisibleHome] = useState(false);
   const [showRight, setShowRight] = useState(false);
   const [showCart, setShowCart] = useState(false);
-  const [showSearch, setShowSearch] = useState(false);
   const toggleVisible = () => {
     const scrolled = document.documentElement.scrollTop;
     if (scrolled > 10) {
@@ -40,7 +37,6 @@ function MainLayout({ children }) {
   const handleShowCart = () => setShowCart(!showCart);
   const handleCloseCart = () => setShowCart(false);
   const handleShowSearch = () => setShowSearch(!showSearch);
-  const handleCloseSearch = () => setShowSearch(false);
   window.addEventListener("scroll", toggleVisible);
   const router = useRouter();
   useEffect(() => {
@@ -132,7 +128,6 @@ function MainLayout({ children }) {
         )}
         <RightMenu handleCloseRightMenu={handleCloseRightMenu} />
         <Cart handleCloseCart={handleCloseCart} cart={cart} />
-        <Search handleCloseSearch={handleCloseSearch} />
         <div>{children}</div>
         <button
           className="btn-scroll"

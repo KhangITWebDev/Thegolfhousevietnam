@@ -1,7 +1,6 @@
 import React from "react";
 import { Modal } from "rsuite";
 import Select, { components } from "react-select";
-
 const customStyles = {
   option: (provided, state) => ({
     ...provided,
@@ -28,10 +27,6 @@ const customStyles = {
     },
     fontWeight: 500,
   }),
-  // dropdownIndicator: (base) => ({
-  //   ...base,
-  //   color: "#000",
-  // }),
   indicatorSeparator: () => ({ display: "none" }),
   container: (provided, state) => ({
     ...provided,

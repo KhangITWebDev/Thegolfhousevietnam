@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBannerData } from "../../store/redux/Banner/banner.action";
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
 import styles from "./OrtherService.module.scss";
-
 function OrtherService(props) {
   const dispatch = useDispatch();
   const { banners } = useSelector((state) => state.BannerReducer);
@@ -37,11 +36,6 @@ function OrtherService(props) {
         <div className="heading" data-aos="fade-up">
           <h2>{sectionTitleHaỉrNailSpa[0]?.title}</h2>
         </div>
-        {/* <div className="d-flex justify-content-center" data-aos="fade-down">
-          <button className="btn-down">
-            <i className="fa-regular fa-chevron-down"></i>
-          </button>
-        </div> */}
       </div>
       <div className={styles.bannerv2} data-aos="fade-up">
         <Image
@@ -56,7 +50,6 @@ function OrtherService(props) {
         <div className={styles.bannerv2_content}>
           <div className="container h-100">
             <div className="d-flex h-100 justify-content-center align-items-center flex-column">
-              {/* <span></span> */}
               <h1 data-aos="fade-right">{bannerHairNailSpa[0]?.tieu_de}</h1>
               <div
                 data-aos="fade-left"
@@ -64,9 +57,6 @@ function OrtherService(props) {
                   __html: bannerHairNailSpa[0]?.mo_ta,
                 }}
               ></div>
-              {/* <div onClick={() => router.push("/trainer")}>
-                <button className="btn-content">Tìm hiểu thêm</button>
-              </div> */}
             </div>
           </div>
         </div>
@@ -95,11 +85,6 @@ function OrtherService(props) {
         <div className="heading" data-aos="fade-up">
           <h2>{sectionTitleVipLouge[0]?.title}</h2>
         </div>
-        {/* <div className="d-flex justify-content-center">
-          <button className="btn-down" data-aos="fade-down">
-            <i className="fa-regular fa-chevron-down"></i>
-          </button>
-        </div> */}
       </div>
       <div className={styles.bannerv2} data-aos="fade-up">
         <Image
@@ -122,9 +107,6 @@ function OrtherService(props) {
                   __html: BAnnerVipLounge[0]?.mo_ta,
                 }}
               ></div>
-              {/* <div onClick={() => router.push("/trainer")}>
-                <button className="btn-content">Tìm hiểu thêm</button>
-              </div> */}
             </div>
           </div>
         </div>
@@ -152,5 +134,4 @@ function OrtherService(props) {
     </div>
   );
 }
-
 export default OrtherService;

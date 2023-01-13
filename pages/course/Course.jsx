@@ -1,34 +1,26 @@
-import Image from "next/image";
-import React, { useState } from "react";
-import { Navigation, Pagination } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { IntroList } from "../../utils/DataDemo/Course/courseData";
-import DatePicker, { registerLocale } from "react-datepicker";
-import styles from "./Course.module.scss";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { vi } from "date-fns/locale"; // the locale you want
 import $ from "jquery";
 import moment from "moment";
-import { convertDate } from "../../utils/function";
-import { useEffect } from "react";
-import Select, { components } from "react-select";
-import { vi } from "date-fns/locale"; // the locale you want
-import { Button, Loader, Modal, Placeholder } from "rsuite";
-import Link from "next/link";
-import SignUp from "../../components/Modal/SignUp";
-import SignIn from "../../components/Modal/SignIn";
-import Sucess from "../../components/Modal/Sucess";
-import CheckInfo from "../../components/Modal/CheckInfo";
-import SignUpTrial from "../../components/Modal/SignUpTrial";
-import SucessTrial from "../../components/Modal/SucessTrial";
-import Calendar from "./Calendar";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { registerLocale } from "react-datepicker";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import Select, { components } from "react-select";
+import { Autoplay, Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import * as yup from "yup";
+import CheckInfo from "../../components/Modal/CheckInfo";
+import SignIn from "../../components/Modal/SignIn";
+import SignUp from "../../components/Modal/SignUp";
+import SignUpTrial from "../../components/Modal/SignUpTrial";
+import Sucess from "../../components/Modal/Sucess";
+import SucessTrial from "../../components/Modal/SucessTrial";
 import { getCourseData } from "../../store/redux/CourseReducer/course.action";
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
-import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-registerLocale("vi", vi);
-
+import styles from "./Course.module.scss";
 const slideCourse = [
   {
     image: "/images/Home/Course/img1.jpg",
@@ -40,36 +32,35 @@ const slideCourse = [
   {
     image: "/images/Home/Course/img2.jpg",
     title: "Khóa học",
-    icon: "/images/Home/Course/icon2.png",
+    icon: "/images/Home/Course/icon1.png",
     description:
       "<p><ul><li>Cam kết đầu ra</li><li>Học 1:1 với HLV chuyên nghiệp</li><li>Lộ trình bài bản từ 3 tháng tới 2 năm</li><li>Giáo trình thiết kế phù hợp từng trình độ từ sơ cấp tới nâng cao</li><li> Hỗ trợ 100% phí học lại nếu chưa đạt được trình độ đầu ra theo cam kết (điều kiện HV tham gia đầy đủ số buổi học quy định)</li><li>60 phút/buổi</li><li>Miễn phí phí gậy tập và bóng</li></ul></p>",
   },
   {
     image: "/images/Home/Course/img3.jpg",
     title: "Khoá trẻ em",
-    icon: "/images/Home/Course/icon1.png",
+    icon: "/images/Home/Course/icon2.png",
     description:
       "<p><ul><li>Độ tuổi từ 4 - 13</li><li>Lịch học linh động & phù hợp với lịch học tại trường</li><li>Giảng viên nhiều năm kinh nghiệm hướng dẫn trẻ</li><li>Tối đa 4 học viên/lớp</li><li>60 phút/buổi</li><li>Miễn phí gậy tập và bóng</li></ul></p>",
   },
   {
-    image: "/images/Home/Course/img2.jpg",
+    image: "/images/Home/Course/img4.jpg",
     title: "Tập luyện theo giờ",
     icon: "/images/Home/Course/icon1.png",
     description:
       "<p><ul><li>Không gian tập luyện trong nhà tiện nghi</li><li> Thiết bị hiện đại</li><li>Chi phí hợp lý</li> </ul></p>",
   },
 ];
-
 const customStyles = {
   option: (provided, state) => ({
     ...provided,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 400,
     "@media screen and (max-width: 992px)": {
-      fontSize: 14,
+      fontSize: 16,
     },
     "@media screen and (max-width: 576px)": {
-      fontSize: 14,
+      fontSize: 16,
     },
     color: state.isSelected ? "#fff" : "#000",
     backgroundColor: state.isSelected ? "#00B577" : "transparent",
@@ -83,7 +74,7 @@ const customStyles = {
       fontSize: 16,
     },
     "@media screen and (max-width: 576px)": {
-      fontSize: 14,
+      fontSize: 16,
     },
     fontWeight: 500,
   }),
@@ -104,7 +95,7 @@ const customStyles = {
       fontSize: 16,
     },
     "@media screen and (max-width: 576px)": {
-      fontSize: 14,
+      fontSize: 16,
     },
     fontWeight: 500,
   }),
@@ -120,11 +111,9 @@ const customStyles = {
     },
   }),
 };
-
 const options = [
   { value: "1", label: "Nguyễn Cơ Thạch, An Lợi Đông, Quận 2, TP Hồ Chí Minh" },
 ];
-
 const PHONE_REGEX = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i;
 const schema = yup.object().shape({
   name: yup.string().required("Họ tên là trường bắt buộc"),
@@ -237,7 +226,6 @@ function Course(props) {
   };
   const handleClose5 = () => setOpen5(false);
   useEffect(() => {
-    $("#course-team .swiper-pagination").attr("data-aos", "fade-up");
     $("#course-team .swiper-pagination-bullet").each(function (indexC) {
       $(this).css({
         backgroundImage: `url(/images/Home/Team/team${indexC + 3}.png)`,
@@ -452,7 +440,7 @@ function Course(props) {
                 styles.item
               }
             >
-              <div className={styles.content} data-aos="fade-up">
+              <div className={styles.content} data-aos="fade-down">
                 <div className={styles.image_container}>
                   <Image
                     alt="item 1"
@@ -571,10 +559,14 @@ function Course(props) {
               }}
               spaceBetween={30}
               slidesPerView={1}
-              // pagination={{
-              //   clickable: true,
-              // }}
-              modules={[Pagination, Navigation]}
+              modules={[Pagination, Navigation, Autoplay]}
+              pagination={{
+                clickable: true,
+              }}
+              autoplay={{
+                delay: 5000,
+                disableOnInteraction: false,
+              }}
               onSwiper={(s) => setSwiper3(s)}
               className="mySwiper"
             >
@@ -608,15 +600,10 @@ function Course(props) {
                             src={item.icon}
                             width={52}
                             height={52}
+                            objectFit="cover"
                           />
                         </div>
                         <h5>{item.title}</h5>
-                        {/* <div className="tool">
-                          <button className="d-flex align-items-center">
-                            <span>Nhận tư vấn</span>
-                            <i className="fa-light fa-arrow-right"></i>
-                          </button>
-                        </div> */}
                       </div>
                     </div>
                   </div>
@@ -634,8 +621,8 @@ function Course(props) {
       </div>
       <div className={styles.course_detail} id="course-detail">
         <div className="container">
-          <div className="d-flex align-items-center flex-wrap-reverse flex-lg-nowrap">
-            <div className="d-flex justify-content-center justify-content-lg-start left">
+          <div className="d-flex align-items-center flex-wrap-reverse flex-md-nowrap">
+            <div className="d-flex justify-content-center justify-content-md-start left">
               <div className="swiper-slide">
                 <div className="d-flex flex-column info">
                   <div>
@@ -652,15 +639,6 @@ function Course(props) {
                       <h5 onClick={handleOpen} data-aos="fade-right">
                         {slideCourse[detailIndex]?.title}
                       </h5>
-                      {/* <span data-aos="fade-right">
-                        Dành cho người tười 4-13 tuổi
-                      </span> */}
-                      {/* <h4 data-aos="fade-right">
-                        20.000.000 VND <p>/tháng</p>
-                      </h4> */}
-                      {/* <p data-aos="fade-right">
-                         Học hằng tuần <br /> Giảm giá 10%
-                      </p> */}
                       <div data-aos="fade-right" className="button">
                         <button onClick={handleOpen1}>Nhận Tư Vấn</button>
                       </div>
@@ -669,7 +647,7 @@ function Course(props) {
                 </div>
               </div>
             </div>
-            <div className="heading col-12 col-lg-8 flex-wrap align-items-start">
+            <div className="heading col-12 col-md-8 flex-wrap align-items-start">
               <span data-aos="fade-left">THÔNG TIN KHOÁ HỌC</span>
               <h2 data-aos="fade-left" style={{}}>
                 {slideCourse[detailIndex]?.title}
@@ -745,22 +723,6 @@ function Course(props) {
                 </div>
               </div>
             </SwiperSlide>
-            {/* <SwiperSlide>
-              <div className="container">
-                <div className="content d-flex flex-column align-items-center">
-                  <span className="icon">“</span>
-                  <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry{"'"}
-                    s standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book.
-                  </p>
-                  <h2>Nami</h2>
-                  <span>Nhân viên kinh doanh</span>
-                </div>
-              </div>
-            </SwiperSlide> */}
             <button className="btn-prev" onClick={() => swiper2.slidePrev()}>
               <i className="fa-thin fa-arrow-left"></i>
             </button>
@@ -775,11 +737,6 @@ function Course(props) {
           <div className="heading" data-aos="fade-down">
             <h2>Đặt lịch học</h2>
           </div>
-          <div className="d-flex justify-content-center">
-            <button className="btn-down">
-              <i className="fa-regular fa-chevron-down"></i>
-            </button>
-          </div>
         </div>
         <div className={styles.bannerv2}>
           <Image
@@ -793,12 +750,14 @@ function Course(props) {
               <div className="h-100 d-flex flex-column justify-content-center align-items-center">
                 <div
                   className={
-                    "d-flex col-10 justify-content-end align-items-center" +
+                    "d-flex flex-wrap col-12 col-md-10 col-lg-12 justify-content-end align-items-center" +
                     " " +
                     styles.search
                   }
                 >
-                  <div className={"col-9" + " " + styles.select_location}>
+                  <div
+                    className={"col-12 col-lg-9" + " " + styles.select_location}
+                  >
                     <span className={styles.title}>Location</span>
                     <div className="d-flex align-items-center">
                       <i className="fa-solid fa-location-dot"></i>
@@ -813,7 +772,9 @@ function Course(props) {
                   </div>
                   <div
                     className={
-                      "col-3 d-flex justify-content-center" + " " + styles.tool
+                      "col-12 col-lg-3 d-flex justify-content-end justify-content-lg-center align-center" +
+                      " " +
+                      styles.tool
                     }
                   >
                     <button onClick={handleOpen2}>
@@ -863,5 +824,4 @@ function Course(props) {
     </div>
   );
 }
-
 export default Course;

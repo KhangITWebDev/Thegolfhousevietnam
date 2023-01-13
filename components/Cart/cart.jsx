@@ -98,7 +98,7 @@ function Cart({ handleCloseCart }) {
               }
             >
               <i className="fa-light fa-bag-shopping"></i>
-              <p>Không có sản phẩm trong giỏi hàng</p>
+              <p>No products in cart</p>
             </div>
           )}
         </div>

@@ -83,7 +83,7 @@ function MyApp({ Component, pageProps }) {
         /> */}
         <DefaultSeo
           title="The Golf House"
-          description="Next SEO is a plug in that makes managing your SEO easier in Next.js projects."
+          description="Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi."
           additionalLinkTags={[
             {
               rel: "icon",

@@ -1,15 +1,12 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { getProshopData } from "../../../../store/redux/ProshopReducer/proshop.action";
-import { ShopList } from "../../../../utils/DataDemo/Home/dataHome";
 import { removeAccents } from "../../../../utils/function";
 import styles from "./TabDescription.module.scss";
-
 function TabDescription({ proshopDetail }) {
   const router = useRouter();
   const related = useSelector((state) =>
@@ -54,9 +51,6 @@ function TabDescription({ proshopDetail }) {
               }}
               slidesPerView={1}
               spaceBetween={30}
-              // pagination={{
-              //   clickable: true,
-              // }}
               modules={[Pagination, Navigation]}
               className="mySwiper"
             >
@@ -94,5 +88,4 @@ function TabDescription({ proshopDetail }) {
     </div>
   );
 }
-
 export default TabDescription;

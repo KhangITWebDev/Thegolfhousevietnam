@@ -218,52 +218,6 @@ button {
   height: 100vh;
   scroll-snap-align: center;
 }
-.button {
-  margin-top: 30px;
-  button {
-    background: #0b2b20;
-    border: 2px solid #0b2b20;
-    color: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    line-height: 1.2;
-    padding: 6px 30px;
-    margin-left: 5px;
-    margin-right: 5px;
-    text-transform: uppercase;
-    @media screen and (max-width: 767px) {
-      width: 50%;
-      padding: 10px;
-    }
-    @media screen and (max-width: 576px) {
-      width: 100%;
-      padding: 10px;
-      margin: 0;
-    }
-    &:hover {
-      color: rgba(248, 171, 12, 1);
-      border: 2px solid;
-      background: transparent;
-    }
-  }
-}
-.heading {
-  width: fit-content;
-  margin: 0 auto;
-  h2 {
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 1.2;
-    text-transform: uppercase;
-    padding-bottom: 5px;
-  }
-  .line {
-    width: 40%;
-    height: 3px;
-    margin: auto;
-    background-color: rgba(248, 171, 12, 1);
-  }
-}
 #study-program {
   .accordion-item {
     border: 0;
@@ -384,7 +338,7 @@ button {
 }
 #proshop-detail {
   position: relative;
-  margin-top: 150px;
+  margin-top: 30px;
   @media screen and (max-width: 576px) {
     margin-top: 50px;
   }
@@ -403,7 +357,7 @@ button {
         margin-top: 15px;
       }
       background-color: transparent;
-      border-radius: 0px;
+      border-radius: 8px !important;
       opacity: 1;
       &-active {
         background-color: transparent;
@@ -424,6 +378,7 @@ button {
       height: 433px !important;
       width: 70% !important;
       border: 1px solid #bbbbbb;
+      border-radius: 8px;
       @media screen and (max-width: 992px) {
         width: 80% !important;
       }
@@ -439,9 +394,9 @@ button {
     }
   }
   .content {
-    padding-left: 30px;
+    padding-left: 25px;
     @media screen and (max-width: 1280px) {
-      padding-left: 20px;
+      padding-left: 18px;
     }
     @media screen and (max-width: 992px) {
       padding-left: 0px;
@@ -456,17 +411,18 @@ button {
       padding: 4px 14px;
     }
     h2 {
-      font-size: 30px;
+      font-size: 28px;
       font-weight: 700;
       line-height: 1.3;
-      margin-top: 25px;
-      margin-bottom: 18px;
+      // margin-top: 25px;
+      margin-bottom: 10px;
     }
     .price {
       font-size: 24px;
       font-weight: 700;
       line-height: 1.3;
       color: #00b577;
+      margin-top: 0px;
       span {
         color: #b8b8b8;
         text-decoration: line-through;
@@ -492,13 +448,13 @@ button {
     }
     p {
       font-weight: 400;
-      margin-top: 15px;
+      margin-top: 10px;
       font-size: 18px;
       line-height: 1.3;
       text-align: justify;
     }
     .tool {
-      margin-top: 50px;
+      margin-top: 30px;
       @media screen and (max-width: 1280px) and (min-width: 992px) {
         flex-wrap: wrap;
       }
@@ -509,6 +465,7 @@ button {
     .quantity {
       position: relative;
       width: 116px;
+      border-radius: 8px;
       border: 1px solid #d9d9d9;
       padding-left: 36px;
       margin-right: 30px;
@@ -535,7 +492,7 @@ button {
       width: auto !important;
       @media screen and (max-width: 1280px) and (min-width: 992px) {
         justify-content: start;
-        margin-top: 30px;
+        margin-top: 20px;
         height: 50px;
         width: calc(80%) !important;
         button {
@@ -551,11 +508,11 @@ button {
 
       @media screen and (max-width: 576px) {
         justify-content: start;
-        margin-top: 30px;
+        margin-top: 20px;
         width: calc(80%) !important;
         button {
           margin-left: 0px;
-          height: 65px;
+          height: 50px;
           width: 100% !important;
         }
       }
@@ -572,19 +529,19 @@ button {
     }
     .fa-heart {
       @media screen and (max-width: 1280px) and (min-width: 992px) {
-        margin-top: 30px;
+        margin-top: 20px;
         width: 50px !important;
         height: 50px !important;
         margin-left: 20px;
       }
       @media screen and (max-width: 576px) {
-        margin-top: 30px;
+        margin-top: 20px;
         margin-left: 20px;
         height: 65px !important;
         width: 65px !important;
       }
       @media screen and (max-width: 480px) {
-        margin-top: 30px;
+        margin-top: 20px;
         margin-left: 0px;
         height: 65px !important;
         width: 65px !important;
@@ -607,7 +564,7 @@ button {
       }
     }
     .bonus {
-      margin-top: 40px;
+      margin-top: 30px;
       p {
         color: #ababab;
         strong {
@@ -617,12 +574,12 @@ button {
     }
   }
   .top {
-    margin-bottom: 80px;
+    margin-bottom: 0px;
   }
 }
 #proshop-detail-tabs {
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin-top: 40px;
+  margin-bottom: 40px;
   .nav-tabs {
     border-bottom: none;
     @media screen and (max-width: 768px) {
@@ -643,6 +600,7 @@ button {
     margin-right: 35px;
     border: none;
     border-top: 1px solid #f8f8f4;
+    border-radius: 8px;
     background-color: transparent;
     @media screen and (max-width: 768px) {
       padding: 11px 0px;
@@ -904,8 +862,8 @@ button {
   input {
     padding: 12px;
     width: 100%;
-    padding-left: 60px !important;
-    color: #c7c7c7;
+    padding-left: 50px !important;
+    color: rgba(0, 0, 0, 0.4);
     border: 2px solid #c7c7c7;
     font-size: 16px;
     font-weight: 400;
@@ -918,7 +876,7 @@ button {
   }
   .icon {
     position: absolute;
-    left: 20px;
+    left: 15px;
     top: 15px;
     color: #c7c7c7;
     i {
@@ -998,6 +956,9 @@ button {
 #navbar-academy {
   .custom-nav {
     position: fixed;
+    background: #fff;
+    transition: all 0.5s;
+    box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.25);
     width: 100%;
     max-width: 1920px;
     z-index: 2000;
@@ -1048,6 +1009,9 @@ button {
       border-radius: 0px;
       width: 163px;
       // ;
+    }
+    .rs-navbar-brand {
+      padding: 0px;
     }
     .rs-navbar-brand,
     .rs-navbar-item {
@@ -1190,6 +1154,9 @@ button {
   }
   .custom-nav {
     // position: fixed;
+    background: #fff;
+    transition: all 0.5s;
+    box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.25);
     max-width: 1920px;
     width: 100%;
     display: none;
@@ -1233,6 +1200,9 @@ button {
     .rs-navbar-item {
       cursor: pointer;
       height: auto;
+    }
+    .rs-navbar-brand {
+      padding: 0px;
     }
     .rs-dropdown-item {
       transition: margin-left 0.4s;
@@ -1507,16 +1477,16 @@ button {
 }
 #banner {
   .swiper-pagination {
-    bottom: 70px;
+    bottom: 50px;
     .swiper-pagination-bullet {
       width: 14px;
       height: 14px;
-      margin: 0 15px;
+      margin: 0 10px;
       background: #d9d9d9;
       opacity: 1;
       &-active {
         background: #00b577;
-        width: 60px;
+        width: 40px;
         border-radius: 10px;
       }
     }
@@ -1525,18 +1495,21 @@ button {
   .btn-next {
     position: absolute;
     z-index: 1998;
-    font-size: 35px;
+    font-size: 30px;
     color: #fff;
-    @media screen and (max-width: 576px) {
-      z-index: -9999;
-      opacity: -1;
-    }
     top: 50%;
     transform: translateY(-50%);
     background: transparent;
     left: 50px;
-    @media screen and (max-width: 992px) {
+    @media screen and (max-width: 1280px) {
       left: 25px;
+    }
+    @media screen and (max-width: 992px) {
+      left: 0px;
+      font-size: 25px;
+    }
+    @media screen and (max-width: 768px) {
+      display: none;
     }
     border: none;
     &:hover {
@@ -1546,16 +1519,16 @@ button {
   .btn-next {
     right: 50px;
     left: auto;
-    @media screen and (max-width: 992px) {
+    @media screen and (max-width: 1280px) {
       right: 25px;
+    }
+    @media screen and (max-width: 992px) {
+      right: 0px;
     }
   }
   .content {
-    .container.h-100 {
-      position: relative;
-    }
-    padding-right: 40px;
-    padding-left: 40px;
+    // padding-right: 40px;
+    // padding-left: 40px;
     @media screen and (min-width: 768px) {
     }
     position: absolute;
@@ -1572,7 +1545,7 @@ button {
         font-size: 45px;
       }
       @media screen and (max-width: 576px) {
-        font-size: 38px;
+        font-size: 36px;
       }
       line-height: 1.3;
       font-weight: 700;
@@ -1582,33 +1555,32 @@ button {
     p {
       font-size: 18px;
       font-weight: 400;
-      @media screen and (max-width: 576px) {
-        font-size: 16px;
-      }
       line-height: 1.3;
       text-align: center;
       color: #fff;
-    }
-    .btn-content {
-      margin-top: 30px;
-      background: #00b577;
-      color: #fff;
-      font-size: 16px;
-      font-weight: 700;
-      text-transform: capitalize;
-      @media screen and (max-width: 767.98px) {
-        width: 50% !important;
-      }
-      @media screen and (max-width: 576.98px) {
-        width: 100% !important;
-      }
-
-      padding: 8px 40px;
-      border: 2px solid #00b577;
-      &:hover {
-        background: transparent;
+      @media screen and (min-width: 768px) {
+        font-size: 16px;
       }
     }
+    // .btn-content {
+    //   margin-top: 30px;
+    //   background: #00b577;
+    //   color: #fff;
+    //   font-size: 16px;
+    //   font-weight: 700;
+    //   text-transform: capitalize;
+    //   @media screen and (max-width: 767.98px) {
+    //     width: 50% !important;
+    //   }
+    //   @media screen and (max-width: 576.98px) {
+    //     width: 100% !important;
+    //   }
+    //   padding: 8px 40px;
+    //   border: 2px solid #00b577;
+    //   &:hover {
+    //     background: transparent;
+    //   }
+    // }
   }
 }
 #donar {
@@ -1623,7 +1595,7 @@ button {
     position: unset !important;
   }
   .swiper-pagination {
-    bottom: 70px;
+    bottom: 30px;
     .swiper-pagination-bullet {
       width: 14px;
       height: 14px;
@@ -1668,7 +1640,7 @@ button {
   .container {
     position: relative;
     .content {
-      padding: 70px 90px 135px;
+      padding: 40px 90px 100px;
       @media screen and (max-width: 992px) {
         padding-left: 60px;
         padding-right: 60px;
@@ -1685,15 +1657,12 @@ button {
         cursor: pointer;
       }
       p {
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 400;
         line-height: 1.3;
         margin-top: 40px;
         text-align: center;
         cursor: text;
-        @media screen and (max-width: 1090px) {
-          font-size: 18px;
-        }
         @media screen and (max-width: 992px) {
           font-size: 16px;
         }
@@ -1705,7 +1674,7 @@ button {
         line-height: 1;
       }
       h2 {
-        font-size: 28px;
+        font-size: 24px;
         line-height: 1.3;
         font-weight: 700;
         text-align: center;
@@ -1713,40 +1682,42 @@ button {
         &:hover {
           color: #00b577;
         }
-        @media screen and (max-width: 992px) {
-          font-size: 24px;
-        }
       }
       span {
         font-size: 20px;
         font-weight: 400;
         line-height: 1.3;
         @media screen and (max-width: 992px) {
-          font-size: 16px;
+          font-size: 18px;
         }
       }
     }
   }
 }
 #course-team {
-  position: relative;
+  // position: relative;
+  padding-top: 50px;
+  .container {
+    position: relative;
+    padding-bottom: 75px;
+  }
   .swiper-wrapper,
   .swiper {
     position: unset !important;
     z-index: 1000;
   }
   .swiper-pagination {
-    bottom: -120px;
+    bottom: 0px;
     z-index: 1000;
     .swiper-pagination-bullet {
-      width: 74px;
-      height: 74px;
+      width: 55px;
+      height: 55px;
       @media screen and (max-width: 768px) {
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
         margin: 0 10px;
       }
-      margin: 0 20px;
+      margin: 0 10px;
       background-color: transparent !important;
       opacity: 1;
       &-active {
@@ -1754,8 +1725,8 @@ button {
         width: 95px;
         height: 95px;
         @media screen and (max-width: 768px) {
-          width: 65px;
-          height: 65px;
+          width: 75px;
+          height: 75px;
         }
       }
     }
@@ -1767,7 +1738,7 @@ button {
     font-size: 25px;
     color: #000;
     top: 50%;
-    transform: translateY(0%);
+    transform: translateY(-50%);
     background: transparent;
     left: 50px;
     @media screen and (max-width: 992px) {
@@ -1812,18 +1783,12 @@ button {
         padding-right: 10px;
       }
       p {
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 400;
         line-height: 1.3;
         margin-top: 40px;
         text-align: center;
         cursor: text;
-        @media screen and (max-width: 992px) {
-          font-size: 18px;
-        }
-        @media screen and (max-width: 576px) {
-          font-size: 16px;
-        }
       }
       .icon {
         font-size: 80px;
@@ -1853,9 +1818,6 @@ button {
         @media screen and (max-width: 992px) {
           font-size: 18px;
         }
-        @media screen and (max-width: 576px) {
-          font-size: 16px;
-        }
         font-weight: 400;
         line-height: 1.3;
       }
@@ -1875,8 +1837,6 @@ button {
   }
 }
 #course {
-  // position: relative;
-  // z-index: 1000;
   @media screen and (max-width: 992px) {
     padding-left: 25px;
     padding-right: 25px;
@@ -1887,7 +1847,7 @@ button {
   }
   .list {
     position: relative;
-    padding: 65px 0 150px;
+    padding: 40px 0 100px;
   }
   .swiper-wrapper,
   .swiper {
@@ -1895,7 +1855,7 @@ button {
     z-index: 1000;
   }
   .swiper-pagination {
-    bottom: 67px;
+    bottom: 30px;
     z-index: 1000;
     .swiper-pagination-bullet {
       width: 14px;
@@ -1912,17 +1872,20 @@ button {
     }
   }
   .swiper-slide {
-    height: 480px;
+    height: 400px;
     position: relative;
     cursor: pointer;
+    margin-right: 10px !important;
+    margin-left: 10px !important;
     .detail {
-      height: 475px;
+      height: 400px;
       position: absolute;
       top: 0px;
       width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+      padding-bottom: 50px;
     }
     &:nth-child(4n + 1) {
       .detail {
@@ -1946,7 +1909,7 @@ button {
     }
     .image {
       position: relative;
-      height: 280px;
+      height: 250px;
       @media screen and (max-width: 576px) {
         height: 290px;
       }
@@ -1968,8 +1931,6 @@ button {
         font-size: 25px;
         font-weight: 700;
         line-height: 1.3;
-        margin-top: 30px;
-        margin-bottom: 55px;
         padding-left: 30px;
         padding-right: 30px;
         color: #fff;
@@ -2045,61 +2006,66 @@ button {
   }
 }
 #course-detail {
+  padding-bottom: 50px;
+  .heading {
+    @media screen and (max-width: 992px) and (min-width: 768px) {
+      padding-left: 30px;
+    }
+  }
   .left {
     @media screen and (max-width: 992px) {
       width: 100%;
     }
   }
   .swiper-slide {
-    height: 500px;
+    height: 400px;
     width: 353.33px !important;
     margin-right: 30px;
     @media screen and (max-width: 992px) {
-      width: 50% !important;
-      margin-right: 0px;
+      width: 100% !important;
       .button {
         width: 100% !important;
       }
     }
     @media screen and (max-width: 768px) {
-      width: 80% !important;
+      width: 60% !important;
+      margin-right: 0px;
+      margin-top: 30px;
       .button {
         width: 100% !important;
+        button {
+          width: 100% !important;
+        }
       }
     }
     @media screen and (max-width: 576px) {
       width: 100% !important;
-      .button {
-        width: 80% !important;
-      }
     }
     position: relative;
-    @media screen and (max-width: 992px) {
-      margin-top: 40px;
-    }
     .detail {
-      height: 420px;
+      height: 400px;
       position: absolute;
       top: 0px;
       width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+      padding-bottom: 50px;
       align-items: center;
+      padding-left: 20px;
+      padding-right: 20px;
       background: linear-gradient(170deg, transparent 50%, #fff 0%);
     }
     .image {
       position: relative;
-      height: 300px;
+      height: 250px;
     }
     .info {
       height: 100%;
       h5 {
         font-size: 25px;
         font-weight: 700;
-        margin-bottom: 10px;
-        padding-left: 20px;
-        padding-right: 20px;
+        margin-bottom: 20px;
         line-height: 1.3;
         text-align: center;
         color: #000;
@@ -2113,29 +2079,25 @@ button {
         font-size: 16px;
         text-align: center;
         font-weight: 400;
-        padding-left: 20px;
-        padding-right: 20px;
         margin-top: 0px;
         margin-bottom: 20px;
         color: #6e6d68;
       }
-      h4 {
-        font-size: 23px;
-        font-weight: 700;
-        margin-bottom: 14px;
-        margin-top: 25px;
-        padding-left: 10px;
-        padding-right: 10px;
-        display: flex;
-        align-items: end;
-        p {
-          font-size: 18px;
-        }
-        color: #000;
-      }
+      // h4 {
+      //   font-size: 23px;
+      //   font-weight: 700;
+      //   margin-bottom: 14px;
+      //   margin-top: 25px;
+      //   display: flex;
+      //   align-items: end;
+      //   p {
+      //     font-size: 18px;
+      //   }
+      //   color: #000;
+      // }
       button {
         margin-top: 0px !important;
-        margin-bottom: 40px;
+        // margin-bottom: 40px;
       }
     }
   }
@@ -2179,8 +2141,8 @@ button {
       font-weight: 700;
       text-transform: uppercase;
       color: #000;
-      padding-top: 25px;
-      padding-bottom: 25px;
+      padding-top: 10px;
+      padding-bottom: 10px;
     }
     p {
       font-size: 16px;
@@ -2210,16 +2172,17 @@ button {
 }
 #vision {
   .swiper-slide {
-    padding: 0px 28px;
-    @media screen and (max-width: 768px) {
-      padding-left: 10px;
-      padding-right: 10px;
-    }
-    height: 100%;
-    @media screen and (max-width: 576px) {
-      padding-left: 0px;
-      padding-right: 0px;
-    }
+    // padding: 0px 28px;
+    // margin-right: 0px;
+    // @media screen and (max-width: 768px) {
+    //   padding-left: 10px;
+    //   padding-right: 10px;
+    // }
+    // height: 100%;
+    // @media screen and (max-width: 576px) {
+    //   padding-left: 0px;
+    //   padding-right: 0px;
+    // }
 
     .step_slide {
       display: flex;
@@ -2230,16 +2193,6 @@ button {
         text-transform: uppercase;
         color: #000;
         font-weight: 500;
-        &:nth-child(2) {
-          width: 50px;
-          height: 1px;
-          @media screen and (max-width: 768px) {
-            height: 2px;
-          }
-          background: #0b2b20;
-          margin-left: 10px;
-          margin-right: 10px;
-        }
       }
     }
     h3 {
@@ -2247,8 +2200,6 @@ button {
       font-weight: 700;
       text-transform: uppercase;
       color: #000;
-      padding-top: 20px;
-      padding-bottom: 10px;
     }
     p {
       font-size: 16px;
@@ -2280,36 +2231,15 @@ button {
 #about {
   // height: 1000px;
   .swiper-slide {
-    padding: 0px 28px;
-    @media screen and (max-width: 768px) {
-      padding-left: 10px;
-      padding-right: 10px;
-    }
-    height: 100%;
-    @media screen and (max-width: 576px) {
-      padding-left: 0px;
-      padding-right: 0px;
-    }
-
     .step_slide {
       display: flex;
       align-items: center;
-      margin-top: 60px;
+      margin-top: 15px;
       span {
         font-size: 14px;
         text-transform: uppercase;
         color: #000;
         font-weight: 500;
-        &:nth-child(2) {
-          width: 50px;
-          height: 1px;
-          @media screen and (max-width: 768px) {
-            height: 2px;
-          }
-          background: #0b2b20;
-          margin-left: 10px;
-          margin-right: 10px;
-        }
       }
     }
     h3 {
@@ -2317,7 +2247,7 @@ button {
       font-weight: 700;
       text-transform: uppercase;
       color: #000;
-      padding-top: 20px;
+      padding-top: 10px;
       padding-bottom: 10px;
     }
     p {
@@ -2523,23 +2453,23 @@ button {
     position: unset !important;
     z-index: 1000;
   }
-  .swiper-pagination {
-    bottom: -70px;
-    z-index: 3000;
-    .swiper-pagination-bullet {
-      width: 14px;
-      height: 14px;
-      margin: 0 15px;
-      background: #fff !important;
-      border: 1px solid #d9d9d9;
-      opacity: 1;
-      &-active {
-        background: #00b577 !important;
-        width: 14px;
-        border-radius: 10px;
-      }
-    }
-  }
+  // .swiper-pagination {
+  //   bottom: -70px;
+  //   z-index: 3000;
+  //   .swiper-pagination-bullet {
+  //     width: 14px;
+  //     height: 14px;
+  //     margin: 0 15px;
+  //     background: #fff !important;
+  //     border: 1px solid #d9d9d9;
+  //     opacity: 1;
+  //     &-active {
+  //       background: #00b577 !important;
+  //       width: 14px;
+  //       border-radius: 10px;
+  //     }
+  //   }
+  // }
   .swiper-slide {
     .content {
       display: flex;
@@ -2550,7 +2480,7 @@ button {
   .swiper-wrapper {
     position: unset !important;
     // height: 340px;
-    margin-top: 100px;
+    margin-top: 40px;
   }
   .swiper-slide {
     height: 100%;
@@ -2560,7 +2490,7 @@ button {
     .content {
       height: 100%;
       h5 {
-        font-size: 25px;
+        font-size: 24px;
         font-weight: 700;
         line-height: 1.4;
         padding-right: 15px;
@@ -2573,11 +2503,11 @@ button {
         }
       }
       p {
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 700;
         line-height: 1.3;
         margin-top: 15px;
-        color: #b8b8b8;
+        color: rgba(0, 0, 0, 0.6);
         padding-right: 5px;
         padding-left: 5px;
       }
@@ -2864,25 +2794,16 @@ button {
   @media screen and (max-width: 992px) {
     font-size: 18px;
   }
-  @media screen and (max-width: 576px) {
-    font-size: 16px;
-  }
 }
 .form-control {
   border: 1px solid #979797 !important;
   background-color: transparent !important;
   box-shadow: none !important;
-  font-size: 18px !important;
+  font-size: 16px !important;
   font-weight: 400 !important;
   padding: 10px 20px !important;
   color: #979797 !important;
   border-radius: 4px !important;
-  @media screen and (max-width: 992px) {
-    font-size: 16px !important;
-  }
-  @media screen and (max-width: 576px) {
-    font-size: 14px !important;
-  }
 }
 .form-group {
   &:first-child {
@@ -2916,10 +2837,7 @@ button {
       font-weight: 700;
       color: #000;
       @media screen and (max-width: 992px) {
-        font-size: 22px;
-      }
-      @media screen and (max-width: 576px) {
-        font-size: 18px;
+        font-size: 20px;
       }
     }
     button {
@@ -3213,16 +3131,12 @@ button {
   }
 }
 #modal-trainer {
-  // width: 720px;
-  // @media screen and (max-width: 768px) {
-  //   margin-bottom: 30px;
-  // }
   width: 98%;
   max-width: 98%;
   margin-bottom: 30px;
-  margin-top: 164px;
+  margin-top: 130px;
   .rs-modal-header {
-    padding: 20px 60px;
+    padding: 20px 60px 0px;
     padding-right: 30px;
     display: flex;
     @media screen and (max-width: 992px) {
@@ -3257,7 +3171,14 @@ button {
     padding: 0;
   }
   .rs-modal-body {
-    padding: 0px 0px 264px;
+    padding: 0px 0px 200px;
+    h2 {
+      margin-bottom: 20px;
+      @media screen and (max-width: 992px) {
+        width: 100%;
+        text-align: center;
+      }
+    }
     @media screen and (max-width: 767.98px) {
       padding-bottom: 100px;
       .heading {
@@ -3266,7 +3187,6 @@ button {
         align-items: flex-start;
       }
     }
-
     overflow: visible !important;
     max-height: 100% !important;
     height: 100%;
@@ -3288,17 +3208,49 @@ button {
       font-weight: 700;
       line-height: 1.3;
       color: #000;
-      margin-top: 60px;
+      margin-top: 40px;
       margin-bottom: 28px;
     }
     .left {
       padding-right: 20px;
+      @media screen and (min-width: 992px) {
+        width: 50%;
+      }
+      @media screen and (max-width: 992px) {
+        padding-right: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
       .image {
         position: relative;
         height: 556px;
+        @media screen and (max-width: 992px) {
+          width: 50%;
+          height: 300px;
+        }
+        @media screen and (max-width: 768px) {
+          width: 60%;
+          height: 350px;
+        }
+        @media screen and (max-width: 576px) {
+          width: 100%;
+          height: 350px;
+        }
       }
       .social {
-        margin-top: 43px;
+        margin-top: 30px;
+        @media screen and (max-width: 992px) {
+          width: 50%;
+          justify-content: center;
+        }
+        @media screen and (max-width: 768px) {
+          width: 60%;
+        }
+        @media screen and (max-width: 576px) {
+          width: 100%;
+        }
         i {
           font-size: 18px;
           color: #6e6d68;
@@ -3348,13 +3300,12 @@ button {
     }
     .right {
       padding-left: 20px;
-      padding-top: 30px;
-      @media screen and (max-width: 767.98px) {
+      @media screen and (max-width: 992px) {
         padding-left: 0px;
-        padding-top: 50px;
       }
-
-      position: relative;
+      @media screen and (min-width: 992px) {
+        width: 50% !important;
+      }
       .rs-progress-line-bg {
         background-color: #7c8e5b;
       }
@@ -3388,10 +3339,10 @@ button {
         padding: 40px 60px 50px;
         width: calc(100% + 150px + 25px);
         transform: translateX(calc(-150px - 25px)) translateY(60px);
-        @media screen and (max-width: 767.98px) {
+        @media screen and (max-width: 992px) {
           width: 100%;
           transform: none;
-          margin-top: 50px;
+          margin-top: 30px;
           padding: 30px 40px;
         }
 
@@ -3721,31 +3672,26 @@ button {
     font-weight: 700;
     line-height: 1.3;
     color: #000;
-    margin-top: 20px;
     text-transform: inherit;
     @media screen and (max-width: 992px) {
-      font-size: 45px;
+      font-size: 36px;
     }
     @media screen and (max-width: 576px) {
       font-size: 36px;
     }
   }
   p {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 400;
-    margin-top: 30px;
     line-height: 1.3;
     color: #6e6d68;
     text-align: justify;
-    @media screen and (max-width: 992px) {
-      font-size: 16px;
-    }
   }
   ul {
     list-style: disc;
     padding-left: 20px !important;
     width: 434px;
-    margin-top: 20px !important;
+    margin-top: 10px !important;
     li {
       font-size: 20px;
       @media screen and (max-width: 992px) {
@@ -3763,6 +3709,7 @@ button {
   justify-content: center;
   width: 100%;
   button {
+    margin-top: 20px;
     @media screen and (max-width: 768px) {
       width: 50% !important;
     }
@@ -3771,17 +3718,38 @@ button {
     }
     background: #00b577;
     color: #fff;
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 600;
     text-transform: capitalize;
     padding: 8px 40px;
-    margin-top: 40px;
+    border-radius: 8px;
     border: 2px solid #00b577;
     transition: all 0.5s linear;
     &:hover {
       background: transparent;
       color: #00b577;
     }
+  }
+}
+.wrap-special {
+  margin-top: 230px;
+  @media screen and (max-width: 1336px) {
+    margin-top: 230px;
+  }
+  @media screen and (max-width: 1080px) {
+    margin-top: 220px;
+  }
+  @media screen and (max-width: 992px) {
+    margin-top: 210px;
+  }
+  @media screen and (max-width: 880px) {
+    margin-top: 190px;
+  }
+  @media screen and (max-width: 768px) {
+    margin-top: 30px;
+  }
+  @media screen and (max-width: 576px) {
+    margin-top: 40px;
   }
 }
 .btn-down {

@@ -18,15 +18,6 @@ function CheckInfo({ handleClose4, watch }) {
       </Modal.Header>
       <Modal.Body>
         <div className="d-flex flex-column">
-          {/* <div className="d-flex information_column">
-            <h6 className="col-4 col-sm-3">
-              <i className="fa-light fa-memo"></i>
-              <span>Khoá học:</span>
-            </h6>
-            <div className="col-8 col-sm-9">
-              <h6 className="desc">Khoá Junior</h6>
-            </div>
-          </div> */}
           <div className="d-flex information_column">
             <h6 className="col-4 col-sm-3">
               <i className="fa-light fa-user-alt"></i>
@@ -54,18 +45,6 @@ function CheckInfo({ handleClose4, watch }) {
               <h6 className="desc">{watch("phone")}</h6>
             </div>
           </div>
-          {/* <div className="d-flex information_column">
-            <h6 className="col-4 col-sm-3">
-              <i className="fa-light fa-file-lines"></i>
-              <span>Chi tiết:</span>
-            </h6>
-            <div className="col-8 col-sm-9">
-              <h6 className="desc">
-                Tên: Thanh Vinh <br /> Số điện thoại: 0378759723 <br />
-                Email: admin@example.com
-              </h6>
-            </div>
-          </div> */}
         </div>
       </Modal.Body>
     </Modal>

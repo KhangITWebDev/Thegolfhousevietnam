@@ -1,9 +1,6 @@
 import moment from "moment";
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import buildCalendar from "./build";
-
 function Calendar({ value, onChange, openSignIn }) {
   const [calendar, setCalendar] = useState([]);
   const dayNames = [
@@ -16,7 +13,6 @@ function Calendar({ value, onChange, openSignIn }) {
     "Thứ 7",
   ];
   const dayNameShort = ["CN", "T2", "T3", "T4", "T5", "T6", "T7"];
-
   useEffect(() => {
     setCalendar(buildCalendar(value));
   }, [value]);
@@ -128,5 +124,4 @@ function Calendar({ value, onChange, openSignIn }) {
     </div>
   );
 }
-
 export default Calendar;

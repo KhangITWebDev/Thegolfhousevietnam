@@ -1,8 +1,7 @@
 import $ from "jquery";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
@@ -17,7 +16,6 @@ import {
 } from "../../../utils/handleStorage";
 import styles from "./detail.module.scss";
 import TabDescription from "./TabDescription/TabDescription";
-
 function Detail(props) {
   const router = useRouter();
   const proshopDetail = useSelector((state) =>
@@ -103,20 +101,11 @@ function Detail(props) {
             </Swiper>
           </div>
           <div className="col-12 col-lg-6 content">
-            {/* <span className="sale">-10%</span> */}
             <h2>{proshopDetail?.ten_vt}</h2>
             <div className="d-flex flex-wrap justify-content-lg-between align-items-center justify-content-start">
               <p className="price">
-                {/* <span>800.000</span> 720.000 VND */}
                 {proshopDetail?.gia_ban_le.toLocaleString("vi-Vi")} VND
               </p>
-              {/* <div className="rate">
-                {Array(5)
-                  .fill()
-                  .map((i) => (
-                    <i className="fa-solid fa-star" key={i}></i>
-                  ))}
-              </div> */}
             </div>
             <p>
               Dicta sunt explicabo. Nemo enim ipsam voluptatem voluptas sit odit
@@ -181,5 +170,4 @@ function Detail(props) {
     </div>
   );
 }
-
 export default Detail;

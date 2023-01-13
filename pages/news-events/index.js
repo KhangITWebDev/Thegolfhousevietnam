@@ -1,7 +1,6 @@
 import React from "react";
 import MainLayout from "../../components/layout/mainLayout";
 import NewsEvents from "./NewsEvents";
-
 function index(props) {
   return (
     <MainLayout>
@@ -9,5 +8,4 @@ function index(props) {
     </MainLayout>
   );
 }
-
 export default index;

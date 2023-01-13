@@ -1,22 +1,20 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Select, { components } from "react-select";
-import { Loader, Progress, RangeSlider, Slider } from "rsuite";
+import { Loader, RangeSlider } from "rsuite";
 import Pagination from "../../components/pagination/pagination";
 import { getBannerData } from "../../store/redux/Banner/banner.action";
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
 import { getProshopData } from "../../store/redux/ProshopReducer/proshop.action";
-import { ShopList } from "../../utils/DataDemo/Home/dataHome";
 import { removeAccents } from "../../utils/function";
 import { usePagination } from "../../utils/usePagination";
 import styles from "./ProShop.module.scss";
 const customStyles = {
   option: (provided, state) => ({
     ...provided,
-    fontSize: 17,
+    fontSize: 18,
     color: state.isSelected ? "#fff" : "#000",
     cursor: "pointer",
     backgroundColor: state.isSelected ? "#00B577" : "transparent",
@@ -26,10 +24,7 @@ const customStyles = {
   singleValue: (provided, state) => ({
     ...provided,
     color: "#000",
-    fontSize: 17,
-    "@media screen and (max-width: 576px)": {
-      fontSize: 15,
-    },
+    fontSize: 18,
     fontWeight: 700,
     margin: 0,
   }),
@@ -55,10 +50,7 @@ const customStyles = {
   input: (base, state) => ({
     ...base,
     color: "#000",
-    fontSize: 17,
-    "@media screen and (max-width: 576px)": {
-      fontSize: 15,
-    },
+    fontSize: 18,
     fontWeight: 700,
     margin: 0,
   }),
@@ -86,7 +78,6 @@ const options = [
 ];
 
 function ProShop(props) {
-  const [show1, setShow1] = useState(true);
   const [value, setValue] = React.useState([0, 1]);
   const maxFilterPrice = 200000000;
   const minFilterPrice = 500000;
@@ -181,7 +172,6 @@ function ProShop(props) {
   useEffect(() => {
     dispatch(getContentData());
   }, [dispatch]);
-
   const sectiontitle = contents.filter(
     (item) => item.category === "63bc4b5739d2a23b06d91f9e"
   );
@@ -200,11 +190,6 @@ function ProShop(props) {
         <div className="heading">
           <h2>{sectiontitle[0]?.title}</h2>
         </div>
-        {/* <div className="d-flex justify-content-center">
-          <button className="btn-down">
-            <i className="fa-regular fa-chevron-down"></i>
-          </button>
-        </div> */}
       </div>
       <div className={styles.bannerv2} data-aos="fade-up">
         <Image
@@ -219,17 +204,11 @@ function ProShop(props) {
         <div className={styles.bannerv2_content}>
           <div className="container h-100">
             <div className="d-flex h-100 justify-content-end align-items-center flex-column">
-              {/* <span>PROSHOP</span>
-              <h1>Chương trình khuyến mãi 50%</h1> */}
-              {/* <p>
-                Huấn luyện viên đạt chuẩn PGA, VGA dày dặn kinh nghiệm chơi và
-                giảng dạy Golf.
-              </p> */}
-              <div onClick={() => router.push(bannerProshop[0]?.link)}>
+              {/* <div onClick={() => router.push(bannerProshop[0]?.link)}>
                 <button className="btn-content">
                   {bannerProshop[0]?.action}
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -303,13 +282,6 @@ function ProShop(props) {
                         {item.ten_vt}
                       </h5>
                       <p>{item.gia_ban_le.toLocaleString("vi-VI")} VND</p>
-                      {/* <div className={"d-flex" + " " + styles.rate}>
-                      {Array(item.rate)
-                        .fill()
-                        .map((i) => (
-                          <i className="fa-solid fa-star" key={i}></i>
-                        ))}
-                    </div> */}
                     </div>
                   </div>
                 ))
@@ -396,18 +368,6 @@ function ProShop(props) {
                   </span>
                   <div className="button justify-content-start">
                     <button onClick={() => filterPrice()}>Lọc</button>
-                  </div>
-                </div>
-              </div>
-              <div className={"d-flex flex-wrap" + " " + styles.bottom}>
-                <div className="col-12 col-lg-12 col-md-6">
-                  <h5>Thẻ</h5>
-                  <div className={styles.tag}>
-                    <button>Giảm giá</button>
-                    <button>Mới</button>
-                    <button>KM</button>
-                    <button>Nổi bật</button>
-                    <button>Shop</button>
                   </div>
                 </div>
               </div>

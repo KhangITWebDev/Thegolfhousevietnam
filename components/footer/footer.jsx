@@ -14,7 +14,7 @@ function Footer(props) {
     <div className={styles.footer} id="footer">
       <div className="container">
         <div className="d-flex flex-column align-items-center">
-          <div className={styles.logo}>
+          <div className={styles.logo} data-aos="fade-down">
             <Image
               alt="logo"
               src="/images/Logo/Logo12.png"
@@ -25,6 +25,7 @@ function Footer(props) {
           <div className={styles.menu + " " + "d-flex flex-wrap"}>
             <div
               className={styles.menu_item}
+              data-aos="fade-right"
               onClick={(e) => {
                 router.push("/");
               }}
@@ -33,6 +34,7 @@ function Footer(props) {
             </div>
             <div
               className={styles.menu_item}
+              data-aos="fade-right"
               onClick={(e) => {
                 router.push("/about-us");
               }}
@@ -41,6 +43,7 @@ function Footer(props) {
             </div>
             <div
               className={styles.menu_item}
+              data-aos="fade-right"
               onClick={(e) => {
                 router.push("/academy");
               }}
@@ -49,6 +52,7 @@ function Footer(props) {
             </div>
             <div
               className={styles.menu_item}
+              data-aos="fade-left"
               onClick={(e) => {
                 router.push("/proshop");
               }}
@@ -57,6 +61,7 @@ function Footer(props) {
             </div>
             <div
               className={styles.menu_item}
+              data-aos="fade-left"
               onClick={(e) => {
                 router.push("/orther-service");
               }}
@@ -65,6 +70,7 @@ function Footer(props) {
             </div>
             <div
               className={styles.menu_item}
+              data-aos="fade-left"
               onClick={(e) => {
                 router.push("/contact-us");
               }}
@@ -81,8 +87,8 @@ function Footer(props) {
         </div>
         <div className={styles.copy_right}>
           <p>
-            <strong>Thegolfhousevietnam</strong> &#169; 2022. All Rights
-            Reserved.
+            &#169; {new Date().getFullYear()}{" "}
+            <strong>ThegolfhouseVietNam</strong>. All Rights Reserved.
           </p>
         </div>
       </div>

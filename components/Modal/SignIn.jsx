@@ -2,7 +2,6 @@ import Link from "next/link";
 import React from "react";
 import { Alert } from "react-bootstrap";
 import { Modal } from "rsuite";
-
 function SignIn({ handleClose2, errors, register, onSubmit, handleSubmit }) {
   return (
     <Modal

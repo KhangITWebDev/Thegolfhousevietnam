@@ -6,7 +6,6 @@ import { Nav, Navbar } from "rsuite";
 import Swal from "sweetalert2";
 import { getLocalStorage, LOCAL_STORAGE } from "../../utils/handleStorage";
 import HeaderMoblie from "../HeaderMobile/HeaderMobile";
-import styles from "./headerMain.module.scss";
 
 export default function HeaderMain({
   onSelect,
@@ -17,16 +16,6 @@ export default function HeaderMain({
   handleShowSearch,
   ...props
 }) {
-  const commingSoon = (e) => {
-    e.preventDefault();
-    Swal.fire({
-      title: "Comming Soon",
-      text: "We are comming soon",
-      icon: "warning",
-      showCancelButton: false,
-      confirmButtonText: "OK",
-    });
-  };
   const router = useRouter();
   const cart = getLocalStorage(LOCAL_STORAGE.CART);
   const [show, setShow] = useState(false);
@@ -147,12 +136,6 @@ export default function HeaderMain({
                     <Nav.Item
                       eventKey="8"
                       onClick={() => {
-                        // $("html,body").animate(
-                        //   {
-                        //     scrollTop: $("#calendar").offset().top,
-                        //   },
-                        //   "slow"
-                        // );
                         router.push("/course#calendar");
                       }}
                     >
@@ -196,9 +179,6 @@ export default function HeaderMain({
                       </span>
                     </div>
                   </Nav.Item>
-                  {/* <Nav.Item eventKey="13" className="search">
-                    <i className="fa-light fa-magnifying-glass"></i>
-                  </Nav.Item> */}
                   <Nav.Item eventKey="14" className="sub-menu">
                     <i className="fa-solid fa-grid"></i>
                   </Nav.Item>

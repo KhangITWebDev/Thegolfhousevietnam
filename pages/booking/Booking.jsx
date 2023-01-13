@@ -1,19 +1,6 @@
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
+import React, { useState } from "react";
+import { components } from "react-select";
 import styles from "./Booking.module.scss";
-import $ from "jquery";
-import moment from "moment/moment";
-import { convertDate } from "../../utils/function";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { Alert } from "react-bootstrap";
-import { Steps } from "rsuite";
-import { useRouter } from "next/router";
-import Select, { components } from "react-select";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectFlip, Navigation, Pagination } from "swiper";
 import StartBooking from "./StartBooking";
 const customStyles = {
   option: (provided, state) => ({
@@ -63,26 +50,9 @@ const options = [
 ];
 
 function Booking(props) {
-  const [swiper, setSwiper] = useState(null);
-  const [address, setAddress] = useState(options[0].label);
-  const [startBooking, setStartBooking] = React.useState(false);
-  const DropdownIndicator = (props) => {
-    return (
-      <components.DropdownIndicator {...props}>
-        <i
-          className="fa-solid fa-chevron-down"
-          style={{
-            fontSize: 24,
-            color: "white",
-          }}
-        ></i>
-      </components.DropdownIndicator>
-    );
-  };
-  console.log(address);
   return (
     <div className={styles.booking_page} id="Booking">
-      <StartBooking setStartBooking={setStartBooking} address={address} />
+      <StartBooking />
     </div>
   );
 }

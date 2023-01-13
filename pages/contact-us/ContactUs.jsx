@@ -1,30 +1,8 @@
 import Image from "next/image";
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigation, Pagination } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
 import styles from "./ContactUs.module.scss";
-
-export const ContactList = [
-  {
-    image: "/images/Contact/contact1.png",
-    title: "Mở cửa",
-    desc: "<p>T2 - T6: 9:00 - 21:00</p><p>T7 - CN: 9:00 - 20:00</p>",
-  },
-  {
-    image: "/images/Contact/contact2.png",
-    title: "Địa chỉ",
-    desc: "<p>85 - 87 Nguyễn Cơ Thạch, P.An Lợi Đông, Q2, TPHCM</p>",
-  },
-  {
-    image: "/images/Contact/contact3.png",
-    title: "Liên lạc",
-    desc: "<p>Telephone: (+84) 274 035 723</p><p>Email: info@lio.com</p>",
-  },
-];
-
 function ContactUs(props) {
   const dispatch = useDispatch();
   const { contents } = useSelector((state) => state.ContentReducer);
@@ -48,11 +26,6 @@ function ContactUs(props) {
       <div className="heading" data-aos="fade-up">
         <h2 className={styles.title_page}>{sectionTitlePage[0]?.title}</h2>
       </div>
-      {/* <div className="d-flex justify-content-center">
-        <button className="btn-down" data-aos="fade-down">
-          <i className="fa-regular fa-chevron-down"></i>
-        </button>
-      </div> */}
       <div className={styles.training} id="contact">
         <div className="container">
           <div className="d-flex flex-wrap justify-content-center">
@@ -104,12 +77,6 @@ function ContactUs(props) {
                       dangerouslySetInnerHTML={{ __html: item.content }}
                     ></div>
                   </div>
-                  {/* <div className="mt-auto">
-                    <button className="d-flex align-items-center">
-                      <span>Xem thêm</span>
-                      <i className="fa-light fa-arrow-right"></i>
-                    </button>
-                  </div> */}
                 </div>
               </div>
             ))}

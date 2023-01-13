@@ -319,7 +319,6 @@ function ProShop(props) {
                         {item.ten_vt}
                       </h5>
                       <p>{item.gia_ban_le.toLocaleString("vi-VI")} VND</p>
-                      <p>{item.date_created}</p>
                     </div>
                   </div>
                 ))

@@ -231,7 +231,10 @@ function HomePage(props) {
                 <p
                   dangerouslySetInnerHTML={{ __html: contentGolf[0]?.content }}
                 ></p>
-                <div className="button" data-aos="fade-left">
+                <div
+                  className="button justify-content-start"
+                  data-aos="fade-left"
+                >
                   <button onClick={handleOpen1}>
                     {contentGolf[0]?.text_button}
                   </button>

@@ -83,7 +83,7 @@ function Detail(props) {
             className={
               styles.bonus +
               " " +
-              "d-flex justify-content-between align-items-center"
+              "d-flex justify-content-start justify-content-sm-between align-items-center"
             }
           >
             <div>

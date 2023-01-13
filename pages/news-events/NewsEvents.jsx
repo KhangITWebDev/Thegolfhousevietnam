@@ -44,13 +44,13 @@ function NewsEvents(props) {
     <div className={styles.news_page}>
       <div className="container">
         <div className="heading" data-aos="fade-up">
-          <h2 className={styles.title_page}>Tin tức, sự kiện</h2>
+          <h2 className={styles.title_page}>Tin tức sự kiện</h2>
         </div>
-        <div className="d-flex justify-content-center" data-aos="fade-down">
+        {/* <div className="d-flex justify-content-center" data-aos="fade-down">
           <button className="btn-down">
             <i className="fa-regular fa-chevron-down"></i>
           </button>
-        </div>
+        </div> */}
         <div className={styles.content}>
           <div className="d-flex flex-wrap">
             <div className="col-12 col-lg-7">

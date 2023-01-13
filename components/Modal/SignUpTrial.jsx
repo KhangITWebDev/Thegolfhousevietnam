@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Modal } from "rsuite";
 import Select, { components } from "react-select";
 import { Alert } from "react-bootstrap";
@@ -8,12 +8,7 @@ const customStyles = {
   option: (provided, state) => ({
     ...provided,
     fontSize: 16,
-    "@media screen and (max-width: 992px)": {
-      fontSize: 14,
-    },
-    "@media screen and (max-width: 576px)": {
-      fontSize: 14,
-    },
+    fontWeight: 400,
     color: state.isSelected ? "#fff" : "#000",
     backgroundColor: state.isSelected ? "#00B577" : "transparent",
     cursor: "pointer",
@@ -21,13 +16,7 @@ const customStyles = {
   singleValue: (provided, state) => ({
     ...provided,
     color: "#A6A6A6",
-    fontSize: 18,
-    "@media screen and (max-width: 992px)": {
-      fontSize: 16,
-    },
-    "@media screen and (max-width: 576px)": {
-      fontSize: 14,
-    },
+    fontSize: 16,
     fontWeight: 500,
   }),
   indicatorSeparator: () => ({ display: "none" }),
@@ -39,14 +28,8 @@ const customStyles = {
   }),
   input: (base, state) => ({
     ...base,
-    color: "#A6A6A6",
-    fontSize: 18,
-    "@media screen and (max-width: 992px)": {
-      fontSize: 16,
-    },
-    "@media screen and (max-width: 576px)": {
-      fontSize: 14,
-    },
+    color: "#000",
+    fontSize: 16,
     fontWeight: 500,
   }),
   control: (base, state) => ({
@@ -61,7 +44,7 @@ const customStyles = {
     paddingTop: 6,
     paddingBottom: 6,
     cursor: "pointer",
-    color: "#A6A6A6",
+    color: "#000",
     border: "1px solid #979797",
     border: state.isFocused ? 0 : 0,
     boxShadow: state.isFocused ? 0 : 0,
@@ -69,10 +52,17 @@ const customStyles = {
       border: state.isFocused ? 0 : 0,
     },
   }),
+  placeholder: (base) => {
+    return {
+      ...base,
+      fontSize: 16,
+      fontWeight: 500,
+    };
+  },
 };
 
 const options = [
-  { value: "1", label: "Ngành nghề" },
+  { value: "1", label: "Kế Toán" },
   { value: "2", label: "Kiến trúc" },
   { value: "3", label: "Bất động sản" },
   { value: "4", label: "Công nghệ thông tin" },
@@ -95,11 +85,20 @@ function SignUpTrial({
   handleClose,
   handleOpen5,
   errors,
+  reset,
   control,
   register,
   onSubmit,
   handleSubmit,
 }) {
+  useEffect(() => {
+    reset({
+      name: "",
+      email: "",
+      phone: "",
+      job: "",
+    });
+  }, []);
   return (
     <Modal
       open={true}
@@ -116,13 +115,7 @@ function SignUpTrial({
       </Modal.Header>
       <Modal.Body>
         <h5>Học thử miễn phí với HLV chuẩn quốc tế</h5>
-        <form
-          action=""
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleOpen3();
-          }}
-        >
+        <form action="" onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group">
             <label htmlFor="" className="form-label">
               Họ tên
@@ -166,20 +159,24 @@ function SignUpTrial({
               control={control}
               defaultValue={options.map((c) => c.value)}
               name="job"
-              render={({ field: { onChange, value, ref } }) => (
+              render={({ field }) => (
                 <Select
+                  {...field}
                   styles={customStyles}
-                  inputRef={ref}
                   components={{ DropdownIndicator }}
-                  defaultValue={options[0]}
-                  onChange={(val) => onChange(val.label)}
+                  placeholder="Ngành nghề"
                   options={options}
                 />
               )}
             />
+            {errors?.job && (
+              <Alert variant="danger">
+                {errors.job?.message || errors.job?.label.message}
+              </Alert>
+            )}
           </div>
           <div className="button">
-            <button onClick={handleSubmit(onSubmit)}>Đăng ký</button>
+            <button>Đăng ký</button>
           </div>
         </form>
       </Modal.Body>

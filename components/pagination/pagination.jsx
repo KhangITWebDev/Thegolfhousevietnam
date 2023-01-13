@@ -1,4 +1,5 @@
 import React from "react";
+import { Tooltip, Whisper } from "rsuite";
 import styles from "./pagination.module.scss";
 
 function Pagination({ data }) {
@@ -8,11 +9,22 @@ function Pagination({ data }) {
         <ul className="pagination pagination-sm d-flex justify-content-center">
           <li
             className={styles.page_item}
+            onClick={() => data.handleClick(1)}
+            style={{
+              display: data.currentPage > 1 ? "block" : "none",
+            }}
+          >
+            <span className={styles.page_link} aria-label="First">
+              <i className="fa-thin fa-chevrons-left"></i>
+            </span>
+          </li>
+          <li
+            className={styles.page_item}
             onClick={() => data.handlePrev()}
             style={{ display: data.currentPage === 1 ? "none" : "block" }}
           >
             <span className={styles.page_link} aria-label="Previous">
-              <i className="fa-light fa-arrow-left"></i>
+              <i className="fa-thin fa-chevron-left"></i>
             </span>
           </li>
           {data.renderPages.map((num) => (
@@ -35,40 +47,24 @@ function Pagination({ data }) {
           ))}
           <li
             className={styles.page_item}
-            key={data.totalPages}
-            id={data.totalPages}
-            style={{
-              paddingLeft:
-                data.totalPages <= 4 ||
-                data.currentPage === data.totalPages - 2 ||
-                data.currentPage === data.totalPages - 1 ||
-                data.currentPage === data.totalPages
-                  ? 0
-                  : 10,
-            }}
-          >
-            <span
-              className={
-                data.totalPages <= 4 ||
-                data.currentPage === data.totalPages - 2 ||
-                data.currentPage === data.totalPages - 1 ||
-                data.currentPage === data.totalPages
-                  ? [styles.page_link, styles.dots].join(" ")
-                  : [styles.page_link, styles.dots_show].join(" ")
-              }
-            >
-              <i className="fal fa-ellipsis-h"></i>
-            </span>
-          </li>
-          <li
-            className={styles.page_item}
             onClick={() => data.handleNext()}
             style={{
               display: data.currentPage === data.totalPages ? "none" : "block",
             }}
           >
             <span className={styles.page_link} aria-label="Next">
-              <i className="fa-light fa-arrow-right"></i>
+              <i className="fa-thin fa-chevron-right"></i>
+            </span>
+          </li>
+          <li
+            className={styles.page_item}
+            onClick={() => data.handleClick(data.totalPages)}
+            style={{
+              display: data.currentPage === data.totalPages ? "none" : "block",
+            }}
+          >
+            <span className={styles.page_link} aria-label="Cuôus">
+              <i className="fa-thin fa-chevrons-right"></i>
             </span>
           </li>
         </ul>

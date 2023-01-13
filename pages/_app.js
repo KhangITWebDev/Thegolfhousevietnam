@@ -26,6 +26,7 @@ function MyApp({ Component, pageProps }) {
     setShowChild(true);
     import("bootstrap/dist/js/bootstrap");
     import("bootstrap/dist/js/bootstrap.bundle");
+    import("jquery-ui-bundle");
     AOS.init();
     AOS.init({
       duration: 1500,

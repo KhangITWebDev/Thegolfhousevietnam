@@ -116,17 +116,25 @@ const options = [
 ];
 const PHONE_REGEX = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i;
 const schema = yup.object().shape({
-  name: yup.string().required("Họ tên là trường bắt buộc"),
+  name: yup.string().required("Vui lòng điền họ tên"),
   phone: yup
     .string()
-    .required("Số điện thoại là trường bắt buộc")
+    .required("Vui lòng điền số điện thoại")
     .min(10, "Số điện thoại phải nhiều hơn 9 ký tự")
     .max(12, "Sô điện thoại phải ít hơn 12 ký tự")
     .matches(PHONE_REGEX, "Số điện thoại không hợp lệ"),
   email: yup
     .string()
     .email("Email không hợp lệ")
-    .required("Email là trường bắt buộc"),
+    .required("Vui lòng điền email"),
+  job: yup
+    .object()
+    .shape({
+      label: yup.string().required("Vui lòng chọn nghề nghiệp"),
+      value: yup.string().required("Vui lòng chọn nghề nghiệp"),
+    })
+    .nullable()
+    .required("Vui lòng chọn nghề nghiệp"),
 });
 const schema2 = yup.object().shape({
   email: yup
@@ -141,6 +149,7 @@ function Course(props) {
     handleSubmit,
     watch,
     reset,
+    control,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -155,7 +164,7 @@ function Course(props) {
     resolver: yupResolver(schema2),
   });
   const onSubmit = (data) => {
-    console.log(data);
+    handleOpen5();
   };
   const onSubmit2 = (data) => {
     router.push("/booking");
@@ -799,7 +808,9 @@ function Course(props) {
           errors={errors}
           register={register}
           onSubmit={onSubmit}
+          reset={reset}
           watch={watch}
+          control={control}
           handleSubmit={handleSubmit}
           handleClose={handleClose1}
           handleOpen5={handleOpen5}
@@ -817,7 +828,7 @@ function Course(props) {
       {open3 && (
         <Sucess handleClose3={handleClose3} handleOpen4={handleOpen4} />
       )}
-      {open4 && <CheckInfo handleClose4={handleClose4} />}
+      {open4 && <CheckInfo handleClose4={handleClose4} watch={watch} />}
       {open5 && (
         <SucessTrial handleClose5={handleClose5} handleOpen4={handleOpen4} />
       )}

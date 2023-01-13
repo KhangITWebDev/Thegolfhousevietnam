@@ -23,11 +23,14 @@ function Cart({ handleCloseCart }) {
     }
   }, [cart]);
   const initialValue = 0;
-  // const total = cart.reduce(
-  //   (accumulator, current) => accumulator + current.gia_ban_le * current.qty,
-  //   initialValue
-  // );
-  const total = 1;
+  const total =
+    cart && cart.length > 0
+      ? cart.reduce(
+          (accumulator, current) =>
+            accumulator + current.gia_ban_le * current.qty,
+          initialValue
+        )
+      : 1;
   return (
     <div
       className={styles.subMenuCart + " " + "cart-dialog"}

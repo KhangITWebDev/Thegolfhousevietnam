@@ -407,7 +407,7 @@ button {
       font-weight: 500;
       line-height: 1.3;
       color: #fff;
-      background: #00b577;
+      background: #576e33;
       padding: 4px 14px;
     }
     h2 {
@@ -421,7 +421,7 @@ button {
       font-size: 24px;
       font-weight: 700;
       line-height: 1.3;
-      color: #00b577;
+      color: #576e33;
       margin-top: 0px;
       span {
         color: #b8b8b8;
@@ -749,8 +749,8 @@ button {
   }
   .rs-steps-item-status-finish {
     .rs-steps-item-icon-wrapper {
-      background-color: #00b577;
-      border-color: #00b577;
+      background-color: #576e33;
+      border-color: #576e33;
     }
   }
   .rs-steps-item-status-wait {
@@ -1096,7 +1096,7 @@ button {
       .rs-navbar-item {
         &-active,
         &:hover {
-          color: #00b577 !important;
+          color: #576e33 !important;
         }
         .cart {
           position: relative;
@@ -1105,7 +1105,7 @@ button {
             width: 15px;
             height: 15px;
             color: #fff;
-            background: #00b577;
+            background: #576e33;
             font-size: 8px;
             font-weight: 400;
             bottom: -2px;
@@ -1275,7 +1275,7 @@ button {
         }
         &-active,
         &:hover {
-          color: #00b577 !important;
+          color: #576e33 !important;
         }
         .cart {
           position: relative;
@@ -1284,7 +1284,7 @@ button {
             width: 20px;
             height: 20px;
             color: #fff;
-            background: #00b577;
+            background: #576e33;
             font-size: 10px;
             font-weight: 400;
             bottom: -2px;
@@ -1489,7 +1489,7 @@ button {
       background: #d9d9d9;
       opacity: 1;
       &-active {
-        background: #00b577;
+        background: #576e33;
         width: 40px;
         border-radius: 10px;
       }
@@ -1517,7 +1517,7 @@ button {
     }
     border: none;
     &:hover {
-      color: #00b577;
+      color: #576e33;
     }
   }
   .btn-next {
@@ -1566,9 +1566,16 @@ button {
         font-size: 16px;
       }
     }
+    .button {
+      button {
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
     // .btn-content {
     //   margin-top: 30px;
-    //   background: #00b577;
+    //   background: #576E33;
     //   color: #fff;
     //   font-size: 16px;
     //   font-weight: 700;
@@ -1580,7 +1587,7 @@ button {
     //     width: 100% !important;
     //   }
     //   padding: 8px 40px;
-    //   border: 2px solid #00b577;
+    //   border: 2px solid #576E33;
     //   &:hover {
     //     background: transparent;
     //   }
@@ -1607,7 +1614,7 @@ button {
       background: #d9d9d9;
       opacity: 1;
       &-active {
-        background: #00b577;
+        background: #576e33;
         width: 14px;
         border-radius: 10px;
       }
@@ -1631,7 +1638,7 @@ button {
     }
     border: none;
     &:hover {
-      color: #00b577;
+      color: #576e33;
     }
   }
   .btn-next {
@@ -1684,7 +1691,7 @@ button {
         text-align: center;
         cursor: pointer;
         &:hover {
-          color: #00b577;
+          color: #576e33;
         }
       }
       span {
@@ -1756,7 +1763,7 @@ button {
     }
     border: none;
     &:hover {
-      color: #00b577;
+      color: #576e33;
     }
   }
   .btn-next {
@@ -1814,7 +1821,7 @@ button {
         margin-top: 30px;
         cursor: pointer;
         &:hover {
-          color: #00b577;
+          color: #576e33;
         }
       }
       span {
@@ -1827,13 +1834,13 @@ button {
       }
     }
     // .btn-content {
-    //   background: #00b577;
+    //   background: #576E33;
     //   color: #fff;
     //   font-size: 16px;
     //   font-weight: 700;
     //   text-transform: capitalize;
     //   padding: 8px 40px;
-    //   border: 2px solid #00b577;
+    //   border: 2px solid #576E33;
     //   &:hover {
     //     background: transparent;
     //   }
@@ -1869,7 +1876,7 @@ button {
       border: 1px solid #d9d9d9;
       opacity: 1;
       &-active {
-        background: #00b577 !important;
+        background: #576e33 !important;
         width: 14px;
         border-radius: 10px;
       }
@@ -1893,7 +1900,7 @@ button {
     }
     &:nth-child(4n + 1) {
       .detail {
-        background: linear-gradient(170deg, transparent 50%, #00b577 0%);
+        background: linear-gradient(170deg, transparent 50%, #576e33 0%);
       }
     }
     &:nth-child(4n + 2) {
@@ -1999,7 +2006,7 @@ button {
     }
     border: none;
     &:hover {
-      color: #00b577;
+      color: #576e33;
     }
   }
   .btn-next {
@@ -2075,7 +2082,7 @@ button {
         color: #000;
         cursor: pointer;
         &:hover {
-          color: #00b577;
+          color: #576e33;
         }
       }
       span,
@@ -2165,7 +2172,7 @@ button {
         border-radius: 10px;
       }
       &::-webkit-scrollbar-thumb {
-        background: #00b577;
+        background: #576e33;
         border-radius: 10px;
       }
       &::-webkit-scrollbar-thumb:hover {
@@ -2223,7 +2230,7 @@ button {
         border-radius: 10px;
       }
       &::-webkit-scrollbar-thumb {
-        background: #00b577;
+        background: #576e33;
         border-radius: 10px;
       }
       &::-webkit-scrollbar-thumb:hover {
@@ -2272,7 +2279,7 @@ button {
         border-radius: 10px;
       }
       &::-webkit-scrollbar-thumb {
-        background: #00b577;
+        background: #576e33;
         border-radius: 10px;
       }
       &::-webkit-scrollbar-thumb:hover {
@@ -2363,7 +2370,7 @@ button {
       border: 1px solid #d9d9d9;
       opacity: 1;
       &-active {
-        background: #00b577 !important;
+        background: #576e33 !important;
         width: 14px;
         border-radius: 10px;
       }
@@ -2395,7 +2402,7 @@ button {
         color: #000;
         cursor: pointer;
         &:hover {
-          color: #00b577;
+          color: #576e33;
         }
       }
       p {
@@ -2467,7 +2474,7 @@ button {
   //     border: 1px solid #d9d9d9;
   //     opacity: 1;
   //     &-active {
-  //       background: #00b577 !important;
+  //       background: #576E33 !important;
   //       width: 14px;
   //       border-radius: 10px;
   //     }
@@ -2502,7 +2509,7 @@ button {
         color: #000;
         transition: all 0.5s;
         &:hover {
-          color: #00b577;
+          color: #576e33;
         }
       }
       p {
@@ -2786,12 +2793,12 @@ button {
   z-index: 2001;
   transition: 0.5s linear;
   &:hover {
-    background: #00b577;
-    border-color: #00b577;
+    background: #576e33;
+    border-color: #576e33;
   }
 }
 .form-label {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
   color: #000;
   @media screen and (max-width: 992px) {
@@ -2836,7 +2843,7 @@ button {
       padding-right: 20px;
     }
     .rs-modal-title {
-      font-size: 25px;
+      font-size: 24px;
       font-weight: 700;
       color: #000;
       @media screen and (max-width: 992px) {
@@ -2856,7 +2863,7 @@ button {
     padding: 0;
   }
   .rs-modal-body {
-    padding: 40px 60px 65px;
+    padding: 15px 60px 40px;
     overflow: visible !important;
     max-height: 90% !important;
     height: 90%;
@@ -2891,12 +2898,12 @@ button {
   }
   .button {
     button {
-      background: #7c8e5b;
+      background: #576e33;
       margin-top: 25px;
-      border: 2px solid #7c8e5b;
+      border: 2px solid #576e33;
       &:hover {
         background-color: transparent;
-        color: #7c8e5b;
+        color: #576e33;
       }
     }
   }
@@ -2948,7 +2955,7 @@ button {
     padding: 0;
   }
   .rs-modal-body {
-    padding: 40px 100px 65px;
+    padding: 10px 100px 40px;
     @media screen and (max-width: 992px) {
       padding-left: 60px;
       padding-right: 60px;
@@ -2969,7 +2976,7 @@ button {
     align-items: center;
     i {
       font-size: 90px;
-      color: #00b577;
+      color: #576e33;
     }
     h5 {
       font-size: 24px;
@@ -3003,12 +3010,12 @@ button {
   }
   .button {
     button {
-      background: #7c8e5b;
+      background: #576e33;
       margin-top: 25px;
-      border: 2px solid #7c8e5b;
+      border: 2px solid #576e33;
       &:hover {
         background-color: transparent;
-        color: #7c8e5b;
+        color: #576e33;
       }
     }
   }
@@ -3034,7 +3041,7 @@ button {
     }
     background-color: #f8f8f4;
     .rs-modal-title {
-      font-size: 25px;
+      font-size: 24px;
       font-weight: 700;
       color: #000;
       @media screen and (max-width: 992px) {
@@ -3054,7 +3061,7 @@ button {
     padding: 0;
   }
   .rs-modal-body {
-    padding: 40px 60px 65px;
+    padding: 10px 60px 40px;
     overflow: visible !important;
     max-height: 90% !important;
     height: 90%;
@@ -3078,16 +3085,16 @@ button {
     font-size: 18px;
     font-weight: 500;
     line-height: 1.3;
-    color: #7c8e5b;
+    color: #576e33;
   }
   .button {
     button {
-      background: #7c8e5b;
+      background: #576e33;
       margin-top: 25px;
-      border: 2px solid #7c8e5b;
+      border: 2px solid #576e33;
       &:hover {
         background-color: transparent;
-        color: #7c8e5b;
+        color: #576e33;
       }
     }
   }
@@ -3148,14 +3155,11 @@ button {
       padding-right: 20px;
     }
     .rs-modal-title {
-      font-size: 25px;
+      font-size: 24px;
       font-weight: 700;
       color: #000;
       @media screen and (max-width: 992px) {
         font-size: 22px;
-      }
-      @media screen and (max-width: 576px) {
-        font-size: 18px;
       }
     }
     button {
@@ -3385,10 +3389,10 @@ button {
 
 #cart-page {
   background-color: #f8f8f4;
-  padding-top: 180px;
-  padding-bottom: 100px;
+  padding-top: 140px;
+  padding-bottom: 40px;
   .process-step {
-    margin: 60px auto;
+    margin: 30px auto;
     .rs-steps-item {
       flex-basis: auto !important;
     }
@@ -3399,8 +3403,8 @@ button {
     }
     .rs-steps-item-active {
       .rs-steps-item-icon-wrapper {
-        background-color: #00b577;
-        border-color: #00b577;
+        background-color: #576e33;
+        border-color: #576e33;
       }
     }
   }
@@ -3491,35 +3495,35 @@ button {
     }
   }
   .tool-cart {
-    margin-top: 50px;
+    margin-top: 20px;
     button {
       border: 2px solid transparent;
-      padding: 15px 30px;
-      font-size: 16px;
-      font-weight: 500;
+      padding: 10px 30px;
+      font-size: 18px;
+      font-weight: 700;
       &:nth-child(1) {
         background-color: #fff;
         color: #000;
       }
       &:nth-child(2) {
-        background-color: #c9c7c4;
+        background-color: #bbbbbb;
         margin-left: 15px;
         color: #fff;
       }
       &:hover {
-        background-color: #00b577;
+        background-color: #576e33;
         color: #fff;
       }
     }
   }
   .box-total {
-    margin-top: 100px;
+    margin-top: 30px;
     .title {
-      font-size: 20px;
+      font-size: 24px;
       font-weight: 500;
       color: #000;
       line-height: 1.3;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
     .content {
       border: 1px solid #c9c7c4;
@@ -3532,7 +3536,7 @@ button {
         align-items: center;
         padding: 30px 20px;
         h3 {
-          font-size: 15px;
+          font-size: 18px;
           font-weight: 500;
           color: #000;
           line-height: 1.3;
@@ -3542,11 +3546,17 @@ button {
         display: flex;
         align-items: center;
         padding: 30px 20px;
-        h3 {
-          font-size: 15px;
-          font-weight: 400;
+        h3,
+        span {
+          font-size: 18px;
+          font-weight: 700;
           color: #000;
           line-height: 1.3;
+        }
+        span {
+          color: #576e33;
+          font-weight: 400;
+          cursor: pointer;
         }
       }
       &:not(:last-child) {
@@ -3555,29 +3565,93 @@ button {
     }
     .button {
       button {
-        margin-top: 10px;
+        margin-top: 20px;
         margin-left: 0px;
+        border-radius: 0px;
       }
     }
   }
   .empty-cart {
-    margin-top: 60px;
+    margin-top: 40px;
     .empty-text {
       font-size: 18px;
       font-weight: 400;
       line-height: 1.3;
     }
     button {
-      margin-top: 40px;
-      background: #00b577;
+      margin-top: 20px;
+      background: #576e33;
       color: #ffff;
       font-size: 18px;
       font-weight: 600;
-      border: 2px solid #00b577;
+      border: 2px solid #576e33;
       padding: 15px 50px;
       &:hover {
-        color: #00b577;
+        color: #576e33;
         background-color: transparent;
+      }
+    }
+  }
+  .step2 {
+    margin-top: 50px;
+    h5 {
+      font-size: 24px;
+      font-weight: 700;
+      list-style: 1.3;
+      color: #000;
+    }
+    .left {
+      padding-right: 15px;
+    }
+    .right {
+      padding-left: 15px;
+    }
+    .order {
+      background-color: #fff;
+      padding: 40px 30px;
+      margin-top: 25px;
+      margin-bottom: 50px;
+      .item {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 2px solid #d9d9d9;
+        padding-bottom: 20px;
+        h6 {
+          font-size: 18px;
+          font-weight: 600;
+          line-height: 1.3;
+          color: #303030;
+        }
+        &:not(:first-child) {
+          margin-top: 20px;
+        }
+        &:last-child {
+          border-bottom: 0px solid #bababa;
+          h6 {
+            color: #576e33;
+          }
+        }
+      }
+    }
+    .checkout {
+      background-color: #fff;
+      padding: 40px 30px;
+      margin-top: 25px;
+      margin-bottom: 50px;
+      .item {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 2px solid #bababa;
+        padding-bottom: 20px;
+        h6 {
+          font-size: 18px;
+          font-weight: 500;
+          line-height: 1.3;
+          color: #303030;
+        }
+        &:not(:first-child) {
+          margin-top: 20px;
+        }
       }
     }
   }
@@ -3614,7 +3688,7 @@ button {
         }
       }
       &:hover {
-        background-color: #00b577;
+        background-color: #576e33;
         color: #fff;
       }
     }
@@ -3716,18 +3790,18 @@ button {
     @media screen and (max-width: 576px) {
       width: 100% !important;
     }
-    background: #00b577;
+    background: #576e33;
     color: #fff;
     font-size: 18px;
     font-weight: 600;
     text-transform: capitalize;
     padding: 8px 40px;
     border-radius: 8px;
-    border: 2px solid #00b577;
+    border: 2px solid #576e33;
     transition: all 0.5s linear;
     &:hover {
       background: transparent;
-      color: #00b577;
+      color: #576e33;
     }
   }
 }
@@ -3757,6 +3831,6 @@ button {
   border: none !important;
   font-size: 22px;
   &:hover {
-    color: #00b577;
+    color: #576e33;
   }
 }

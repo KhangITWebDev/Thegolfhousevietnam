@@ -13,7 +13,7 @@ module.exports = async (phase, { defaultConfig }) => {
       domains: [
         "api.fostech.vn",
         "d25k1955sgf0bb.cloudfront.net",
-        "alba-web-holding.herokuapp.com",
+        "thegolfhousevietnam.com",
         "flagcdn.com",
         "hrms-lio.fostech.vn",
       ],

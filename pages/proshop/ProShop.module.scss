@@ -45,14 +45,14 @@
         color: #fff;
       }
       button {
-        background: #00b577;
+        background: #576e33;
         color: #fff;
         font-size: 16px;
         font-weight: 700;
         text-transform: capitalize;
         padding: 8px 40px;
         margin-bottom: 120px;
-        border: 2px solid #00b577;
+        border: 2px solid #576e33;
         transition: all 0.3s linear;
         &:hover {
           background: transparent;
@@ -133,7 +133,7 @@
             color: #000;
             cursor: pointer;
             &:hover {
-              color: #00b577;
+              color: #576e33;
             }
           }
           p {
@@ -264,8 +264,8 @@
           font-size: 12px;
           line-height: 1.3;
           &:hover {
-            border: 1px solid #00b577;
-            color: #00b577;
+            border: 1px solid #576e33;
+            color: #576e33;
           }
         }
       }

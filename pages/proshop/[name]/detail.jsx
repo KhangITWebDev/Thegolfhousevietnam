@@ -56,7 +56,7 @@ function Detail(props) {
   }, []);
   const handleAddToCart = (item) => {
     const cart = getLocalStorage(LOCAL_STORAGE.CART);
-    if (cart) {
+    if (cart.length > 0) {
       const find = cart.findIndex((x) => x._id === item._id);
       if (find < 0) {
         cart.push({ ...item, qty: qty });
@@ -66,9 +66,61 @@ function Detail(props) {
         setLocalStorage(LOCAL_STORAGE.CART, cart);
       }
     } else {
-      setLocalStorage(LOCAL_STORAGE.CART, { ...item, qty: qty });
+      setLocalStorage(LOCAL_STORAGE.CART, [{ ...item, qty: qty }]);
     }
   };
+  useEffect(() => {
+    $("#add-cart").on("click", function () {
+      var cart = $(".cart");
+      var imgtodrag = $("#image-proshop-detail").eq(0);
+      console.log($("#image-proshop-detail").eq(0));
+      if (imgtodrag) {
+        var imgclone = imgtodrag
+          .clone()
+          .offset({
+            top: imgtodrag.offset().top,
+            left: imgtodrag.offset().left,
+          })
+          .css({
+            opacity: "0.5",
+            position: "absolute",
+            height: "150px",
+            width: "150px",
+            "z-index": "",
+          })
+          .appendTo($("body"))
+          .animate(
+            {
+              top: cart.offset().top + 10,
+              left: cart.offset().left + 10,
+              width: 75,
+              height: 75,
+            },
+            1000,
+            "easeInOutExpo"
+          );
+        setTimeout(function () {
+          cart.effect(
+            "shake",
+            {
+              times: 2,
+            },
+            200
+          );
+        }, 1500);
+        imgclone.animate(
+          {
+            width: 0,
+            height: 0,
+          },
+          function () {
+            $(this).detach();
+          }
+        );
+      }
+    });
+  }, []);
+
   return (
     <div className={styles.detail_page}>
       <div className="container">
@@ -88,7 +140,7 @@ function Detail(props) {
                 .fill()
                 .map((item, index) => (
                   <SwiperSlide key={index}>
-                    <div className="image">
+                    <div className="image" id="image-proshop-detail">
                       <Image
                         alt="Image"
                         src="/images/Logo/Logo2.png"
@@ -126,8 +178,12 @@ function Detail(props) {
                 ></i>
               </div>
               <div className="button">
-                <button onClick={() => handleAddToCart(proshopDetail)}>
+                <button
+                  onClick={() => handleAddToCart(proshopDetail)}
+                  id="add-cart"
+                >
                   Thêm vào giỏ hàng
+                  <span className="cart-item"></span>
                 </button>
               </div>
               <i className="fa-light fa-heart"></i>

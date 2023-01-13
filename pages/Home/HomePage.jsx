@@ -19,17 +19,25 @@ import { removeAccents, time } from "../../utils/function";
 import styles from "./Home.module.scss";
 const PHONE_REGEX = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i;
 const schema = yup.object().shape({
-  name: yup.string().required("Họ tên là trường bắt buộc"),
+  name: yup.string().required("Vui lòng điền họ tên"),
   phone: yup
     .string()
-    .required("Số điện thoại là trường bắt buộc")
+    .required("Vui lòng điền số điện thoại")
     .min(10, "Số điện thoại phải nhiều hơn 9 ký tự")
     .max(12, "Sô điện thoại phải ít hơn 12 ký tự")
     .matches(PHONE_REGEX, "Số điện thoại không hợp lệ"),
   email: yup
     .string()
     .email("Email không hợp lệ")
-    .required("Email là trường bắt buộc"),
+    .required("Vui lòng điền email"),
+  job: yup
+    .object()
+    .shape({
+      label: yup.string().required("Vui lòng chọn nghề nghiệp"),
+      value: yup.string().required("Vui lòng chọn nghề nghiệp"),
+    })
+    .nullable()
+    .required("Vui lòng chọn nghề nghiệp"),
 });
 function HomePage(props) {
   const {
@@ -43,7 +51,6 @@ function HomePage(props) {
     resolver: yupResolver(schema),
   });
   const onSubmit = (data) => {
-    console.log(data);
     handleOpen5();
   };
   const { news } = useSelector((state) => state.NewsReducer);
@@ -246,6 +253,7 @@ function HomePage(props) {
                   register={register}
                   onSubmit={onSubmit}
                   control={control}
+                  reset={reset}
                   handleSubmit={handleSubmit}
                   handleClose={handleClose1}
                   handleOpen5={handleOpen5}

@@ -1,3 +1,4 @@
+import { da } from "date-fns/locale";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -168,6 +169,41 @@ function ProShop(props) {
       data.setCurrentPage(1);
     }
   };
+  const sort = (value) => {
+    data.setCurrentPage(1);
+    switch (value) {
+      case "1": {
+        const Newest = [...proshopData].sort(
+          (a, b) => new Date(b.date_created) - new Date(a.date_created)
+        );
+        data.setPerData(Newest);
+        break;
+      }
+      case "2": {
+        const lostest = [...proshopData].sort(
+          (a, b) => new Date(a.date_created) - new Date(b.date_created)
+        );
+        data.setPerData(lostest);
+        break;
+      }
+      case "3": {
+        const Newest = [...proshopData].sort(
+          (a, b) => b.gia_ban_le - a.gia_ban_le
+        );
+        data.setPerData(Newest);
+        break;
+      }
+      case "4": {
+        const price = [...proshopData].sort(
+          (a, b) => a.gia_ban_le - b.gia_ban_le
+        );
+        data.setPerData(price);
+        break;
+      }
+      default:
+        break;
+    }
+  };
   const { contents } = useSelector((state) => state.ContentReducer);
   useEffect(() => {
     dispatch(getContentData());
@@ -242,6 +278,7 @@ function ProShop(props) {
                 <Select
                   options={options}
                   styles={customStyles}
+                  onChange={({ value }) => sort(value)}
                   defaultValue={options[0]}
                   components={{ DropdownIndicator }}
                 />
@@ -282,6 +319,7 @@ function ProShop(props) {
                         {item.ten_vt}
                       </h5>
                       <p>{item.gia_ban_le.toLocaleString("vi-VI")} VND</p>
+                      <p>{item.date_created}</p>
                     </div>
                   </div>
                 ))

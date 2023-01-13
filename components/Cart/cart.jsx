@@ -98,7 +98,7 @@ function Cart({ handleCloseCart }) {
               }
             >
               <i className="fa-light fa-bag-shopping"></i>
-              <p>Không có sản phẩm trong giỏ hàng</p>
+              <p className="text-center">Không có sản phẩm trong giỏ hàng</p>
             </div>
           )}
         </div>

@@ -20,6 +20,7 @@ import Sucess from "../../components/Modal/Sucess";
 import SucessTrial from "../../components/Modal/SucessTrial";
 import { getCourseData } from "../../store/redux/CourseReducer/course.action";
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
+import { LoginAsMember } from "../../store/redux/LoginReducer/login.action";
 import styles from "./Course.module.scss";
 const slideCourse = [
   {
@@ -116,17 +117,17 @@ const options = [
 ];
 const PHONE_REGEX = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i;
 const schema = yup.object().shape({
-  name: yup.string().required("Vui lòng điền họ tên"),
+  name: yup.string().required("Vui lòng nhập họ tên"),
   phone: yup
     .string()
-    .required("Vui lòng điền số điện thoại")
+    .required("Vui lòng nhập số điện thoại")
     .min(10, "Số điện thoại phải nhiều hơn 9 ký tự")
     .max(12, "Sô điện thoại phải ít hơn 12 ký tự")
     .matches(PHONE_REGEX, "Số điện thoại không hợp lệ"),
   email: yup
     .string()
     .email("Email không hợp lệ")
-    .required("Vui lòng điền email"),
+    .required("Vui lòng nhập email"),
   job: yup
     .object()
     .shape({
@@ -137,10 +138,11 @@ const schema = yup.object().shape({
     .required("Vui lòng chọn nghề nghiệp"),
 });
 const schema2 = yup.object().shape({
-  email: yup
-    .string()
-    .email("Email không hợp lệ")
-    .required("Email là trường bắt buộc"),
+  // email: yup
+  //   .string()
+  //   .email("Email không hợp lệ")
+  //   .required("vui lòng nhập email"),
+  phone: yup.string().required("Vui lòng nhập số điện thoại"),
   password: yup.string().required("Mật khẩu là trường bắt buộc"),
 });
 function Course(props) {
@@ -167,7 +169,13 @@ function Course(props) {
     handleOpen5();
   };
   const onSubmit2 = (data) => {
-    router.push("/booking");
+    dispatch(
+      LoginAsMember({
+        username: data.phone,
+        password: data.password,
+      })
+    );
+    // router.push("/booking");
   };
   const [value, setValue] = useState(moment());
   const [startDate, setStartDate] = useState(new Date());

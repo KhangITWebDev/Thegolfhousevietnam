@@ -162,7 +162,7 @@ function Cart(props) {
   const onSubmit = (data) => {
     console.log(data);
   };
-  const [step, setStep] = React.useState(0);
+  const [step, setStep] = React.useState(2);
   const onChange = (nextStep) => {
     setStep(nextStep < 0 ? 0 : nextStep > 3 ? 3 : nextStep);
   };
@@ -259,9 +259,9 @@ function Cart(props) {
           <>
             <div className="process-step col-10">
               <Steps current={step}>
-                <Steps.Item title="Giỏ Hàng" />
-                <Steps.Item title="Thanh Toán & Giao Hàng" />
-                <Steps.Item title="Kiểm Tra Đơn Hàng" />
+                <Steps.Item title="Giỏ hàng" />
+                <Steps.Item title="Phương thức thanh toán" />
+                <Steps.Item title="Đặt thành công" />
               </Steps>
             </div>
             {step === 0 && (
@@ -645,6 +645,50 @@ function Cart(props) {
                     <div className="button" onClick={handleSubmit(onSubmit)}>
                       <button>Đặt hàng</button>
                     </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            {step === 2 && (
+              <div className="step3">
+                <h4>Đơn hàng của bạn đã được nhận. Cảm ơn bạn đã đặt hàng</h4>
+                <div className="d-flex list-top">
+                  <div className="col-6 d-flex left">
+                    <div className="col-4 item">
+                      <span className="title">Mã đơn hàng</span>
+                      <p>20584</p>
+                    </div>
+                    <div className="col-4 item">
+                      <span className="title">Ngày</span>
+                      <p>11/01/2023</p>
+                    </div>
+                    <div className="col-4 item">
+                      <span className="title">Tổng</span>
+                      <p>720.000 VND</p>
+                    </div>
+                  </div>
+                  <div className="col-6 right">
+                    <span className="title">Phương thức thanh toán</span>
+                    <p>Tiền mặt</p>
+                  </div>
+                </div>
+                <h3>Chi tiết đơn hàng</h3>
+                <div className="view-order">
+                  <div className="item">
+                    <h6>Bóng Golf x 1</h6>
+                    <h6>720.000 VND</h6>
+                  </div>
+                  <div className="item">
+                    <h6>Địa chỉ giao hàng</h6>
+                    <h6>Quận 7, TPHCM</h6>
+                  </div>
+                  <div className="item">
+                    <h6>Phương thức thanh toán</h6>
+                    <h6>Tiền mặt</h6>
+                  </div>
+                  <div className="item">
+                    <h6>Tổng giá</h6>
+                    <h6>720.000 VND</h6>
                   </div>
                 </div>
               </div>

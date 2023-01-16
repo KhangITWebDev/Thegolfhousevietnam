@@ -20,7 +20,7 @@ function SignIn({ handleClose2, errors, register, onSubmit, handleSubmit }) {
       <Modal.Body>
         <h5>Chào mừng trở lại, vui lòng đăng nhập:</h5>
         <form action="">
-          <div className="form-group">
+          {/* <div className="form-group">
             <label htmlFor="" className="form-label">
               Email
             </label>
@@ -31,6 +31,19 @@ function SignIn({ handleClose2, errors, register, onSubmit, handleSubmit }) {
             />
             {errors?.email && (
               <Alert variant="danger">{errors?.email?.message}</Alert>
+            )}
+          </div> */}
+          <div className="form-group">
+            <label htmlFor="" className="form-label">
+              Điện thoại
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              {...register("phone")}
+            />
+            {errors?.phone && (
+              <Alert variant="danger">{errors?.phone?.message}</Alert>
             )}
           </div>
           <div className="form-group">

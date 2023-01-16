@@ -3416,18 +3416,32 @@ button {
       border-radius: 0px;
     }
     .rs-steps-item-status-wait {
+      .rs-steps-item-title {
+        color: #000;
+      }
       .rs-steps-item-icon-wrapper {
         border-radius: 0;
         background-color: #d3d3d3;
         border-color: #d3d3d3;
       }
     }
+    .rs-steps-item-title {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 1.3;
+    }
     .rs-steps-item-active,
     .rs-steps-item-status-finish {
+      .rs-steps-item-title {
+        color: #576e33;
+      }
       .rs-steps-item-icon-wrapper {
         background-color: #576e33;
         border-color: #576e33;
       }
+    }
+    .rs-steps-item-active .rs-steps-item-title {
+      color: #000;
     }
   }
   .header {
@@ -3675,7 +3689,7 @@ button {
           opacity: 0;
           top: 8px;
           cursor: pointer;
-          height: 15px;
+          height: 16px;
           width: 15px;
         }
         .checkmark {
@@ -3704,9 +3718,9 @@ button {
         }
         & .checkmark:after {
           left: 5px;
-          top: 9px;
+          top: 10px;
           width: 5px;
-          height: 9px;
+          height: 8px;
           border: solid white;
           border-width: 0 2px 2px 0;
           -webkit-transform: rotate(45deg);
@@ -3739,6 +3753,72 @@ button {
       .button {
         button {
           margin-top: 40px;
+        }
+      }
+    }
+  }
+  .step3 {
+    h4 {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+    h3 {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-top: 60px;
+    }
+    .list-top {
+      background-color: #fff;
+      padding: 20px 40px;
+      margin-top: 30px;
+      .left {
+        .item {
+          border-right: 1px dashed #b1b1b1;
+          &:not(:first-child) {
+            padding-left: 40px;
+          }
+        }
+      }
+      .right {
+        padding-left: 40px;
+      }
+      .title,
+      p {
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 1.3;
+        color: #8f8f8f;
+      }
+      p {
+        color: #000;
+      }
+    }
+    .view-order {
+      background-color: #fff;
+      padding: 40px 30px;
+      margin-top: 25px;
+      margin-bottom: 50px;
+      .item {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 2px solid #d9d9d9;
+        padding-bottom: 20px;
+        h6 {
+          font-size: 18px;
+          font-weight: 600;
+          line-height: 1.3;
+          color: #303030;
+        }
+        &:not(:first-child) {
+          margin-top: 20px;
+        }
+        &:last-child {
+          border-bottom: 0px solid #bababa;
+          h6 {
+            color: #576e33;
+          }
         }
       }
     }

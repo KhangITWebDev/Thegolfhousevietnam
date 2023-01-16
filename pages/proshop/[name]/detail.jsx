@@ -10,6 +10,7 @@ import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { getProshopData } from "../../../store/redux/ProshopReducer/proshop.action";
 import { removeAccents } from "../../../utils/function";
+import * as yup from "yup";
 import {
   getLocalStorage,
   LOCAL_STORAGE,
@@ -17,6 +18,14 @@ import {
 } from "../../../utils/handleStorage";
 import styles from "./detail.module.scss";
 import TabDescription from "./TabDescription/TabDescription";
+const schema2 = yup.object().shape({
+  // email: yup
+  //   .string()
+  //   .email("Email không hợp lệ")
+  //   .required("vui lòng nhập email"),
+  phone: yup.string().required("Vui lòng nhập số điện thoại"),
+  password: yup.string().required("Mật khẩu là trường bắt buộc"),
+});
 function Detail(props) {
   const router = useRouter();
   const proshopDetail = useSelector((state) =>

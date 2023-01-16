@@ -7,7 +7,7 @@ const trainerClientAxios = axios.create({
   baseURL: "https://hrms-lio.fostech.vn",
   timeout: 20000,
   headers: {
-    // "content-type": "application/json",
+    "content-type": "application/json",
     // "Access-Control-Allow-Origin": "*",
   },
   paramsSerializer: (params) => queryString.stringify(params),

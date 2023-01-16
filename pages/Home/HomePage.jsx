@@ -19,17 +19,17 @@ import { removeAccents, time } from "../../utils/function";
 import styles from "./Home.module.scss";
 const PHONE_REGEX = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i;
 const schema = yup.object().shape({
-  name: yup.string().required("Vui lòng điền họ tên"),
+  name: yup.string().required("Vui lòng nhập họ tên"),
   phone: yup
     .string()
-    .required("Vui lòng điền số điện thoại")
+    .required("Vui lòng nhập số điện thoại")
     .min(10, "Số điện thoại phải nhiều hơn 9 ký tự")
     .max(12, "Sô điện thoại phải ít hơn 12 ký tự")
     .matches(PHONE_REGEX, "Số điện thoại không hợp lệ"),
   email: yup
     .string()
     .email("Email không hợp lệ")
-    .required("Vui lòng điền email"),
+    .required("Vui lòng nhập email"),
   job: yup
     .object()
     .shape({

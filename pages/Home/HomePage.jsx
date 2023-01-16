@@ -173,8 +173,10 @@ function HomePage(props) {
                             data-aos="fade-right"
                             onClick={(e) =>
                               item.link.length > 0 && item.link != ""
-                                ? router.push(item.link)
-                                : commingSoon(e)
+                                ? !item.cua_so_moi
+                                  ? router.push(item.link)
+                                  : window.open(item.link)
+                                : ""
                             }
                           >
                             {item.action}
@@ -435,7 +437,21 @@ function HomePage(props) {
                     className={styles.info + " " + "h-100 d-flex flex-column"}
                   >
                     <div>
-                      <div className={styles.image}>
+                      <div
+                        className={styles.image}
+                        onClick={() => {
+                          router.push(
+                            `/news-events/${removeAccents(item.title)}`
+                          );
+                          localStorage.setItem("newsId", item._id);
+                          localStorage.setItem(
+                            "newsTime",
+                            new Date().toLocaleString("en-US", {
+                              timeZone: "Asia/Ho_Chi_Minh",
+                            })
+                          );
+                        }}
+                      >
                         <Image
                           alt={"Image" + index + 1}
                           loader={({ src }) =>

@@ -94,6 +94,7 @@
     }
     .product {
       .item {
+        cursor: pointer;
         .image {
           position: relative;
           z-index: -1 !important;

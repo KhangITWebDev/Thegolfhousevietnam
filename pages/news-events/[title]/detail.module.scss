@@ -1,5 +1,5 @@
 .detail_page {
-  padding-top: 140px;
+  padding-top: 100px;
   .banner {
     position: relative;
     height: 500px;
@@ -269,6 +269,7 @@
         .info {
           .image {
             position: relative;
+            cursor: pointer;
             height: 240px;
             width: 100%;
             img {

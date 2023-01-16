@@ -18,6 +18,7 @@ import {
 import { Alert } from "react-bootstrap";
 import Select, { components } from "react-select";
 const { Column, HeaderCell, Cell } = Table;
+import $ from "jquery";
 
 const customStyles = {
   option: (provided, state) => ({
@@ -183,6 +184,16 @@ function Cart(props) {
     (accumulator, current) => accumulator + current.gia_ban_le * current.qty,
     initialValue
   );
+  $("input:checkbox").on("click", function () {
+    var $box = $(this);
+    if ($box.is(":checked")) {
+      var group = "input:checkbox[name='" + $box.attr("name") + "']";
+      $(group).prop("checked", false);
+      $box.prop("checked", true);
+    } else {
+      $box.prop("checked", false);
+    }
+  });
   const [qty, setQty] = useState(1);
   const decreasement = () => {
     setQty(qty - 1);
@@ -414,6 +425,19 @@ function Cart(props) {
                   <form action="" onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-group">
                       <label htmlFor="" className="form-label">
+                        Họ tên
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        {...register("name")}
+                      />
+                      {errors?.name && (
+                        <Alert variant="danger">{errors?.name?.message}</Alert>
+                      )}
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="" className="form-label">
                         Tỉnh/Thành phố
                       </label>
                       <Controller
@@ -538,8 +562,16 @@ function Cart(props) {
                         <Alert variant="danger">{errors?.email?.message}</Alert>
                       )}
                     </div>
-                    <div className="button">
-                      <button>Xác nhận</button>
+                    <div className="form-group">
+                      <label htmlFor="" className="form-label">
+                        Ghi chú
+                      </label>
+                      <textarea
+                        type="text"
+                        rows={8}
+                        className="form-control"
+                        {...register("note")}
+                      />
                     </div>
                   </form>
                 </div>
@@ -561,33 +593,56 @@ function Cart(props) {
                   </div>
                   <h5>Phương thức thanh toán</h5>
                   <div className="checkout">
-                    <RadioGroup name="radioList" inline>
-                      <Radio value="A">
-                        <div>
-                          <h6>Thanh toán tiền mặt</h6>
-                          <p>Thanh toán khi nhận hàng</p>
+                    <label className="item">
+                      <input type="checkbox" name="checkout" id="" />
+                      <span className="checkmark"></span>
+                      <div className="content">
+                        <h6>Thanh toán tiền mặt</h6>
+                        <p>Thanh toán khi nhận hàng</p>
+                      </div>
+                    </label>
+                    <label className="item">
+                      <input type="checkbox" name="checkout" id="" />
+                      <span className="checkmark"></span>
+                      <div className="box-item">
+                        <div className="content">
+                          <h6>Ví điện tử</h6>
+                          <p>Quét mã QR</p>
                         </div>
-                      </Radio>
-                      <Radio value="B">
-                        <div>
-                          <div>
-                            <h6>Ví điện tử</h6>
-                            <p>Quét mã QR</p>
-                          </div>
-                          <div>
-                            <h6>Ví điện tử</h6>
-                            <p>Quét mã QR</p>
-                          </div>
+                        <div className="image">
+                          <Image
+                            alt="Image momo"
+                            src="/images/Cart/momo.png"
+                            width={36}
+                            height={36}
+                            objectFit="cover"
+                          />
+                          <Image
+                            alt="Image momo"
+                            src="/images/Cart/zalo.png"
+                            width={36}
+                            height={36}
+                            objectFit="cover"
+                          />
+                          <Image
+                            alt="Image momo"
+                            src="/images/Cart/shopeepay.png"
+                            width={36}
+                            height={36}
+                            objectFit="cover"
+                          />
                         </div>
-                      </Radio>
-                      <Radio value="C">
-                        <div>
-                          <h6>Tài khoản ngân hàng</h6>
-                          <p>Quét mã QR hoặc chuyển khoản đến tài khoản</p>
-                        </div>
-                      </Radio>
-                    </RadioGroup>
-                    <div className="button">
+                      </div>
+                    </label>
+                    <label className="item">
+                      <input type="checkbox" name="checkout" id="" />
+                      <span className="checkmark"></span>
+                      <div className="content">
+                        <h6>Tài khoản ngân hàng</h6>
+                        <p>Quét mã QR hoặc chuyển khoản đến tài khoản</p>
+                      </div>
+                    </label>
+                    <div className="button" onClick={handleSubmit(onSubmit)}>
                       <button>Đặt hàng</button>
                     </div>
                   </div>

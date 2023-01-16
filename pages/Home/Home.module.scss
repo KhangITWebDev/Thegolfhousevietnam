@@ -445,6 +445,7 @@
         .info {
           .image {
             position: relative;
+            cursor: pointer;
             height: 240px;
             width: 100%;
             img {
@@ -479,6 +480,9 @@
           }
         }
       }
+    }
+    button {
+      margin-top: 40px;
     }
   }
 }

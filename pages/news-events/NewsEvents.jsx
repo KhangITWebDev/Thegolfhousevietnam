@@ -60,7 +60,21 @@ function NewsEvents(props) {
                     className={"d-flex flex-wrap" + " " + styles.item}
                     key={index}
                   >
-                    <div className={"col-12 col-sm-6" + " " + styles.image}>
+                    <div
+                      className={"col-12 col-sm-6" + " " + styles.image}
+                      onClick={() => {
+                        router.push(
+                          `/news-events/${removeAccents(item.title)}`
+                        );
+                        localStorage.setItem("newsId", item._id);
+                        localStorage.setItem(
+                          "newsTime",
+                          new Date().toLocaleString("en-US", {
+                            timeZone: "Asia/Ho_Chi_Minh",
+                          })
+                        );
+                      }}
+                    >
                       <Image
                         loader={({ src }) =>
                           `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`

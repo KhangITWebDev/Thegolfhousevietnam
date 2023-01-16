@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import CountUp from "react-countup";
@@ -9,6 +10,7 @@ import { getBannerData } from "../../store/redux/Banner/banner.action";
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
 import styles from "./Academy.module.scss";
 function Academy(props) {
+  const router = useRouter();
   const [swiper, setSwiper] = useState(null);
   const [activeSlide, setActiveSlide] = useState(0);
   const dispatch = useDispatch();
@@ -365,7 +367,14 @@ function Academy(props) {
               <div>
                 <button
                   onClick={() => {
-                    window.open(sectionLocation[0]?.url_button);
+                    if (sectionLocation[0]?.show_buton) {
+                      if (sectionLocation[0]?.open_page) {
+                        window.open(sectionLocation[0]?.url_button);
+                      } else {
+                        router.push(sectionLocation[0]?.url_button);
+                      }
+                    } else {
+                    }
                   }}
                   className="btn-content"
                   data-aos="fade-right"

@@ -274,6 +274,20 @@ button {
     background-color: #f8ab0c;
   }
 }
+#detail-page {
+  .rs-loader-wrapper {
+    margin-top: 40px;
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+  }
+  .rs-loader-content {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: #000;
+  }
+}
 #pro-shop {
   .rs-loader-wrapper {
     margin-top: 40px;
@@ -282,7 +296,7 @@ button {
     justify-content: center;
   }
   .rs-loader-content {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 400;
     line-height: 1.3;
     color: #000;
@@ -846,12 +860,6 @@ button {
 #SignIn,
 #Booking,
 .rs-modal {
-  .alert-danger {
-    padding: 5px 15px;
-    font-size: 12px;
-    font-weight: 500;
-    margin-top: 10px;
-  }
   .rs-steps-horizontal {
     padding: 50px 0px;
   }
@@ -862,6 +870,7 @@ button {
   input {
     padding: 12px;
     width: 100%;
+    border-radius: 6px;
     padding-left: 50px !important;
     color: rgba(0, 0, 0, 0.4);
     border: 2px solid #c7c7c7;
@@ -2295,6 +2304,7 @@ button {
     margin-top: 50px;
     .content {
       height: 100%;
+      cursor: pointer;
       h5 {
         font-size: 24px;
         font-weight: 700;
@@ -2816,6 +2826,12 @@ button {
   border-radius: 4px !important;
 }
 .form-group {
+  .alert-danger {
+    padding: 5px 15px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 10px;
+  }
   &:first-child {
     margin-top: 25px;
   }
@@ -3281,7 +3297,7 @@ button {
           &:last-child {
             margin-left: 5px;
             &:hover {
-              color: #c862dc;
+              color: #1da1f2;
             }
           }
           &:nth-child(2) {
@@ -3291,7 +3307,7 @@ button {
           }
           &:nth-child(3) {
             &:hover {
-              color: #1da1f2;
+              color: #c862dc;
             }
           }
           &:not(:first-child),
@@ -3397,11 +3413,17 @@ button {
       flex-basis: auto !important;
     }
     .rs-steps-item-icon-wrapper {
-      border-radius: 0;
-      background-color: #3a3838;
-      border-color: #3a3838;
+      border-radius: 0px;
     }
-    .rs-steps-item-active {
+    .rs-steps-item-status-wait {
+      .rs-steps-item-icon-wrapper {
+        border-radius: 0;
+        background-color: #d3d3d3;
+        border-color: #d3d3d3;
+      }
+    }
+    .rs-steps-item-active,
+    .rs-steps-item-status-finish {
       .rs-steps-item-icon-wrapper {
         background-color: #576e33;
         border-color: #576e33;
@@ -3638,11 +3660,59 @@ button {
       padding: 40px 30px;
       margin-top: 25px;
       margin-bottom: 50px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
       .item {
         display: flex;
-        justify-content: space-between;
         border-bottom: 2px solid #bababa;
         padding-bottom: 20px;
+        position: relative;
+        input[type="checkbox"] {
+          position: absolute;
+          z-index: 2000;
+          opacity: 0;
+          top: 8px;
+          cursor: pointer;
+          height: 15px;
+          width: 15px;
+        }
+        .checkmark {
+          // position: absolute;
+          margin-top: 8px;
+          border-radius: 3px;
+          height: 15px;
+          width: 15px;
+          background-color: #fff;
+          border: 1px solid #bababa;
+        }
+        &:hover input ~ .checkmark {
+          background-color: #ccc;
+        }
+        & input:checked ~ .checkmark {
+          background-color: #576e33;
+          border-color: #576e33;
+        }
+        .checkmark:after {
+          content: "";
+          position: absolute;
+          display: none;
+        }
+        & input:checked ~ .checkmark:after {
+          display: block;
+        }
+        & .checkmark:after {
+          left: 5px;
+          top: 9px;
+          width: 5px;
+          height: 9px;
+          border: solid white;
+          border-width: 0 2px 2px 0;
+          -webkit-transform: rotate(45deg);
+          -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+        }
         h6 {
           font-size: 18px;
           font-weight: 500;
@@ -3651,6 +3721,24 @@ button {
         }
         &:not(:first-child) {
           margin-top: 20px;
+        }
+        .content {
+          margin-left: 15px;
+        }
+      }
+      .box-item {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        .image {
+          img {
+            padding-left: 15px !important;
+          }
+        }
+      }
+      .button {
+        button {
+          margin-top: 40px;
         }
       }
     }
@@ -3833,4 +3921,14 @@ button {
   &:hover {
     color: #576e33;
   }
+}
+#footer {
+  .col {
+    @media screen {
+      width: calc(100% / 4);
+    }
+  }
+}
+.swal2-container {
+  z-index: 3010 !important;
 }

@@ -155,7 +155,19 @@ function Detail(props) {
                 className={"col-12 col-sm-6 col-lg-4" + " " + styles.item}
               >
                 <div className={styles.info}>
-                  <div className={styles.image}>
+                  <div
+                    className={styles.image}
+                    onClick={() => {
+                      router.push(`/news-events/${removeAccents(item.title)}`);
+                      localStorage.setItem("newsId", item._id);
+                      localStorage.setItem(
+                        "newsTime",
+                        new Date().toLocaleString("en-US", {
+                          timeZone: "Asia/Ho_Chi_Minh",
+                        })
+                      );
+                    }}
+                  >
                     <Image
                       loader={({ src }) =>
                         `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`

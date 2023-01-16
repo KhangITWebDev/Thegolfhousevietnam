@@ -2,6 +2,7 @@
   margin-bottom: 80px;
   padding-top: 140px;
   .item {
+    cursor: pointer;
     margin-top: 30px;
     &:nth-child(1),
     &:nth-child(4) {
@@ -71,5 +72,8 @@
         margin-top: 5px;
       }
     }
+  }
+  button {
+    margin-top: 40px;
   }
 }

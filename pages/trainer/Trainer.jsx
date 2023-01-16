@@ -2,6 +2,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal, Progress } from "rsuite";
+import Swal from "sweetalert2";
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
 import { getTrainerData } from "../../store/redux/Trainer/trainer.action";
 import styles from "./Trainer.module.scss";
@@ -11,6 +12,16 @@ function Trainer(props) {
   const handleOpen = (index) => {
     setOpen(true);
     setShowDetailIndex(index);
+  };
+  const commingSoon = (e) => {
+    e.preventDefault();
+    Swal.fire({
+      title: "Comming Soon",
+      text: "We are comming soon",
+      icon: "warning",
+      showCancelButton: false,
+      confirmButtonText: "OK",
+    });
   };
   const handleClose = () => setOpen(false);
   const { trainers } = useSelector((state) => state.TrainerReducer);
@@ -45,6 +56,7 @@ function Trainer(props) {
             <div
               key={index}
               className={"col-12 col-lg-4 col-md-6" + " " + styles.item}
+              onClick={() => handleOpen(index)}
               data-aos={
                 index === 0
                   ? "fade-right"
@@ -73,7 +85,6 @@ function Trainer(props) {
               </div>
               <div className={styles.info}>
                 <h3
-                  onClick={() => handleOpen(index)}
                   data-aos={
                     index === 0
                       ? "fade-right"
@@ -122,10 +133,21 @@ function Trainer(props) {
                   />
                 </div>
                 <div className="social d-flex">
-                  <i className="fa-brands fa-facebook-f"></i>
-                  <i className="fa-brands fa-youtube"></i>
-                  <i className="fa-brands fa-twitter"></i>
-                  <i className="fa-brands fa-instagram"></i>
+                  {trainers[showDetailIndex]?.socail_list?.map(
+                    (item, index) => (
+                      <i
+                        key={index}
+                        onClick={(e) =>
+                          item.link.length > 0 && item.link !== ""
+                            ? window.open(item.link)
+                            : commingSoon(e)
+                        }
+                        className={`fa-brands fa-${
+                          item.name === "facebook" ? "facebook-f" : item.name
+                        }`}
+                      ></i>
+                    )
+                  )}
                 </div>
               </div>
               <div className="col-12 col-lg-12 right">

@@ -301,6 +301,9 @@ function ProShop(props) {
                         " " +
                         "d-flex flex-column align-items-center"
                       }
+                      onClick={() =>
+                        router.push(`/proshop/${removeAccents(item.ten_vt)}`)
+                      }
                     >
                       <div className={styles.image} style={{ zIndex: 1003 }}>
                         <Image
@@ -311,13 +314,7 @@ function ProShop(props) {
                           objectFit="cover"
                         ></Image>
                       </div>
-                      <h5
-                        onClick={() =>
-                          router.push(`/proshop/${removeAccents(item.ten_vt)}`)
-                        }
-                      >
-                        {item.ten_vt}
-                      </h5>
+                      <h5>{item.ten_vt}</h5>
                       <p>{item.gia_ban_le.toLocaleString("vi-VI")} VND</p>
                     </div>
                   </div>

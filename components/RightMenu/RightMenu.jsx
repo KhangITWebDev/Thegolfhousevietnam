@@ -60,8 +60,8 @@ function RightMenu({ handleCloseRightMenu }) {
           </div>
         </div>
         <div className={styles.footer}>
-          <p>(+84) 274 035 723</p>
-          <span>info@lio.com</span>
+          <p>(+84) 909 337 777</p>
+          <span>admin@thegolfhousevietnam.com</span>
         </div>
       </div>
     </div>

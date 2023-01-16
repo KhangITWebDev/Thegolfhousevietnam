@@ -119,7 +119,7 @@ export default function HeaderAccademy({
                       router.push("/trainer");
                     }}
                   >
-                    HLV
+                    Huấn Luyện Viên
                   </Nav.Item>
                   <Nav.Menu
                     title="Đào Tạo"

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
@@ -21,6 +22,7 @@ function ContactUs(props) {
   const sectionBannerContact = contents.filter(
     (item) => item.category === "63bc470139d2a23b06d8f551"
   );
+  const router = useRouter();
   return (
     <div className={styles.contact_page}>
       <div className="heading" data-aos="fade-up">
@@ -31,7 +33,19 @@ function ContactUs(props) {
           <div className="d-flex flex-wrap justify-content-center">
             {sectionContactList.slice(0, 3).map((item, index) => (
               <div key={index} className="item col-12 col-sm-6 col-lg-4">
-                <div className="content h-100 d-flex flex-column align-items-center">
+                <div
+                  className="content h-100 d-flex flex-column align-items-center"
+                  onClick={() => {
+                    if (item.show_buton) {
+                      if (item.open_page) {
+                        window.open(item.url_button);
+                      } else {
+                        router.push(item.url_button);
+                      }
+                    } else {
+                    }
+                  }}
+                >
                   <div
                     className="image"
                     data-aos={

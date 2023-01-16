@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import CountUp from "react-countup";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigation, Pagination } from "swiper";
+import { Autoplay, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { getBannerData } from "../../store/redux/Banner/banner.action";
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
@@ -117,7 +117,11 @@ function Academy(props) {
                 spaceBetween={30}
                 loop={true}
                 pagination={false}
-                modules={[Pagination, Navigation]}
+                autoplay={{
+                  delay: 5000,
+                  disableOnInteraction: false,
+                }}
+                modules={[Pagination, Navigation, Autoplay]}
                 className="mySwiper"
                 onSwiper={(s) => {
                   setSwiper(s);

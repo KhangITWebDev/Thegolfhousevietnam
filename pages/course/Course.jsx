@@ -1,6 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { vi } from "date-fns/locale"; // the locale you want
 import $ from "jquery";
+import Cookies from "js-cookie";
 import moment from "moment";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -9,9 +10,11 @@ import { registerLocale } from "react-datepicker";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import Select, { components } from "react-select";
+import Swal from "sweetalert2";
 import { Autoplay, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import * as yup from "yup";
+import loginClientAxios from "../../clientAxios/loginClientAxios";
 import CheckInfo from "../../components/Modal/CheckInfo";
 import SignIn from "../../components/Modal/SignIn";
 import SignUp from "../../components/Modal/SignUp";
@@ -168,14 +171,22 @@ function Course(props) {
   const onSubmit = (data) => {
     handleOpen5();
   };
-  const onSubmit2 = (data) => {
-    dispatch(
-      LoginAsMember({
-        username: data.phone,
-        password: data.password,
-      })
-    );
-    // router.push("/booking");
+  const onSubmit2 = async (data) => {
+    const resApi = await loginClientAxios.post("/user/login", {
+      username: data.phone,
+      password: data.password,
+    });
+    if (resApi.result?.message?.length > 0) {
+      Swal.fire({
+        text: `${resApi.result.message}`,
+        icon: "error",
+        showCancelButton: false,
+        confirmButtonText: "OK",
+      });
+    } else if (resApi.result) {
+      Cookies.set("access_token", resApi.result.access_token);
+      router.push("/booking");
+    }
   };
   const [value, setValue] = useState(moment());
   const [startDate, setStartDate] = useState(new Date());
@@ -211,6 +222,7 @@ function Course(props) {
     setOpen4(false);
     setOpen5(false);
   };
+  const token = Cookies.get("access_token");
   const handleClose2 = () => setOpen2(false);
   const [open3, setOpen3] = React.useState(false);
   const handleOpen3 = () => {
@@ -794,7 +806,15 @@ function Course(props) {
                       styles.tool
                     }
                   >
-                    <button onClick={handleOpen2}>
+                    <button
+                      onClick={() => {
+                        if (!token || token?.length < 0 || token === "") {
+                          handleOpen2();
+                        } else {
+                          router.push("/booking");
+                        }
+                      }}
+                    >
                       Booking <i className="fa-light fa-arrow-right"></i>
                     </button>
                   </div>

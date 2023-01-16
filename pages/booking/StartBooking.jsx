@@ -1,7 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import Cookies from "js-cookie";
 import moment from "moment/moment";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { Alert } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { Steps } from "rsuite";
@@ -32,10 +34,16 @@ function StartBooking() {
   } = useForm({
     resolver: yupResolver(schema),
   });
+  const token = Cookies.get("access_token");
   const router = useRouter();
   const [value, setValue] = useState(moment());
   const [step, setStep] = useState(0);
   const [status, setStatus] = useState("success");
+  useEffect(() => {
+    if (!token || token?.length < 0 || token === "") {
+      router.back();
+    }
+  }, []);
   const onChange = (nextStep) => {
     setStep(nextStep < 0 ? 0 : nextStep > 3 ? 3 : nextStep);
   };

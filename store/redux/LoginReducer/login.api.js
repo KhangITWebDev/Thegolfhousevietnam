@@ -18,19 +18,19 @@
 //     };
 //   }
 
+import Cookies from "js-cookie";
 import loginClientAxios from "../../../clientAxios/loginClientAxios";
 
 // };
 const LoginAPI = async (data) => {
   try {
-    console.log(loginClientAxios);
     const resApi = await loginClientAxios.post("/user/login", data);
-    console.log("ResApi", resApi);
-    if (resApi)
+    if (resApi) {
       return {
         success: true,
         data: resApi,
       };
+    }
     return {
       success: false,
       data: null,

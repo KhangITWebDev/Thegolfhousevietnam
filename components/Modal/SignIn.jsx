@@ -1,8 +1,22 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { Alert } from "react-bootstrap";
-import { Modal } from "rsuite";
-function SignIn({ handleClose2, errors, register, onSubmit, handleSubmit }) {
+import { Loader, Modal } from "rsuite";
+function SignIn({
+  handleClose2,
+  errors,
+  register,
+  onSubmit,
+  handleSubmit,
+  loading,
+  reset,
+}) {
+  useEffect(() => {
+    reset({
+      phone: "",
+      password: "",
+    });
+  }, []);
   return (
     <Modal
       open={true}
@@ -61,11 +75,14 @@ function SignIn({ handleClose2, errors, register, onSubmit, handleSubmit }) {
           </div>
           <div style={{ marginTop: 20 }}>
             <Link href="">
-              <a className="link">Quên mật khẩu?</a>
+              <a className="link">Quên mật khẩu</a>
             </Link>
           </div>
+
           <div className="button">
-            <button onClick={handleSubmit(onSubmit)}>Đăng nhập</button>
+            <button onClick={handleSubmit(onSubmit)}>
+              {loading ? <Loader content="Đang đăng nhập.." /> : "Đăng nhập"}
+            </button>
           </div>
         </form>
       </Modal.Body>

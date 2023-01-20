@@ -1,12 +1,14 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk from "redux-thunk";
-import DemoReducer from "../store/redux/DemoReducer/demo.reducer";
-import NewsReducer from "../store/redux/NewsEvents/news.reducer";
-import TrainerReducer from "../store/redux/Trainer/trainer.reducer";
-import ProshopReducer from "../store/redux/ProshopReducer/proshop.reducer";
-import BannerReducer from "../store/redux/Banner/banner.reducer";
-import CourseReducer from "../store/redux/CourseReducer/course.reducer";
-import ContentReducer from "../store/redux/LoadContentReducer/content.reducer";
+import DemoReducer from "./redux/DemoReducer/demo.reducer";
+import NewsReducer from "./redux/NewsEvents/news.reducer";
+import TrainerReducer from "./redux/Trainer/trainer.reducer";
+import ProshopReducer from "./redux/ProshopReducer/proshop.reducer";
+import BannerReducer from "./redux/Banner/banner.reducer";
+import CourseReducer from "./redux/CourseReducer/course.reducer";
+import ContentReducer from "./redux/LoadContentReducer/content.reducer";
+import BookingReducer from "./redux/BookingReducer/booking.reducer";
+import ProvinceReducer from "./redux/ProviceReducer/province.reducer";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -20,6 +22,8 @@ const reducer = combineReducers({
   BannerReducer,
   CourseReducer,
   ContentReducer,
+  BookingReducer,
+  ProvinceReducer,
 });
 
 export const store = createStore(

@@ -1,12 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { vi } from "date-fns/locale"; // the locale you want
 import $ from "jquery";
 import Cookies from "js-cookie";
 import moment from "moment";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { registerLocale } from "react-datepicker";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import Select, { components } from "react-select";
@@ -21,9 +19,9 @@ import SignUp from "../../components/Modal/SignUp";
 import SignUpTrial from "../../components/Modal/SignUpTrial";
 import Sucess from "../../components/Modal/Sucess";
 import SucessTrial from "../../components/Modal/SucessTrial";
+import { getLocationData } from "../../store/redux/BookingReducer/booking.action";
 import { getCourseData } from "../../store/redux/CourseReducer/course.action";
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
-import { LoginAsMember } from "../../store/redux/LoginReducer/login.action";
 import styles from "./Course.module.scss";
 const slideCourse = [
   {
@@ -98,9 +96,6 @@ const customStyles = {
     "@media screen and (max-width: 992px)": {
       fontSize: 16,
     },
-    "@media screen and (max-width: 576px)": {
-      fontSize: 16,
-    },
     fontWeight: 500,
   }),
   control: (base, state) => ({
@@ -114,6 +109,14 @@ const customStyles = {
       border: state.isFocused ? 0 : 0,
     },
   }),
+  placeholder: (base) => {
+    return {
+      ...base,
+      fontSize: 18,
+      fontWeight: 500,
+      color: "#fff",
+    };
+  },
 };
 const options = [
   { value: "1", label: "Nguyễn Cơ Thạch, An Lợi Đông, Quận 2, TP Hồ Chí Minh" },
@@ -171,27 +174,37 @@ function Course(props) {
   const onSubmit = (data) => {
     handleOpen5();
   };
+  const [loading, setLoading] = useState(false);
+  const [clickLocation, setClickLocation] = useState(false);
+  const [clickBooking, setClickBooking] = useState(false);
   const onSubmit2 = async (data) => {
+    setLoading(true);
     const resApi = await loginClientAxios.post("/user/login", {
       username: data.phone,
       password: data.password,
     });
-    if (resApi.result?.message?.length > 0) {
-      Swal.fire({
-        text: `${resApi.result.message}`,
-        icon: "error",
-        showCancelButton: false,
-        confirmButtonText: "OK",
-      });
-    } else if (resApi.result) {
-      Cookies.set("access_token", resApi.result.access_token);
-      router.push("/booking");
-    }
+    setTimeout(() => {
+      if (resApi?.result?.message?.length > 0) {
+        Swal.fire({
+          text: `${resApi.result.message}`,
+          icon: "error",
+          showCancelButton: false,
+          confirmButtonText: "OK",
+        });
+        setLoading(false);
+      } else if (resApi?.result) {
+        setLoading(false);
+        Cookies.set("access_token", resApi?.result?.access_token);
+        setOpen2(false);
+      }
+    }, 2000);
   };
-  const [value, setValue] = useState(moment());
-  const [startDate, setStartDate] = useState(new Date());
   const router = useRouter();
   const [address, setAddress] = useState();
+  const { locationList } = useSelector((state) => state.BookingReducer);
+  useEffect(() => {
+    dispatch(getLocationData());
+  }, [dispatch]);
   const [swiper2, setSwiper2] = React.useState(null);
   const [swiper3, setSwiper3] = React.useState(null);
   const [open, setOpen] = React.useState(false);
@@ -790,13 +803,33 @@ function Course(props) {
                     <span className={styles.title}>Location</span>
                     <div className="d-flex align-items-center">
                       <i className="fa-solid fa-location-dot"></i>
-                      <Select
-                        options={options}
-                        styles={customStyles}
-                        defaultValue={options[0]}
-                        components={{ DropdownIndicator }}
-                        onChange={(value) => setAddress(value.label)}
-                      />
+                      {!token || token?.length < 0 || token === "" ? (
+                        <button
+                          type="text"
+                          onClick={() => {
+                            setClickBooking(false);
+                            setClickLocation(true);
+                            handleOpen2();
+                          }}
+                        >
+                          <span> Chọn vị trí học...</span>
+                          <i
+                            className="fa-light fa-chevron-down"
+                            style={{
+                              fontSize: 24,
+                              color: "white",
+                            }}
+                          ></i>
+                        </button>
+                      ) : (
+                        <Select
+                          options={options}
+                          styles={customStyles}
+                          components={{ DropdownIndicator }}
+                          onChange={(value) => setAddress(value.label)}
+                          placeholder="Chọn địa chỉ học..."
+                        />
+                      )}
                     </div>
                   </div>
                   <div
@@ -809,9 +842,20 @@ function Course(props) {
                     <button
                       onClick={() => {
                         if (!token || token?.length < 0 || token === "") {
+                          setClickBooking(true);
+                          setClickLocation(false);
                           handleOpen2();
                         } else {
-                          router.push("/booking");
+                          if (address) {
+                            router.push("/booking");
+                          } else {
+                            Swal.fire({
+                              text: "Vui lòng chọn địa chỉ học...",
+                              icon: "error",
+                              showCancelButton: false,
+                              confirmButtonText: "OK",
+                            });
+                          }
                         }
                       }}
                     >
@@ -851,6 +895,8 @@ function Course(props) {
           onSubmit={onSubmit2}
           handleSubmit={handleSubmit2}
           handleClose2={handleClose2}
+          loading={loading}
+          reset={reset2}
         />
       )}
       {open3 && (

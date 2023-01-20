@@ -3967,9 +3967,31 @@ button {
     border-radius: 8px;
     border: 2px solid #576e33;
     transition: all 0.5s linear;
+    .rs-loader-wrapper {
+      margin-top: 0px;
+      width: 100% !important;
+      display: flex;
+      justify-content: center;
+      .rs-loader .rs-loader-spin,
+      .rs-loader .rs-loader-spin::before,
+      .rs-loader .rs-loader-spin::after {
+        width: 22px;
+        height: 22px;
+      }
+    }
+    .rs-loader-content {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.3;
+      color: #fff;
+    }
     &:hover {
       background: transparent;
       color: #576e33;
+      .rs-loader-content {
+        background: transparent;
+        color: #576e33;
+      }
     }
   }
 }

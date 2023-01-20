@@ -1,9 +1,10 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Alert } from "react-bootstrap";
 import { Controller } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import Select, { components } from "react-select";
-import { Modal } from "rsuite";
+import { Loader, Modal } from "rsuite";
+import { getProvinceData } from "../../store/redux/ProviceReducer/province.action";
 
 const DropdownIndicator = (props) => {
   return (
@@ -26,24 +27,26 @@ function ModalAddress({
   register,
   onSubmit,
   reset,
+  watch,
   handleSubmit,
   customStyles,
-  options,
-  optionCity,
-  optionDistrict,
-  optionWard,
 }) {
+  const dispatch = useDispatch();
+  const province = useSelector((state) => state.ProvinceReducer.province);
+  const district = watch("city")
+    ? province[
+        province.findIndex((x) => x.code === Number(watch("city")?.value))
+      ]?.districts
+    : [];
+  const ward =
+    watch("city") && watch("district")
+      ? district[
+          district.findIndex((x) => x.code === Number(watch("district")?.value))
+        ]?.wards
+      : [];
   useEffect(() => {
-    reset({
-      city: "",
-      district: "",
-      ward: "",
-      street: "",
-      no: "",
-      phone: "",
-      email: "",
-    });
-  }, []);
+    dispatch(getProvinceData());
+  }, [dispatch]);
   return (
     <Modal
       open={true}
@@ -60,129 +63,148 @@ function ModalAddress({
       </Modal.Header>
       <Modal.Body>
         <h5>Vui lòng nhập địa chỉ để LIO giao hàng đến bạn</h5>
-        <form action="" onSubmit={handleSubmit(onSubmit)}>
-          <div className="form-group">
-            <label htmlFor="" className="form-label">
-              Tỉnh/Thành phố
-            </label>
-            <Controller
-              control={control}
-              name="city"
-              render={({ field }) => (
-                <Select
-                  {...field}
-                  styles={customStyles}
-                  components={{ DropdownIndicator }}
-                  options={optionCity}
-                  placeholder="Chọn tỉnh/thành phố"
-                />
+        {province && district && ward ? (
+          <form action="" onSubmit={handleSubmit(onSubmit)}>
+            <div className="form-group">
+              <label htmlFor="" className="form-label">
+                Tỉnh/Thành phố
+              </label>
+              <Controller
+                control={control}
+                name="city"
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    styles={customStyles}
+                    components={{ DropdownIndicator }}
+                    options={province.map((x) => {
+                      return {
+                        value: x.code,
+                        label: x.name,
+                      };
+                    })}
+                    placeholder="Chọn tỉnh/thành phố"
+                  />
+                )}
+              />
+              {errors?.city && (
+                <Alert variant="danger">
+                  {errors?.city?.message || errors?.city?.label?.message}
+                </Alert>
               )}
-            />
-            {errors?.city && (
-              <Alert variant="danger">
-                {errors?.city?.message || errors?.city?.label?.message}
-              </Alert>
-            )}
-          </div>
-          <div className="form-group">
-            <label htmlFor="" className="form-label">
-              Quận/Huyện
-            </label>
-            <Controller
-              control={control}
-              name="district"
-              render={({ field }) => (
-                <Select
-                  {...field}
-                  styles={customStyles}
-                  components={{ DropdownIndicator }}
-                  options={optionDistrict}
-                  placeholder="Chọn quận/huyện"
-                />
+            </div>
+            <div className="form-group">
+              <label htmlFor="" className="form-label">
+                Quận/Huyện
+              </label>
+              <Controller
+                control={control}
+                name="district"
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    styles={customStyles}
+                    components={{ DropdownIndicator }}
+                    options={district?.map((x) => {
+                      return {
+                        value: x.code,
+                        label: x.name,
+                      };
+                    })}
+                    placeholder="Chọn quận/huyện"
+                  />
+                )}
+              />
+              {errors?.district && (
+                <Alert variant="danger">
+                  {errors?.district?.message ||
+                    errors?.district?.label?.message}
+                </Alert>
               )}
-            />
-            {errors?.district && (
-              <Alert variant="danger">
-                {errors?.district?.message || errors?.district?.label?.message}
-              </Alert>
-            )}
-          </div>
-          <div className="form-group">
-            <label htmlFor="" className="form-label">
-              Phường/Xã
-            </label>
-            <Controller
-              control={control}
-              defaultValue={options.map((c) => c.value)}
-              name="ward"
-              render={({ field }) => (
-                <Select
-                  {...field}
-                  styles={customStyles}
-                  components={{ DropdownIndicator }}
-                  options={optionWard}
-                  placeholder="Chọn phường"
-                />
+            </div>
+            <div className="form-group">
+              <label htmlFor="" className="form-label">
+                Phường/Xã
+              </label>
+              <Controller
+                control={control}
+                name="ward"
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    styles={customStyles}
+                    components={{ DropdownIndicator }}
+                    options={ward?.map((x) => {
+                      return {
+                        value: x.code,
+                        label: x.name,
+                      };
+                    })}
+                    placeholder="Chọn phường"
+                  />
+                )}
+              />
+              {errors?.ward && (
+                <Alert variant="danger">
+                  {errors?.ward?.message || errors?.ward?.label?.message}
+                </Alert>
               )}
-            />
-            {errors?.ward && (
-              <Alert variant="danger">
-                {errors?.ward?.message || errors?.ward?.label?.message}
-              </Alert>
-            )}
-          </div>
-          <div className="form-group">
-            <label htmlFor="" className="form-label">
-              Tên đường
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              {...register("street")}
-            />
-            {errors?.street && (
-              <Alert variant="danger">{errors?.street?.message}</Alert>
-            )}
-          </div>
-          <div className="form-group">
-            <label htmlFor="" className="form-label">
-              Số nhà
-            </label>
-            <input type="text" className="form-control" {...register("no")} />
-            {errors?.no && (
-              <Alert variant="danger">{errors?.no?.message}</Alert>
-            )}
-          </div>
-          <div className="form-group">
-            <label htmlFor="" className="form-label">
-              Điện Thoại
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              {...register("phone")}
-            />
-            {errors?.phone && (
-              <Alert variant="danger">{errors?.phone?.message}</Alert>
-            )}
-          </div>
-          <div className="form-group">
-            <label htmlFor="" className="form-label">
-              Email
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              {...register("email")}
-            />
-            {errors?.email && (
-              <Alert variant="danger">{errors?.email?.message}</Alert>
-            )}
-          </div>
-          <div className="button">
-            <button>Xác nhận</button>
-          </div>
-        </form>
+            </div>
+            <div className="form-group">
+              <label htmlFor="" className="form-label">
+                Tên đường
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                {...register("street")}
+              />
+              {errors?.street && (
+                <Alert variant="danger">{errors?.street?.message}</Alert>
+              )}
+            </div>
+            <div className="form-group">
+              <label htmlFor="" className="form-label">
+                Số nhà
+              </label>
+              <input type="text" className="form-control" {...register("no")} />
+              {errors?.no && (
+                <Alert variant="danger">{errors?.no?.message}</Alert>
+              )}
+            </div>
+            <div className="form-group">
+              <label htmlFor="" className="form-label">
+                Điện Thoại
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                {...register("phone")}
+              />
+              {errors?.phone && (
+                <Alert variant="danger">{errors?.phone?.message}</Alert>
+              )}
+            </div>
+            <div className="form-group">
+              <label htmlFor="" className="form-label">
+                Email
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                {...register("email")}
+              />
+              {errors?.email && (
+                <Alert variant="danger">{errors?.email?.message}</Alert>
+              )}
+            </div>
+            <div className="button">
+              <button>Xác nhận</button>
+            </div>
+          </form>
+        ) : (
+          <Loader content="Vui lòng chờ vài giây..." />
+        )}
       </Modal.Body>
     </Modal>
   );

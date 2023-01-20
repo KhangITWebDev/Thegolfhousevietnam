@@ -1,24 +1,24 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import $ from "jquery";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Alert } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { Radio, RadioGroup, Steps, Table } from "rsuite";
+import Select, { components } from "react-select";
+import { Steps, Table } from "rsuite";
 import Swal from "sweetalert2";
+import * as yup from "yup";
 import ModalAddress from "../../components/Modal/ModalAddress";
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
-import * as yup from "yup";
+import { getProvinceData } from "../../store/redux/ProviceReducer/province.action";
 import {
   getLocalStorage,
   LOCAL_STORAGE,
   setLocalStorage,
 } from "../../utils/handleStorage";
-import { Alert } from "react-bootstrap";
-import Select, { components } from "react-select";
 const { Column, HeaderCell, Cell } = Table;
-import $ from "jquery";
 
 const customStyles = {
   option: (provided, state) => ({
@@ -76,25 +76,6 @@ const customStyles = {
     };
   },
 };
-
-const optionCity = [
-  { value: 1, label: "Hồ Chí Minh" },
-  { value: 2, label: "Hà Nội" },
-];
-const optionDistrict = [
-  { value: 1, label: "Quận 1" },
-  { value: 2, label: "Quận 2" },
-];
-const optionWard = [
-  { value: 1, label: "Phường 1" },
-  { value: 2, label: "Phường 2" },
-];
-const options = [
-  { value: "1", label: "Ngành nghề" },
-  { value: "2", label: "Kiến trúc" },
-  { value: "3", label: "Bất động sản" },
-  { value: "4", label: "Công nghệ thông tin" },
-];
 const DropdownIndicator = (props) => {
   return (
     <components.DropdownIndicator {...props}>
@@ -148,6 +129,44 @@ const schema = yup.object().shape({
   street: yup.string().required("Vui lòng điền tên đường"),
   no: yup.string().required("Vui lòng điền số nhà"),
 });
+const schema2 = yup.object().shape({
+  phone: yup
+    .string()
+    .required("Vui lòng điền số điện thoại")
+    .min(10, "Số điện thoại phải nhiều hơn 9 ký tự")
+    .max(12, "Sô điện thoại phải ít hơn 12 ký tự")
+    .matches(PHONE_REGEX, "Số điện thoại không hợp lệ"),
+  email: yup
+    .string()
+    .email("Email không hợp lệ")
+    .required("Vui lòng điền email"),
+  city: yup
+    .object()
+    .shape({
+      label: yup.string().required("Vui lòng chọn tỉnh/thành phố"),
+      value: yup.string().required("Vui lòng chọn tỉnh/thành phố"),
+    })
+    .nullable()
+    .required("Vui lòng chọn tỉnh/thành phố"),
+  district: yup
+    .object()
+    .shape({
+      label: yup.string().required("Vui lòng chọn quận/huyện"),
+      value: yup.string().required("Vui lòng chọn quận/huyện"),
+    })
+    .nullable()
+    .required("Vui lòng chọn quận/huyện"),
+  ward: yup
+    .object()
+    .shape({
+      label: yup.string().required("Vui lòng chọn phường/xã"),
+      value: yup.string().required("Vui lòng chọn phường/xã"),
+    })
+    .nullable()
+    .required("Vui lòng chọn phường/xã"),
+  street: yup.string().required("Vui lòng điền tên đường"),
+  no: yup.string().required("Vui lòng điền số nhà"),
+});
 function Cart(props) {
   const {
     register,
@@ -162,7 +181,50 @@ function Cart(props) {
   const onSubmit = (data) => {
     console.log(data);
   };
-  const [step, setStep] = React.useState(2);
+  const {
+    register: register2,
+    handleSubmit: handleSubmit2,
+    watch: watch2,
+    reset: reset2,
+    control: control2,
+    formState: { errors: errors2 },
+  } = useForm({
+    resolver: yupResolver(schema2),
+  });
+  const onSubmit2 = (data) => {
+    const addressList = getLocalStorage(LOCAL_STORAGE.ADDRESS_LIST);
+    if (addressList.length > 0) {
+      addressList.push(data);
+      Swal.fire({
+        text: "Số lượng phải lớn hơn 0",
+        icon: "info",
+        showCancelButton: true,
+        cancelButtonText: "Hủy Bỏ",
+        confirmButtonText: "Đông ý",
+      }).then((result) => {
+        return (
+          result.isConfirmed &&
+          setLocalStorage(LOCAL_STORAGE.ADDRESS_LIST, addressList)
+        );
+      });
+    } else {
+      Swal.fire({
+        text: "Số lượng phải lớn hơn 0",
+        icon: "info",
+        showCancelButton: true,
+        cancelButtonText: "Hủy Bỏ",
+        confirmButtonText: "Đông ý",
+      }).then((result) => {
+        return (
+          result.isConfirmed &&
+          setLocalStorage(LOCAL_STORAGE.ADDRESS_LIST, [data])
+        );
+      });
+    }
+  };
+  const [step, setStep] = React.useState(0);
+  const [changeQty, setChangeQty] = React.useState(false);
+  const [currentChange, setCurrentChange] = React.useState(-1);
   const onChange = (nextStep) => {
     setStep(nextStep < 0 ? 0 : nextStep > 3 ? 3 : nextStep);
   };
@@ -171,10 +233,27 @@ function Cart(props) {
   const router = useRouter();
   const cart = getLocalStorage(LOCAL_STORAGE.CART);
   const ship = 15000;
-  const dispatch = useDispatch();
   const { contents } = useSelector((state) => state.ContentReducer);
   useEffect(() => {
     dispatch(getContentData());
+  }, [dispatch]);
+  const dispatch = useDispatch();
+  const [code, setCode] = useState();
+  const [districtCode, setDistrictCode] = useState();
+  const province = useSelector((state) => state.ProvinceReducer.province);
+  const district = watch("city")
+    ? province[
+        province.findIndex((x) => x.code === Number(watch("city")?.value))
+      ]?.districts
+    : [];
+  const ward =
+    watch("city") && watch("district")
+      ? district[
+          district.findIndex((x) => x.code === Number(watch("district")?.value))
+        ]?.wards
+      : [];
+  useEffect(() => {
+    dispatch(getProvinceData());
   }, [dispatch]);
   const sectiontitle = contents.filter(
     (item) => item.category === "63bc4d8b39d2a23b06d92f3d"
@@ -195,22 +274,6 @@ function Cart(props) {
     }
   });
   const [qty, setQty] = useState(1);
-  const decreasement = () => {
-    setQty(qty - 1);
-    if (qty <= 1) {
-      Swal.fire({
-        title: "Lỗi",
-        text: "Số lượng phải lớn hơn 0",
-        icon: "error",
-        showCancelButton: false,
-        confirmButtonText: "OK",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          setQty(1);
-        }
-      });
-    }
-  };
   const handleRemove = (item) => {
     const data = cart.filter((x) => x._id !== item._id);
     Swal.fire({
@@ -228,20 +291,26 @@ function Cart(props) {
       }
     });
   };
-  const handleDecreaseQty = (item) => {
+  const handleDecreaseQty = (item, index) => {
     const cart = getLocalStorage(LOCAL_STORAGE.CART);
-    const findIndex = cart.findIndex((x) => x._id === item._id);
-    cart[findIndex].qty = cart[findIndex].qty - 1;
-    setLocalStorage(LOCAL_STORAGE.CART, cart);
-    if (item.qty <= 0) {
-      alert("lỗi");
-      cart[findIndex].qty = 1;
+    item.qty -= 1;
+    if (item.qty === 0) {
+      Swal.fire({
+        title: "Lỗi",
+        text: "Số lượng phải lớn hơn 0",
+        icon: "error",
+        showCancelButton: false,
+        confirmButtonText: "Đồng ý",
+      });
+      item.qty = 1;
     }
+    cart[index] = item;
+    setLocalStorage(LOCAL_STORAGE.CART, cart);
   };
-  const handleIncreaseQty = (item) => {
+  const handleIncreaseQty = (item, index) => {
     const cart = getLocalStorage(LOCAL_STORAGE.CART);
-    const findIndex = cart.findIndex((x) => x._id === item._id);
-    cart[findIndex].qty = cart[findIndex].qty + 1;
+    item.qty += 1;
+    cart[index] = item;
     setLocalStorage(LOCAL_STORAGE.CART, cart);
   };
   const [open, setOpen] = useState(false);
@@ -249,6 +318,9 @@ function Cart(props) {
     setOpen(true);
   };
   const handleClose = () => setOpen(false);
+  const handleChangeCheckout = (e) => {
+    console.log(e.target.value);
+  };
   return (
     <div>
       <div className="container" id="cart-page">
@@ -312,7 +384,7 @@ function Cart(props) {
                       <span className="h-100 header">Số lượng</span>
                     </HeaderCell>
                     <Cell>
-                      {(rowData) => (
+                      {(rowData, index) => (
                         <div className="d-flex align-items-center h-100">
                           <div className="quantity">
                             <span className="h-100 d-flex align-items-center data">
@@ -320,10 +392,10 @@ function Cart(props) {
                             </span>
                             <i
                               className="fa-light fa-chevron-up"
-                              onClick={() => handleIncreaseQty(rowData)}
+                              onClick={() => handleIncreaseQty(rowData, index)}
                             ></i>
                             <i
-                              onClick={() => handleDecreaseQty(rowData)}
+                              onClick={() => handleDecreaseQty(rowData, index)}
                               className="fa-light fa-chevron-down"
                             ></i>
                           </div>
@@ -386,18 +458,18 @@ function Cart(props) {
                       </div>
                       {open && (
                         <ModalAddress
-                          reset={reset}
-                          errors={errors}
-                          handleSubmit={handleSubmit}
-                          register={register}
-                          onSubmit={onSubmit}
-                          control={control}
+                          reset={reset2}
+                          errors={errors2}
+                          handleSubmit={handleSubmit2}
+                          register={register2}
+                          onSubmit={onSubmit2}
+                          control={control2}
                           handleClose={handleClose}
                           customStyles={customStyles}
-                          options={options}
-                          optionCity={optionCity}
-                          optionDistrict={optionDistrict}
-                          optionWard={optionWard}
+                          province={province}
+                          district={district}
+                          ward={ward}
+                          watch={watch2}
                         />
                       )}
                       <div className="item d-flex">
@@ -422,7 +494,7 @@ function Cart(props) {
               <div className="d-flex step2">
                 <div className="col-7 left">
                   <h5>Chi tiết mua hàng</h5>
-                  <form action="" onSubmit={handleSubmit(onSubmit)}>
+                  <form action="">
                     <div className="form-group">
                       <label htmlFor="" className="form-label">
                         Họ tên
@@ -448,7 +520,13 @@ function Cart(props) {
                             {...field}
                             styles={customStyles}
                             components={{ DropdownIndicator }}
-                            options={optionCity}
+                            options={province.map((x) => {
+                              return {
+                                value: x.code,
+                                label: x.name,
+                              };
+                            })}
+                            // onChange={({ value }) => setCode(Number(value))}
                             placeholder="Chọn tỉnh/thành phố"
                           />
                         )}
@@ -472,7 +550,12 @@ function Cart(props) {
                             {...field}
                             styles={customStyles}
                             components={{ DropdownIndicator }}
-                            options={optionDistrict}
+                            options={district.map((x) => {
+                              return {
+                                value: x.code,
+                                label: x.name,
+                              };
+                            })}
                             placeholder="Chọn quận/huyện"
                           />
                         )}
@@ -496,7 +579,12 @@ function Cart(props) {
                             {...field}
                             styles={customStyles}
                             components={{ DropdownIndicator }}
-                            options={optionWard}
+                            options={ward?.map((x) => {
+                              return {
+                                value: x.code,
+                                label: x.name,
+                              };
+                            })}
                             placeholder="Chọn phường"
                           />
                         )}
@@ -594,7 +682,13 @@ function Cart(props) {
                   <h5>Phương thức thanh toán</h5>
                   <div className="checkout">
                     <label className="item">
-                      <input type="checkbox" name="checkout" id="" />
+                      <input
+                        type="checkbox"
+                        name="checkout"
+                        id=""
+                        value="check1"
+                        onClick={handleChangeCheckout}
+                      />
                       <span className="checkmark"></span>
                       <div className="content">
                         <h6>Thanh toán tiền mặt</h6>
@@ -602,7 +696,13 @@ function Cart(props) {
                       </div>
                     </label>
                     <label className="item">
-                      <input type="checkbox" name="checkout" id="" />
+                      <input
+                        type="checkbox"
+                        name="checkout"
+                        id=""
+                        value="check2"
+                        onClick={handleChangeCheckout}
+                      />
                       <span className="checkmark"></span>
                       <div className="box-item">
                         <div className="content">
@@ -635,7 +735,13 @@ function Cart(props) {
                       </div>
                     </label>
                     <label className="item">
-                      <input type="checkbox" name="checkout" id="" />
+                      <input
+                        type="checkbox"
+                        name="checkout"
+                        id=""
+                        value="check3"
+                        onClick={handleChangeCheckout}
+                      />
                       <span className="checkmark"></span>
                       <div className="content">
                         <h6>Tài khoản ngân hàng</h6>

@@ -19,6 +19,7 @@ import $ from "jquery";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { DefaultSeo } from "next-seo";
+import Cookies from "js-cookie";
 
 function MyApp({ Component, pageProps }) {
   const [showChild, setShowChild] = useState(false);
@@ -31,6 +32,9 @@ function MyApp({ Component, pageProps }) {
     AOS.init({
       duration: 1500,
     });
+    setTimeout(() => {
+      Cookies.remove("access_token");
+    }, 3600000);
   }, []);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 

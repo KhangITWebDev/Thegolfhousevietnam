@@ -228,6 +228,22 @@
           padding-right: 0px;
         }
         padding-right: 20px;
+        button {
+          border: 0px;
+          background-color: transparent;
+          width: 100%;
+          padding-top: 8px;
+          padding-bottom: 8px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          color: #fff;
+          font-size: 18px;
+          font-weight: 500;
+          @media screen and (max-width: 992px) {
+            font-size: 16px;
+          }
+        }
         .title {
           font-size: 18px;
           font-weight: 600;
@@ -257,7 +273,8 @@
           @media screen and (max-width: 576px) {
             width: 100%;
           }
-          &:hover {
+          &:hover,
+          &:hover i {
             color: #576e33;
             background: transparent;
           }

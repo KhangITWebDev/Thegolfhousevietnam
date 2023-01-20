@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const slice = createSlice({
-  name: "demo",
+  name: "booking",
 
   initialState: {
-    usersList: [],
+    locationList: [],
   },
 
   reducers: {
-    setUsersList: (state, action) => {
-      state.usersList = action.payload;
+    setLocationList: (state, action) => {
+      state.locationList = action.payload;
     },
     // setUserToUsersList: (state, action) => {
     //   state.usersList.push(action.payload);
@@ -21,4 +21,4 @@ export default slice.reducer;
 
 // Actions
 
-export const { setUsersList, setUserToUsersList } = slice.actions;
+export const { setLocationList } = slice.actions;

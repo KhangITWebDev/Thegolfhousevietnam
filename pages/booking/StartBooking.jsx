@@ -39,6 +39,7 @@ function StartBooking() {
   const [value, setValue] = useState(moment());
   const [step, setStep] = useState(0);
   const [status, setStatus] = useState("success");
+  console.log(token);
   useEffect(() => {
     if (!token || token?.length < 0 || token === "") {
       router.back();

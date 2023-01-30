@@ -199,6 +199,28 @@ function Course(props) {
       }
     }, 2000);
   };
+  // const callAPI = async () => {
+  //   try {
+  //     const res = await fetch(
+  //       `https://betatgh.fostech.vn/restapi/1.0/object/academy.location`,
+  //       {
+  //         method: "GET",
+  //         withCredentials: true,
+  //         crossorigin: true,
+  //         mode: "no-cors",
+  //         headers: new Headers({
+  //           // "Content-type": "application/json",
+  //           Authorization: "Bearer " + "z4M7VMadwS4VogcyGnflxZPcYIxb9AW4", // notice the Bearer before your token
+  //         }),
+  //       }
+  //     );
+  //     const data = await res.json();
+  //     console.log(data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+  // console.log(callAPI());
   const router = useRouter();
   const [address, setAddress] = useState();
   const { locationList } = useSelector((state) => state.BookingReducer);

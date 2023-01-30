@@ -179,7 +179,17 @@ function Cart(props) {
     resolver: yupResolver(schema),
   });
   const onSubmit = (data) => {
-    console.log(data);
+    if (!checkoutMethod) {
+      Swal.fire({
+        text: "Vui lòng chọn phương thức thanh toán",
+        icon: "info",
+        showCancelButton: false,
+        cancelButtonText: "Hủy Bỏ",
+        confirmButtonText: "Đông ý",
+      });
+    } else {
+      console.log({ ...data, checkput: checkoutMethod });
+    }
   };
   const {
     register: register2,
@@ -317,9 +327,10 @@ function Cart(props) {
   const handleOpen = () => {
     setOpen(true);
   };
+  const [checkoutMethod, setCheckoutMethod] = useState();
   const handleClose = () => setOpen(false);
   const handleChangeCheckout = (e) => {
-    console.log(e.target.value);
+    setCheckoutMethod(e.target.value);
   };
   return (
     <div>

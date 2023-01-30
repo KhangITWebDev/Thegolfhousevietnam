@@ -6,6 +6,9 @@ const bookingClientAxios = axios.create({
   // baseURL: process.env.API_URL,
   baseURL: "https://betatgh.fostech.vn",
   timeout: 20000,
+  withCredentials: false,
+  crossorigin: true,
+  mode: "no-cors",
   headers: {
     // "content-type": "application/json",
     // "Access-Control-Allow-Origin": "*",

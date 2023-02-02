@@ -17,7 +17,7 @@ function ContactUs(props) {
     (item) => item.category === "63bc466939d2a23b06d8f125"
   );
   const sectionTitleForm = contents.filter(
-    (item) => item.category === "63bc47b439d2a23b06d8fddc"
+    (item) => item.category === "63db87a8df230754d23088ec"
   );
   const sectionBannerContact = contents.filter(
     (item) => item.category === "63bc470139d2a23b06d8f551"
@@ -109,8 +109,8 @@ function ContactUs(props) {
                 `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
               }
               src={
-                sectionBannerContact[0]?.images[
-                  sectionBannerContact[0]?.images.length - 1
+                sectionTitleForm[0]?.images[
+                  sectionTitleForm[0]?.images.length - 1
                 ]?.source
               }
               layout="fill"

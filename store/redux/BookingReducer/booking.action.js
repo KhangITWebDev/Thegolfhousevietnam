@@ -1,5 +1,22 @@
 import BookingApi from "./booking.api";
-import { setLocationList } from "./booking.reducer";
+import {
+  setLocationList,
+  setRegistration,
+  setSchedule,
+  setUserLogin,
+} from "./booking.reducer";
+export const LoginUser = (data) => async (dispatch) => {
+  try {
+    const resApi = await BookingApi.login(data);
+    if (resApi.success) {
+      dispatch(setUserLogin(resApi?.data?.result));
+    } else {
+      dispatch(setUserLogin({}));
+    }
+  } catch (err) {
+    alert(err);
+  }
+};
 export const getLocationData = () => async (dispatch) => {
   try {
     const resApi = await BookingApi.getLocationApi();
@@ -7,6 +24,30 @@ export const getLocationData = () => async (dispatch) => {
       dispatch(setLocationList(resApi?.data));
     } else {
       dispatch(setLocationList([]));
+    }
+  } catch (err) {
+    alert(err);
+  }
+};
+export const getRegistrationData = () => async (dispatch) => {
+  try {
+    const resApi = await BookingApi.getRegistrationApi();
+    if (resApi.success) {
+      dispatch(setRegistration(resApi?.data));
+    } else {
+      dispatch(setRegistration([]));
+    }
+  } catch (err) {
+    alert(err);
+  }
+};
+export const getScheduleData = () => async (dispatch) => {
+  try {
+    const resApi = await BookingApi.getScheduleApi();
+    if (resApi.success) {
+      dispatch(setSchedule(resApi?.data));
+    } else {
+      dispatch(setSchedule([]));
     }
   } catch (err) {
     alert(err);

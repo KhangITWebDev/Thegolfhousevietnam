@@ -9,19 +9,14 @@ const bookingClientAxios = axios.create({
   withCredentials: false,
   crossorigin: true,
   mode: "no-cors",
-  headers: {
-    // "content-type": "application/json",
-    // "Access-Control-Allow-Origin": "*",
-  },
+  headers: {},
   paramsSerializer: (params) => queryString.stringify(params),
 });
 
 bookingClientAxios.interceptors.request.use(
   (config) => {
-    //Handle token here ...
     const token = Cookies.get("access_token");
     config.headers.authorization = `Bearer ${token}`;
-
     return config;
   },
   (err) => {
@@ -34,10 +29,7 @@ bookingClientAxios.interceptors.response.use(
     return res;
   },
   (err) => {
-    //Handle err
-    // eslint-disable-next-line no-console
     console.error(err);
-    // window.location.href = '/not-found';
   }
 );
 

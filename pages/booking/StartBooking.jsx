@@ -6,9 +6,14 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { Alert } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import { Steps } from "rsuite";
 import * as yup from "yup";
 import Calendar from "../../components/Calendar/Calendar";
+import {
+  getRegistrationData,
+  getScheduleData,
+} from "../../store/redux/BookingReducer/booking.action";
 import styles from "./Booking.module.scss";
 const PHONE_REGEX = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i;
 const schema = yup.object().shape({
@@ -39,7 +44,11 @@ function StartBooking() {
   const [value, setValue] = useState(moment());
   const [step, setStep] = useState(0);
   const [status, setStatus] = useState("success");
-  console.log(token);
+  const { schedule } = useSelector((state) => state.BookingReducer);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getScheduleData());
+  }, [dispatch]);
   useEffect(() => {
     if (!token || token?.length < 0 || token === "") {
       router.back();
@@ -62,7 +71,9 @@ function StartBooking() {
           <Steps.Item title="Thông tin đặt lịch" />
         </Steps>
       </div>
-      {step === 0 && <Calendar value={value} onChange={setValue} />}
+      {step === 0 && (
+        <Calendar value={value} onChange={setValue} schedule={schedule} />
+      )}
       {step === 1 && (
         <div className="">
           <div className={styles.confirm}>

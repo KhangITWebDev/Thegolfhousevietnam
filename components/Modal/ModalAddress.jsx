@@ -3,7 +3,7 @@ import { Alert } from "react-bootstrap";
 import { Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import Select, { components } from "react-select";
-import { Loader, Modal } from "rsuite";
+import { Loader, Modal, Toggle } from "rsuite";
 import { getProvinceData } from "../../store/redux/ProviceReducer/province.action";
 
 const DropdownIndicator = (props) => {
@@ -27,6 +27,7 @@ function ModalAddress({
   register,
   onSubmit,
   reset,
+  setDefaultAddress,
   watch,
   handleSubmit,
   customStyles,
@@ -197,6 +198,21 @@ function ModalAddress({
               {errors?.email && (
                 <Alert variant="danger">{errors?.email?.message}</Alert>
               )}
+            </div>
+            <div className="form-group form-check form-switch">
+              <label
+                className="form-label form-check-label"
+                htmlFor="flexSwitchCheckDefault"
+              >
+                Đặt làm mặc định
+              </label>
+              <input
+                className="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="flexSwitchCheckDefault"
+                onClick={(e) => setDefaultAddress(e.target.checked)}
+              />
             </div>
             <div className="button">
               <button>Xác nhận</button>

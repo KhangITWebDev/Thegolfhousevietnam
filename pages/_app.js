@@ -33,7 +33,7 @@ function MyApp({ Component, pageProps }) {
       duration: 1500,
     });
     setTimeout(() => {
-      Cookies.remove("access_token");
+      Cookies.set("access_token", "");
     }, 3600000);
   }, []);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -92,11 +92,11 @@ function MyApp({ Component, pageProps }) {
           additionalLinkTags={[
             {
               rel: "icon",
-              href: "/images/Logo/Logo12.png",
+              href: "/images/Logo/logo2.png",
             },
             {
               rel: "apple-touch-icon",
-              href: "/images/Logo/Logo12.png",
+              href: "/images/Logo/logo2.png",
               sizes: "76x76",
             },
           ]}

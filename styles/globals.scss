@@ -1898,9 +1898,9 @@ button {
     margin-right: 10px !important;
     margin-left: 10px !important;
     .detail {
-      height: 400px;
+      height: 300px;
       position: absolute;
-      top: 0px;
+      bottom: 0px;
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -1929,7 +1929,7 @@ button {
     }
     .image {
       position: relative;
-      height: 250px;
+      height: 280px;
       @media screen and (max-width: 576px) {
         height: 290px;
       }
@@ -2038,7 +2038,7 @@ button {
     }
   }
   .swiper-slide {
-    height: 400px;
+    height: 450px;
     width: 353.33px !important;
     margin-right: 30px;
     @media screen and (max-width: 992px) {
@@ -2063,35 +2063,34 @@ button {
     }
     position: relative;
     .detail {
-      height: 400px;
+      height: 320px;
       position: absolute;
-      top: 0px;
+      bottom: 0px;
       width: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding-bottom: 50px;
+      // justify-content: flex-end;
+      padding-bottom: 30px;
       align-items: center;
       padding-left: 20px;
       padding-right: 20px;
-      background: linear-gradient(170deg, transparent 50%, #fff 0%);
     }
     .image {
       position: relative;
-      height: 250px;
+      height: 350px;
     }
     .info {
       height: 100%;
       h5 {
         font-size: 25px;
         font-weight: 700;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
         line-height: 1.3;
         text-align: center;
-        color: #000;
+        color: #fff;
         cursor: pointer;
         &:hover {
-          color: #576e33;
+          color: rgba(0, 0, 0, 0.6);
         }
       }
       span,
@@ -2116,8 +2115,19 @@ button {
       //   color: #000;
       // }
       button {
+        background-color: #fff;
+        color: #576e33;
         margin-top: 0px !important;
+        border-color: #fff;
+        &:hover {
+          color: #000 !important;
+        }
         // margin-bottom: 40px;
+        @media screen and (max-width: 992px) {
+          padding-left: 0px;
+          padding-right: 0px;
+          width: 100%;
+        }
       }
     }
   }
@@ -3402,7 +3412,21 @@ button {
     color: #000;
   }
 }
-
+.form-check .form-check-input {
+  float: none !important;
+  margin-left: 15px !important;
+}
+.form-switch {
+  padding-left: 0px !important;
+}
+.form-check-input {
+  height: 1.3em !important;
+  width: 2.5em !important;
+  cursor: pointer;
+}
+.form-check {
+  padding-left: 0px !important;
+}
 #cart-page {
   background-color: #f8f8f4;
   padding-top: 140px;
@@ -3494,8 +3518,8 @@ button {
     position: relative;
     width: 116px;
     border: 1px solid #d9d9d9;
-    padding-left: 36px;
     height: 45px;
+    border-radius: 6px;
     // @media screen and (max-width: 1280px) and (min-width: 992px) {
     //   height: 50px;
     // }
@@ -3617,6 +3641,7 @@ button {
     button {
       margin-top: 20px;
       background: #576e33;
+      border-radius: 6px;
       color: #ffff;
       font-size: 18px;
       font-weight: 600;

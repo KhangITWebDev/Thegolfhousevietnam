@@ -4,16 +4,25 @@ const slice = createSlice({
   name: "booking",
 
   initialState: {
+    userLogin: [],
     locationList: [],
+    registration: [],
+    schedule: [],
   },
 
   reducers: {
+    setUserLogin: (state, action) => {
+      state.userLogin = action.payload;
+    },
     setLocationList: (state, action) => {
       state.locationList = action.payload;
     },
-    // setUserToUsersList: (state, action) => {
-    //   state.usersList.push(action.payload);
-    // },
+    setRegistration: (state, action) => {
+      state.registration = action.payload;
+    },
+    setSchedule: (state, action) => {
+      state.schedule = action.payload;
+    },
   },
 });
 
@@ -21,4 +30,5 @@ export default slice.reducer;
 
 // Actions
 
-export const { setLocationList } = slice.actions;
+export const { setUserLogin, setLocationList, setRegistration, setSchedule } =
+  slice.actions;

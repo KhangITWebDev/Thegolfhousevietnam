@@ -7,7 +7,7 @@ import { Alert } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import Select, { components } from "react-select";
-import { Steps, Table } from "rsuite";
+import { Loader, Steps, Table } from "rsuite";
 import Swal from "sweetalert2";
 import * as yup from "yup";
 import ModalAddress from "../../components/Modal/ModalAddress";
@@ -201,34 +201,61 @@ function Cart(props) {
   } = useForm({
     resolver: yupResolver(schema2),
   });
+  const [defaultAddress, setDefaultAddress] = useState(false);
+  useEffect(() => {
+    if (defaultAddress) {
+      // const handleShow = (indexI) => {
+      const newState = addressList.map((obj, indexD) => {
+        return { ...obj, default: false };
+      });
+      setLocalStorage(LOCAL_STORAGE.ADDRESS_LIST, newState);
+      // };
+    }
+  }, [defaultAddress]);
+  console.log(addressList);
   const onSubmit2 = (data) => {
     const addressList = getLocalStorage(LOCAL_STORAGE.ADDRESS_LIST);
     if (addressList.length > 0) {
-      addressList.push(data);
+      addressList.pop({ ...data, default: defaultAddress });
       Swal.fire({
-        text: "Số lượng phải lớn hơn 0",
+        text: "Bạn có chắc chắn muốn thêm địa chỉ này",
         icon: "info",
         showCancelButton: true,
         cancelButtonText: "Hủy Bỏ",
         confirmButtonText: "Đông ý",
       }).then((result) => {
-        return (
-          result.isConfirmed &&
-          setLocalStorage(LOCAL_STORAGE.ADDRESS_LIST, addressList)
-        );
+        if (result.isConfirmed) {
+          setLocalStorage(LOCAL_STORAGE.ADDRESS_LIST, addressList);
+        }
+        Swal.fire({
+          text: "Bạn đã thêm địa chỉ thành công",
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonText: "Đông ý",
+        }).then((result) => {
+          result.isConfirmed && setOpen(false);
+        });
       });
     } else {
       Swal.fire({
-        text: "Số lượng phải lớn hơn 0",
+        text: "Bạn có chắc chắn muốn thêm địa chỉ này",
         icon: "info",
         showCancelButton: true,
         cancelButtonText: "Hủy Bỏ",
         confirmButtonText: "Đông ý",
       }).then((result) => {
-        return (
-          result.isConfirmed &&
-          setLocalStorage(LOCAL_STORAGE.ADDRESS_LIST, [data])
-        );
+        result.isConfirmed &&
+          setLocalStorage(LOCAL_STORAGE.ADDRESS_LIST, [
+            { ...data, default: defaultAddress },
+          ]);
+        Swal.fire({
+          text: "Bạn đã thêm địa chỉ thành công",
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonText: "Đông ý",
+        }).then((result) => {
+          result.isConfirmed && setOpen(false);
+        });
       });
     }
   };
@@ -248,8 +275,6 @@ function Cart(props) {
     dispatch(getContentData());
   }, [dispatch]);
   const dispatch = useDispatch();
-  const [code, setCode] = useState();
-  const [districtCode, setDistrictCode] = useState();
   const province = useSelector((state) => state.ProvinceReducer.province);
   const district = watch("city")
     ? province[
@@ -284,12 +309,14 @@ function Cart(props) {
     }
   });
   const [qty, setQty] = useState(1);
+  const [loadingRemove, setLoadingRemove] = useState(-1);
+  const [loadingQty, setLoadingQty] = useState(-1);
   const handleRemove = (item) => {
     const data = cart.filter((x) => x._id !== item._id);
     Swal.fire({
       title: "",
-      html: "<p>Bạn có chắc chắn xóa sản phẩm này không?</p>",
-      icon: "info",
+      html: `<p>Bạn có chắc chắn xóa sản phẩm ${item.ten_vt} ra khỏi giỏi hàng ?</p>`,
+      icon: "warning",
       showCancelButton: true,
       confirmButtonText: "OK",
       focusConfirm: false,
@@ -297,31 +324,76 @@ function Cart(props) {
       cancelButtonText: "<span>Hủy bỏ</span>",
     }).then((rs) => {
       if (rs.isConfirmed) {
-        setLocalStorage(LOCAL_STORAGE.CART, data);
+        setLoadingRemove(item._id);
+        setTimeout(() => {
+          setLocalStorage(LOCAL_STORAGE.CART, data);
+          setLoadingRemove(-1);
+          Swal.fire({
+            html: `<p>Bạn đã xóa ${item.qty} sản phẩm ${item.ten_vt} thành công !</p>`,
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonText: "<span>Đồng ý</span>",
+          });
+        }, 2000);
       }
     });
   };
   const handleDecreaseQty = (item, index) => {
     const cart = getLocalStorage(LOCAL_STORAGE.CART);
-    item.qty -= 1;
-    if (item.qty === 0) {
-      Swal.fire({
-        title: "Lỗi",
-        text: "Số lượng phải lớn hơn 0",
-        icon: "error",
-        showCancelButton: false,
-        confirmButtonText: "Đồng ý",
-      });
-      item.qty = 1;
-    }
-    cart[index] = item;
-    setLocalStorage(LOCAL_STORAGE.CART, cart);
+    Swal.fire({
+      title: "",
+      html: `<p>Bạn có chắc chắn giảm số lượng sản phẩm ${item.ten_vt}</p>`,
+      icon: "info",
+      showCancelButton: true,
+      confirmButtonText: "OK",
+      focusConfirm: false,
+      confirmButtonText: "<span>Đồng ý</span>",
+      cancelButtonText: "<span>Hủy bỏ</span>",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setLoadingQty(item._id);
+        setTimeout(() => {
+          setLoadingQty(-1);
+          item.qty -= 1;
+          if (item.qty === 0) {
+            Swal.fire({
+              title: "Lỗi",
+              text: "Số lượng phải lớn hơn 0",
+              icon: "error",
+              showCancelButton: false,
+              confirmButtonText: "Đồng ý",
+            });
+            item.qty = 1;
+          }
+          cart[index] = item;
+          setLocalStorage(LOCAL_STORAGE.CART, cart);
+        }, 2000);
+      }
+    });
   };
+  const addressList = getLocalStorage(LOCAL_STORAGE.ADDRESS_LIST);
   const handleIncreaseQty = (item, index) => {
     const cart = getLocalStorage(LOCAL_STORAGE.CART);
-    item.qty += 1;
-    cart[index] = item;
-    setLocalStorage(LOCAL_STORAGE.CART, cart);
+    Swal.fire({
+      title: "",
+      html: `<p>Bạn có chắc chắn tăng số lượng sản phẩm ${item.ten_vt}</p>`,
+      icon: "info",
+      showCancelButton: true,
+      confirmButtonText: "OK",
+      focusConfirm: false,
+      confirmButtonText: "<span>Đồng ý</span>",
+      cancelButtonText: "<span>Hủy bỏ</span>",
+    }).then((result) => {
+      if (result.isConfirmed) {
+      }
+      setLoadingQty(item._id);
+      setTimeout(() => {
+        setLoadingQty(-1);
+        item.qty += 1;
+        cart[index] = item;
+        setLocalStorage(LOCAL_STORAGE.CART, cart);
+      }, 2000);
+    });
   };
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
@@ -355,7 +427,7 @@ function Cart(props) {
                   bordered
                   cellBordered
                   onSortColumn={(sortColumn, sortType) => {
-                    console.log(sortColumn, sortType);
+                    // console.log(sortColumn, sortType);
                   }}
                   rowHeight={120}
                 >
@@ -397,18 +469,33 @@ function Cart(props) {
                     <Cell>
                       {(rowData, index) => (
                         <div className="d-flex align-items-center h-100">
-                          <div className="quantity">
-                            <span className="h-100 d-flex align-items-center data">
-                              {rowData.qty}
-                            </span>
-                            <i
-                              className="fa-light fa-chevron-up"
-                              onClick={() => handleIncreaseQty(rowData, index)}
-                            ></i>
-                            <i
-                              onClick={() => handleDecreaseQty(rowData, index)}
-                              className="fa-light fa-chevron-down"
-                            ></i>
+                          <div className="quantity d-flex justify-content-center align-items-center">
+                            {loadingQty === rowData._id ? (
+                              <Loader />
+                            ) : (
+                              <>
+                                <span
+                                  style={{
+                                    paddingRight: 15,
+                                  }}
+                                  className="h-100 d-flex align-items-center data"
+                                >
+                                  {rowData.qty}
+                                </span>
+                                <i
+                                  className="fa-light fa-chevron-up"
+                                  onClick={() =>
+                                    handleIncreaseQty(rowData, index)
+                                  }
+                                ></i>
+                                <i
+                                  onClick={() =>
+                                    handleDecreaseQty(rowData, index)
+                                  }
+                                  className="fa-light fa-chevron-down"
+                                ></i>
+                              </>
+                            )}
                           </div>
                         </div>
                       )}
@@ -436,10 +523,14 @@ function Cart(props) {
                     <Cell>
                       {(rowData) => (
                         <span className="h-100 d-flex align-items-center data romove">
-                          <i
-                            onClick={() => handleRemove(rowData)}
-                            className="fa-light fa-xmark"
-                          ></i>
+                          {loadingRemove === rowData._id ? (
+                            <Loader />
+                          ) : (
+                            <i
+                              onClick={() => handleRemove(rowData)}
+                              className="fa-light fa-xmark"
+                            ></i>
+                          )}
                         </span>
                       )}
                     </Cell>
@@ -474,6 +565,7 @@ function Cart(props) {
                           handleSubmit={handleSubmit2}
                           register={register2}
                           onSubmit={onSubmit2}
+                          setDefaultAddress={setDefaultAddress}
                           control={control2}
                           handleClose={handleClose}
                           customStyles={customStyles}
@@ -678,8 +770,19 @@ function Cart(props) {
                   <h5>Đơn hàng của bạn</h5>
                   <div className="order">
                     <div className="item">
-                      <h6>Bóng Golf x 1</h6>
-                      <h6>720.000 VND</h6>
+                      {cart.map((item, index) => (
+                        <>
+                          <h6>
+                            {item.ten_vt} x {item.qty}
+                          </h6>
+                          <h6>
+                            {(item.gia_ban_le * item.qty).toLocaleString(
+                              "vi-VI"
+                            )}{" "}
+                            VND
+                          </h6>
+                        </>
+                      ))}
                     </div>
                     <div className="item">
                       <h6>Giao hàng đến</h6>
@@ -687,7 +790,7 @@ function Cart(props) {
                     </div>
                     <div className="item">
                       <h6>Tổng giá</h6>
-                      <h6>720.000 VND</h6>
+                      <h6>{total.toLocaleString("vi-VI")} VND</h6>
                     </div>
                   </div>
                   <h5>Phương thức thanh toán</h5>

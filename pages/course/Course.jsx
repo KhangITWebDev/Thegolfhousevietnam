@@ -1,4 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
 import $ from "jquery";
 import Cookies from "js-cookie";
 import moment from "moment";
@@ -19,15 +20,20 @@ import SignUp from "../../components/Modal/SignUp";
 import SignUpTrial from "../../components/Modal/SignUpTrial";
 import Sucess from "../../components/Modal/Sucess";
 import SucessTrial from "../../components/Modal/SucessTrial";
-import { getLocationData } from "../../store/redux/BookingReducer/booking.action";
+import {
+  getLocationData,
+  getRegistrationData,
+} from "../../store/redux/BookingReducer/booking.action";
 import { getCourseData } from "../../store/redux/CourseReducer/course.action";
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
+import { removeAccents } from "../../utils/function";
 import styles from "./Course.module.scss";
 const slideCourse = [
   {
     image: "/images/Home/Course/img1.jpg",
     title: "Lớp lẻ",
     icon: "/images/Home/Course/icon1.png",
+    background: "#576e33",
     description:
       "<p><ul><li> Học 1:1 với HLV chuyên nghiệp</li><li>Tặng 1 buổi ra sân với mỗi 10 buổi đăng ký học</li><li>60 phút/buổi</li><li>Miễn phí gậy tập và bóng</li></ul></p>",
   },
@@ -35,6 +41,7 @@ const slideCourse = [
     image: "/images/Home/Course/img2.jpg",
     title: "Khóa học",
     icon: "/images/Home/Course/icon1.png",
+    background: "#B2A776",
     description:
       "<p><ul><li>Cam kết đầu ra</li><li>Học 1:1 với HLV chuyên nghiệp</li><li>Lộ trình bài bản từ 3 tháng tới 2 năm</li><li>Giáo trình thiết kế phù hợp từng trình độ từ sơ cấp tới nâng cao</li><li> Hỗ trợ 100% phí học lại nếu chưa đạt được trình độ đầu ra theo cam kết (điều kiện HV tham gia đầy đủ số buổi học quy định)</li><li>60 phút/buổi</li><li>Miễn phí phí gậy tập và bóng</li></ul></p>",
   },
@@ -42,6 +49,7 @@ const slideCourse = [
     image: "/images/Home/Course/img3.jpg",
     title: "Khoá trẻ em",
     icon: "/images/Home/Course/icon2.png",
+    background: "#DD6B7F",
     description:
       "<p><ul><li>Độ tuổi từ 4 - 13</li><li>Lịch học linh động & phù hợp với lịch học tại trường</li><li>Giảng viên nhiều năm kinh nghiệm hướng dẫn trẻ</li><li>Tối đa 4 học viên/lớp</li><li>60 phút/buổi</li><li>Miễn phí gậy tập và bóng</li></ul></p>",
   },
@@ -49,6 +57,7 @@ const slideCourse = [
     image: "/images/Home/Course/img4.jpg",
     title: "Tập luyện theo giờ",
     icon: "/images/Home/Course/icon1.png",
+    background: "#6B84DD",
     description:
       "<p><ul><li>Không gian tập luyện trong nhà tiện nghi</li><li> Thiết bị hiện đại</li><li>Chi phí hợp lý</li> </ul></p>",
   },
@@ -175,6 +184,7 @@ function Course(props) {
     handleOpen5();
   };
   const [loading, setLoading] = useState(false);
+  const token = Cookies.get("access_token");
   const [clickLocation, setClickLocation] = useState(false);
   const [clickBooking, setClickBooking] = useState(false);
   const onSubmit2 = async (data) => {
@@ -195,38 +205,21 @@ function Course(props) {
       } else if (resApi?.result) {
         setLoading(false);
         Cookies.set("access_token", resApi?.result?.access_token);
+        Cookies.set("trainee_id", resApi?.result?.id);
         setOpen2(false);
       }
     }, 2000);
   };
-  // const callAPI = async () => {
-  //   try {
-  //     const res = await fetch(
-  //       `https://betatgh.fostech.vn/restapi/1.0/object/academy.location`,
-  //       {
-  //         method: "GET",
-  //         withCredentials: true,
-  //         crossorigin: true,
-  //         mode: "no-cors",
-  //         headers: new Headers({
-  //           // "Content-type": "application/json",
-  //           Authorization: "Bearer " + "z4M7VMadwS4VogcyGnflxZPcYIxb9AW4", // notice the Bearer before your token
-  //         }),
-  //       }
-  //     );
-  //     const data = await res.json();
-  //     console.log(data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-  // console.log(callAPI());
   const router = useRouter();
   const [address, setAddress] = useState();
   const { locationList } = useSelector((state) => state.BookingReducer);
   useEffect(() => {
     dispatch(getLocationData());
-  }, [dispatch]);
+  }, [dispatch, token]);
+  const { registration } = useSelector((state) => state.BookingReducer);
+  useEffect(() => {
+    dispatch(getRegistrationData());
+  }, [dispatch, token]);
   const [swiper2, setSwiper2] = React.useState(null);
   const [swiper3, setSwiper3] = React.useState(null);
   const [open, setOpen] = React.useState(false);
@@ -257,7 +250,6 @@ function Course(props) {
     setOpen4(false);
     setOpen5(false);
   };
-  const token = Cookies.get("access_token");
   const handleClose2 = () => setOpen2(false);
   const [open3, setOpen3] = React.useState(false);
   const handleOpen3 = () => {
@@ -611,7 +603,7 @@ function Course(props) {
           <div className="list" data-aos="fade-left">
             <Swiper
               breakpoints={{
-                1920: {
+                1200: {
                   slidesPerView: 4,
                 },
                 992: {
@@ -657,8 +649,13 @@ function Course(props) {
                           objectFit="cover"
                         />
                       </div>
-                      <div className="detail">
-                        <div className="icon">
+                      <div
+                        className="detail"
+                        style={{
+                          background: `linear-gradient(170deg, transparent 50%, ${item.background} 0%)`,
+                        }}
+                      >
+                        {/* <div className="icon">
                           <Image
                             alt="Intro 1"
                             src={item.icon}
@@ -666,7 +663,7 @@ function Course(props) {
                             height={52}
                             objectFit="cover"
                           />
-                        </div>
+                        </div> */}
                         <h5>{item.title}</h5>
                       </div>
                     </div>
@@ -699,12 +696,31 @@ function Course(props) {
                       />
                     </div>
                     {/* <div className="detail"></div> */}
-                    <div className="detail d-flex justify-content-end">
+                    <div
+                      className="detail d-flex justify-content-end"
+                      style={{
+                        height:
+                          window.screen.width < 780 &&
+                          window.screen.width > 768 &&
+                          removeAccents(slideCourse[detailIndex]?.title) ===
+                            removeAccents("Tập luyện theo giờ")
+                            ? 500
+                            : 320,
+                        background: `linear-gradient(170deg, transparent 50%, ${slideCourse[detailIndex]?.background} 0%)`,
+                      }}
+                    >
                       <h5 onClick={handleOpen} data-aos="fade-right">
                         {slideCourse[detailIndex]?.title}
                       </h5>
                       <div data-aos="fade-right" className="button">
-                        <button onClick={handleOpen1}>Nhận Tư Vấn</button>
+                        <button
+                          style={{
+                            color: slideCourse[detailIndex]?.background,
+                          }}
+                          onClick={handleOpen1}
+                        >
+                          Nhận Tư Vấn
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -824,16 +840,27 @@ function Course(props) {
                   >
                     <span className={styles.title}>Location</span>
                     <div className="d-flex align-items-center">
-                      <i className="fa-solid fa-location-dot"></i>
+                      <i
+                        className="fa-solid fa-location-dot"
+                        style={{
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          address
+                            ? window.open(
+                                `https://www.google.com/maps/place/${address.lat}+${address.long}
+                                `
+                              )
+                            : Swal.fire({
+                                text: "Vui lòng chọn địa chỉ học...",
+                                icon: "error",
+                                showCancelButton: false,
+                                confirmButtonText: "OK",
+                              });
+                        }}
+                      ></i>
                       {!token || token?.length < 0 || token === "" ? (
-                        <button
-                          type="text"
-                          onClick={() => {
-                            setClickBooking(false);
-                            setClickLocation(true);
-                            handleOpen2();
-                          }}
-                        >
+                        <button type="text" onClick={handleOpen2}>
                           <span> Chọn vị trí học...</span>
                           <i
                             className="fa-light fa-chevron-down"
@@ -845,10 +872,31 @@ function Course(props) {
                         </button>
                       ) : (
                         <Select
-                          options={options}
+                          options={locationList["academy.location"]?.map(
+                            (x) => {
+                              return {
+                                id: x.id,
+                                label: x.name,
+                                value: x.address,
+                                lat: x.latitude,
+                                long: x.longitude,
+                              };
+                            }
+                          )}
                           styles={customStyles}
                           components={{ DropdownIndicator }}
-                          onChange={(value) => setAddress(value.label)}
+                          noOptionsMessage={() => "Chưa có dữ liệu..."}
+                          onChange={(value) => {
+                            setAddress({
+                              lat: value.lat,
+                              long: value.long,
+                            });
+                            Cookies.set("location_id", value.id);
+                            Cookies.set(
+                              "program_id",
+                              registration["academy.registration"].program_id[0]
+                            );
+                          }}
                           placeholder="Chọn địa chỉ học..."
                         />
                       )}

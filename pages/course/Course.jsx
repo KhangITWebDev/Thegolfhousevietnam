@@ -323,6 +323,9 @@ function Course(props) {
   const sectionIntroduction = contents.filter(
     (item) => item.category === "63bc39c139d2a23b06d8a316"
   );
+  const sectionBooking = contents.filter(
+    (item) => item.category === "63bc3d4539d2a23b06d8bb0e"
+  );
   return (
     <div className={styles.course_page}>
       <div className="container">
@@ -815,13 +818,19 @@ function Course(props) {
       <div className={styles.calendar} id="calendar">
         <div className="container">
           <div className="heading" data-aos="fade-down">
-            <h2>Đặt lịch học</h2>
+            <h2>{sectionBooking[0]?.title}</h2>
           </div>
         </div>
         <div className={styles.bannerv2}>
           <Image
             alt="Booking banner"
-            src="/images/Booking/bookingbanner.png"
+            loader={({ src }) =>
+              `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+            }
+            src={
+              sectionBooking[0]?.images[sectionBooking[0]?.images.length - 1]
+                ?.source
+            }
             layout="fill"
             objectFit="cover"
           />

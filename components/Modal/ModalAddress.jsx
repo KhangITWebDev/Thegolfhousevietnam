@@ -48,6 +48,17 @@ function ModalAddress({
   useEffect(() => {
     dispatch(getProvinceData());
   }, [dispatch]);
+  useEffect(() => {
+    reset({
+      city: "",
+      district: "",
+      ward: "",
+      street: "",
+      no: "",
+      phone: "",
+      email: "",
+    });
+  }, []);
   return (
     <Modal
       open={true}

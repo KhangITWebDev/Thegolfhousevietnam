@@ -3545,6 +3545,7 @@ button {
     line-height: 1.3;
     padding-top: 20px;
     padding-bottom: 20px;
+    white-space: normal;
   }
   .romove {
     cursor: pointer;
@@ -3606,6 +3607,13 @@ button {
         display: flex;
         align-items: center;
         padding: 30px 20px;
+        h4 {
+          font-size: 16px;
+          font-weight: 400;
+          color: #000;
+          line-height: 1.3;
+          margin-bottom: 15px;
+        }
         h3,
         span {
           font-size: 18px;
@@ -3617,6 +3625,20 @@ button {
           color: #576e33;
           font-weight: 400;
           cursor: pointer;
+          &:hover {
+            color: #000;
+          }
+        }
+        .change-address {
+          font-size: 14px;
+          font-weight: 400;
+          border: 1px solid #576e33;
+          background-color: transparent;
+          border-radius: 6px;
+          &:hover {
+            background-color: #576e33;
+            color: #fff;
+          }
         }
       }
       &:not(:last-child) {
@@ -3672,7 +3694,18 @@ button {
       padding: 40px 30px;
       margin-top: 25px;
       margin-bottom: 50px;
-      .item {
+      &_list {
+        // height: 65px;
+        height: 110px;
+        overflow-y: auto;
+      }
+      &_item {
+        &:not(:first-child) {
+          margin-top: 15px;
+        }
+      }
+      .item,
+      &_list {
         display: flex;
         justify-content: space-between;
         border-bottom: 2px solid #d9d9d9;

@@ -148,7 +148,16 @@
       }
     }
     @media screen and (max-width: 576px) {
-      height: 600px;
+      height: 400px;
+    }
+    @media screen and (max-width: 380px) {
+      height: 350px;
+    }
+    @media screen and (max-width: 320px) {
+      height: 300px;
+    }
+    @media screen and (max-width: 250px) {
+      height: 400px;
     }
     .content {
       position: absolute;

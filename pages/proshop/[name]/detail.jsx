@@ -96,7 +96,7 @@ function Detail(props) {
             position: "absolute",
             height: "150px",
             width: "150px",
-            "z-index": "",
+            "z-index": "4000",
           })
           .appendTo($("body"))
           .animate(

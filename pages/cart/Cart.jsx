@@ -11,6 +11,7 @@ import { Loader, Steps, Table } from "rsuite";
 import Swal from "sweetalert2";
 import * as yup from "yup";
 import ModalAddress from "../../components/Modal/ModalAddress";
+import ModalAddressDeliver from "../../components/Modal/ModalAddressDeliver";
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
 import { getProvinceData } from "../../store/redux/ProviceReducer/province.action";
 import {
@@ -173,6 +174,7 @@ function Cart(props) {
     handleSubmit,
     watch,
     reset,
+    setValue,
     control,
     formState: { errors },
   } = useForm({
@@ -202,21 +204,23 @@ function Cart(props) {
     resolver: yupResolver(schema2),
   });
   const [defaultAddress, setDefaultAddress] = useState(false);
-  useEffect(() => {
-    if (defaultAddress) {
-      // const handleShow = (indexI) => {
-      const newState = addressList.map((obj, indexD) => {
-        return { ...obj, default: false };
-      });
-      setLocalStorage(LOCAL_STORAGE.ADDRESS_LIST, newState);
-      // };
-    }
-  }, [defaultAddress]);
-  console.log(addressList);
+  const addressList = getLocalStorage(LOCAL_STORAGE.ADDRESS_LIST);
   const onSubmit2 = (data) => {
     const addressList = getLocalStorage(LOCAL_STORAGE.ADDRESS_LIST);
     if (addressList.length > 0) {
-      addressList.pop({ ...data, default: defaultAddress });
+      if (defaultAddress) {
+        const newState = addressList.map((obj, indexD) => {
+          // if (indexD === 0) {
+          return { ...obj, default: false };
+          // }
+          // return obj;
+        });
+        setLocalStorage(LOCAL_STORAGE.ADDRESS_LIST, newState);
+      }
+      addressList.unshift({
+        ...data,
+        default: defaultAddress,
+      });
       Swal.fire({
         text: "Bạn có chắc chắn muốn thêm địa chỉ này",
         icon: "info",
@@ -233,7 +237,9 @@ function Cart(props) {
           showCancelButton: false,
           confirmButtonText: "Đông ý",
         }).then((result) => {
-          result.isConfirmed && setOpen(false);
+          if (result.isConfirmed) {
+            setOpen(false);
+          }
         });
       });
     } else {
@@ -265,6 +271,7 @@ function Cart(props) {
   const onChange = (nextStep) => {
     setStep(nextStep < 0 ? 0 : nextStep > 3 ? 3 : nextStep);
   };
+  const findAddressDefault = addressList.findIndex((x) => x.default === true);
   const onNext = () => onChange(step + 1);
   const onPrevious = () => onChange(step - 1);
   const router = useRouter();
@@ -280,13 +287,51 @@ function Cart(props) {
     ? province[
         province.findIndex((x) => x.code === Number(watch("city")?.value))
       ]?.districts
+    : defaultAddress >= 0
+    ? province[
+        province.findIndex(
+          (x) => x.code === Number(addressList[findAddressDefault]?.city?.value)
+        )
+      ]?.districts
     : [];
   const ward =
     watch("city") && watch("district")
-      ? district[
-          district.findIndex((x) => x.code === Number(watch("district")?.value))
-        ]?.wards
+      ? district
+        ? district[
+            district?.findIndex(
+              (x) => x.code === Number(watch("district")?.value)
+            )
+          ]?.wards
+        : []
+      : findAddressDefault >= 0
+      ? district
+        ? district[
+            district?.findIndex(
+              (x) =>
+                x.code ===
+                Number(addressList[findAddressDefault]?.district?.value)
+            )
+          ]?.wards
+        : []
       : [];
+  const optionsCity = province.map((x) => {
+    return {
+      label: x.name,
+      value: x.code,
+    };
+  });
+  const optionsDistrict = district?.map((x) => {
+    return {
+      label: x.name,
+      value: x.code,
+    };
+  });
+  const optionsWards = ward?.map((x) => {
+    return {
+      label: x.name,
+      value: x.code,
+    };
+  });
   useEffect(() => {
     dispatch(getProvinceData());
   }, [dispatch]);
@@ -298,6 +343,15 @@ function Cart(props) {
     (accumulator, current) => accumulator + current.gia_ban_le * current.qty,
     initialValue
   );
+  useEffect(() => {
+    setValue("city", addressList[findAddressDefault]?.city);
+    setValue("district", addressList[findAddressDefault]?.district);
+    setValue("ward", addressList[findAddressDefault]?.ward);
+    setValue("no", addressList[findAddressDefault]?.no);
+    setValue("street", addressList[findAddressDefault]?.street);
+    setValue("phone", addressList[findAddressDefault]?.phone);
+    setValue("email", addressList[findAddressDefault]?.email);
+  }, []);
   $("input:checkbox").on("click", function () {
     var $box = $(this);
     if ($box.is(":checked")) {
@@ -371,7 +425,6 @@ function Cart(props) {
       }
     });
   };
-  const addressList = getLocalStorage(LOCAL_STORAGE.ADDRESS_LIST);
   const handleIncreaseQty = (item, index) => {
     const cart = getLocalStorage(LOCAL_STORAGE.CART);
     Swal.fire({
@@ -396,11 +449,16 @@ function Cart(props) {
     });
   };
   const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
+  const handleOpen2 = () => {
+    setOpen2(true);
+  };
   const [checkoutMethod, setCheckoutMethod] = useState();
   const handleClose = () => setOpen(false);
+  const handleClose2 = () => setOpen2(false);
   const handleChangeCheckout = (e) => {
     setCheckoutMethod(e.target.value);
   };
@@ -438,14 +496,18 @@ function Cart(props) {
                     <Cell>
                       {(rowData) => (
                         <div className="d-flex align-items-center box-name">
-                          <Image
-                            alt="Image"
-                            src="/images/Home/Shop/shop1.png"
-                            width={80}
-                            height={80}
-                            objectFit="cover"
-                          ></Image>
-                          <h5 className="data">{rowData.ten_vt}</h5>
+                          <div className="col-3">
+                            <Image
+                              alt="Image"
+                              src="/images/Home/Shop/shop1.png"
+                              width={80}
+                              height={80}
+                              objectFit="cover"
+                            ></Image>
+                          </div>
+                          <div className="col-9">
+                            <h5 className="data">{rowData.ten_vt}</h5>
+                          </div>
                         </div>
                       )}
                     </Cell>
@@ -553,9 +615,39 @@ function Cart(props) {
                           <h3>Địa chỉ</h3>
                         </div>
                         <div className="col-8 detail">
-                          <span className="add-address" onClick={handleOpen}>
-                            Thêm địa chỉ
-                          </span>
+                          <div className="d-flex flex-column">
+                            {findAddressDefault >= 0 && (
+                              <div className="d-flex align-items-center">
+                                <div className="col-9">
+                                  <h4>
+                                    {addressList[findAddressDefault]?.no}{" "}
+                                    {addressList[findAddressDefault]?.street},{" "}
+                                    {
+                                      addressList[findAddressDefault]?.district
+                                        .label
+                                    }
+                                  </h4>
+                                </div>
+                                <button
+                                  className="change-address col-3"
+                                  onClick={handleOpen2}
+                                >
+                                  Thay đổi
+                                </button>
+                              </div>
+                            )}
+                            <span className="add-address" onClick={handleOpen}>
+                              Thêm địa chỉ
+                            </span>
+                            {open2 && (
+                              <ModalAddressDeliver
+                                addressList={addressList}
+                                defaultValue={findAddressDefault}
+                                handleClose={handleClose2}
+                                customStyles={customStyles}
+                              />
+                            )}
+                          </div>
                         </div>
                       </div>
                       {open && (
@@ -585,7 +677,22 @@ function Cart(props) {
                       </div>
                     </div>
                     <div className="w-100 button">
-                      <button className="w-100" onClick={onNext}>
+                      <button
+                        className="w-100"
+                        onClick={() => {
+                          if (findAddressDefault < 0) {
+                            Swal.fire({
+                              text: "Bạn chưa chọn địa chỉ giao hàng?",
+                              icon: "error",
+                              showCancelButton: false,
+                              cancelButtonText: "Hủy Bỏ",
+                              confirmButtonText: "Đông ý",
+                            });
+                          } else {
+                            onNext();
+                          }
+                        }}
+                      >
                         Thanh toán
                       </button>
                     </div>
@@ -623,13 +730,20 @@ function Cart(props) {
                             {...field}
                             styles={customStyles}
                             components={{ DropdownIndicator }}
-                            options={province.map((x) => {
-                              return {
-                                value: x.code,
-                                label: x.name,
-                              };
-                            })}
+                            options={optionsCity}
                             // onChange={({ value }) => setCode(Number(value))}
+                            defaultValue={
+                              optionsCity[
+                                optionsCity.findIndex(
+                                  (x) =>
+                                    x.value ===
+                                    Number(
+                                      addressList[findAddressDefault]?.city
+                                        ?.value
+                                    )
+                                )
+                              ]
+                            }
                             placeholder="Chọn tỉnh/thành phố"
                           />
                         )}
@@ -653,12 +767,19 @@ function Cart(props) {
                             {...field}
                             styles={customStyles}
                             components={{ DropdownIndicator }}
-                            options={district.map((x) => {
-                              return {
-                                value: x.code,
-                                label: x.name,
-                              };
-                            })}
+                            options={optionsDistrict}
+                            defaultValue={
+                              optionsDistrict[
+                                optionsDistrict?.findIndex(
+                                  (x) =>
+                                    x.value ===
+                                    Number(
+                                      addressList[findAddressDefault]?.district
+                                        ?.value
+                                    )
+                                )
+                              ]
+                            }
                             placeholder="Chọn quận/huyện"
                           />
                         )}
@@ -682,12 +803,21 @@ function Cart(props) {
                             {...field}
                             styles={customStyles}
                             components={{ DropdownIndicator }}
-                            options={ward?.map((x) => {
-                              return {
-                                value: x.code,
-                                label: x.name,
-                              };
-                            })}
+                            options={optionsWards}
+                            defaultValue={
+                              optionsWards
+                                ? optionsWards[
+                                    optionsWards?.findIndex(
+                                      (x) =>
+                                        x.value ===
+                                        Number(
+                                          addressList[findAddressDefault]?.ward
+                                            ?.value
+                                        )
+                                    )
+                                  ]
+                                : ""
+                            }
                             placeholder="Chọn phường"
                           />
                         )}
@@ -769,19 +899,30 @@ function Cart(props) {
                 <div className="col-5 right">
                   <h5>Đơn hàng của bạn</h5>
                   <div className="order">
-                    <div className="item">
+                    <div className="order_list d-flex flex-column">
                       {cart.map((item, index) => (
-                        <>
-                          <h6>
-                            {item.ten_vt} x {item.qty}
-                          </h6>
-                          <h6>
-                            {(item.gia_ban_le * item.qty).toLocaleString(
-                              "vi-VI"
-                            )}{" "}
-                            VND
-                          </h6>
-                        </>
+                        <div
+                          className="order_item d-flex justify-content-between"
+                          key={index}
+                        >
+                          <div className="col-7">
+                            <h6>
+                              {item.ten_vt} x {item.qty}
+                            </h6>
+                          </div>
+                          <div className="col-5">
+                            <h6
+                              style={{
+                                textAlign: "right",
+                              }}
+                            >
+                              {(item.gia_ban_le * item.qty).toLocaleString(
+                                "vi-VI"
+                              )}{" "}
+                              VND
+                            </h6>
+                          </div>
+                        </div>
                       ))}
                     </div>
                     <div className="item">

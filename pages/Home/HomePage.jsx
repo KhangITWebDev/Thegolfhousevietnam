@@ -282,7 +282,7 @@ function HomePage(props) {
                 .source
             }
             layout="fill"
-            objectFit="cover"
+            // objectFit="cover"
           />
           <div className={styles.content}>
             <div className="container h-100">

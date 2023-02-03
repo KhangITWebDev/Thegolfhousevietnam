@@ -67,14 +67,10 @@ function About(props) {
                 />
               </div>
             </div>
-            <div
-              className={"col-12 col-md-6" + " " + styles.right}
-              data-aos="fade-left"
-            >
-              <span data-aos="fade-left">{sectionFounder[0]?.sub_title}</span>
-              <h3 data-aos="fade-left">{sectionFounder[0]?.title}</h3>
+            <div className={"col-12 col-md-6" + " " + styles.right}>
+              <span>{sectionFounder[0]?.sub_title}</span>
+              <h3>{sectionFounder[0]?.title}</h3>
               <p
-                data-aos="fade-left"
                 dangerouslySetInnerHTML={{ __html: sectionFounder[0]?.content }}
               ></p>
               {/* <div data-aos="fade-left">

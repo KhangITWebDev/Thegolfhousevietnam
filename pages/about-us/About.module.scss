@@ -1,5 +1,11 @@
 .about_page {
   padding-top: 150px;
+  @media screen and (max-width: 480px) {
+    padding-top: 140px;
+  }
+  @media screen and (max-width: 380px) {
+    padding-top: 120px;
+  }
   .membership {
     // margin-top: 100px;
     .left {
@@ -14,6 +20,16 @@
         @media screen and (max-width: 768px) {
           span {
             width: 100% !important;
+          }
+        }
+        @media screen and (max-width: 480px) {
+          span {
+            height: 350px !important;
+          }
+        }
+        @media screen and (max-width: 380px) {
+          span {
+            height: 250px !important;
           }
         }
         @media screen and (max-width: 576px) {
@@ -37,6 +53,16 @@
             width: 100% !important;
           }
         }
+        @media screen and (max-width: 480px) {
+          span {
+            height: 200px !important;
+          }
+        }
+        @media screen and (max-width: 376px) {
+          span {
+            height: 180px !important;
+          }
+        }
       }
     }
     .right {
@@ -48,12 +74,19 @@
         padding-left: 40px;
       }
       @media screen and (max-width: 768px) {
+        margin-top: 350px;
+      }
+      @media screen and (max-width: 767px) {
         padding-left: 0px;
         margin-top: 220px;
       }
       @media screen and (max-width: 480px) {
         padding-left: 0px;
-        margin-top: 180px;
+        margin-top: 130px;
+      }
+      @media screen and (max-width: 380px) {
+        padding-left: 0px;
+        margin-top: 120px;
       }
       span {
         font-size: 20px;

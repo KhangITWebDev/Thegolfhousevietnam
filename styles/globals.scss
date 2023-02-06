@@ -2115,12 +2115,13 @@ button {
       //   color: #000;
       // }
       button {
-        background-color: #fff;
-        color: #576e33;
+        background-color: transparent;
+        color: #fff;
         margin-top: 0px !important;
         border-color: #fff;
         &:hover {
           color: #000 !important;
+          background-color: #fff;
         }
         // margin-bottom: 40px;
         @media screen and (max-width: 992px) {

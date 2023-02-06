@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Modal } from "rsuite";
+import { Loader, Modal } from "rsuite";
 import Select, { components } from "react-select";
 import { Alert } from "react-bootstrap";
 import { Controller } from "react-hook-form";
@@ -90,13 +90,14 @@ function SignUpTrial({
   register,
   onSubmit,
   handleSubmit,
+  loadingSignUpTrial,
 }) {
   useEffect(() => {
     reset({
-      name: "",
-      email: "",
-      phone: "",
-      job: "",
+      from_name: "",
+      from_email: "",
+      from_phone: "",
+      from_job: "",
     });
   }, []);
   return (
@@ -120,9 +121,13 @@ function SignUpTrial({
             <label htmlFor="" className="form-label">
               Họ tên
             </label>
-            <input type="text" className="form-control" {...register("name")} />
-            {errors?.name && (
-              <Alert variant="danger">{errors?.name?.message}</Alert>
+            <input
+              type="text"
+              className="form-control"
+              {...register("from_name")}
+            />
+            {errors?.from_name && (
+              <Alert variant="danger">{errors?.from_name?.message}</Alert>
             )}
           </div>
           <div className="form-group">
@@ -132,10 +137,10 @@ function SignUpTrial({
             <input
               type="text"
               className="form-control"
-              {...register("email")}
+              {...register("from_email")}
             />
-            {errors?.email && (
-              <Alert variant="danger">{errors?.email?.message}</Alert>
+            {errors?.from_email && (
+              <Alert variant="danger">{errors?.from_email?.message}</Alert>
             )}
           </div>
           <div className="form-group">
@@ -145,10 +150,10 @@ function SignUpTrial({
             <input
               type="text"
               className="form-control"
-              {...register("phone")}
+              {...register("from_phone")}
             />
-            {errors?.phone && (
-              <Alert variant="danger">{errors?.phone?.message}</Alert>
+            {errors?.from_phone && (
+              <Alert variant="danger">{errors?.from_phone?.message}</Alert>
             )}
           </div>
           <div className="form-group">
@@ -158,7 +163,7 @@ function SignUpTrial({
             <Controller
               control={control}
               defaultValue={options.map((c) => c.value)}
-              name="job"
+              name="from_job"
               render={({ field }) => (
                 <Select
                   {...field}
@@ -176,7 +181,13 @@ function SignUpTrial({
             )}
           </div>
           <div className="button">
-            <button>Đăng ký</button>
+            <button>
+              {loadingSignUpTrial ? (
+                <Loader content="Đăng đăng ký" />
+              ) : (
+                "Đăng ký"
+              )}
+            </button>
           </div>
         </form>
       </Modal.Body>

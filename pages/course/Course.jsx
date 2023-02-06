@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 import moment from "moment";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import Select, { components } from "react-select";
@@ -19,12 +19,16 @@ import SignIn from "../../components/Modal/SignIn";
 import SignUp from "../../components/Modal/SignUp";
 import SignUpTrial from "../../components/Modal/SignUpTrial";
 import Sucess from "../../components/Modal/Sucess";
+import emailjs from "@emailjs/browser";
 import SucessTrial from "../../components/Modal/SucessTrial";
 import {
   getLocationData,
   getRegistrationData,
 } from "../../store/redux/BookingReducer/booking.action";
-import { getCourseData } from "../../store/redux/CourseReducer/course.action";
+import {
+  getCourseData,
+  PostSignTrial,
+} from "../../store/redux/CourseReducer/course.action";
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
 import { removeAccents } from "../../utils/function";
 import styles from "./Course.module.scss";
@@ -132,18 +136,18 @@ const options = [
 ];
 const PHONE_REGEX = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i;
 const schema = yup.object().shape({
-  name: yup.string().required("Vui lòng nhập họ tên"),
-  phone: yup
+  from_name: yup.string().required("Vui lòng nhập họ tên"),
+  from_phone: yup
     .string()
     .required("Vui lòng nhập số điện thoại")
     .min(10, "Số điện thoại phải nhiều hơn 9 ký tự")
     .max(12, "Sô điện thoại phải ít hơn 12 ký tự")
     .matches(PHONE_REGEX, "Số điện thoại không hợp lệ"),
-  email: yup
+  from_email: yup
     .string()
     .email("Email không hợp lệ")
     .required("Vui lòng nhập email"),
-  job: yup
+  from_job: yup
     .object()
     .shape({
       label: yup.string().required("Vui lòng chọn nghề nghiệp"),
@@ -180,8 +184,51 @@ function Course(props) {
   } = useForm({
     resolver: yupResolver(schema2),
   });
+  const form = useRef();
+  const [loadingSignUpTrial, setLoadingSignUpTrial] = useState(false);
   const onSubmit = (data) => {
-    handleOpen5();
+    setLoadingSignUpTrial(true);
+    const formState = {
+      from_name: data.from_name,
+      from_phone: data.from_phone,
+      from_email: data.from_email,
+      from_job: data.from_job.label,
+    };
+    setTimeout(() => {
+      emailjs
+        .send(
+          "service_ug5xzoq",
+          "template_zhcsmlh",
+          formState,
+          "n8Aci-Exs7CuotOPb"
+        )
+        .then(
+          function (response) {
+            if (response.status === 200) {
+              dispatch(PostSignTrial({}));
+              setLoadingSignUpTrial(false);
+              Swal.fire({
+                text: `Bạn đã đăng ký học thử thành công`,
+                icon: "success",
+                showCancelButton: false,
+                confirmButtonText: "OK",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  handleClose1();
+                }
+              });
+            }
+          },
+          function (err) {
+            Swal.fire({
+              text: `Vui lòng nhập lại thông tin`,
+              icon: "error",
+              showCancelButton: false,
+              confirmButtonText: "OK",
+            });
+          }
+        );
+    }, 2000);
   };
   const [loading, setLoading] = useState(false);
   const token = Cookies.get("access_token");
@@ -292,6 +339,9 @@ function Course(props) {
     });
   }, []);
   const [detailIndex, setDetailIndex] = useState(1);
+  const [bgDetail, setBGDetail] = useState(
+    "linear-gradient(170deg, transparent 50%, #b2a776 0%)"
+  );
   const DropdownIndicator = (props) => {
     return (
       <components.DropdownIndicator {...props}>
@@ -326,6 +376,9 @@ function Course(props) {
   const sectionBooking = contents.filter(
     (item) => item.category === "63bc3d4539d2a23b06d8bb0e"
   );
+  const getBg = (index) => {
+    setBGDetail($("#detail-course-" + index)?.css("background"));
+  };
   return (
     <div className={styles.course_page}>
       <div className="container">
@@ -629,7 +682,7 @@ function Course(props) {
               onSwiper={(s) => setSwiper3(s)}
               className="mySwiper"
             >
-              {slideCourse.map((item, index) => (
+              {courseData.map((item, index) => (
                 <SwiperSlide
                   key={index}
                   onClick={() => {
@@ -640,6 +693,7 @@ function Course(props) {
                       "slow"
                     );
                     setDetailIndex(index);
+                    getBg(index);
                   }}
                 >
                   <div className="d-flex flex-column info">
@@ -647,16 +701,20 @@ function Course(props) {
                       <div className="image">
                         <Image
                           alt="Intro 1"
-                          src={item.image}
+                          loader={({ src }) =>
+                            `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                          }
+                          src={item.thumb_image}
                           layout="fill"
                           objectFit="cover"
                         />
                       </div>
                       <div
                         className="detail"
-                        style={{
-                          background: `linear-gradient(170deg, transparent 50%, ${item.background} 0%)`,
-                        }}
+                        id={`detail-course-${index}`}
+                        // style={{
+                        //   background: `linear-gradient(170deg, transparent 50%, ${item.background} 0%)`,
+                        // }}
                       >
                         {/* <div className="icon">
                           <Image
@@ -667,7 +725,7 @@ function Course(props) {
                             objectFit="cover"
                           />
                         </div> */}
-                        <h5>{item.title}</h5>
+                        <h5>{item.name}</h5>
                       </div>
                     </div>
                   </div>
@@ -693,7 +751,10 @@ function Course(props) {
                     <div className="image" data-aos="fade-right">
                       <Image
                         alt="Intro 1"
-                        src={slideCourse[detailIndex]?.image}
+                        loader={({ src }) =>
+                          `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                        }
+                        src={courseData[detailIndex]?.thumb_image}
                         layout="fill"
                         objectFit="cover"
                       />
@@ -705,25 +766,18 @@ function Course(props) {
                         height:
                           window.screen.width < 780 &&
                           window.screen.width > 768 &&
-                          removeAccents(slideCourse[detailIndex]?.title) ===
+                          removeAccents(courseData[detailIndex]?.name) ===
                             removeAccents("Tập luyện theo giờ")
                             ? 500
                             : 320,
-                        background: `linear-gradient(170deg, transparent 50%, ${slideCourse[detailIndex]?.background} 0%)`,
+                        background: bgDetail,
                       }}
                     >
                       <h5 onClick={handleOpen} data-aos="fade-right">
-                        {slideCourse[detailIndex]?.title}
+                        {courseData[detailIndex]?.name}
                       </h5>
                       <div data-aos="fade-right" className="button">
-                        <button
-                          style={{
-                            color: slideCourse[detailIndex]?.background,
-                          }}
-                          onClick={handleOpen1}
-                        >
-                          Nhận Tư Vấn
-                        </button>
+                        <button onClick={handleOpen1}>Nhận Tư Vấn</button>
                       </div>
                     </div>
                   </div>
@@ -733,14 +787,14 @@ function Course(props) {
             <div className="heading col-12 col-md-8 flex-wrap align-items-start">
               <span data-aos="fade-left">THÔNG TIN KHOÁ HỌC</span>
               <h2 data-aos="fade-left" style={{}}>
-                {slideCourse[detailIndex]?.title}
+                {courseData[detailIndex]?.name}
               </h2>
-              <p
+              <div
                 dangerouslySetInnerHTML={{
-                  __html: slideCourse[detailIndex]?.description,
+                  __html: courseData[detailIndex]?.description,
                 }}
                 data-aos="fade-left"
-              ></p>
+              ></div>
             </div>
           </div>
         </div>
@@ -957,6 +1011,7 @@ function Course(props) {
       {open1 && (
         <SignUpTrial
           errors={errors}
+          loadingSignUpTrial={loadingSignUpTrial}
           register={register}
           onSubmit={onSubmit}
           reset={reset}

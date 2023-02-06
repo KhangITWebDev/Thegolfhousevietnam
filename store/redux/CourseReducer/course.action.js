@@ -13,14 +13,13 @@ export const getCourseData = () => async (dispatch) => {
     alert(err);
   }
 };
-// export const SignUpAsMember = (value) => async (dispatch) => {
-//   try {
-//     const resApi = await DemoApi.postUsersAPI(value);
-//     console.log(`NCH:  => file: User.thunk.js => line 37 => resApi`, resApi);
-//     if (resApi.success) {
-//     } else {
-//     }
-//   } catch (err) {
-//     alert(err);
-//   }
-// };
+export const PostSignTrial = (value) => async (dispatch) => {
+  try {
+    const resApi = await CourseAPI.postUsersRegister(value);
+    if (resApi.success) {
+    } else {
+    }
+  } catch (err) {
+    alert(err);
+  }
+};

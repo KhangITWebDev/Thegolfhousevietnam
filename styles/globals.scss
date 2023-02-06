@@ -1485,7 +1485,7 @@ button {
 }
 .rs-modal {
   &-wrapper {
-    z-index: 2001 !important;
+    z-index: 3002 !important;
   }
 }
 #banner {
@@ -2855,6 +2855,7 @@ button {
   // @media screen and (max-width: 768px) {
   //   margin-bottom: 30px;
   // }
+  z-index: 4100;
   margin-bottom: 30px;
   .rs-modal-header {
     padding: 20px 60px;
@@ -4092,4 +4093,7 @@ button {
 }
 .swal2-container {
   z-index: 3010 !important;
+}
+.rs-modal-wrapper {
+  z-index: 4100px !important;
 }

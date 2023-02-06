@@ -32,40 +32,6 @@ import {
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
 import { removeAccents } from "../../utils/function";
 import styles from "./Course.module.scss";
-const slideCourse = [
-  {
-    image: "/images/Home/Course/img1.jpg",
-    title: "Lớp lẻ",
-    icon: "/images/Home/Course/icon1.png",
-    background: "#576e33",
-    description:
-      "<p><ul><li> Học 1:1 với HLV chuyên nghiệp</li><li>Tặng 1 buổi ra sân với mỗi 10 buổi đăng ký học</li><li>60 phút/buổi</li><li>Miễn phí gậy tập và bóng</li></ul></p>",
-  },
-  {
-    image: "/images/Home/Course/img2.jpg",
-    title: "Khóa học",
-    icon: "/images/Home/Course/icon1.png",
-    background: "#B2A776",
-    description:
-      "<p><ul><li>Cam kết đầu ra</li><li>Học 1:1 với HLV chuyên nghiệp</li><li>Lộ trình bài bản từ 3 tháng tới 2 năm</li><li>Giáo trình thiết kế phù hợp từng trình độ từ sơ cấp tới nâng cao</li><li> Hỗ trợ 100% phí học lại nếu chưa đạt được trình độ đầu ra theo cam kết (điều kiện HV tham gia đầy đủ số buổi học quy định)</li><li>60 phút/buổi</li><li>Miễn phí phí gậy tập và bóng</li></ul></p>",
-  },
-  {
-    image: "/images/Home/Course/img3.jpg",
-    title: "Khoá trẻ em",
-    icon: "/images/Home/Course/icon2.png",
-    background: "#DD6B7F",
-    description:
-      "<p><ul><li>Độ tuổi từ 4 - 13</li><li>Lịch học linh động & phù hợp với lịch học tại trường</li><li>Giảng viên nhiều năm kinh nghiệm hướng dẫn trẻ</li><li>Tối đa 4 học viên/lớp</li><li>60 phút/buổi</li><li>Miễn phí gậy tập và bóng</li></ul></p>",
-  },
-  {
-    image: "/images/Home/Course/img4.jpg",
-    title: "Tập luyện theo giờ",
-    icon: "/images/Home/Course/icon1.png",
-    background: "#6B84DD",
-    description:
-      "<p><ul><li>Không gian tập luyện trong nhà tiện nghi</li><li> Thiết bị hiện đại</li><li>Chi phí hợp lý</li> </ul></p>",
-  },
-];
 const customStyles = {
   option: (provided, state) => ({
     ...provided,
@@ -131,9 +97,7 @@ const customStyles = {
     };
   },
 };
-const options = [
-  { value: "1", label: "Nguyễn Cơ Thạch, An Lợi Đông, Quận 2, TP Hồ Chí Minh" },
-];
+
 const PHONE_REGEX = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i;
 const schema = yup.object().shape({
   from_name: yup.string().required("Vui lòng nhập họ tên"),
@@ -205,7 +169,7 @@ function Course(props) {
         .then(
           function (response) {
             if (response.status === 200) {
-              dispatch(PostSignTrial({}));
+              // dispatch(PostSignTrial({}));
               setLoadingSignUpTrial(false);
               Swal.fire({
                 text: `Bạn đã đăng ký học thử thành công`,

@@ -1,7 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CountUp from "react-countup";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,21 +16,22 @@ import { getBannerData } from "../../store/redux/Banner/banner.action";
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
 import { getNewData } from "../../store/redux/NewsEvents/news.action";
 import { removeAccents, time } from "../../utils/function";
+import emailjs from "@emailjs/browser";
 import styles from "./Home.module.scss";
 const PHONE_REGEX = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i;
 const schema = yup.object().shape({
-  name: yup.string().required("Vui lòng nhập họ tên"),
-  phone: yup
+  from_name: yup.string().required("Vui lòng nhập họ tên"),
+  from_phone: yup
     .string()
     .required("Vui lòng nhập số điện thoại")
     .min(10, "Số điện thoại phải nhiều hơn 9 ký tự")
     .max(12, "Sô điện thoại phải ít hơn 12 ký tự")
     .matches(PHONE_REGEX, "Số điện thoại không hợp lệ"),
-  email: yup
+  from_email: yup
     .string()
     .email("Email không hợp lệ")
     .required("Vui lòng nhập email"),
-  job: yup
+  from_job: yup
     .object()
     .shape({
       label: yup.string().required("Vui lòng chọn nghề nghiệp"),
@@ -50,8 +51,50 @@ function HomePage(props) {
   } = useForm({
     resolver: yupResolver(schema),
   });
+  const [loadingSignUpTrial, setLoadingSignUpTrial] = useState(false);
   const onSubmit = (data) => {
-    handleOpen5();
+    setLoadingSignUpTrial(true);
+    const formState = {
+      from_name: data.from_name,
+      from_phone: data.from_phone,
+      from_email: data.from_email,
+      from_job: data.from_job.label,
+    };
+    setTimeout(() => {
+      emailjs
+        .send(
+          "service_ug5xzoq",
+          "template_zhcsmlh",
+          formState,
+          "n8Aci-Exs7CuotOPb"
+        )
+        .then(
+          function (response) {
+            if (response.status === 200) {
+              // dispatch(PostSignTrial({}));
+              setLoadingSignUpTrial(false);
+              Swal.fire({
+                text: `Bạn đã đăng ký học thử thành công`,
+                icon: "success",
+                showCancelButton: false,
+                confirmButtonText: "OK",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  handleClose1();
+                }
+              });
+            }
+          },
+          function (err) {
+            Swal.fire({
+              text: `Vui lòng nhập lại thông tin`,
+              icon: "error",
+              showCancelButton: false,
+              confirmButtonText: "OK",
+            });
+          }
+        );
+    }, 2000);
   };
   const { news } = useSelector((state) => state.NewsReducer);
   const dispatch = useDispatch();
@@ -255,6 +298,7 @@ function HomePage(props) {
                   register={register}
                   onSubmit={onSubmit}
                   control={control}
+                  loadingSignUpTrial={loadingSignUpTrial}
                   reset={reset}
                   handleSubmit={handleSubmit}
                   handleClose={handleClose1}

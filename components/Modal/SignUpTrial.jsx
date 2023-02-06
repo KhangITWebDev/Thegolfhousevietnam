@@ -61,13 +61,6 @@ const customStyles = {
   },
 };
 
-const options = [
-  { value: "1", label: "Kế Toán" },
-  { value: "2", label: "Kiến trúc" },
-  { value: "3", label: "Bất động sản" },
-  { value: "4", label: "Công nghệ thông tin" },
-];
-
 const DropdownIndicator = (props) => {
   return (
     <components.DropdownIndicator {...props}>
@@ -81,6 +74,12 @@ const DropdownIndicator = (props) => {
     </components.DropdownIndicator>
   );
 };
+const options = [
+  { value: "1", label: "Kế Toán" },
+  { value: "2", label: "Kiến trúc" },
+  { value: "3", label: "Bất động sản" },
+  { value: "4", label: "Công nghệ thông tin" },
+];
 function SignUpTrial({
   handleClose,
   handleOpen5,
@@ -162,7 +161,6 @@ function SignUpTrial({
             </label>
             <Controller
               control={control}
-              defaultValue={options.map((c) => c.value)}
               name="from_job"
               render={({ field }) => (
                 <Select
@@ -174,9 +172,9 @@ function SignUpTrial({
                 />
               )}
             />
-            {errors?.job && (
+            {errors?.from_job && (
               <Alert variant="danger">
-                {errors.job?.message || errors.job?.label.message}
+                {errors.from_job?.message || errors.from_job?.label.message}
               </Alert>
             )}
           </div>

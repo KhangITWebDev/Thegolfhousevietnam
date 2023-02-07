@@ -31,6 +31,7 @@ function ModalAddress({
   watch,
   handleSubmit,
   customStyles,
+  defaultAddress,
 }) {
   const dispatch = useDispatch();
   const province = useSelector((state) => state.ProvinceReducer.province);
@@ -58,6 +59,7 @@ function ModalAddress({
       phone: "",
       email: "",
     });
+    setDefaultAddress(false);
   }, []);
   return (
     <Modal
@@ -220,6 +222,7 @@ function ModalAddress({
               <input
                 className="form-check-input"
                 type="checkbox"
+                checked={defaultAddress}
                 role="switch"
                 id="flexSwitchCheckDefault"
                 onClick={(e) => setDefaultAddress(e.target.checked)}

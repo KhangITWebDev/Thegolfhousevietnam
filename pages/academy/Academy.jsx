@@ -36,16 +36,13 @@ function Academy(props) {
   return (
     <div className={styles.academy_page}>
       <div className="container">
-        <div className="heading" data-aos="fade-up">
+        <div className="heading" data-aos="fade-down">
           <h2 className={styles.title_page}>{sectionTitle[0]?.title}</h2>
         </div>
-        <div className={styles.intro}>
+        <div className={styles.intro} data-aos="fade-right">
           <div className="d-flex flex-wrap align-items-center">
-            <div
-              className={"col-12 col-md-6" + " " + styles.left}
-              data-aos="fade-right"
-            >
-              <div className={styles.image1} data-aos="fade-right">
+            <div className={"col-12 col-md-6" + " " + styles.left}>
+              <div className={styles.image1}>
                 <Image
                   alt="Image 1"
                   loader={({ src }) =>
@@ -60,7 +57,7 @@ function Academy(props) {
                   objectFit="cover"
                 />
               </div>
-              <div className={styles.image2} data-aos="fade-left">
+              <div className={styles.image2}>
                 <Image
                   alt="Image 2"
                   loader={({ src }) =>
@@ -81,32 +78,31 @@ function Academy(props) {
                 "col-12 col-md-6 d-flex flex-column" + " " + styles.right
               }
             >
-              <span data-aos="fade-left">{sectionIntro[0]?.sub_title}</span>
-              <h3 data-aos="fade-left">{sectionIntro[0]?.title}</h3>
+              <span>{sectionIntro[0]?.sub_title}</span>
+              <h3>{sectionIntro[0]?.title}</h3>
               <p
-                data-aos="fade-left"
                 dangerouslySetInnerHTML={{ __html: sectionIntro[0]?.content }}
               ></p>
               {sectionIntro[0]?.text_button && (
-                <div data-aos="fade-left">
+                <div>
                   <button>{sectionIntro[0]?.text_button}</button>
                 </div>
               )}
             </div>
           </div>
         </div>
-        <div className="wrap-special">
-          <div className={styles.welcome} id="welcome">
-            <div className={styles.info} data-aos="fade-right">
+        <div className="wrap-special" data-aos="fade-right">
+          <div className={styles.welcome} id="welcome" data-aos="fade-right">
+            <div className={styles.info}>
               <div
                 className={
                   "d-flex justify-content-between" + " " + styles.navigation
                 }
               >
-                <span onClick={() => swiper.slidePrev()} data-aos="fade-right">
+                <span onClick={() => swiper.slidePrev()}>
                   <i className="fa-regular fa-chevron-left"></i>
                 </span>
-                <span onClick={() => swiper.slideNext()} data-aos="fade-left">
+                <span onClick={() => swiper.slideNext()}>
                   <i className="fa-regular fa-chevron-right"></i>
                 </span>
               </div>
@@ -130,13 +126,13 @@ function Academy(props) {
               >
                 <div className={styles.content}>
                   <SwiperSlide>
-                    <div className="step_slide" data-aos="fade-right">
+                    <div className="step_slide">
                       {/* <span>01</span>
                     <span></span> */}
                       <span>{sectionInfoAcademy[0]?.sub_title}</span>
                     </div>
-                    <h3 data-aos="fade-left">{sectionInfoAcademy[0]?.title}</h3>
-                    <div className="desc" data-aos="fade-right">
+                    <h3>{sectionInfoAcademy[0]?.title}</h3>
+                    <div className="desc">
                       <p
                         dangerouslySetInnerHTML={{
                           __html: sectionInfoAcademy[0]?.content,
@@ -147,7 +143,7 @@ function Academy(props) {
                     className={
                       "d-flex justify-content-end" + " " + styles.see_more
                     }
-                    data-aos="fade-left"
+                    
                   >
                     <button className="d-flex align-items-center">
                       <span>Xem thêm</span>
@@ -156,13 +152,13 @@ function Academy(props) {
                   </div> */}
                   </SwiperSlide>
                   <SwiperSlide>
-                    <div className="step_slide" data-aos="fade-right">
+                    <div className="step_slide">
                       {/* <span>01</span>
                     <span></span> */}
                       <span>{sectionInfoAcademy[1]?.sub_title}</span>
                     </div>
-                    <h3 data-aos="fade-left">{sectionInfoAcademy[1]?.title}</h3>
-                    <div className="desc" data-aos="fade-right">
+                    <h3>{sectionInfoAcademy[1]?.title}</h3>
+                    <div className="desc">
                       <p
                         dangerouslySetInnerHTML={{
                           __html: sectionInfoAcademy[1]?.content,
@@ -171,11 +167,11 @@ function Academy(props) {
                     </div>
                   </SwiperSlide>
                   <SwiperSlide>
-                    <div className="step_slide" data-aos="fade-right">
+                    <div className="step_slide">
                       <span>{sectionInfoAcademy[2]?.sub_title}</span>
                     </div>
-                    <h3 data-aos="fade-left">{sectionInfoAcademy[2]?.title}</h3>
-                    <div className="desc" data-aos="fade-right">
+                    <h3>{sectionInfoAcademy[2]?.title}</h3>
+                    <div className="desc">
                       <p
                         dangerouslySetInnerHTML={{
                           __html: sectionInfoAcademy[2]?.content,
@@ -184,11 +180,11 @@ function Academy(props) {
                     </div>
                   </SwiperSlide>
                   <SwiperSlide>
-                    <div className="step_slide" data-aos="fade-right">
+                    <div className="step_slide">
                       <span>{sectionInfoAcademy[3]?.sub_title}</span>
                     </div>
-                    <h3 data-aos="fade-left">{sectionInfoAcademy[3]?.title}</h3>
-                    <div className="desc" data-aos="fade-right">
+                    <h3>{sectionInfoAcademy[3]?.title}</h3>
+                    <div className="desc">
                       <p
                         dangerouslySetInnerHTML={{
                           __html: sectionInfoAcademy[3]?.content,
@@ -197,11 +193,11 @@ function Academy(props) {
                     </div>
                   </SwiperSlide>
                   <SwiperSlide>
-                    <div className="step_slide" data-aos="fade-right">
+                    <div className="step_slide">
                       <span>{sectionInfoAcademy[4]?.sub_title}</span>
                     </div>
-                    <h3 data-aos="fade-left">{sectionInfoAcademy[4]?.title}</h3>
-                    <div className="desc" data-aos="fade-right">
+                    <h3>{sectionInfoAcademy[4]?.title}</h3>
+                    <div className="desc">
                       <p
                         dangerouslySetInnerHTML={{
                           __html: sectionInfoAcademy[4]?.content,
@@ -216,15 +212,12 @@ function Academy(props) {
               <span> Giới thiệu</span> <span>học viện</span>
             </h5>
             <div className={"d-flex flex-wrap" + " " + styles.detail}>
-              <div className="col-2 col-sm-4" data-aos="fade-right">
+              <div className="col-2 col-sm-4">
                 <h5>
                   Giới thiệu <br /> học viện
                 </h5>
               </div>
-              <div
-                className={"col-12 col-sm-8 flex-wrap" + " " + styles.image}
-                data-aos="fade-left"
-              >
+              <div className={"col-12 col-sm-8 flex-wrap" + " " + styles.image}>
                 <Image
                   alt="Image Course"
                   loader={({ src }) =>
@@ -243,12 +236,9 @@ function Academy(props) {
           </div>
         </div>
       </div>
-      <div className={styles.academy_detail}>
+      <div className={styles.academy_detail} data-aos="fade-right">
         <div className="d-flex flex-wrap">
-          <div
-            className={"col-12 col-lg-3 col-md-6" + " " + styles.item}
-            data-aos="fade-up"
-          >
+          <div className={"col-12 col-lg-3 col-md-6" + " " + styles.item}>
             <div className={styles.image}>
               <Image
                 alt="Image 1"
@@ -269,10 +259,7 @@ function Academy(props) {
               </div>
             </div>
           </div>
-          <div
-            className={"col-12 col-lg-3 col-md-6" + " " + styles.item}
-            data-aos="fade-down"
-          >
+          <div className={"col-12 col-lg-3 col-md-6" + " " + styles.item}>
             <div className={styles.image}>
               <Image
                 alt="Image 1"
@@ -293,10 +280,7 @@ function Academy(props) {
               </div>
             </div>
           </div>
-          <div
-            className={"col-12 col-lg-3 col-md-6" + " " + styles.item}
-            data-aos="fade-up"
-          >
+          <div className={"col-12 col-lg-3 col-md-6" + " " + styles.item}>
             <div className={styles.image}>
               <Image
                 alt="Image 1"
@@ -317,10 +301,7 @@ function Academy(props) {
               </div>
             </div>
           </div>
-          <div
-            className={"col-12 col-lg-3 col-md-6" + " " + styles.item}
-            data-aos="fade-down"
-          >
+          <div className={"col-12 col-lg-3 col-md-6" + " " + styles.item}>
             <div className={styles.image}>
               <Image
                 alt="Image 1"
@@ -343,7 +324,7 @@ function Academy(props) {
           </div>
         </div>
       </div>
-      <div className={styles.bannerv2} data-aos="fade-up">
+      <div className={styles.bannerv2} data-aos="fade-right">
         <Image
           loader={({ src }) =>
             `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
@@ -355,15 +336,13 @@ function Academy(props) {
           }
           layout="fill"
           objectFit="cover"
-          data-aos="fade-down"
         />
         <div className={styles.content}>
           <div className="container h-100">
             <div className="d-flex h-100 justify-content-center align-items-center flex-column">
-              <span data-aos="fade-left">{sectionLocation[0]?.sub_title}</span>
-              <h1 data-aos="fade-right">{sectionLocation[0]?.title}</h1>
+              <span>{sectionLocation[0]?.sub_title}</span>
+              <h1>{sectionLocation[0]?.title}</h1>
               <div
-                data-aos="fade-left"
                 dangerouslySetInnerHTML={{
                   __html: sectionLocation[0]?.content,
                 }}
@@ -381,7 +360,6 @@ function Academy(props) {
                     }
                   }}
                   className="btn-content"
-                  data-aos="fade-right"
                 >
                   {sectionLocation[0]?.text_button}
                 </button>

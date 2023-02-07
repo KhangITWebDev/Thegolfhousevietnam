@@ -14,6 +14,7 @@ import ModalAddress from "../../components/Modal/ModalAddress";
 import ModalAddressDeliver from "../../components/Modal/ModalAddressDeliver";
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
 import { getProvinceData } from "../../store/redux/ProviceReducer/province.action";
+import { convertDate } from "../../utils/function";
 import {
   getLocalStorage,
   LOCAL_STORAGE,
@@ -21,13 +22,31 @@ import {
 } from "../../utils/handleStorage";
 const { Column, HeaderCell, Cell } = Table;
 
+const checkoutList = [
+  {
+    id: "check1",
+    name: "Tiền mặt",
+  },
+  {
+    id: "check2",
+    name: "Ví điện tử",
+  },
+  {
+    id: "check3",
+    name: "Tài khoản ngân hàng",
+  },
+];
 const customStyles = {
   option: (provided, state) => ({
     ...provided,
     fontSize: 16,
     fontWeight: 400,
     color: state.isSelected ? "#fff" : "#000",
-    backgroundColor: state.isSelected ? "#00B577" : "transparent",
+    backgroundColor: state.isSelected ? "#576e33" : "#fff",
+    "&:hover": {
+      backgroundColor: "#bbbbbb",
+      color: "#fff",
+    },
     cursor: "pointer",
   }),
   singleValue: (provided, state) => ({
@@ -180,17 +199,36 @@ function Cart(props) {
   } = useForm({
     resolver: yupResolver(schema),
   });
+  const [loadingCheckout, setLoadingCheckout] = useState(false);
   const onSubmit = (data) => {
+    setLoadingCheckout(true);
     if (!checkoutMethod) {
-      Swal.fire({
-        text: "Vui lòng chọn phương thức thanh toán",
-        icon: "info",
-        showCancelButton: false,
-        cancelButtonText: "Hủy Bỏ",
-        confirmButtonText: "Đông ý",
-      });
+      setTimeout(() => {
+        setLoadingCheckout(false);
+        Swal.fire({
+          text: "Vui lòng chọn phương thức thanh toán",
+          icon: "error",
+          showCancelButton: false,
+          cancelButtonText: "Hủy Bỏ",
+          confirmButtonText: "Đông ý",
+        });
+      }, 2000);
     } else {
-      console.log({ ...data, checkput: checkoutMethod });
+      setTimeout(() => {
+        setLoadingCheckout(false);
+        Swal.fire({
+          text: "Bạn có chắc chắc chắn đã nhập đúng thông tin đặt hàng",
+          icon: "info",
+          showCancelButton: true,
+          cancelButtonText: "Hủy Bỏ",
+          confirmButtonText: "Đông ý",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            onNext();
+            console.log({ ...data, checkput: checkoutMethod });
+          }
+        });
+      }, 2000);
     }
   };
   const {
@@ -208,19 +246,6 @@ function Cart(props) {
   const onSubmit2 = (data) => {
     const addressList = getLocalStorage(LOCAL_STORAGE.ADDRESS_LIST);
     if (addressList.length > 0) {
-      if (defaultAddress) {
-        const newState = addressList.map((obj, indexD) => {
-          // if (indexD === 0) {
-          return { ...obj, default: false };
-          // }
-          // return obj;
-        });
-        setLocalStorage(LOCAL_STORAGE.ADDRESS_LIST, newState);
-      }
-      addressList.unshift({
-        ...data,
-        default: defaultAddress,
-      });
       Swal.fire({
         text: "Bạn có chắc chắn muốn thêm địa chỉ này",
         icon: "info",
@@ -229,7 +254,20 @@ function Cart(props) {
         confirmButtonText: "Đông ý",
       }).then((result) => {
         if (result.isConfirmed) {
+          addressList.unshift({
+            ...data,
+            default: defaultAddress,
+          });
           setLocalStorage(LOCAL_STORAGE.ADDRESS_LIST, addressList);
+          if (defaultAddress) {
+            const newState = addressList.map((obj, indexD) => {
+              if (indexD === 0) {
+                return { ...obj, default: true };
+              }
+              return { ...obj, default: false };
+            });
+            setLocalStorage(LOCAL_STORAGE.ADDRESS_LIST, newState);
+          }
         }
         Swal.fire({
           text: "Bạn đã thêm địa chỉ thành công",
@@ -252,7 +290,7 @@ function Cart(props) {
       }).then((result) => {
         result.isConfirmed &&
           setLocalStorage(LOCAL_STORAGE.ADDRESS_LIST, [
-            { ...data, default: defaultAddress },
+            { ...data, default: true },
           ]);
         Swal.fire({
           text: "Bạn đã thêm địa chỉ thành công",
@@ -260,23 +298,28 @@ function Cart(props) {
           showCancelButton: false,
           confirmButtonText: "Đông ý",
         }).then((result) => {
-          result.isConfirmed && setOpen(false);
+          if (result.isConfirmed) {
+            setOpen(false);
+            setDefaultAddress(false);
+          }
         });
       });
     }
   };
   const [step, setStep] = React.useState(0);
-  const [changeQty, setChangeQty] = React.useState(false);
-  const [currentChange, setCurrentChange] = React.useState(-1);
   const onChange = (nextStep) => {
     setStep(nextStep < 0 ? 0 : nextStep > 3 ? 3 : nextStep);
   };
-  const findAddressDefault = addressList.findIndex((x) => x.default === true);
+  const [findAddressDefault, setFindAddressDefault] = useState(
+    addressList.findIndex((x) => x.default === true)
+  );
+  useEffect(() => {
+    setFindAddressDefault(addressList.findIndex((x) => x.default === true));
+  }, [addressList]);
   const onNext = () => onChange(step + 1);
   const onPrevious = () => onChange(step - 1);
   const router = useRouter();
   const cart = getLocalStorage(LOCAL_STORAGE.CART);
-  const ship = 15000;
   const { contents } = useSelector((state) => state.ContentReducer);
   useEffect(() => {
     dispatch(getContentData());
@@ -287,9 +330,9 @@ function Cart(props) {
     ? province[
         province.findIndex((x) => x.code === Number(watch("city")?.value))
       ]?.districts
-    : defaultAddress >= 0
+    : findAddressDefault >= 0
     ? province[
-        province.findIndex(
+        province?.findIndex(
           (x) => x.code === Number(addressList[findAddressDefault]?.city?.value)
         )
       ]?.districts
@@ -362,7 +405,6 @@ function Cart(props) {
       $box.prop("checked", false);
     }
   });
-  const [qty, setQty] = useState(1);
   const [loadingRemove, setLoadingRemove] = useState(-1);
   const [loadingQty, setLoadingQty] = useState(-1);
   const handleRemove = (item) => {
@@ -644,6 +686,7 @@ function Cart(props) {
                                 addressList={addressList}
                                 defaultValue={findAddressDefault}
                                 handleClose={handleClose2}
+                                setFindAddressDefault={setFindAddressDefault}
                                 customStyles={customStyles}
                               />
                             )}
@@ -657,6 +700,7 @@ function Cart(props) {
                           handleSubmit={handleSubmit2}
                           register={register2}
                           onSubmit={onSubmit2}
+                          defaultAddress={defaultAddress}
                           setDefaultAddress={setDefaultAddress}
                           control={control2}
                           handleClose={handleClose}
@@ -899,7 +943,12 @@ function Cart(props) {
                 <div className="col-5 right">
                   <h5>Đơn hàng của bạn</h5>
                   <div className="order">
-                    <div className="order_list d-flex flex-column">
+                    <div
+                      className="order_list d-flex flex-column"
+                      style={{
+                        height: cart.length === 1 ? 50 : 110,
+                      }}
+                    >
                       {cart.map((item, index) => (
                         <div
                           className="order_item d-flex justify-content-between"
@@ -927,7 +976,16 @@ function Cart(props) {
                     </div>
                     <div className="item">
                       <h6>Giao hàng đến</h6>
-                      <h6>Quận 7, TPHCM</h6>
+                      <h6>
+                        {addressList[
+                          findAddressDefault
+                        ]?.district.label.replace("Thành phố", "TP")}
+                        ,{" "}
+                        {addressList[findAddressDefault]?.city.label.replace(
+                          "Thành phố",
+                          "TP"
+                        )}
+                      </h6>
                     </div>
                     <div className="item">
                       <h6>Tổng giá</h6>
@@ -1004,7 +1062,13 @@ function Cart(props) {
                       </div>
                     </label>
                     <div className="button" onClick={handleSubmit(onSubmit)}>
-                      <button>Đặt hàng</button>
+                      <button>
+                        {loadingCheckout ? (
+                          <Loader content="Đang kiểm tra" />
+                        ) : (
+                          "Đặt hàng"
+                        )}
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -1021,35 +1085,77 @@ function Cart(props) {
                     </div>
                     <div className="col-4 item">
                       <span className="title">Ngày</span>
-                      <p>11/01/2023</p>
+                      <p>{convertDate(new Date()).getDateMonthYear1}</p>
                     </div>
                     <div className="col-4 item">
                       <span className="title">Tổng</span>
-                      <p>720.000 VND</p>
+                      <p>{total.toLocaleString("VI-vi")} VND</p>
                     </div>
                   </div>
                   <div className="col-6 right">
                     <span className="title">Phương thức thanh toán</span>
-                    <p>Tiền mặt</p>
+                    <p>
+                      {checkoutList.find((x) => x.id === checkoutMethod)?.name}
+                    </p>
                   </div>
                 </div>
                 <h3>Chi tiết đơn hàng</h3>
                 <div className="view-order">
-                  <div className="item">
-                    <h6>Bóng Golf x 1</h6>
-                    <h6>720.000 VND</h6>
+                  <div
+                    className="list d-flex flex-column"
+                    style={{
+                      height: cart.length === 1 ? 50 : 95,
+                    }}
+                  >
+                    {cart.map((item, index) => (
+                      <div
+                        className="list_item d-flex justify-content-between"
+                        key={index}
+                      >
+                        <div className="col-7">
+                          <h6>
+                            {item.ten_vt} x {item.qty}
+                          </h6>
+                        </div>
+                        <div className="col-5">
+                          <h6
+                            style={{
+                              textAlign: "right",
+                            }}
+                          >
+                            {(item.gia_ban_le * item.qty).toLocaleString(
+                              "vi-VI"
+                            )}{" "}
+                            VND
+                          </h6>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                   <div className="item">
                     <h6>Địa chỉ giao hàng</h6>
-                    <h6>Quận 7, TPHCM</h6>
+                    <h6>
+                      {addressList[findAddressDefault]?.district.label.replace(
+                        "Thành phố",
+                        "TP"
+                      )}
+                      ,{" "}
+                      {addressList[findAddressDefault]?.city.label.replace(
+                        "Thành phố",
+                        "TP"
+                      )}
+                    </h6>
                   </div>
                   <div className="item">
                     <h6>Phương thức thanh toán</h6>
-                    <h6>Tiền mặt</h6>
+                    <h6>
+                      {" "}
+                      {checkoutList.find((x) => x.id === checkoutMethod)?.name}
+                    </h6>
                   </div>
                   <div className="item">
                     <h6>Tổng giá</h6>
-                    <h6>720.000 VND</h6>
+                    <h6>{total.toLocaleString("VI-vi")} VND</h6>
                   </div>
                 </div>
               </div>

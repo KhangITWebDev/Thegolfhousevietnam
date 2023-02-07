@@ -76,7 +76,7 @@ function Calendar({ value, onChange, schedule }) {
   }, [dispatch]);
   return (
     <div id="calendar">
-      <div className="calendar" data-aos="fade-down">
+      <div className="calendar" data-aos="fade-right">
         <div className="header">
           <div onClick={() => !isMonth() && onChange(prevMonth())}>
             {!isMonth() ? <i className="fa-light fa-arrow-left"></i> : null}

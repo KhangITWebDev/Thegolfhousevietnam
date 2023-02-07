@@ -346,7 +346,7 @@ function Course(props) {
   return (
     <div className={styles.course_page}>
       <div className="container">
-        <div className={"heading" + " " + styles.header} data-aos="fade-up">
+        <div className={"heading" + " " + styles.header} data-aos="fade-down">
           <span>{sectionTitlePage[0]?.sub_title}</span>
           <h2 className={styles.title_page}>{sectionTitlePage[0]?.title}</h2>
           <div className="button">
@@ -357,7 +357,7 @@ function Course(props) {
         </div>
       </div>
       <div className="container">
-        <div className={styles.training} id="training">
+        <div className={styles.training} id="training" data-aos="fade-right">
           <div className={styles.list + " " + "d-flex flex-wrap"}>
             <div
               className={
@@ -365,7 +365,6 @@ function Course(props) {
                 " " +
                 styles.item
               }
-              data-aos="fade-right"
             >
               <h2>
                 Lợi ích học Golf tại <span>The Golf House?</span>
@@ -378,7 +377,7 @@ function Course(props) {
                 styles.item
               }
             >
-              <div className={styles.content} data-aos="fade-down">
+              <div className={styles.content}>
                 <div className={styles.image_container}>
                   <Image
                     alt="item 1"
@@ -424,7 +423,7 @@ function Course(props) {
                 styles.item
               }
             >
-              <div className={styles.content} data-aos="fade-left">
+              <div className={styles.content}>
                 <div className={styles.image_container}>
                   <Image
                     alt="item 1"
@@ -470,7 +469,7 @@ function Course(props) {
                 styles.item
               }
             >
-              <div className={styles.content} data-aos="fade-right">
+              <div className={styles.content}>
                 <div className={styles.image_container}>
                   <Image
                     alt="item 1"
@@ -516,7 +515,7 @@ function Course(props) {
                 styles.item
               }
             >
-              <div className={styles.content} data-aos="fade-down">
+              <div className={styles.content}>
                 <div className={styles.image_container}>
                   <Image
                     alt="item 1"
@@ -562,7 +561,7 @@ function Course(props) {
                 styles.item
               }
             >
-              <div className={styles.content} data-aos="fade-left">
+              <div className={styles.content}>
                 <div className={styles.image_container}>
                   <Image
                     alt="item 1"
@@ -604,15 +603,12 @@ function Course(props) {
           </div>
         </div>
       </div>
-      <div className={styles.course} id="course">
+      <div className={styles.course} id="course" data-aos="fade-right">
         <div className={styles.top}>
           <div className="container">
-            <span data-aos="fade-right">
-              {sectionTitleCourse[0]?.sub_title}
-            </span>
-            <h2 data-aos="fade-right">{sectionTitleCourse[0]?.title}</h2>
+            <span>{sectionTitleCourse[0]?.sub_title}</span>
+            <h2>{sectionTitleCourse[0]?.title}</h2>
             <p
-              data-aos="fade-right"
               dangerouslySetInnerHTML={{
                 __html: sectionTitleCourse[0]?.content,
               }}
@@ -620,7 +616,7 @@ function Course(props) {
           </div>
         </div>
         <div className="container">
-          <div className="list" data-aos="fade-left">
+          <div className="list">
             <Swiper
               breakpoints={{
                 1200: {
@@ -705,14 +701,18 @@ function Course(props) {
           </div>
         </div>
       </div>
-      <div className={styles.course_detail} id="course-detail">
+      <div
+        className={styles.course_detail}
+        id="course-detail"
+        data-aos="fade-right"
+      >
         <div className="container">
           <div className="d-flex align-items-center flex-wrap-reverse flex-md-nowrap">
             <div className="d-flex justify-content-center justify-content-md-start left">
               <div className="swiper-slide">
                 <div className="d-flex flex-column info">
                   <div>
-                    <div className="image" data-aos="fade-right">
+                    <div className="image">
                       <Image
                         alt="Intro 1"
                         loader={({ src }) =>
@@ -737,10 +737,10 @@ function Course(props) {
                         background: bgDetail,
                       }}
                     >
-                      <h5 onClick={handleOpen} data-aos="fade-right">
+                      <h5 onClick={handleOpen}>
                         {courseData[detailIndex]?.name}
                       </h5>
-                      <div data-aos="fade-right" className="button">
+                      <div className="button">
                         <button onClick={handleOpen1}>Nhận Tư Vấn</button>
                       </div>
                     </div>
@@ -749,21 +749,18 @@ function Course(props) {
               </div>
             </div>
             <div className="heading col-12 col-md-8 flex-wrap align-items-start">
-              <span data-aos="fade-left">THÔNG TIN KHOÁ HỌC</span>
-              <h2 data-aos="fade-left" style={{}}>
-                {courseData[detailIndex]?.name}
-              </h2>
+              <span>THÔNG TIN KHOÁ HỌC</span>
+              <h2 style={{}}>{courseData[detailIndex]?.name}</h2>
               <div
                 dangerouslySetInnerHTML={{
                   __html: courseData[detailIndex]?.description,
                 }}
-                data-aos="fade-left"
               ></div>
             </div>
           </div>
         </div>
       </div>
-      <div className={styles.team} id="course-team">
+      <div className={styles.team} id="course-team" data-aos="fade-right">
         <div className="container">
           <Swiper
             effect={"creative"}
@@ -792,35 +789,31 @@ function Course(props) {
             <SwiperSlide>
               <div className="container">
                 <div className="content d-flex flex-column align-items-center">
-                  <span className="icon" data-aos="fade-down">
-                    “
-                  </span>
-                  <p data-aos="fade-left">
+                  <span className="icon">“</span>
+                  <p>
                     Từ một nhân viên văn phòng không mặn mà với hoạt động thể
                     thao, tôi tìm thấy niềm đam mê với Golf tại The Golf House.
                     Đến với Golf, tôi thấy cuộc sống trở nên vui vẻ và thú vị.
                     Đặc biệt, Golf rèn cho tôi tính kiên nhẫn và một lối sống
                     tích cực năng động hơn.
                   </p>
-                  <h2 data-aos="fade-right">Nguyễn Ngọc</h2>
-                  <span data-aos="fade-left">Nhân viên văn phòng</span>
+                  <h2>Nguyễn Ngọc</h2>
+                  <span>Nhân viên văn phòng</span>
                 </div>
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="container">
                 <div className="content d-flex flex-column align-items-center">
-                  <span className="icon" data-aos="fade-down">
-                    “
-                  </span>
-                  <p data-aos="fade-left">
+                  <span className="icon">“</span>
+                  <p>
                     Là một người chơi Golf hơn 10 năm, tôi gặp khó khăn trong
                     việc xuống Handicap. Nhờ các HLV tại The Golf House phân
                     tích các lỗi sai kỹ thuật mà tôi đã hiểu được vấn đề cần
                     chỉnh sửa để có thể chơi Golf tốt hơn.
                   </p>
-                  <h2 data-aos="fade-right">Trần Trung</h2>
-                  <span data-aos="fade-left">Nhân viên văn phòng</span>
+                  <h2>Trần Trung</h2>
+                  <span>Nhân viên văn phòng</span>
                 </div>
               </div>
             </SwiperSlide>
@@ -833,9 +826,9 @@ function Course(props) {
           </Swiper>
         </div>
       </div>
-      <div className={styles.calendar} id="calendar">
+      <div className={styles.calendar} id="calendar" data-aos="fade-right">
         <div className="container">
-          <div className="heading" data-aos="fade-down">
+          <div className="heading">
             <h2>{sectionBooking[0]?.title}</h2>
           </div>
         </div>

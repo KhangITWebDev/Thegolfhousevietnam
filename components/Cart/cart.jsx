@@ -8,9 +8,11 @@ import {
   setLocalStorage,
 } from "../../utils/handleStorage";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 function Cart({ handleCloseCart }) {
   const cart = getLocalStorage(LOCAL_STORAGE.CART);
+  const token = Cookies.get("access_token");
   const router = useRouter();
   useEffect(() => {
     $("#close").on("click", () => {
@@ -53,7 +55,7 @@ function Cart({ handleCloseCart }) {
               <i className="fa-light fa-xmark"></i>
             </button>
           </div>
-          {cart.length > 0 ? (
+          {cart.length > 0 && token.length > 0 ? (
             <div>
               <div className={styles.product}>
                 {cart.map((item, index) => (

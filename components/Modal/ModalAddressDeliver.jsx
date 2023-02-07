@@ -4,7 +4,9 @@ import { Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import Select, { components } from "react-select";
 import { Loader, Modal, Toggle } from "rsuite";
+import Swal from "sweetalert2";
 import { getProvinceData } from "../../store/redux/ProviceReducer/province.action";
+import { LOCAL_STORAGE, setLocalStorage } from "../../utils/handleStorage";
 
 const DropdownIndicator = (props) => {
   return (
@@ -25,6 +27,7 @@ export default function ModalAddressDeliver({
   customStyles,
   addressList,
   defaultValue,
+  setFindAddressDefault,
 }) {
   const options = addressList?.map((item, index) => {
     return {
@@ -32,6 +35,61 @@ export default function ModalAddressDeliver({
       value: index + 1,
     };
   });
+  const [loading, setLoading] = useState(false);
+  const [newDefaultAddress, setNewDefaultAddress] = useState(
+    options[defaultValue]
+  );
+  const changeDefaultAddress = () => {
+    setLoading(true);
+    const findIndex = options.findIndex(
+      (x) => x.value === newDefaultAddress?.value
+    );
+    if (findIndex >= 0) {
+      if (findIndex === defaultValue) {
+        setTimeout(() => {
+          setLoading(false);
+          Swal.fire({
+            text: "Địa chỉ này đã là mặc định",
+            icon: "info",
+            showCancelButton: false,
+            cancelButtonText: "Hủy Bỏ",
+            confirmButtonText: "Đông ý",
+          });
+          setFindAddressDefault(defaultValue);
+        }, 2000);
+      } else {
+        setTimeout(() => {
+          Swal.fire({
+            text: "Bạn có chắc chắn thay đôỉ địa chỉ này thành mặc định",
+            icon: "info",
+            cancelButtonText: "Hủy Bỏ",
+            confirmButtonText: "Đông ý",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              const newState = addressList.map((obj, indexD) => {
+                if (indexD === findIndex) {
+                  return { ...obj, default: true };
+                }
+                return { ...obj, default: false };
+              });
+              setFindAddressDefault(findIndex);
+              setLocalStorage(LOCAL_STORAGE.ADDRESS_LIST, newState);
+              Swal.fire({
+                text: "Thay đổi địa chỉ thành công",
+                icon: "success",
+                showCancelButton: false,
+                confirmButtonText: "Đông ý",
+              }).then((rs) => {
+                if (rs.isConfirmed) {
+                  handleClose();
+                }
+              });
+            }
+          });
+        }, 2000);
+      }
+    }
+  };
   return (
     <Modal
       open={true}
@@ -48,23 +106,23 @@ export default function ModalAddressDeliver({
       </Modal.Header>
       <Modal.Body>
         <h5>Thay đổi địa chỉ giao hàng mặc định</h5>
-        <form action="">
-          <div className="form-group">
-            {/* <label htmlFor="" className="form-label">
+        <div className="form-group">
+          {/* <label htmlFor="" className="form-label">
               Tỉnh/Thành phố
             </label> */}
-            <Select
-              styles={customStyles}
-              components={{ DropdownIndicator }}
-              defaultValue={options[defaultValue]}
-              onChange={(value) => console.log(value)}
-              options={options}
-            />
-          </div>
-          <div className="button">
-            <button>Xác nhận</button>
-          </div>
-        </form>
+          <Select
+            styles={customStyles}
+            components={{ DropdownIndicator }}
+            defaultValue={options[defaultValue]}
+            onChange={(value) => setNewDefaultAddress(value)}
+            options={options}
+          />
+        </div>
+        <div className="button">
+          <button onClick={changeDefaultAddress}>
+            {loading ? <Loader content="Đang xác nhận" /> : "Xác nhận"}
+          </button>
+        </div>
       </Modal.Body>
     </Modal>
   );

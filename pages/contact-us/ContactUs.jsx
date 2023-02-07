@@ -25,14 +25,18 @@ function ContactUs(props) {
   const router = useRouter();
   return (
     <div className={styles.contact_page}>
-      <div className="heading" data-aos="fade-up">
+      <div className="heading" data-aos="fade-down">
         <h2 className={styles.title_page}>{sectionTitlePage[0]?.title}</h2>
       </div>
       <div className={styles.training} id="contact">
         <div className="container">
           <div className="d-flex flex-wrap justify-content-center">
             {sectionContactList.slice(0, 3).map((item, index) => (
-              <div key={index} className="item col-12 col-sm-6 col-lg-4">
+              <div
+                key={index}
+                className="item col-12 col-sm-6 col-lg-4"
+                data-aos="fade-right"
+              >
                 <div
                   className="content h-100 d-flex flex-column align-items-center"
                   onClick={() => {
@@ -48,13 +52,13 @@ function ContactUs(props) {
                 >
                   <div
                     className="image"
-                    data-aos={
-                      index === 0
-                        ? "fade-right"
-                        : index === 1
-                        ? "fade-down"
-                        : "fade-left"
-                    }
+                    // data-aos={
+                    //   index === 0
+                    //     ? "fade-right"
+                    //     : index === 1
+                    //     ? "fade-down"
+                    //     : "fade-left"
+                    // }
                   >
                     <Image
                       alt="item 1"
@@ -70,24 +74,24 @@ function ContactUs(props) {
                   <div className="info d-flex flex-column align-items-center">
                     <h5
                       className="text-center"
-                      data-aos={
-                        index === 0
-                          ? "fade-right"
-                          : index === 1
-                          ? "fade-up"
-                          : "fade-left"
-                      }
+                      // data-aos={
+                      //   index === 0
+                      //     ? "fade-right"
+                      //     : index === 1
+                      //     ? "fade-up"
+                      //     : "fade-left"
+                      // }
                     >
                       {item.title}
                     </h5>
                     <div
-                      data-aos={
-                        index === 0
-                          ? "fade-right"
-                          : index === 1
-                          ? "fade-up"
-                          : "fade-left"
-                      }
+                      // data-aos={
+                      //   index === 0
+                      //     ? "fade-right"
+                      //     : index === 1
+                      //     ? "fade-up"
+                      //     : "fade-left"
+                      // }
                       dangerouslySetInnerHTML={{ __html: item.content }}
                     ></div>
                   </div>
@@ -98,7 +102,7 @@ function ContactUs(props) {
         </div>
       </div>
       <div className={styles.form}>
-        <div className="d-flex flex-wrap">
+        <div className="d-flex flex-wrap" data-aos="fade-right">
           <div
             className={"col-12 col-lg-6" + " " + styles.left}
             data-aos="fade-right"
@@ -119,37 +123,35 @@ function ContactUs(props) {
           </div>
           <div
             className={"col-12 col-lg-6" + " " + styles.right}
-            data-aos="fade-left"
+            data-aos="fade-right"
           >
             <div>
               <div className="heading align-items-start w-100">
-                <span data-aos="fade-left">
-                  {sectionTitleForm[0]?.sub_title}
-                </span>
-                <h2 data-aos="fade-left" className={styles.title_page}>
+                <span>{sectionTitleForm[0]?.sub_title}</span>
+                <h2 className={styles.title_page}>
                   {sectionTitleForm[0]?.title}
                 </h2>
               </div>
               <form action="">
-                <div className="form-group" data-aos="fade-left">
+                <div className="form-group">
                   <label htmlFor="" className="form-label">
                     Họ tên
                   </label>
                   <input type="text" className="form-control" />
                 </div>
-                <div className="form-group" data-aos="fade-left">
+                <div className="form-group">
                   <label htmlFor="" className="form-label">
                     Email
                   </label>
                   <input type="text" className="form-control" />
                 </div>
-                <div className="form-group" data-aos="fade-left">
+                <div className="form-group">
                   <label htmlFor="" className="form-label">
                     Điện Thoại
                   </label>
                   <input type="text" className="form-control" />
                 </div>
-                <div className="form-group" data-aos="fade-left">
+                <div className="form-group">
                   <label htmlFor="" className="form-label">
                     Ghi chú
                   </label>
@@ -159,7 +161,7 @@ function ContactUs(props) {
                     rows="3"
                   ></textarea>
                 </div>
-                <div className="button" data-aos="fade-left">
+                <div className="button">
                   <button>Gửi</button>
                 </div>
               </form>

@@ -33,11 +33,11 @@ function OrtherService(props) {
   return (
     <div className={styles.orther_service}>
       <div className="container">
-        <div className="heading" data-aos="fade-up">
+        <div className="heading" data-aos="fade-down">
           <h2>{sectionTitleHaỉrNailSpa[0]?.title}</h2>
         </div>
       </div>
-      <div className={styles.bannerv2} data-aos="fade-up">
+      <div className={styles.bannerv2} data-aos="fade-right">
         <Image
           loader={({ src }) =>
             `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
@@ -50,9 +50,8 @@ function OrtherService(props) {
         <div className={styles.bannerv2_content}>
           <div className="container h-100">
             <div className="d-flex h-100 justify-content-center align-items-center flex-column">
-              <h1 data-aos="fade-right">{bannerHairNailSpa[0]?.tieu_de}</h1>
+              <h1>{bannerHairNailSpa[0]?.tieu_de}</h1>
               <div
-                data-aos="fade-left"
                 dangerouslySetInnerHTML={{
                   __html: bannerHairNailSpa[0]?.mo_ta,
                 }}
@@ -62,7 +61,7 @@ function OrtherService(props) {
         </div>
       </div>
       <div className="container">
-        <h5 data-aos="fade-down">Dịch vụ</h5>
+        <h5 data-aos="fade-up">Dịch vụ</h5>
         <div className={styles.list}>
           {imageHairNailSpa[0]?.images?.slice(0, 4).map((item, index) => {
             return (
@@ -82,11 +81,11 @@ function OrtherService(props) {
         </div>
       </div>
       <div className="container">
-        <div className="heading" data-aos="fade-up">
+        <div className="heading" data-aos="fade-down">
           <h2>{sectionTitleVipLouge[0]?.title}</h2>
         </div>
       </div>
-      <div className={styles.bannerv2} data-aos="fade-up">
+      <div className={styles.bannerv2} data-aos="fade-right">
         <Image
           loader={({ src }) =>
             `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
@@ -100,9 +99,8 @@ function OrtherService(props) {
           <div className="container h-100">
             <div className="d-flex h-100 justify-content-center align-items-center flex-column">
               {/* <span></span> */}
-              <h1 data-aos="fade-right">{BAnnerVipLounge[0]?.tieu_de}</h1>
+              <h1>{BAnnerVipLounge[0]?.tieu_de}</h1>
               <div
-                data-aos="fade-left"
                 dangerouslySetInnerHTML={{
                   __html: BAnnerVipLounge[0]?.mo_ta,
                 }}
@@ -112,7 +110,7 @@ function OrtherService(props) {
         </div>
       </div>
       <div className="container">
-        <h5 data-aos="fade-down">Dịch vụ</h5>
+        <h5 data-aos="fade-up">Dịch vụ</h5>
         <div className={styles.list}>
           {imageVipLouge[0]?.images?.slice(0, 4).map((item, index) => {
             return (

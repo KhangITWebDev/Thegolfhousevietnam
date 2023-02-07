@@ -115,7 +115,7 @@ function ProShop(props) {
   const glove = proshopData.filter((x) => x.ten_nvt === "Găng tay");
   const shose = proshopData.filter((x) => x.ten_nvt === "Giày");
   const golfClubs = proshopData.filter((x) => x.ten_nvt === "Gậy");
-  const golfBall = proshopData.filter((x) => x.ten_nvt.includes("Bóng"));
+  const golfBall = proshopData.filter((x) => x.ten_nvt?.includes("Bóng"));
   const data = usePagination(proshopData, 6);
   const filter = (type) => {
     data.setCurrentPage(1);
@@ -222,12 +222,12 @@ function ProShop(props) {
   };
   return (
     <div className={styles.proshop_page}>
-      <div className="container" data-aos="fade-up">
+      <div className="container" data-aos="fade-down">
         <div className="heading">
           <h2>{sectiontitle[0]?.title}</h2>
         </div>
       </div>
-      <div className={styles.bannerv2} data-aos="fade-up">
+      <div className={styles.bannerv2} data-aos="fade-right">
         <Image
           loader={({ src }) =>
             `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
@@ -327,7 +327,7 @@ function ProShop(props) {
           </div>
           <div
             className={"col-12 col-lg-5" + " " + styles.right}
-            data-aos="fade-left"
+            data-aos="fade-right"
           >
             <div className={styles.tabs}>
               <div className={"d-flex flex-wrap" + " " + styles.top}>

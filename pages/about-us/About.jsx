@@ -28,13 +28,10 @@ function About(props) {
   return (
     <div className={styles.about_page}>
       <div className="container">
-        <div className={styles.membership} id="founder">
+        <div className={styles.membership} id="founder" data-aos="fade-right">
           <div className="d-flex flex-wrap align-items-center">
-            <div
-              className={"col-12 col-md-6" + " " + styles.left}
-              data-aos="fade-right"
-            >
-              <div className={styles.image1} data-aos="fade-right">
+            <div className={"col-12 col-md-6" + " " + styles.left}>
+              <div className={styles.image1}>
                 <Image
                   alt="Image 1"
                   loader={({ src }) =>
@@ -50,7 +47,7 @@ function About(props) {
                   objectFit="cover"
                 />
               </div>
-              <div className={styles.image2} data-aos="fade-left">
+              <div className={styles.image2}>
                 <Image
                   alt="Image 2"
                   loader={({ src }) =>
@@ -73,27 +70,24 @@ function About(props) {
               <p
                 dangerouslySetInnerHTML={{ __html: sectionFounder[0]?.content }}
               ></p>
-              {/* <div data-aos="fade-left">
+              {/* <div >
                 <button>Đăng ký</button>
               </div> */}
             </div>
           </div>
         </div>
         <div className="wrap-special">
-          <div className={styles.vision} id="vision">
+          <div className={styles.vision} id="vision" data-aos="fade-right">
             <h5 className={styles.mobile}>
               <span>Tầm nhìn</span> <span>sứ mệnh</span>
             </h5>
             <div className={"d-flex flex-wrap" + " " + styles.detail}>
-              <div className="col-2 col-sm-4" data-aos="fade-right">
+              <div className="col-2 col-sm-4">
                 <h5>
                   <span>Tầm nhìn</span> <span>Sứ mệnh</span>
                 </h5>
               </div>
-              <div
-                className={"col-12 col-sm-8 flex-wrap" + " " + styles.image}
-                data-aos="fade-left"
-              >
+              <div className={"col-12 col-sm-8 flex-wrap" + " " + styles.image}>
                 <Image
                   alt="Image Course"
                   loader={({ src }) =>
@@ -109,7 +103,7 @@ function About(props) {
                 ></Image>
               </div>
             </div>
-            <div className={styles.info} data-aos="fade-right">
+            <div className={styles.info}>
               <Swiper
                 effect={"flip"}
                 grabCursor={true}
@@ -123,7 +117,6 @@ function About(props) {
                 <div className={styles.content}>
                   <SwiperSlide>
                     <p
-                      data-aos="fade-right"
                       className="desc"
                       dangerouslySetInnerHTML={{
                         __html: sectionVision[0]?.content,
@@ -135,8 +128,8 @@ function About(props) {
             </div>
           </div>
         </div>
-        <div className={styles.welcome} id="about">
-          <div className={styles.info} data-aos="fade-left">
+        <div className={styles.welcome} id="about" data-aos="fade-right">
+          <div className={styles.info}>
             <div
               className={
                 "d-flex justify-content-between" + " " + styles.navigation
@@ -169,11 +162,11 @@ function About(props) {
             >
               <div className={styles.content}>
                 <SwiperSlide>
-                  <div className="step_slide" data-aos="fade-left">
+                  <div className="step_slide">
                     <span>{sectionIntro[0]?.sub_title}</span>
                   </div>
-                  <h3 data-aos="fade-right">{sectionIntro[0]?.title}</h3>
-                  <div className="desc" data-aos="fade-left">
+                  <h3>{sectionIntro[0]?.title}</h3>
+                  <div className="desc">
                     <p
                       dangerouslySetInnerHTML={{
                         __html: sectionIntro[0]?.content,
@@ -182,11 +175,11 @@ function About(props) {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="step_slide" data-aos="fade-left">
+                  <div className="step_slide">
                     <span>{sectionIntro[1]?.sub_title}</span>
                   </div>
-                  <h3 data-aos="fade-right">{sectionIntro[1]?.title}</h3>
-                  <div className="desc" data-aos="fade-left">
+                  <h3>{sectionIntro[1]?.title}</h3>
+                  <div className="desc">
                     <p
                       dangerouslySetInnerHTML={{
                         __html: sectionIntro[1]?.content,
@@ -199,10 +192,7 @@ function About(props) {
           </div>
           <h5 className={styles.mobile}>Lio Holding</h5>
           <div className={"d-flex flex-wrap" + " " + styles.detail}>
-            <div
-              className={"col-12 col-sm-8 flex-wrap" + " " + styles.image}
-              data-aos="fade-right"
-            >
+            <div className={"col-12 col-sm-8 flex-wrap" + " " + styles.image}>
               <Image
                 alt="Image Course"
                 loader={({ src }) =>
@@ -217,7 +207,7 @@ function About(props) {
                 objectFit="cover"
               ></Image>
             </div>
-            <div className="col-2 col-sm-4" data-aos="fade-left">
+            <div className="col-2 col-sm-4">
               <h5>
                 Lio <br /> Holding
               </h5>

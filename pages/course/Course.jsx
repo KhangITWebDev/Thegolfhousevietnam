@@ -292,16 +292,6 @@ function Course(props) {
     setOpen(false);
   };
   const handleClose5 = () => setOpen5(false);
-  useEffect(() => {
-    $("#course-team .swiper-pagination-bullet").each(function (indexC) {
-      $(this).css({
-        backgroundImage: `url(/images/Home/Team/team${indexC + 3}.png)`,
-        backgroundPosition: "center",
-        backgroundSize: "contain",
-        opacity: 1,
-      });
-    });
-  }, []);
   const [detailIndex, setDetailIndex] = useState(1);
   const [bgDetail, setBGDetail] = useState(
     "linear-gradient(170deg, transparent 50%, #b2a776 0%)"
@@ -340,9 +330,26 @@ function Course(props) {
   const sectionBooking = contents.filter(
     (item) => item.category === "63bc3d4539d2a23b06d8bb0e"
   );
+  const SectionTrainee = contents.filter(
+    (item) => item.category === "63e356cc234bcc47f71bc040"
+  );
   const getBg = (index) => {
     setBGDetail($("#detail-course-" + index)?.css("background"));
   };
+  useEffect(() => {
+    $("#course-team .swiper-pagination-bullet").each(function (indexC) {
+      $(this).css({
+        backgroundImage: `url(https://api.fostech.vn${
+          SectionTrainee[indexC]?.images[
+            SectionTrainee[indexC]?.images?.length - 1
+          ]?.source
+        }?access_token=7d7fea98483f31af4ac3cdd9db2e4a93)`,
+        backgroundPosition: "center",
+        backgroundSize: "contain",
+        opacity: 1,
+      });
+    });
+  }, [SectionTrainee]);
   return (
     <div className={styles.course_page}>
       <div className="container">
@@ -780,7 +787,11 @@ function Course(props) {
             pagination={{
               clickable: true,
             }}
-            modules={[Pagination, Navigation]}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+            }}
+            modules={[Pagination, Navigation, Autoplay]}
             className="mySwiper"
             onSwiper={(s) => {
               setSwiper2(s);
@@ -790,15 +801,13 @@ function Course(props) {
               <div className="container">
                 <div className="content d-flex flex-column align-items-center">
                   <span className="icon">“</span>
-                  <p>
-                    Từ một nhân viên văn phòng không mặn mà với hoạt động thể
-                    thao, tôi tìm thấy niềm đam mê với Golf tại The Golf House.
-                    Đến với Golf, tôi thấy cuộc sống trở nên vui vẻ và thú vị.
-                    Đặc biệt, Golf rèn cho tôi tính kiên nhẫn và một lối sống
-                    tích cực năng động hơn.
-                  </p>
-                  <h2>Nguyễn Ngọc</h2>
-                  <span>Nhân viên văn phòng</span>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: SectionTrainee[0]?.content,
+                    }}
+                  ></div>
+                  <h2>{SectionTrainee[0]?.title}</h2>
+                  <span>{SectionTrainee[0]?.sub_title}</span>
                 </div>
               </div>
             </SwiperSlide>
@@ -806,14 +815,13 @@ function Course(props) {
               <div className="container">
                 <div className="content d-flex flex-column align-items-center">
                   <span className="icon">“</span>
-                  <p>
-                    Là một người chơi Golf hơn 10 năm, tôi gặp khó khăn trong
-                    việc xuống Handicap. Nhờ các HLV tại The Golf House phân
-                    tích các lỗi sai kỹ thuật mà tôi đã hiểu được vấn đề cần
-                    chỉnh sửa để có thể chơi Golf tốt hơn.
-                  </p>
-                  <h2>Trần Trung</h2>
-                  <span>Nhân viên văn phòng</span>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: SectionTrainee[1]?.content,
+                    }}
+                  ></div>
+                  <h2>{SectionTrainee[1]?.title}</h2>
+                  <span>{SectionTrainee[1]?.sub_title}</span>
                 </div>
               </div>
             </SwiperSlide>

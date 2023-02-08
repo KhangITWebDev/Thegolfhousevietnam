@@ -144,6 +144,10 @@ function HomePage(props) {
   const sectiontitleNew = contents.filter(
     (item) => item.category === "63bc49ef39d2a23b06d90d05"
   );
+  const sectionTeam = contents.filter(
+    (item) => item.category === "63e34f6eca71c51ca0ed6bb2"
+  );
+
   const router = useRouter();
   const [swiper, setSwiper] = React.useState(null);
   const [swiper2, setSwiper2] = React.useState(null);
@@ -160,7 +164,7 @@ function HomePage(props) {
   return (
     <>
       <div className={styles.home_page}>
-        <div className={styles.banner} id="banner" data-aos="fade-up">
+        <div className={styles.banner} id="banner" data-aos="fade-right">
           <Swiper
             effect={"creative"}
             creativeEffect={{
@@ -206,7 +210,7 @@ function HomePage(props) {
                       <div className="d-flex h-100 justify-content-center align-items-center flex-column">
                         <h1 data-aos="fade-right">{item.tieu_de}</h1>
                         <div
-                          data-aos="fade-left"
+                          data-aos="fade-right"
                           dangerouslySetInnerHTML={{
                             __html: item.mo_ta,
                           }}
@@ -278,14 +282,15 @@ function HomePage(props) {
                 </div>
               </div>
               <div className={"col-12 col-md-6" + " " + styles.right}>
-                <span data-aos="fade-left">{contentGolf[0]?.sub_title}</span>
-                <h3 data-aos="fade-left">{contentGolf[0]?.title}</h3>
+                <span data-aos="fade-right">{contentGolf[0]?.sub_title}</span>
+                <h3 data-aos="fade-right">{contentGolf[0]?.title}</h3>
                 <p
+                  data-aos="fade-right"
                   dangerouslySetInnerHTML={{ __html: contentGolf[0]?.content }}
                 ></p>
                 <div
                   className="button justify-content-start"
-                  data-aos="fade-left"
+                  data-aos="fade-right"
                 >
                   <button onClick={handleOpen1}>
                     {contentGolf[0]?.text_button}
@@ -315,7 +320,7 @@ function HomePage(props) {
             </div>
           </div>
         </div>
-        <div className={styles.bannerv2} data-aos="fade-up">
+        <div className={styles.bannerv2} data-aos="fade-right">
           <Image
             loader={({ src }) =>
               `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
@@ -334,7 +339,7 @@ function HomePage(props) {
                 <span data-aos="fade-right">
                   {sectionTrainer[0]?.sub_title}
                 </span>
-                <h1 data-aos="fade-left">{sectionTrainer[0]?.title}</h1>
+                <h1 data-aos="fade-right">{sectionTrainer[0]?.title}</h1>
                 <div
                   data-aos="fade-right"
                   dangerouslySetInnerHTML={{
@@ -343,7 +348,7 @@ function HomePage(props) {
                 ></div>
                 <div
                   className="button"
-                  data-aos="fade-left"
+                  data-aos="fade-right"
                   onClick={() => router.push(sectionTrainer[0]?.url_button)}
                 >
                   <button>{sectionTrainer[0]?.text_button}</button>
@@ -352,7 +357,7 @@ function HomePage(props) {
             </div>
           </div>
         </div>
-        <div className={styles.team} id="team" data-aos="fade-up">
+        <div className={styles.team} id="team" data-aos="fade-right">
           <Swiper
             effect={"creative"}
             creativeEffect={{
@@ -364,6 +369,10 @@ function HomePage(props) {
                 translate: ["100%", 0, 0],
               },
             }}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+            }}
             centeredSlides={true}
             slidesPerView={1}
             spaceBetween={30}
@@ -371,65 +380,41 @@ function HomePage(props) {
             pagination={{
               clickable: true,
             }}
-            modules={[Pagination, Navigation]}
+            modules={[Pagination, Navigation, Autoplay]}
             className="mySwiper"
             onSwiper={(s) => {
               setSwiper2(s);
             }}
           >
-            <SwiperSlide>
-              <div className="container">
-                <div className="content d-flex flex-column align-items-center">
-                  <Image
-                    alt="Avatar"
-                    src="/images/Home/Team/team1.png"
-                    width={100}
-                    height={100}
-                    data-aos="fade-right"
-                  />
-                  <p data-aos="fade-left">
-                    Cũng như tất cả các môn thể thao khác, Golf muốn phát triển
-                    bắt buộc hệ thống golf chuyên nghiệp phải mạnh, được xây
-                    dựng bài bản. Tôi tin rằng mô hình của The Golf House
-                    Vietnam chắc chắn sẽ góp phần giải quyết bài toán đó. Tôi sẽ
-                    cống hiến hết mình để đưa Golf chuyên nghiệp phát triển tại
-                    thị trường Việt Nam, giúp đào tạo một thế hệ Golfer giúp
-                    Golf Việt Nam vươn tầm khu vực và thế giới.
-                  </p>
-                  <span className="icon" data-aos="fade-right">
-                    “
-                  </span>
-                  <h2 data-aos="fade-left">Ryan O’Flaherty</h2>
-                  <span data-aos="fade-right">Giám đốc điều hành</span>
+            {sectionTeam.slice(0, 3).map((item, index) => (
+              <SwiperSlide key={index}>
+                <div className="container">
+                  <div className="content d-flex flex-column align-items-center">
+                    <Image
+                      alt="Avatar"
+                      loader={({ src }) =>
+                        `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                      }
+                      src={item?.images[item?.images.length - 1].source}
+                      width={100}
+                      height={100}
+                      data-aos="fade-right"
+                    />
+                    <div
+                      data-aos="fade-right"
+                      dangerouslySetInnerHTML={{
+                        __html: item?.content,
+                      }}
+                    ></div>
+                    <span className="icon" data-aos="fade-right">
+                      “
+                    </span>
+                    <h2 data-aos="fade-right">{item.title}</h2>
+                    <span data-aos="fade-right">{item.sub_title}</span>
+                  </div>
                 </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="container">
-                <div className="content d-flex flex-column align-items-center">
-                  <Image
-                    alt="Avatar"
-                    src="/images/Home/Team/team2.png"
-                    width={100}
-                    height={100}
-                    data-aos="fade-right"
-                  />
-                  <p data-aos="fade-left">
-                    Trong 19 năm làm việc trong ngành Golf, tôi đã học hỏi và
-                    trải nghiệm nhiều lối kỹ thuật đa dạng từ Mỹ, Nam Phi tới
-                    châu Âu, giảng dạy cho nhiều lứa tuổi khác nhau, bao gồm cả
-                    trẻ nhỏ. Tôi tự tin sẽ mang những kiến thức của mình tới The
-                    Golf House Vietnam để khám phá ra cách Swing hiệu quả nhất
-                    cho từng học viên.
-                  </p>
-                  <span data-aos="fade-right" className="icon">
-                    “
-                  </span>
-                  <h2 data-aos="fade-left">Jacques Du Toit</h2>
-                  <span data-aos="fade-right">HLV PGA</span>
-                </div>
-              </div>
-            </SwiperSlide>
+              </SwiperSlide>
+            ))}
             <button className="btn-prev" onClick={() => swiper2.slidePrev()}>
               <i className="fa-thin fa-arrow-left"></i>
             </button>
@@ -454,7 +439,7 @@ function HomePage(props) {
         </div>
         <div className={styles.news}>
           <div className="container">
-            <div className="heading" data-aos="fade-up">
+            <div className="heading" data-aos="fade-right">
               <span className="text-center">
                 {sectiontitleNew[0]?.sub_title}
               </span>
@@ -469,16 +454,11 @@ function HomePage(props) {
                 <div
                   key={index}
                   className={"col-12 col-sm-6 col-lg-4" + " " + styles.item}
-                  data-aos={
-                    index === 0
-                      ? "fade-right"
-                      : index === 1
-                      ? "fade-down"
-                      : "fade-left"
-                  }
+                  data-aos="fade-right"
                 >
                   <div
                     className={styles.info + " " + "h-100 d-flex flex-column"}
+                    data-aos="fade-right"
                   >
                     <div>
                       <div

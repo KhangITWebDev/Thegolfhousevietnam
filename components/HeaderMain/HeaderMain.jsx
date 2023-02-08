@@ -117,7 +117,7 @@ export default function HeaderMain({
                       router.push("/trainer");
                     }}
                   >
-                    Huẩn Luyện Viên
+                    Huấn Luyện Viên
                   </Nav.Item>
                   <Nav.Menu
                     title="Đào Tạo"

@@ -38,6 +38,7 @@ function Detail(props) {
       (x) => removeAccents(x.ten_vt || "") === router.query.name
     )
   );
+  console.log(proshopDetail);
   const {
     register: register2,
     handleSubmit: handleSubmit2,

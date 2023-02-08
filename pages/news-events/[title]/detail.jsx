@@ -34,8 +34,9 @@ function Detail(props) {
           src={newsDetail?.picture}
           layout="fill"
           objectFit="cover"
+          data-aos="fade-right"
         />
-        <div className={styles.content}>
+        <div className={styles.content} data-aos="fade-right">
           <div className="container h-100">
             <div className="d-flex h-100 justify-content-center align-items-center flex-column">
               <span className={styles.type}>{newsDetail?.cate_name}</span>
@@ -69,9 +70,10 @@ function Detail(props) {
               dangerouslySetInnerHTML={{
                 __html: newsDetail?.content,
               }}
+              data-aos="fade-right"
             ></div>
           </div>
-          <div className="col-12 col-md-10 m-auto">
+          <div className="col-12 col-md-10 m-auto" data-aos="fade-right">
             <div className={styles.tag}>
               <button>Mới</button>
               <button>Nổi bật</button>
@@ -85,18 +87,25 @@ function Detail(props) {
               " " +
               "d-flex justify-content-start justify-content-sm-between align-items-center"
             }
+            data-aos="fade-right"
           >
-            <div>
+            <div data-aos="fade-right">
               <i className="fa-light fa-heart"></i>
             </div>
-            <div className={"d-flex" + " " + styles.right}>
+            <div
+              className={"d-flex" + " " + styles.right}
+              data-aos="fade-right"
+            >
               <i className="fa-brands fa-facebook-f"></i>
               <i className="fa-brands fa-instagram"></i>
               <i className="fa-light fa-envelope"></i>
               <i className="fa-light fa-link"></i>
             </div>
           </div>
-          <div className={styles.comment + " " + "d-flex flex-wrap"}>
+          <div
+            className={styles.comment + " " + "d-flex flex-wrap"}
+            data-aos="fade-right"
+          >
             <div className={styles.avatar + " " + "col-12 col-md-2"}>
               <Image
                 alt="Iamge"
@@ -122,7 +131,7 @@ function Detail(props) {
               </div>
             </div>
           </div>
-          <div className={styles.add_comment}>
+          <div className={styles.add_comment} data-aos="fade-right">
             <form action="">
               <div className="form-group">
                 <label htmlFor="">
@@ -132,10 +141,11 @@ function Detail(props) {
                   className="form-control"
                   cols="30"
                   rows="10"
+                  data-aos="fade-right"
                 ></textarea>
               </div>
               <div className="button justify-content-start">
-                <button>Gửi</button>
+                <button data-aos="fade-right">Gửi</button>
               </div>
             </form>
           </div>
@@ -153,6 +163,7 @@ function Detail(props) {
               <div
                 key={index}
                 className={"col-12 col-sm-6 col-lg-4" + " " + styles.item}
+                data-aos="fade-right"
               >
                 <div className={styles.info}>
                   <div
@@ -198,7 +209,7 @@ function Detail(props) {
               </div>
             ))}
           </div>
-          <div className="button">
+          <div className="button" data-aos="fade-right">
             <button>Xem thêm</button>
           </div>
         </div>

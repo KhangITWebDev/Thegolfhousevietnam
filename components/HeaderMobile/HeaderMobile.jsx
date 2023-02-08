@@ -158,49 +158,31 @@ export default function HeaderMoblie({
                   Tin tức, sự kiện
                 </Nav.Item>
               </Nav.Menu>
-              <Nav.Item
-                eventKey="9"
+              <Nav.Menu
+                title="Học Viện"
                 onClick={(e) => {
-                  e.preventDefault();
                   router.push("/academy");
                 }}
               >
-                Học viện
-              </Nav.Item>
-              <Nav.Item
-                eventKey="10"
-                onClick={(e) => {
-                  e.preventDefault();
-                  router.push("/trainer");
-                }}
-              >
-                Huấn Luyện Viên
-              </Nav.Item>
-              <Nav.Menu
-                title="Đào Tạo"
-                onClick={(e) => {
-                  router.push("/course");
-                }}
-              >
                 <Nav.Item
-                  eventKey="11"
+                  eventKey="9"
                   onClick={(e) => {
-                    router.push("/course#course");
+                    router.push("/trainer");
                   }}
                 >
-                  Khoá học
+                  Huấn Luyện Viên
                 </Nav.Item>
                 <Nav.Item
-                  eventKey="12"
+                  eventKey="10"
                   onClick={() => {
-                    router.push("/course#calendar");
+                    router.push("/course");
                   }}
                 >
-                  Đặt lịch học
+                  Đào tạo
                 </Nav.Item>
               </Nav.Menu>
               <Nav.Item
-                eventKey="13"
+                eventKey="11"
                 onClick={(e) => {
                   e.preventDefault();
                   router.push("/proshop");
@@ -209,13 +191,22 @@ export default function HeaderMoblie({
                 Proshop
               </Nav.Item>
               <Nav.Item
-                eventKey="15"
+                eventKey="12"
                 onClick={(e) => {
                   e.preventDefault();
-                  router.push("/orther-service");
+                  router.push("/orther-service#spa");
                 }}
               >
-                Dịch vụ khác
+                spa
+              </Nav.Item>
+              <Nav.Item
+                eventKey="13"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/orther-service#spa");
+                }}
+              >
+                lounge
               </Nav.Item>
               <Nav.Item
                 eventKey="15"

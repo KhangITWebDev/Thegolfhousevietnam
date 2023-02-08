@@ -862,7 +862,7 @@ function Cart(props) {
                                   ]
                                 : ""
                             }
-                            placeholder="Chọn phường"
+                            placeholder="Chọn phường/xã"
                           />
                         )}
                       />
@@ -881,6 +881,7 @@ function Cart(props) {
                         type="text"
                         className="form-control"
                         {...register("street")}
+                        placeholder="Tên đường"
                       />
                       {errors?.street && (
                         <Alert variant="danger">
@@ -896,6 +897,7 @@ function Cart(props) {
                         type="text"
                         className="form-control"
                         {...register("no")}
+                        placeholder="Số nhà"
                       />
                       {errors?.no && (
                         <Alert variant="danger">{errors?.no?.message}</Alert>
@@ -909,6 +911,7 @@ function Cart(props) {
                         type="text"
                         className="form-control"
                         {...register("phone")}
+                        placeholder="Điện thoại"
                       />
                       {errors?.phone && (
                         <Alert variant="danger">{errors?.phone?.message}</Alert>
@@ -922,6 +925,7 @@ function Cart(props) {
                         type="text"
                         className="form-control"
                         {...register("email")}
+                        placeholder="Email"
                       />
                       {errors?.email && (
                         <Alert variant="danger">{errors?.email?.message}</Alert>
@@ -935,6 +939,7 @@ function Cart(props) {
                         type="text"
                         rows={8}
                         className="form-control"
+                        placeholder="Ghi chú"
                         {...register("note")}
                       />
                     </div>

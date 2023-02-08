@@ -1171,7 +1171,7 @@ button {
     max-width: 1920px;
     width: 100%;
     display: none;
-    top: 0px;
+    top: -1px;
     height: auto;
     @media screen and (max-width: 1279px) {
       display: block;

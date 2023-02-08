@@ -32,7 +32,7 @@ function OrtherService(props) {
   const BAnnerVipLounge = banners.filter((x) => x.danh_muc === "VIP Lounge");
   return (
     <div className={styles.orther_service}>
-      <div className="container">
+      <div className="container" id="spa">
         <div className="heading" data-aos="fade-down">
           <h2>{sectionTitleHaỉrNailSpa[0]?.title}</h2>
         </div>
@@ -80,7 +80,7 @@ function OrtherService(props) {
           })}
         </div>
       </div>
-      <div className="container">
+      <div className="container" id="lounge">
         <div className="heading" data-aos="fade-down">
           <h2>{sectionTitleVipLouge[0]?.title}</h2>
         </div>

@@ -95,7 +95,7 @@ function MainLayout({ children }) {
   const token = Cookies.get("access_token");
   useEffect(() => {
     $(".rs-navbar-item").each((index) => {
-      switch (router.pathname) {
+      switch (router.asPath) {
         case "/": {
           $(".rs-navbar-item")[0].classList.add("rs-navbar-item-active");
           break;
@@ -109,15 +109,27 @@ function MainLayout({ children }) {
           break;
         }
         case "/trainer": {
-          $(".rs-navbar-item")[3].classList.add("rs-navbar-item-active");
+          $(".rs-navbar-item")[2].classList.add("rs-navbar-item-active");
           break;
         }
         case "/course": {
-          $(".rs-navbar-item")[4].classList.add("rs-navbar-item-active");
+          $(".rs-navbar-item")[2].classList.add("rs-navbar-item-active");
           break;
         }
         case "/proshop": {
+          $(".rs-navbar-item")[3].classList.add("rs-navbar-item-active");
+          break;
+        }
+        case "/orther-service#spa": {
+          $(".rs-navbar-item")[4].classList.add("rs-navbar-item-active");
+          break;
+        }
+        case "/orther-service#lounge": {
           $(".rs-navbar-item")[5].classList.add("rs-navbar-item-active");
+          break;
+        }
+        case "/contact-us": {
+          $(".rs-navbar-item")[6].classList.add("rs-navbar-item-active");
           break;
         }
         default:
@@ -125,6 +137,7 @@ function MainLayout({ children }) {
       }
     });
   }, [router]);
+  console.log(router);
   $(".search").on("click", () => {
     $(".search-dialog").css("transform", "scaleY(1)");
   });

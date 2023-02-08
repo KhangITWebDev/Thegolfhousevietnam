@@ -124,6 +124,8 @@ function SignUpTrial({
               type="text"
               className="form-control"
               {...register("from_name")}
+              placeholder="Họ tên"
+              autoFocus={true}
             />
             {errors?.from_name && (
               <Alert variant="danger">{errors?.from_name?.message}</Alert>
@@ -137,6 +139,7 @@ function SignUpTrial({
               type="text"
               className="form-control"
               {...register("from_email")}
+              placeholder="email"
             />
             {errors?.from_email && (
               <Alert variant="danger">{errors?.from_email?.message}</Alert>
@@ -150,6 +153,7 @@ function SignUpTrial({
               type="text"
               className="form-control"
               {...register("from_phone")}
+              placeholder="Điện thoại"
             />
             {errors?.from_phone && (
               <Alert variant="danger">{errors?.from_phone?.message}</Alert>
@@ -167,7 +171,7 @@ function SignUpTrial({
                   {...field}
                   styles={customStyles}
                   components={{ DropdownIndicator }}
-                  placeholder="Ngành nghề"
+                  placeholder="Chọn ngành nghề"
                   options={options}
                 />
               )}

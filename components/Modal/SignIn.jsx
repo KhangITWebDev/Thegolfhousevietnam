@@ -55,6 +55,7 @@ function SignIn({
               type="text"
               className="form-control"
               {...register("phone")}
+              placeholder="Điện thoại"
             />
             {errors?.phone && (
               <Alert variant="danger">{errors?.phone?.message}</Alert>
@@ -68,6 +69,7 @@ function SignIn({
               type="password"
               className="form-control"
               {...register("password")}
+              placeholder="Mật Khẩu"
             />
             {errors?.password && (
               <Alert variant="danger">{errors?.password?.message}</Alert>

@@ -154,7 +154,7 @@ function ModalAddress({
                         label: x.name,
                       };
                     })}
-                    placeholder="Chọn phường"
+                    placeholder="Chọn phường/xã"
                   />
                 )}
               />
@@ -172,6 +172,7 @@ function ModalAddress({
                 type="text"
                 className="form-control"
                 {...register("street")}
+                placeholder="Tên đường"
               />
               {errors?.street && (
                 <Alert variant="danger">{errors?.street?.message}</Alert>
@@ -181,7 +182,12 @@ function ModalAddress({
               <label htmlFor="" className="form-label">
                 Số nhà
               </label>
-              <input type="text" className="form-control" {...register("no")} />
+              <input
+                type="text"
+                className="form-control"
+                {...register("no")}
+                placeholder="Số nhà"
+              />
               {errors?.no && (
                 <Alert variant="danger">{errors?.no?.message}</Alert>
               )}
@@ -194,6 +200,7 @@ function ModalAddress({
                 type="text"
                 className="form-control"
                 {...register("phone")}
+                placeholder="Điện thoại"
               />
               {errors?.phone && (
                 <Alert variant="danger">{errors?.phone?.message}</Alert>
@@ -207,6 +214,7 @@ function ModalAddress({
                 type="text"
                 className="form-control"
                 {...register("email")}
+                placeholder="Email"
               />
               {errors?.email && (
                 <Alert variant="danger">{errors?.email?.message}</Alert>

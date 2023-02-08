@@ -1,7 +1,7 @@
 import Image from "next/image";
 import $ from "jquery";
 import HomePage from "./Home/HomePage";
-import MainLayout from "../components/layout/mainLayout";
+import MainLayout from "../components/layout/mainLayout.jsx";
 
 export default function Home() {
   return (

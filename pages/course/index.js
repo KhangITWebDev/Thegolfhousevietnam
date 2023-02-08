@@ -1,5 +1,5 @@
 import React from "react";
-import MainLayout from "../../components/layout/mainLayout";
+import MainLayout from "../../components/layout/mainLayout.jsx";
 import Course from "./Course";
 function index(props) {
   return (

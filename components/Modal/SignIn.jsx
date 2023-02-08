@@ -26,13 +26,13 @@ function SignIn({
       data-aos-delay="800"
     >
       <Modal.Header>
-        <Modal.Title>Yêu cầu khi đặt lịch</Modal.Title>
+        <Modal.Title>Đăng nhập</Modal.Title>
         <button onClick={handleClose2}>
           <i className="fa-light fa-times"></i>
         </button>
       </Modal.Header>
       <Modal.Body>
-        <h5>Chào mừng trở lại, vui lòng đăng nhập:</h5>
+        <h5>Hãy đăng nhập với tài khoản của TGH:</h5>
         <form action="">
           {/* <div className="form-group">
             <label htmlFor="" className="form-label">

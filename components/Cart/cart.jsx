@@ -55,7 +55,7 @@ function Cart({ handleCloseCart }) {
               <i className="fa-light fa-xmark"></i>
             </button>
           </div>
-          {cart.length > 0 && token.length > 0 ? (
+          {cart.length > 0 && token?.length > 0 ? (
             <div>
               <div className={styles.product}>
                 {cart.map((item, index) => (

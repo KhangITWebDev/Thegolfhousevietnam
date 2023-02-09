@@ -9,7 +9,6 @@ const bookingClientAxios = axios.create({
   headers: {
     // "Access-Control-Allow-Methods": "GET, POST",
     // "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Credentials": false,
   },
   paramsSerializer: (params) => queryString.stringify(params),
 });

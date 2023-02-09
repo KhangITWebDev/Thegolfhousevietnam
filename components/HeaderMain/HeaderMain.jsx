@@ -14,10 +14,10 @@ export default function HeaderMain({
   handleShowRightMenu,
   handleShowCart,
   handleShowSearch,
+  cart,
   ...props
 }) {
   const router = useRouter();
-  const cart = getLocalStorage(LOCAL_STORAGE.CART);
   const [show, setShow] = useState(false);
   useEffect(() => {
     $(".rs-navbar-item").each(function (index) {
@@ -183,6 +183,7 @@ export default function HeaderMain({
         visible={visible}
         handleShowCart={handleShowCart}
         handleShowSearch={handleShowSearch}
+        cart={cart}
       />
     </>
   );

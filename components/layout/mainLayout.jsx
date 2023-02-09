@@ -13,6 +13,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import SignIn from "../Modal/SignIn";
 import loginClientAxios from "../../clientAxios/loginClientAxios";
 import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
+import { getCartData } from "../../store/redux/CartReducer/cart.action";
 const schema2 = yup.object().shape({
   // email: yup
   //   .string()
@@ -31,6 +33,11 @@ function MainLayout({ children }) {
   } = useForm({
     resolver: yupResolver(schema2),
   });
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.CartReducer.cartList);
+  useEffect(() => {
+    dispatch(getCartData());
+  }, [dispatch]);
   const [open2, setOpen2] = React.useState(false);
   const handleOpen2 = () => {
     setOpen2(true);
@@ -56,11 +63,11 @@ function MainLayout({ children }) {
         setLoading(false);
         Cookies.set("access_token", resApi?.result?.access_token);
         Cookies.set("trainee_id", resApi?.result?.id);
+        Cookies.set("erp_token", resApi?.result?.erp_token);
         setOpen2(false);
       }
     }, 2000);
   };
-  const cart = [1];
   const [activeKey, setActiveKey] = React.useState(1);
   const [visible, setVisible] = useState(false);
   const [visibleHome, setVisibleHome] = useState(false);
@@ -192,6 +199,7 @@ function MainLayout({ children }) {
             handleShowRightMenu={handleShowRightMenu}
             handleShowCart={handleShowCart}
             handleShowSearch={handleShowSearch}
+            cart={cart}
           />
         ) : (
           <HeaderAccademy
@@ -202,6 +210,7 @@ function MainLayout({ children }) {
             handleShowCart={handleShowCart}
             handleShowRightMenu={handleShowRightMenu}
             handleShowSearch={handleShowSearch}
+            cart={cart}
           />
         )}
         <RightMenu handleCloseRightMenu={handleCloseRightMenu} />

@@ -11,9 +11,9 @@ export default function HeaderMoblieBlack({
   activeKey,
   handleShowCart,
   handleShowSearch,
+  cart,
   ...props
 }) {
-  const cart = getLocalStorage(LOCAL_STORAGE.CART);
   const router = useRouter();
   const [show, setShow] = useState(false);
   useEffect(() => {

@@ -12,6 +12,10 @@ import Swal from "sweetalert2";
 import * as yup from "yup";
 import ModalAddress from "../../components/Modal/ModalAddress";
 import ModalAddressDeliver from "../../components/Modal/ModalAddressDeliver";
+import {
+  DelteProductInCart,
+  getCartData,
+} from "../../store/redux/CartReducer/cart.action";
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
 import { getProvinceData } from "../../store/redux/ProviceReducer/province.action";
 import { convertDate } from "../../utils/function";
@@ -319,12 +323,15 @@ function Cart(props) {
   const onNext = () => onChange(step + 1);
   const onPrevious = () => onChange(step - 1);
   const router = useRouter();
-  const cart = getLocalStorage(LOCAL_STORAGE.CART);
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.CartReducer.cartList);
+  useEffect(() => {
+    dispatch(getCartData());
+  }, [dispatch, cart]);
   const { contents } = useSelector((state) => state.ContentReducer);
   useEffect(() => {
     dispatch(getContentData());
   }, [dispatch]);
-  const dispatch = useDispatch();
   const province = useSelector((state) => state.ProvinceReducer.province);
   const district = watch("city")
     ? province[
@@ -383,7 +390,8 @@ function Cart(props) {
   );
   const initialValue = 0;
   const total = cart.reduce(
-    (accumulator, current) => accumulator + current.gia_ban_le * current.qty,
+    (accumulator, current) =>
+      accumulator + current.gia_ban_le * current.sl_xuat,
     initialValue
   );
   useEffect(() => {
@@ -408,7 +416,6 @@ function Cart(props) {
   const [loadingRemove, setLoadingRemove] = useState(-1);
   const [loadingQty, setLoadingQty] = useState(-1);
   const handleRemove = (item) => {
-    const data = cart.filter((x) => x._id !== item._id);
     Swal.fire({
       title: "",
       html: `<p>Bạn có chắc chắn xóa sản phẩm ${item.ten_vt} ra khỏi giỏi hàng ?</p>`,
@@ -422,10 +429,10 @@ function Cart(props) {
       if (rs.isConfirmed) {
         setLoadingRemove(item._id);
         setTimeout(() => {
-          setLocalStorage(LOCAL_STORAGE.CART, data);
+          dispatch(DelteProductInCart(item._id));
           setLoadingRemove(-1);
           Swal.fire({
-            html: `<p>Bạn đã xóa ${item.qty} sản phẩm ${item.ten_vt} thành công !</p>`,
+            html: `<p>Bạn đã xóa ${item.sl_xuat} sản phẩm ${item.ten_vt} thành công !</p>`,
             icon: "success",
             showCancelButton: false,
             confirmButtonText: "<span>Đồng ý</span>",
@@ -561,7 +568,7 @@ function Cart(props) {
                     <Cell>
                       {(rowData) => (
                         <span className="h-100 d-flex align-items-center data">
-                          {rowData.gia_ban_le.toLocaleString("vi-VI")} VND
+                          {rowData?.gia_ban_le} VND
                         </span>
                       )}
                     </Cell>

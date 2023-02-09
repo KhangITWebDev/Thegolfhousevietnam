@@ -23,6 +23,7 @@ import SignIn from "../../../components/Modal/SignIn";
 import { useForm } from "react-hook-form";
 import Cookies from "js-cookie";
 import loginClientAxios from "../../../clientAxios/loginClientAxios";
+import { AddToCart } from "../../../store/redux/CartReducer/cart.action";
 const schema2 = yup.object().shape({
   // email: yup
   //   .string()
@@ -38,7 +39,6 @@ function Detail(props) {
       (x) => removeAccents(x.ten_vt || "") === router.query.name
     )
   );
-  console.log(proshopDetail);
   const {
     register: register2,
     handleSubmit: handleSubmit2,
@@ -74,6 +74,7 @@ function Detail(props) {
         setLoading(false);
         Cookies.set("access_token", resApi?.result?.access_token);
         Cookies.set("trainee_id", resApi?.result?.id);
+        Cookies.set("erp_token", resApi?.result?.erp_token);
         setOpen2(false);
       }
     }, 2000);
@@ -109,21 +110,33 @@ function Detail(props) {
       });
     });
   }, []);
+  console.log(proshopDetail);
   const handleAddToCart = (item) => {
     if (token && token.length > 0) {
-      const cart = getLocalStorage(LOCAL_STORAGE.CART);
-      if (cart.length > 0) {
-        const find = cart.findIndex((x) => x._id === item._id);
-        if (find < 0) {
-          cart.push({ ...item, qty: qty });
-          setLocalStorage(LOCAL_STORAGE.CART, cart);
-        } else {
-          cart[find].qty = cart[find].qty + qty;
-          setLocalStorage(LOCAL_STORAGE.CART, cart);
-        }
-      } else {
-        setLocalStorage(LOCAL_STORAGE.CART, [{ ...item, qty: qty }]);
-      }
+      // const cart = getLocalStorage(LOCAL_STORAGE.CART);
+      // if (cart.length > 0) {
+      //   const find = cart.findIndex((x) => x._id === item._id);
+      //   if (find < 0) {
+      //     cart.push({ ...item, qty: qty });
+      //     setLocalStorage(LOCAL_STORAGE.CART, cart);
+      //   } else {
+      //     cart[find].qty = cart[find].qty + qty;
+      //     setLocalStorage(LOCAL_STORAGE.CART, cart);
+      //   }
+      // } else {
+      //   setLocalStorage(LOCAL_STORAGE.CART, [{ ...item, qty: qty }]);
+      // }
+      dispatch(
+        AddToCart({
+          ma_vt: item?.ma_vt,
+          ma_dvt: item.ma_dvt,
+          sl_xuat: qty,
+          // tien_nt: 200000,
+          // tien: 200000,
+          // gia_ban: 10000,
+          // gia_ban_le: 10000,
+        })
+      );
     } else {
       handleOpen2();
     }

@@ -9,9 +9,15 @@ import {
 } from "../../utils/handleStorage";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
+import { useDispatch, useSelector } from "react-redux";
+import { getCartData } from "../../store/redux/CartReducer/cart.action";
 
 function Cart({ handleCloseCart }) {
-  const cart = getLocalStorage(LOCAL_STORAGE.CART);
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.CartReducer.cartList);
+  useEffect(() => {
+    dispatch(getCartData());
+  }, [dispatch, cart]);
   const token = Cookies.get("access_token");
   const router = useRouter();
   useEffect(() => {
@@ -24,15 +30,15 @@ function Cart({ handleCloseCart }) {
       setLocalStorage(LOCAL_STORAGE.CART, []);
     }
   }, [cart]);
-  const initialValue = 0;
-  const total =
-    cart && cart.length > 0
-      ? cart.reduce(
-          (accumulator, current) =>
-            accumulator + current.gia_ban_le * current.qty,
-          initialValue
-        )
-      : 1;
+  // const initialValue = 0;
+  // const total =
+  //   cart && cart.length > 0
+  //     ? cart.reduce(
+  //         (accumulator, current) =>
+  //           accumulator + current.gia_ban_le * current.qty,
+  //         initialValue
+  //       )
+  //     : 1;
   return (
     <div
       className={styles.subMenuCart + " " + "cart-dialog"}
@@ -74,16 +80,16 @@ function Cart({ handleCloseCart }) {
                     </div>
                     <div className={styles.content}>
                       <h4>{item.ten_vt}</h4>
-                      <p>
+                      {/*  <p>
                         {item.qty} x {item.gia_ban_le.toLocaleString("vi-VI")}{" "}
                         VND
-                      </p>
+                      </p> */}
                     </div>
                   </div>
                 ))}
               </div>
               <div className={styles.total}>
-                <h6>Tổng cộng: {total.toLocaleString("vi-VI")} VND</h6>
+                {/* <h6>Tổng cộng: {total.toLocaleString("vi-VI")} VND</h6> */}
               </div>
               <div className={styles.tool + " " + "d-flex"}>
                 <div className={"col-6" + " " + styles.btn}>

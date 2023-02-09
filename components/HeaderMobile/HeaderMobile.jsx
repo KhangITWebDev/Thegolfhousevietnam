@@ -11,10 +11,10 @@ export default function HeaderMoblie({
   handleShowCart,
   handleShowSearch,
   visible,
+  cart,
   ...props
 }) {
   const router = useRouter();
-  const cart = getLocalStorage(LOCAL_STORAGE.CART);
   const [show, setShow] = useState(false);
   useEffect(() => {
     $(".rs-navbar-item").each(function (index) {

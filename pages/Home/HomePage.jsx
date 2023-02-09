@@ -63,7 +63,14 @@ function HomePage(props) {
     dispatch(getNewData());
     dispatch(getUserRegisterData());
   }, [dispatch]);
+  console.log(userRegister);
   const onSubmit = (data) => {
+    const findEmail = userRegister.findIndex(
+      (x) => x.email === watch("from_email")
+    );
+    const findPhone = userRegister.findIndex(
+      (x) => x.dien_thoai === watch("from_phone")
+    );
     setLoadingSignUpTrial(true);
     const formState = {
       from_name: data.from_name,
@@ -72,47 +79,65 @@ function HomePage(props) {
       from_job: data.from_job.label,
     };
     setTimeout(() => {
-      emailjs
-        .send(
-          "service_ug5xzoq",
-          "template_zhcsmlh",
-          formState,
-          "n8Aci-Exs7CuotOPb"
-        )
-        .then(
-          function (response) {
-            if (response.status === 200) {
-              dispatch(
-                PostSignTrial({
-                  ten_kh: data.from_name,
-                  dien_thoai: data.from_phone,
-                  email: data.from_email,
-                  cong_viec: data.from_job.label,
-                  register_number: "",
-                })
-              );
-              setLoadingSignUpTrial(false);
+      if (findEmail >= 0) {
+        setLoadingSignUpTrial(false);
+        Swal.fire({
+          text: `Email này đã tồn tại`,
+          icon: "error",
+          showCancelButton: false,
+          confirmButtonText: "OK",
+        });
+      } else if (findPhone >= 0) {
+        setLoadingSignUpTrial(false);
+        Swal.fire({
+          text: `Số điên thoại đã tồn tại`,
+          icon: "error",
+          showCancelButton: false,
+          confirmButtonText: "OK",
+        });
+      } else {
+        emailjs
+          .send(
+            "service_ug5xzoq",
+            "template_zhcsmlh",
+            formState,
+            "n8Aci-Exs7CuotOPb"
+          )
+          .then(
+            function (response) {
+              if (response.status === 200) {
+                dispatch(
+                  PostSignTrial({
+                    ten_kh: data.from_name,
+                    dien_thoai: data.from_phone,
+                    email: data.from_email,
+                    cong_viec: data.from_job.label,
+                    register_number: String(userRegister?.length + 1) || "1",
+                  })
+                );
+                setLoadingSignUpTrial(false);
+                Swal.fire({
+                  text: `Bạn đã đăng ký học thử thành công`,
+                  icon: "success",
+                  showCancelButton: false,
+                  confirmButtonText: "OK",
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    handleClose1();
+                  }
+                });
+              }
+            },
+            function (err) {
               Swal.fire({
-                text: `Bạn đã đăng ký học thử thành công`,
-                icon: "success",
+                text: `Vui lòng nhập lại thông tin`,
+                icon: "error",
                 showCancelButton: false,
                 confirmButtonText: "OK",
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  handleClose1();
-                }
               });
             }
-          },
-          function (err) {
-            Swal.fire({
-              text: `Vui lòng nhập lại thông tin`,
-              icon: "error",
-              showCancelButton: false,
-              confirmButtonText: "OK",
-            });
-          }
-        );
+          );
+      }
     }, 2000);
   };
   const [open1, setOpen1] = React.useState(false);

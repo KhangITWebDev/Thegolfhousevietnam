@@ -16,6 +16,7 @@ export default function HeaderAccademy({
   onSelect,
   visible,
   activeKey,
+  cart,
   handleShowRightMenu,
   handleShowSearch,
   handleShowCart,
@@ -32,7 +33,6 @@ export default function HeaderAccademy({
     });
   };
   const router = useRouter();
-  const cart = getLocalStorage(LOCAL_STORAGE.CART);
   const [show, setShow] = useState(false);
   const [showCart, setShowCart] = useState(false);
   // useEffect(() => {
@@ -184,6 +184,7 @@ export default function HeaderAccademy({
       </div>
       <HeaderMoblieBlack
         visible={visible}
+        cart={cart}
         handleShowCart={handleShowCart}
         handleShowSearch={handleShowSearch}
       />

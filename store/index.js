@@ -9,6 +9,7 @@ import CourseReducer from "./redux/CourseReducer/course.reducer";
 import ContentReducer from "./redux/LoadContentReducer/content.reducer";
 import BookingReducer from "./redux/BookingReducer/booking.reducer";
 import ProvinceReducer from "./redux/ProviceReducer/province.reducer";
+import CartReducer from "./redux/CartReducer/cart.reducer";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -24,6 +25,7 @@ const reducer = combineReducers({
   ContentReducer,
   BookingReducer,
   ProvinceReducer,
+  CartReducer,
 });
 
 export const store = createStore(

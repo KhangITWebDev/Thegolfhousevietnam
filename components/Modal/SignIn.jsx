@@ -49,13 +49,13 @@ function SignIn({
           </div> */}
           <div className="form-group">
             <label htmlFor="" className="form-label">
-              Điện thoại
+              Tài khoản
             </label>
             <input
               type="text"
               className="form-control"
               {...register("phone")}
-              placeholder="Điện thoại"
+              placeholder="Email hoặc số điện thoại"
             />
             {errors?.phone && (
               <Alert variant="danger">{errors?.phone?.message}</Alert>

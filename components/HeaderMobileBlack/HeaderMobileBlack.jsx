@@ -116,12 +116,7 @@ export default function HeaderMoblieBlack({
               >
                 Trang chủ
               </Nav.Item>
-              <Nav.Menu
-                title="Về Chúng Tôi"
-                onClick={(e) => {
-                  router.push("/about-us");
-                }}
-              >
+              <Nav.Menu title="Về Chúng Tôi">
                 <Nav.Item
                   eventKey="6"
                   onClick={() => {
@@ -147,14 +142,17 @@ export default function HeaderMoblieBlack({
                   Tin tức, sự kiện
                 </Nav.Item>
               </Nav.Menu>
-              <Nav.Menu
-                title="Học Viện"
-                onClick={(e) => {
-                  router.push("/academy");
-                }}
-              >
+              <Nav.Menu title="Học Viện">
                 <Nav.Item
                   eventKey="9"
+                  onClick={(e) => {
+                    router.push("/academy");
+                  }}
+                >
+                  Học viện
+                </Nav.Item>
+                <Nav.Item
+                  eventKey="10"
                   onClick={(e) => {
                     router.push("/trainer");
                   }}
@@ -162,7 +160,7 @@ export default function HeaderMoblieBlack({
                   Huấn Luyện Viên
                 </Nav.Item>
                 <Nav.Item
-                  eventKey="10"
+                  eventKey="11"
                   onClick={() => {
                     router.push("/course");
                   }}
@@ -171,7 +169,7 @@ export default function HeaderMoblieBlack({
                 </Nav.Item>
               </Nav.Menu>
               <Nav.Item
-                eventKey="11"
+                eventKey="12"
                 onClick={(e) => {
                   e.preventDefault();
                   router.push("/proshop");
@@ -180,7 +178,7 @@ export default function HeaderMoblieBlack({
                 Proshop
               </Nav.Item>
               <Nav.Item
-                eventKey="12"
+                eventKey="13"
                 onClick={(e) => {
                   e.preventDefault();
                   router.push("/orther-service#spa");
@@ -189,7 +187,7 @@ export default function HeaderMoblieBlack({
                 spa
               </Nav.Item>
               <Nav.Item
-                eventKey="13"
+                eventKey="14"
                 onClick={(e) => {
                   e.preventDefault();
                   router.push("/orther-service#spa");

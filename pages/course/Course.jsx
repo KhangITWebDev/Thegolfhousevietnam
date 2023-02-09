@@ -149,6 +149,7 @@ function Course(props) {
     resolver: yupResolver(schema2),
   });
   const form = useRef();
+  const dispatch = useDispatch();
   const [loadingSignUpTrial, setLoadingSignUpTrial] = useState(false);
   const onSubmit = (data) => {
     setLoadingSignUpTrial(true);
@@ -169,7 +170,15 @@ function Course(props) {
         .then(
           function (response) {
             if (response.status === 200) {
-              // dispatch(PostSignTrial({}));
+              dispatch(
+                PostSignTrial({
+                  ten_kh: data.from_name,
+                  dien_thoai: data.from_phone,
+                  email: data.from_email,
+                  cong_viec: data.from_job.label,
+                  register_number: "",
+                })
+              );
               setLoadingSignUpTrial(false);
               Swal.fire({
                 text: `Bạn đã đăng ký học thử thành công`,
@@ -310,7 +319,6 @@ function Course(props) {
     );
   };
   const courseData = useSelector((state) => state.CourseReducer.courseList);
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCourseData());
   }, [dispatch]);

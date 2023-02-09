@@ -5,7 +5,10 @@ export const getNewData = () => async (dispatch) => {
   try {
     const resApi = await NewsApi.getNewAPI();
     if (resApi.success) {
-      dispatch(setNewsList(resApi?.data));
+      const data = resApi?.data?.filter(
+        (x) => x.status === true && x.newsfeed === true
+      );
+      dispatch(setNewsList(data));
     } else {
       dispatch(setNewsList([]));
     }

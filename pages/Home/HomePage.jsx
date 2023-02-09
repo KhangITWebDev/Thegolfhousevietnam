@@ -18,6 +18,10 @@ import { getNewData } from "../../store/redux/NewsEvents/news.action";
 import { removeAccents, time } from "../../utils/function";
 import emailjs from "@emailjs/browser";
 import styles from "./Home.module.scss";
+import {
+  getUserRegisterData,
+  PostSignTrial,
+} from "../../store/redux/CourseReducer/course.action";
 const PHONE_REGEX = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i;
 const schema = yup.object().shape({
   from_name: yup.string().required("Vui lòng nhập họ tên"),
@@ -51,7 +55,14 @@ function HomePage(props) {
   } = useForm({
     resolver: yupResolver(schema),
   });
+  const dispatch = useDispatch();
   const [loadingSignUpTrial, setLoadingSignUpTrial] = useState(false);
+  const { userRegister } = useSelector((state) => state.CourseReducer);
+  const { news } = useSelector((state) => state.NewsReducer);
+  useEffect(() => {
+    dispatch(getNewData());
+    dispatch(getUserRegisterData());
+  }, [dispatch]);
   const onSubmit = (data) => {
     setLoadingSignUpTrial(true);
     const formState = {
@@ -71,7 +82,15 @@ function HomePage(props) {
         .then(
           function (response) {
             if (response.status === 200) {
-              // dispatch(PostSignTrial({}));
+              dispatch(
+                PostSignTrial({
+                  ten_kh: data.from_name,
+                  dien_thoai: data.from_phone,
+                  email: data.from_email,
+                  cong_viec: data.from_job.label,
+                  register_number: "",
+                })
+              );
               setLoadingSignUpTrial(false);
               Swal.fire({
                 text: `Bạn đã đăng ký học thử thành công`,
@@ -96,11 +115,6 @@ function HomePage(props) {
         );
     }, 2000);
   };
-  const { news } = useSelector((state) => state.NewsReducer);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getNewData());
-  }, [dispatch]);
   const [open1, setOpen1] = React.useState(false);
   const handleOpen1 = () => {
     setOpen1(true);

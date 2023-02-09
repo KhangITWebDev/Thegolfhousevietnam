@@ -92,6 +92,7 @@ const getScheduleApi = async () => {
     const resApi = await bookingClientAxios.get(
       `/restapi/1.0/object/academy.schedule.booking?domain=[('date_start','>=','2023-01-16 16:00:00'),('date_start','<=','2023-01-20 23:59:59'),('schedule_id.location_id.id','=',${locationId}),('program_id','=',${programId})]`
     );
+
     if (resApi)
       return {
         success: true,

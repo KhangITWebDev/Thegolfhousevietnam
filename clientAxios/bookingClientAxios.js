@@ -7,6 +7,7 @@ const bookingClientAxios = axios.create({
   baseURL: "https://betatgh.fostech.vn",
   timeout: 20000,
   headers: {
+    "Access-Control-Allow-Methods": "GET, POST",
     "Access-Control-Allow-Origin": "*",
   },
   paramsSerializer: (params) => queryString.stringify(params),

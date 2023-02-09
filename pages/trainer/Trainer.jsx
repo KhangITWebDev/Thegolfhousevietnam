@@ -40,12 +40,12 @@ function Trainer(props) {
   return (
     <div className={styles.trainer_page}>
       <div className="container">
-        <div className="heading" data-aos="fade-right">
+        <div className="heading" data-aos="fade-down">
           <h2 className={styles.title_page}>{sectionTitlePage[0]?.title}</h2>
         </div>
         <div
           className="d-flex justify-content-center heading"
-          data-aos="fade-left"
+          data-aos="fade-down"
         >
           <p
             dangerouslySetInnerHTML={{ __html: sectionTitlePage[0]?.content }}
@@ -57,24 +57,9 @@ function Trainer(props) {
               key={index}
               className={"col-12 col-lg-4 col-md-6" + " " + styles.item}
               onClick={() => handleOpen(index)}
-              data-aos={
-                index === 0
-                  ? "fade-right"
-                  : index === 1
-                  ? "fade-up"
-                  : "fade-left"
-              }
+              data-aos="fade-right"
             >
-              <div
-                className={styles.image}
-                data-aos={
-                  index === 0
-                    ? "fade-right"
-                    : index === 1
-                    ? "fade-down"
-                    : "fade-left"
-                }
-              >
+              <div className={styles.image}>
                 <Image
                   //   loader={({ src }) => `https://api.fostech.vn${src}?`}
                   alt="Image 1"
@@ -84,22 +69,12 @@ function Trainer(props) {
                 ></Image>
               </div>
               <div className={styles.info}>
-                <h3
-                  data-aos={
-                    index === 0
-                      ? "fade-right"
-                      : index === 1
-                      ? "fade-up"
-                      : "fade-left"
-                  }
-                >
-                  {item.fullname}
-                </h3>
+                <h3>{item.fullname}</h3>
               </div>
             </div>
           ))}
         </div>
-        <div className="button" data-aos="fade-up">
+        <div className="button" data-aos="fade-right">
           <button>Xem tất cả</button>
         </div>
       </div>

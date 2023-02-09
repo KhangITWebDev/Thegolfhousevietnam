@@ -137,7 +137,6 @@ function MainLayout({ children }) {
       }
     });
   }, [router]);
-  console.log(router);
   $(".search").on("click", () => {
     $(".search-dialog").css("transform", "scaleY(1)");
   });
@@ -156,6 +155,13 @@ function MainLayout({ children }) {
     $(".custom-menu").css("transform", "scaleY(1)");
   });
   $(".rs-dropdown").on({
+    mouseenter: function () {
+      if ($(this).index() === 1) {
+        $(".rs-dropdown-menu")[0].removeAttribute("hidden");
+      } else {
+        $(".rs-dropdown-menu")[1].removeAttribute("hidden");
+      }
+    },
     mouseenter: function () {
       if ($(this).index() === 1) {
         $(".rs-dropdown-menu")[0].removeAttribute("hidden");

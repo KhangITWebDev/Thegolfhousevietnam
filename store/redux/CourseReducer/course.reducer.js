@@ -5,15 +5,16 @@ const slice = createSlice({
 
   initialState: {
     courseList: [],
+    userRegister: [],
   },
 
   reducers: {
     setCourseList: (state, action) => {
       state.courseList = action.payload;
     },
-    // setUserToUsersList: (state, action) => {
-    //   state.usersList.push(action.payload);
-    // },
+    setUserRegister: (state, action) => {
+      state.userRegister = action.payload;
+    },
   },
 });
 
@@ -21,4 +22,4 @@ export default slice.reducer;
 
 // Actions
 
-export const { setCourseList } = slice.actions;
+export const { setCourseList, setUserRegister } = slice.actions;

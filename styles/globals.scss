@@ -3484,6 +3484,13 @@ button {
   .box-name {
     h5 {
       margin-left: 20px;
+      cursor: pointer;
+      &:hover {
+        color: #576e33;
+      }
+    }
+    img {
+      cursor: pointer;
     }
   }
   .rs-table-row {

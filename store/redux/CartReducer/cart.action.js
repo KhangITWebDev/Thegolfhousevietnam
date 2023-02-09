@@ -33,3 +33,13 @@ export const DelteProductInCart = (id) => async (dispatch) => {
     alert(err);
   }
 };
+export const UdateProductInCart = (id, value) => async (dispatch) => {
+  try {
+    const resApi = await CartAPI.putCartAPI(id, value);
+    if (resApi.success) {
+    } else {
+    }
+  } catch (err) {
+    alert(err);
+  }
+};

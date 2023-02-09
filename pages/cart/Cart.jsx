@@ -15,10 +15,11 @@ import ModalAddressDeliver from "../../components/Modal/ModalAddressDeliver";
 import {
   DelteProductInCart,
   getCartData,
+  UdateProductInCart,
 } from "../../store/redux/CartReducer/cart.action";
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
 import { getProvinceData } from "../../store/redux/ProviceReducer/province.action";
-import { convertDate } from "../../utils/function";
+import { convertDate, removeAccents } from "../../utils/function";
 import {
   getLocalStorage,
   LOCAL_STORAGE,
@@ -441,8 +442,7 @@ function Cart(props) {
       }
     });
   };
-  const handleDecreaseQty = (item, index) => {
-    const cart = getLocalStorage(LOCAL_STORAGE.CART);
+  const handleDecreaseQty = (item) => {
     Swal.fire({
       title: "",
       html: `<p>Bạn có chắc chắn giảm số lượng sản phẩm ${item.ten_vt}</p>`,
@@ -456,26 +456,34 @@ function Cart(props) {
       if (result.isConfirmed) {
         setLoadingQty(item._id);
         setTimeout(() => {
-          setLoadingQty(-1);
-          item.qty -= 1;
-          if (item.qty === 0) {
+          dispatch(
+            UdateProductInCart(item._id, { item, sl_xuat: item.sl_xuat - 1 })
+          );
+          if (item.sl_xuat <= 1) {
             Swal.fire({
               title: "Lỗi",
               text: "Số lượng phải lớn hơn 0",
               icon: "error",
               showCancelButton: false,
               confirmButtonText: "Đồng ý",
+            }).then((res) => {
+              if (res.isConfirmed) {
+                dispatch(UdateProductInCart(item._id, { item, sl_xuat: 1 }));
+                setTimeout(() => {
+                  setLoadingQty(-1);
+                }, 500);
+              }
             });
-            item.qty = 1;
+          } else {
+            setTimeout(() => {
+              setLoadingQty(-1);
+            }, 500);
           }
-          cart[index] = item;
-          setLocalStorage(LOCAL_STORAGE.CART, cart);
         }, 2000);
       }
     });
   };
   const handleIncreaseQty = (item, index) => {
-    const cart = getLocalStorage(LOCAL_STORAGE.CART);
     Swal.fire({
       title: "",
       html: `<p>Bạn có chắc chắn tăng số lượng sản phẩm ${item.ten_vt}</p>`,
@@ -487,14 +495,21 @@ function Cart(props) {
       cancelButtonText: "<span>Hủy bỏ</span>",
     }).then((result) => {
       if (result.isConfirmed) {
+        setLoadingQty(item._id);
+        if (result.isConfirmed) {
+          setTimeout(() => {
+            dispatch(
+              UdateProductInCart(item._id, {
+                ...item,
+                sl_xuat: item.sl_xuat + 1,
+              })
+            );
+            setTimeout(() => {
+              setLoadingQty(-1);
+            }, 500);
+          }, 2000);
+        }
       }
-      setLoadingQty(item._id);
-      setTimeout(() => {
-        setLoadingQty(-1);
-        item.qty += 1;
-        cart[index] = item;
-        setLocalStorage(LOCAL_STORAGE.CART, cart);
-      }, 2000);
     });
   };
   const [open, setOpen] = useState(false);
@@ -552,10 +567,24 @@ function Cart(props) {
                               width={80}
                               height={80}
                               objectFit="cover"
+                              onClick={() =>
+                                router.push(
+                                  `/proshop/${removeAccents(rowData.ten_vt)}`
+                                )
+                              }
                             ></Image>
                           </div>
                           <div className="col-9">
-                            <h5 className="data">{rowData.ten_vt}</h5>
+                            <h5
+                              className="data"
+                              onClick={() =>
+                                router.push(
+                                  `/proshop/${removeAccents(rowData.ten_vt)}`
+                                )
+                              }
+                            >
+                              {rowData.ten_vt}
+                            </h5>
                           </div>
                         </div>
                       )}
@@ -591,13 +620,11 @@ function Cart(props) {
                                   }}
                                   className="h-100 d-flex align-items-center data"
                                 >
-                                  {rowData.qty}
+                                  {rowData.sl_xuat}
                                 </span>
                                 <i
                                   className="fa-light fa-chevron-up"
-                                  onClick={() =>
-                                    handleIncreaseQty(rowData, index)
-                                  }
+                                  onClick={() => handleIncreaseQty(rowData)}
                                 ></i>
                                 <i
                                   onClick={() =>

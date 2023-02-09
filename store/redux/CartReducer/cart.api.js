@@ -71,9 +71,34 @@ const postCartAPI = async (data) => {
     };
   }
 };
+const putCartAPI = async (id, data) => {
+  const erp_token = Cookies.get("erp_token");
+  try {
+    const resApi = await ContentAxios.put(
+      `/cart/${id}?access_token=${erp_token}`,
+      data
+    );
+    if (resApi)
+      return {
+        success: true,
+        data: resApi,
+      };
+    return {
+      success: false,
+      data: null,
+    };
+  } catch (err) {
+    console.log(err);
+    return {
+      success: false,
+      data: null,
+    };
+  }
+};
 const CartAPI = {
   getCartAPI,
   deleteProductCartAPI,
   postCartAPI,
+  putCartAPI,
 };
 export default CartAPI;

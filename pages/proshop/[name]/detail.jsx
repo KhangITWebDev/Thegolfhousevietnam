@@ -23,7 +23,11 @@ import SignIn from "../../../components/Modal/SignIn";
 import { useForm } from "react-hook-form";
 import Cookies from "js-cookie";
 import loginClientAxios from "../../../clientAxios/loginClientAxios";
-import { AddToCart } from "../../../store/redux/CartReducer/cart.action";
+import {
+  AddToCart,
+  getCartData,
+  UdateProductInCart,
+} from "../../../store/redux/CartReducer/cart.action";
 const schema2 = yup.object().shape({
   // email: yup
   //   .string()
@@ -80,6 +84,10 @@ function Detail(props) {
     }, 2000);
   };
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.CartReducer.cartList);
+  useEffect(() => {
+    dispatch(getCartData());
+  }, [dispatch, cart]);
   useEffect(() => {
     dispatch(getProshopData());
   }, [dispatch]);
@@ -110,33 +118,34 @@ function Detail(props) {
       });
     });
   }, []);
-  console.log(proshopDetail);
   const handleAddToCart = (item) => {
     if (token && token.length > 0) {
       // const cart = getLocalStorage(LOCAL_STORAGE.CART);
-      // if (cart.length > 0) {
-      //   const find = cart.findIndex((x) => x._id === item._id);
-      //   if (find < 0) {
-      //     cart.push({ ...item, qty: qty });
-      //     setLocalStorage(LOCAL_STORAGE.CART, cart);
-      //   } else {
-      //     cart[find].qty = cart[find].qty + qty;
-      //     setLocalStorage(LOCAL_STORAGE.CART, cart);
-      //   }
-      // } else {
-      //   setLocalStorage(LOCAL_STORAGE.CART, [{ ...item, qty: qty }]);
-      // }
-      dispatch(
-        AddToCart({
-          ma_vt: item?.ma_vt,
-          ma_dvt: item.ma_dvt,
-          sl_xuat: qty,
-          // tien_nt: 200000,
-          // tien: 200000,
-          // gia_ban: 10000,
-          // gia_ban_le: 10000,
-        })
-      );
+
+      const find = cart.findIndex((x) => x.ma_vt === item.ma_vt);
+      if (find < 0) {
+        dispatch(
+          AddToCart({
+            ma_vt: item?.ma_vt,
+            ma_dvt: item.ma_dvt,
+            sl_xuat: qty,
+            // tien_nt: 200000,
+            // tien: 200000,
+            // gia_ban: 10000,
+            // gia_ban_le: 10000,
+          })
+        );
+      } else {
+        console.log("SL", cart[find].sl_xuat);
+        console.log("Quantity", qty);
+        console.log(cart[find].sl_xuat + qty);
+        dispatch(
+          UdateProductInCart(cart[find]?._id, {
+            ...cart[find],
+            sl_xuat: cart[find]?.sl_xuat + qty,
+          })
+        );
+      }
     } else {
       handleOpen2();
     }
@@ -146,7 +155,6 @@ function Detail(props) {
       $("#add-cart").on("click", function () {
         var cart = $(".cart");
         var imgtodrag = $("#image-proshop-detail").eq(0);
-        console.log($("#image-proshop-detail").eq(0));
         if (imgtodrag) {
           var imgclone = imgtodrag
             .clone()

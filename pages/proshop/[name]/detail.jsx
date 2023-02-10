@@ -29,10 +29,6 @@ import {
   UdateProductInCart,
 } from "../../../store/redux/CartReducer/cart.action";
 const schema2 = yup.object().shape({
-  // email: yup
-  //   .string()
-  //   .email("Email không hợp lệ")
-  //   .required("vui lòng nhập email"),
   phone: yup.string().required("Vui lòng nhập số điện thoại"),
   password: yup.string().required("Mật khẩu là trường bắt buộc"),
 });
@@ -58,6 +54,7 @@ function Detail(props) {
   };
   const handleClose2 = () => setOpen2(false);
   const [loading, setLoading] = useState(false);
+  const [loadingAddToCart, setLoadingAddToCart] = useState(false);
   const token = Cookies.get("access_token");
   const onSubmit2 = async (data) => {
     setLoading(true);
@@ -87,10 +84,8 @@ function Detail(props) {
   const cart = useSelector((state) => state.CartReducer.cartList);
   useEffect(() => {
     dispatch(getCartData());
-  }, [dispatch, cart]);
-  useEffect(() => {
     dispatch(getProshopData());
-  }, [dispatch]);
+  }, []);
   const [qty, setQty] = useState(1);
   const decreasement = () => {
     setQty(qty - 1);
@@ -120,31 +115,38 @@ function Detail(props) {
   }, []);
   const handleAddToCart = (item) => {
     if (token && token.length > 0) {
+      setLoadingAddToCart(true);
       // const cart = getLocalStorage(LOCAL_STORAGE.CART);
-
       const find = cart.findIndex((x) => x.ma_vt === item.ma_vt);
       if (find < 0) {
-        dispatch(
-          AddToCart({
-            ma_vt: item?.ma_vt,
-            ma_dvt: item.ma_dvt,
-            sl_xuat: qty,
-            // tien_nt: 200000,
-            // tien: 200000,
-            // gia_ban: 10000,
-            // gia_ban_le: 10000,
-          })
-        );
+        setTimeout(() => {
+          setLoadingAddToCart(false);
+          dispatch(
+            AddToCart({
+              ma_vt: item?.ma_vt,
+              ma_dvt: item.ma_dvt,
+              sl_xuat: qty,
+              // tien_nt: 200000,
+              // tien: 200000,
+              // gia_ban: 10000,
+              // gia_ban_le: 10000,
+            })
+          );
+          dispatch(getCartData());
+          setQty(1);
+        }, 1300);
       } else {
-        console.log("SL", cart[find].sl_xuat);
-        console.log("Quantity", qty);
-        console.log(cart[find].sl_xuat + qty);
-        dispatch(
-          UdateProductInCart(cart[find]?._id, {
-            ...cart[find],
-            sl_xuat: cart[find]?.sl_xuat + qty,
-          })
-        );
+        setTimeout(() => {
+          setLoadingAddToCart(false);
+          dispatch(
+            UdateProductInCart(cart[find]?._id, {
+              ...cart[find],
+              sl_xuat: cart[find]?.sl_xuat + qty,
+            })
+          );
+          dispatch(getCartData());
+          setQty(1);
+        }, 1300);
       }
     } else {
       handleOpen2();
@@ -152,57 +154,58 @@ function Detail(props) {
   };
   useEffect(() => {
     if (token && token.length > 0) {
-      $("#add-cart").on("click", function () {
-        var cart = $(".cart");
-        var imgtodrag = $("#image-proshop-detail").eq(0);
-        if (imgtodrag) {
-          var imgclone = imgtodrag
-            .clone()
-            .offset({
-              top: imgtodrag.offset().top,
-              left: imgtodrag.offset().left,
-            })
-            .css({
-              opacity: "0.5",
-              position: "absolute",
-              height: "150px",
-              width: "150px",
-              "z-index": "4000",
-            })
-            .appendTo($("body"))
-            .animate(
+      setTimeout(() => {
+        $("#add-cart").on("click", function () {
+          var cart = $(".cart");
+          var imgtodrag = $("#image-proshop-detail").eq(0);
+          if (imgtodrag) {
+            var imgclone = imgtodrag
+              .clone()
+              .offset({
+                top: imgtodrag.offset().top,
+                left: imgtodrag.offset().left,
+              })
+              .css({
+                opacity: "0.5",
+                position: "absolute",
+                height: "150px",
+                width: "150px",
+                "z-index": "4000",
+              })
+              .appendTo($("body"))
+              .animate(
+                {
+                  top: cart.offset().top + 10,
+                  left: cart.offset().left + 10,
+                  width: 75,
+                  height: 75,
+                },
+                1000,
+                "easeInOutExpo"
+              );
+            setTimeout(function () {
+              cart.effect(
+                "shake",
+                {
+                  times: 2,
+                },
+                200
+              );
+            }, 1000);
+            imgclone.animate(
               {
-                top: cart.offset().top + 10,
-                left: cart.offset().left + 10,
-                width: 75,
-                height: 75,
+                width: 0,
+                height: 0,
               },
-              1000,
-              "easeInOutExpo"
+              function () {
+                $(this).detach();
+              }
             );
-          setTimeout(function () {
-            cart.effect(
-              "shake",
-              {
-                times: 2,
-              },
-              200
-            );
-          }, 1500);
-          imgclone.animate(
-            {
-              width: 0,
-              height: 0,
-            },
-            function () {
-              $(this).detach();
-            }
-          );
-        }
-      });
+          }
+        });
+      }, 5000);
     }
   }, [token]);
-
   return (
     <div className={styles.detail_page} id="detail-page">
       {!proshopDetail ? (
@@ -278,7 +281,11 @@ function Detail(props) {
                     onClick={() => handleAddToCart(proshopDetail)}
                     id="add-cart"
                   >
-                    Thêm vào giỏ hàng
+                    {loadingAddToCart ? (
+                      <Loader content="Đang xử lý" />
+                    ) : (
+                      "Thêm vào giỏ hàng"
+                    )}
                     <span className="cart-item"></span>
                   </button>
                 </div>

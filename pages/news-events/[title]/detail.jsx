@@ -11,7 +11,7 @@ function Detail(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getNewData());
-  }, [dispatch]);
+  }, []);
   const router = useRouter();
   const [findIndex, setFindIndex] = useState(
     news.findIndex((x) => removeAccents(x.title) === router.query.title)
@@ -20,7 +20,7 @@ function Detail(props) {
     setFindIndex(
       news.findIndex((x) => removeAccents(x.title) === router.query.title)
     );
-  }, [news, router]);
+  }, [router]);
   const newsDetail = news[findIndex] ? news[findIndex] : NewsEventsData[0];
   const ortherNews = news.filter((x) => x._id !== newsDetail?._id);
   return (

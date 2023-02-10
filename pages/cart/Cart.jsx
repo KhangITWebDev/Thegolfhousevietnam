@@ -328,11 +328,11 @@ function Cart(props) {
   const cart = useSelector((state) => state.CartReducer.cartList);
   useEffect(() => {
     dispatch(getCartData());
-  }, [dispatch, cart]);
+  }, []);
   const { contents } = useSelector((state) => state.ContentReducer);
   useEffect(() => {
     dispatch(getContentData());
-  }, [dispatch]);
+  }, []);
   const province = useSelector((state) => state.ProvinceReducer.province);
   const district = watch("city")
     ? province[
@@ -385,7 +385,7 @@ function Cart(props) {
   });
   useEffect(() => {
     dispatch(getProvinceData());
-  }, [dispatch]);
+  }, []);
   const sectiontitle = contents.filter(
     (item) => item.category === "63bc4d8b39d2a23b06d92f3d"
   );
@@ -420,7 +420,7 @@ function Cart(props) {
     Swal.fire({
       title: "",
       html: `<p>Bạn có chắc chắn xóa sản phẩm ${item.ten_vt} ra khỏi giỏi hàng ?</p>`,
-      icon: "warning",
+      icon: "question",
       showCancelButton: true,
       confirmButtonText: "OK",
       focusConfirm: false,
@@ -446,7 +446,7 @@ function Cart(props) {
     Swal.fire({
       title: "",
       html: `<p>Bạn có chắc chắn giảm số lượng sản phẩm ${item.ten_vt}</p>`,
-      icon: "info",
+      icon: "question",
       showCancelButton: true,
       confirmButtonText: "OK",
       focusConfirm: false,
@@ -466,20 +466,27 @@ function Cart(props) {
               icon: "error",
               showCancelButton: false,
               confirmButtonText: "Đồng ý",
+              allowOutsideClick: false,
             }).then((res) => {
               if (res.isConfirmed) {
                 dispatch(UdateProductInCart(item._id, { item, sl_xuat: 1 }));
                 setTimeout(() => {
+                  setTimeout(() => {
+                    dispatch(getCartData());
+                  }, 500);
                   setLoadingQty(-1);
-                }, 500);
+                }, 1000);
               }
             });
           } else {
             setTimeout(() => {
+              dispatch(getCartData());
+            }, 1000);
+            setTimeout(() => {
               setLoadingQty(-1);
-            }, 500);
+            }, 1500);
           }
-        }, 2000);
+        }, 3000);
       }
     });
   };
@@ -487,7 +494,7 @@ function Cart(props) {
     Swal.fire({
       title: "",
       html: `<p>Bạn có chắc chắn tăng số lượng sản phẩm ${item.ten_vt}</p>`,
-      icon: "info",
+      icon: "question",
       showCancelButton: true,
       confirmButtonText: "OK",
       focusConfirm: false,
@@ -506,8 +513,8 @@ function Cart(props) {
             );
             setTimeout(() => {
               setLoadingQty(-1);
-            }, 500);
-          }, 2000);
+            }, 1000);
+          }, 3000);
         }
       }
     });
@@ -679,7 +686,9 @@ function Cart(props) {
                     <button onClick={() => router.push("/proshop")}>
                       Tiếp tục mua
                     </button>
-                    <button>Cập nhật giỏi</button>
+                    <button onClick={() => dispatch(getCartData())}>
+                      Cập nhật giỏi
+                    </button>
                   </div>
                 </div>
                 <div className="box-total d-flex justify-content-end">

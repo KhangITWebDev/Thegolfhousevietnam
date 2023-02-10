@@ -7,13 +7,11 @@ import styles from "./OrtherService.module.scss";
 function OrtherService(props) {
   const dispatch = useDispatch();
   const { banners } = useSelector((state) => state.BannerReducer);
-  useEffect(() => {
-    dispatch(getBannerData());
-  }, [dispatch]);
   const { contents } = useSelector((state) => state.ContentReducer);
   useEffect(() => {
+    dispatch(getBannerData());
     dispatch(getContentData());
-  }, [dispatch]);
+  }, []);
   const sectionTitleHaỉrNailSpa = contents.filter(
     (item) => item.category === "63bc43b239d2a23b06d8def1"
   );

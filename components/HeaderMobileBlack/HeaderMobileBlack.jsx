@@ -181,7 +181,7 @@ export default function HeaderMoblieBlack({
                 eventKey="13"
                 onClick={(e) => {
                   e.preventDefault();
-                  router.push("/orther-service#spa");
+                  router.push("/other-service#spa");
                 }}
               >
                 spa
@@ -190,7 +190,7 @@ export default function HeaderMoblieBlack({
                 eventKey="14"
                 onClick={(e) => {
                   e.preventDefault();
-                  router.push("/orther-service#spa");
+                  router.push("/other-service#spa");
                 }}
               >
                 lounge

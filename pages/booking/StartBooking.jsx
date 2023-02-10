@@ -48,7 +48,7 @@ function StartBooking() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getScheduleData());
-  }, [dispatch]);
+  }, []);
   useEffect(() => {
     if (!token || token?.length < 0 || token === "") {
       router.back();

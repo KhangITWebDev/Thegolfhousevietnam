@@ -59,11 +59,14 @@ function HomePage(props) {
   const [loadingSignUpTrial, setLoadingSignUpTrial] = useState(false);
   const { userRegister } = useSelector((state) => state.CourseReducer);
   const { news } = useSelector((state) => state.NewsReducer);
+  const { banners } = useSelector((state) => state.BannerReducer);
+  const { contents } = useSelector((state) => state.ContentReducer);
   useEffect(() => {
     dispatch(getNewData());
     dispatch(getUserRegisterData());
-  }, [dispatch]);
-  console.log(userRegister);
+    dispatch(getBannerData());
+    dispatch(getContentData());
+  }, []);
   const onSubmit = (data) => {
     const findEmail = userRegister.findIndex(
       (x) => x.email === watch("from_email")
@@ -85,7 +88,7 @@ function HomePage(props) {
           text: `Email này đã tồn tại`,
           icon: "error",
           showCancelButton: false,
-          confirmButtonText: "OK",
+          confirmButtonText: "Đồng ý",
         });
       } else if (findPhone >= 0) {
         setLoadingSignUpTrial(false);
@@ -93,7 +96,7 @@ function HomePage(props) {
           text: `Số điên thoại đã tồn tại`,
           icon: "error",
           showCancelButton: false,
-          confirmButtonText: "OK",
+          confirmButtonText: "Đồng ý",
         });
       } else {
         emailjs
@@ -117,13 +120,18 @@ function HomePage(props) {
                 );
                 setLoadingSignUpTrial(false);
                 Swal.fire({
-                  text: `Bạn đã đăng ký học thử thành công`,
+                  title: "<h5>Đăng ký thành công</h5>",
+                  text: `Cảm ơn anh/chị đã quan tâm tới dịch vụ của The Golf House Việt Nam.
+                  Chuyên viên tư vấn của chúng tôi sẽ liên hệ tới anh/chị trong thời
+                  gian sớm nhất.`,
                   icon: "success",
                   showCancelButton: false,
-                  confirmButtonText: "OK",
+                  confirmButtonText: "Kiểm tra",
+                  allowOutsideClick: false,
                 }).then((result) => {
                   if (result.isConfirmed) {
                     handleClose1();
+                    handleOpen4();
                   }
                 });
               }
@@ -141,19 +149,19 @@ function HomePage(props) {
     }, 2000);
   };
   const [open1, setOpen1] = React.useState(false);
+  const [open4, setOpen4] = React.useState(false);
+  const [open5, setOpen5] = React.useState(false);
   const handleOpen1 = () => {
     setOpen1(true);
     setOpen4(false);
     setOpen5(false);
   };
-  const [open4, setOpen4] = React.useState(false);
   const handleOpen4 = () => {
     setOpen4(true);
     setOpen1(false);
     setOpen5(false);
   };
   const handleClose4 = () => setOpen4(false);
-  const [open5, setOpen5] = React.useState(false);
   const handleOpen5 = () => {
     setOpen5(true);
     setOpen4(false);
@@ -161,15 +169,6 @@ function HomePage(props) {
   };
   const handleClose5 = () => setOpen5(false);
   const handleClose1 = () => setOpen1(false);
-  const { banners } = useSelector((state) => state.BannerReducer);
-  useEffect(() => {
-    dispatch(getBannerData());
-  }, [dispatch]);
-  const { contents } = useSelector((state) => state.ContentReducer);
-  useEffect(() => {
-    dispatch(getContentData());
-  }, [dispatch]);
-
   const bannerHome = banners.filter((item) => item.danh_muc === "Slide Home");
   const contentGolf = contents.filter(
     (item) => item.category === "63bbe8a6e17e4f12eead3ec1"
@@ -186,20 +185,9 @@ function HomePage(props) {
   const sectionTeam = contents.filter(
     (item) => item.category === "63e34f6eca71c51ca0ed6bb2"
   );
-
   const router = useRouter();
   const [swiper, setSwiper] = React.useState(null);
   const [swiper2, setSwiper2] = React.useState(null);
-  const commingSoon = (e) => {
-    e.preventDefault();
-    Swal.fire({
-      title: "Comming Soon",
-      text: "We are comming soon",
-      icon: "warning",
-      showCancelButton: false,
-      confirmButtonText: "OK",
-    });
-  };
   return (
     <>
       <div className={styles.home_page}>

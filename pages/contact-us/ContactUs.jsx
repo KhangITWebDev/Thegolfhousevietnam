@@ -1,15 +1,90 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
 import styles from "./ContactUs.module.scss";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import Swal from "sweetalert2";
+import emailjs from "@emailjs/browser";
+import { useState } from "react";
+import { Alert } from "react-bootstrap";
+import { Loader } from "rsuite";
+const PHONE_REGEX = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i;
+const schema = yup.object().shape({
+  from_name: yup.string().required("Vui lòng nhập họ tên"),
+  from_phone: yup
+    .string()
+    .required("Vui lòng nhập số điện thoại")
+    .min(10, "Số điện thoại phải nhiều hơn 9 ký tự")
+    .max(12, "Sô điện thoại phải ít hơn 12 ký tự")
+    .matches(PHONE_REGEX, "Số điện thoại không hợp lệ"),
+  from_email: yup
+    .string()
+    .email("Email không hợp lệ")
+    .required("Vui lòng nhập email"),
+});
 function ContactUs(props) {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    control,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
   const dispatch = useDispatch();
   const { contents } = useSelector((state) => state.ContentReducer);
   useEffect(() => {
     dispatch(getContentData());
-  }, [dispatch]);
+  }, []);
+  const [loading, setLoading] = useState(false);
+  const onSubmit = (data) => {
+    setLoading(true);
+    const formState = {
+      name: data.from_name,
+      phone: data.from_phone,
+      email: data.from_email,
+      note: data.note,
+    };
+    setTimeout(() => {
+      emailjs
+        .send(
+          "service_ug5xzoq",
+          "template_5tam0xu",
+          formState,
+          "n8Aci-Exs7CuotOPb"
+        )
+        .then(
+          function (response) {
+            if (response.status === 200) {
+              setLoading(false);
+              Swal.fire({
+                title: "<h5>Đăng ký liên hệ thành công</h5>",
+                text: `Cảm ơn anh/chị đã liên hệ với The Golf House Việt Nam.
+                  Chuyên viên tư vấn của chúng tôi sẽ liên hệ tới anh/chị trong thời
+                  gian sớm nhất.`,
+                icon: "success",
+                showCancelButton: false,
+                confirmButtonText: "Đồng ý",
+              });
+            }
+          },
+          function (err) {
+            Swal.fire({
+              text: `Vui lòng nhập lại thông tin`,
+              icon: "error",
+              showCancelButton: false,
+              confirmButtonText: "OK",
+            });
+          }
+        );
+    }, 2000);
+  };
   const sectionContactList = contents.filter(
     (item) => item.category === "63bc447139d2a23b06d8e3c3"
   );
@@ -132,24 +207,53 @@ function ContactUs(props) {
                   {sectionTitleForm[0]?.title}
                 </h2>
               </div>
-              <form action="">
+              <form action="" onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-group">
                   <label htmlFor="" className="form-label">
                     Họ tên
                   </label>
-                  <input type="text" className="form-control" />
+                  <input
+                    type="text"
+                    className="form-control"
+                    {...register("from_name")}
+                    placeholder="Họ tên"
+                    autoFocus={true}
+                  />
+                  {errors?.from_name && (
+                    <Alert variant="danger">{errors?.from_name?.message}</Alert>
+                  )}
                 </div>
                 <div className="form-group">
                   <label htmlFor="" className="form-label">
                     Email
                   </label>
-                  <input type="text" className="form-control" />
+                  <input
+                    type="text"
+                    className="form-control"
+                    {...register("from_email")}
+                    placeholder="Email"
+                  />
+                  {errors?.from_email && (
+                    <Alert variant="danger">
+                      {errors?.from_email?.message}
+                    </Alert>
+                  )}
                 </div>
                 <div className="form-group">
                   <label htmlFor="" className="form-label">
                     Điện Thoại
                   </label>
-                  <input type="text" className="form-control" />
+                  <input
+                    type="text"
+                    className="form-control"
+                    {...register("from_phone")}
+                    placeholder="Điện thoại"
+                  />
+                  {errors?.from_phone && (
+                    <Alert variant="danger">
+                      {errors?.from_phone?.message}
+                    </Alert>
+                  )}
                 </div>
                 <div className="form-group">
                   <label htmlFor="" className="form-label">
@@ -159,10 +263,14 @@ function ContactUs(props) {
                     className="form-control"
                     id="exampleFormControlTextarea1"
                     rows="3"
+                    {...register("note")}
+                    placeholder="Ghi chú"
                   ></textarea>
                 </div>
                 <div className="button">
-                  <button>Gửi</button>
+                  <button>
+                    {loading ? <Loader content="Đang Gửi" /> : "Gửi"}
+                  </button>
                 </div>
               </form>
             </div>

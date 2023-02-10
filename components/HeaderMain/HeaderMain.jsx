@@ -79,7 +79,8 @@ export default function HeaderMain({
                     <Nav.Item
                       eventKey="2"
                       onClick={() => {
-                        router.push("/about-us#founder");
+                        localStorage.setItem("id_url", "founder");
+                        router.push("/about-us");
                       }}
                     >
                       Nhà sáng lập
@@ -87,7 +88,8 @@ export default function HeaderMain({
                     <Nav.Item
                       eventKey="3"
                       onClick={() => {
-                        router.push("/about-us#about");
+                        localStorage.setItem("id_url", "about");
+                        router.push("/about-us");
                       }}
                     >
                       Lio Holding
@@ -137,7 +139,7 @@ export default function HeaderMain({
                     eventKey="8"
                     onClick={(e) => {
                       e.preventDefault();
-                      router.push("/orther-service#spa");
+                      router.push("/other-service#spa");
                     }}
                   >
                     Spa
@@ -146,7 +148,7 @@ export default function HeaderMain({
                     eventKey="9"
                     onClick={(e) => {
                       e.preventDefault();
-                      router.push("/orther-service#lounge");
+                      router.push("/other-service#lounge");
                     }}
                   >
                     Lounge

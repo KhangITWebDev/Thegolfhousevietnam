@@ -80,18 +80,17 @@ const options = [
 
 function ProShop(props) {
   const [value, setValue] = React.useState([0, 1]);
-  const maxFilterPrice = 200000000;
-  const minFilterPrice = 500000;
+  const maxFilterPrice = 100000000;
+  const minFilterPrice = 10000;
   const proshopData = useSelector((state) => state.ProshopReducer.proshopList);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProshopData());
-  }, [dispatch]);
-  const { banners } = useSelector((state) => state.BannerReducer);
-  useEffect(() => {
     dispatch(getBannerData());
-  }, [dispatch]);
-
+    dispatch(getContentData());
+  }, []);
+  const { banners } = useSelector((state) => state.BannerReducer);
+  const { contents } = useSelector((state) => state.ContentReducer);
   const bannerProshop = banners.filter((item) => item.danh_muc === "Proshop");
   const router = useRouter();
   const DropdownIndicator = (props) => {
@@ -204,10 +203,6 @@ function ProShop(props) {
         break;
     }
   };
-  const { contents } = useSelector((state) => state.ContentReducer);
-  useEffect(() => {
-    dispatch(getContentData());
-  }, [dispatch]);
   const sectiontitle = contents.filter(
     (item) => item.category === "63bc4b5739d2a23b06d91f9e"
   );

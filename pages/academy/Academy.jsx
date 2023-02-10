@@ -17,7 +17,7 @@ function Academy(props) {
   const { contents } = useSelector((state) => state.ContentReducer);
   useEffect(() => {
     dispatch(getContentData());
-  }, [dispatch]);
+  }, []);
   const sectionLocation = contents.filter(
     (item) => item.category === "63bc31a139d2a23b06d8835c"
   );

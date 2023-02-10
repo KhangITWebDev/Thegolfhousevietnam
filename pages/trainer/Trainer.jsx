@@ -14,26 +14,14 @@ function Trainer(props) {
     setOpen(true);
     setShowDetailIndex(index);
   };
-  const commingSoon = (e) => {
-    e.preventDefault();
-    Swal.fire({
-      title: "Comming Soon",
-      text: "We are comming soon",
-      icon: "warning",
-      showCancelButton: false,
-      confirmButtonText: "OK",
-    });
-  };
   const handleClose = () => setOpen(false);
   const { trainers } = useSelector((state) => state.TrainerReducer);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getTrainerData());
-  }, [dispatch]);
   const { contents } = useSelector((state) => state.ContentReducer);
   useEffect(() => {
     dispatch(getContentData());
-  }, [dispatch]);
+    dispatch(getTrainerData());
+  }, []);
   const sectionTitlePage = contents.filter(
     (item) => item.category === "63bc375439d2a23b06d89c18"
   );

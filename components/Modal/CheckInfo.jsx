@@ -24,7 +24,7 @@ function CheckInfo({ handleClose4, watch }) {
               <span>Tên:</span>
             </h6>
             <div className="col-8 col-sm-9">
-              <h6 className="desc">{watch("name")}</h6>
+              <h6 className="desc">{watch("from_name")}</h6>
             </div>
           </div>
           <div className="d-flex information_column">
@@ -33,7 +33,7 @@ function CheckInfo({ handleClose4, watch }) {
               <span>Email:</span>
             </h6>
             <div className="col-8 col-sm-9">
-              <h6 className="desc">{watch("email")}</h6>
+              <h6 className="desc">{watch("from_email")}</h6>
             </div>
           </div>
           <div className="d-flex information_column">
@@ -42,7 +42,16 @@ function CheckInfo({ handleClose4, watch }) {
               <span>Điện thoại:</span>
             </h6>
             <div className="col-8 col-sm-9">
-              <h6 className="desc">{watch("phone")}</h6>
+              <h6 className="desc">{watch("from_phone")}</h6>
+            </div>
+          </div>
+          <div className="d-flex information_column">
+            <h6 className="col-4 col-sm-3">
+              <i className="fa-light fa-briefcase"></i>
+              <span>Nghề nghiệp:</span>
+            </h6>
+            <div className="col-8 col-sm-9">
+              <h6 className="desc">{watch("from_job")?.label}</h6>
             </div>
           </div>
         </div>

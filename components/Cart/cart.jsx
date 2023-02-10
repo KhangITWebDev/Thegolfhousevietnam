@@ -17,7 +17,7 @@ function Cart({ handleCloseCart }) {
   const cart = useSelector((state) => state.CartReducer.cartList);
   useEffect(() => {
     dispatch(getCartData());
-  }, [dispatch, cart]);
+  }, []);
   const token = Cookies.get("access_token");
   const router = useRouter();
   useEffect(() => {

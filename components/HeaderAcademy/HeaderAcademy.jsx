@@ -139,7 +139,7 @@ export default function HeaderAccademy({
                     eventKey="8"
                     onClick={(e) => {
                       e.preventDefault();
-                      router.push("/orther-service#spa");
+                      router.push("/other-service#spa");
                     }}
                   >
                     Spa
@@ -148,7 +148,7 @@ export default function HeaderAccademy({
                     eventKey="9"
                     onClick={(e) => {
                       e.preventDefault();
-                      router.push("/orther-service#lounge");
+                      router.push("/other-service#lounge");
                     }}
                   >
                     Lounge

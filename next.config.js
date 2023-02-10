@@ -9,6 +9,11 @@ module.exports = async (phase, { defaultConfig }) => {
     },
     output: "standalone",
     swcMinify: true,
+    api: {
+      bodyParser: {
+        sizeLimit: "1mb",
+      },
+    },
     images: {
       domains: [
         "api.fostech.vn",

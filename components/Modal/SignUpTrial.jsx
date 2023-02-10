@@ -139,7 +139,7 @@ function SignUpTrial({
               type="text"
               className="form-control"
               {...register("from_email")}
-              placeholder="email"
+              placeholder="Email"
             />
             {errors?.from_email && (
               <Alert variant="danger">{errors?.from_email?.message}</Alert>

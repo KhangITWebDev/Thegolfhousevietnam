@@ -14,7 +14,7 @@ function NewsEvents(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getNewData());
-  }, [dispatch]);
+  }, []);
   const data = usePagination(news, 4);
   const router = useRouter();
   const findIndex = news.findIndex(

@@ -149,7 +149,6 @@ function Course(props) {
   } = useForm({
     resolver: yupResolver(schema2),
   });
-  const form = useRef();
   const { userRegister } = useSelector((state) => state.CourseReducer);
   const dispatch = useDispatch();
   const [loadingSignUpTrial, setLoadingSignUpTrial] = useState(false);
@@ -174,7 +173,7 @@ function Course(props) {
           text: `Email này đã tồn tại`,
           icon: "error",
           showCancelButton: false,
-          confirmButtonText: "OK",
+          confirmButtonText: "Đồng ý",
         });
       } else if (findPhone >= 0) {
         setLoadingSignUpTrial(false);
@@ -182,7 +181,7 @@ function Course(props) {
           text: `Số điên thoại đã tồn tại`,
           icon: "error",
           showCancelButton: false,
-          confirmButtonText: "OK",
+          confirmButtonText: "Đồng ý",
         });
       } else {
         emailjs
@@ -206,13 +205,18 @@ function Course(props) {
                 );
                 setLoadingSignUpTrial(false);
                 Swal.fire({
-                  text: `Bạn đã đăng ký học thử thành công`,
+                  title: "<h5>Đăng ký thành công</h5>",
+                  text: `Cảm ơn anh/chị đã quan tâm tới dịch vụ của The Golf House Việt Nam.
+                  Chuyên viên tư vấn của chúng tôi sẽ liên hệ tới anh/chị trong thời
+                  gian sớm nhất.`,
                   icon: "success",
                   showCancelButton: false,
-                  confirmButtonText: "OK",
+                  confirmButtonText: "Kiểm tra",
+                  allowOutsideClick: false,
                 }).then((result) => {
                   if (result.isConfirmed) {
                     handleClose1();
+                    handleOpen4();
                   }
                 });
               }
@@ -258,14 +262,12 @@ function Course(props) {
   const router = useRouter();
   const [address, setAddress] = useState();
   const { locationList } = useSelector((state) => state.BookingReducer);
-  useEffect(() => {
-    dispatch(getLocationData());
-  }, [dispatch, token]);
   const { registration } = useSelector((state) => state.BookingReducer);
   useEffect(() => {
     dispatch(getRegistrationData());
     dispatch(getUserRegisterData());
-  }, [dispatch, token]);
+    dispatch(getLocationData());
+  }, [token]);
   const [swiper2, setSwiper2] = React.useState(null);
   const [swiper3, setSwiper3] = React.useState(null);
   const [open, setOpen] = React.useState(false);
@@ -278,6 +280,10 @@ function Course(props) {
   };
   const handleClose = () => setOpen(false);
   const [open1, setOpen1] = React.useState(false);
+  const [open2, setOpen2] = React.useState(false);
+  const [open3, setOpen3] = React.useState(false);
+  const [open4, setOpen4] = React.useState(false);
+  const [open5, setOpen5] = React.useState(false);
   const handleOpen1 = () => {
     setOpen1(true);
     setOpen2(false);
@@ -287,7 +293,6 @@ function Course(props) {
     setOpen5(false);
   };
   const handleClose1 = () => setOpen1(false);
-  const [open2, setOpen2] = React.useState(false);
   const handleOpen2 = () => {
     setOpen2(true);
     setOpen(false);
@@ -297,7 +302,6 @@ function Course(props) {
     setOpen5(false);
   };
   const handleClose2 = () => setOpen2(false);
-  const [open3, setOpen3] = React.useState(false);
   const handleOpen3 = () => {
     setOpen3(true);
     setOpen2(false);
@@ -307,7 +311,6 @@ function Course(props) {
     setOpen5(false);
   };
   const handleClose3 = () => setOpen3(false);
-  const [open4, setOpen4] = React.useState(false);
   const handleOpen4 = () => {
     setOpen4(true);
     setOpen2(false);
@@ -317,7 +320,6 @@ function Course(props) {
     setOpen5(false);
   };
   const handleClose4 = () => setOpen4(false);
-  const [open5, setOpen5] = React.useState(false);
   const handleOpen5 = () => {
     setOpen5(true);
     setOpen4(false);

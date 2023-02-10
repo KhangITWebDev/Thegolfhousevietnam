@@ -106,14 +106,12 @@ function ProShop(props) {
       </components.DropdownIndicator>
     );
   };
-  const coast = proshopData.filter((x) => x.ten_nvt === "Áo");
-  const trousers = proshopData.filter((x) => x.ten_nvt === "Quần");
-  const skirt = proshopData
-    .filter((x) => x.ten_nvt === "Váy")
-    .concat(proshopData.filter((x) => x.ten_nvt === "Chân Váy"));
-  const glove = proshopData.filter((x) => x.ten_nvt === "Găng tay");
-  const shose = proshopData.filter((x) => x.ten_nvt === "Giày");
-  const golfClubs = proshopData.filter((x) => x.ten_nvt === "Gậy");
+  const coast = proshopData.filter((x) => x.ten_vt?.includes("Áo"));
+  const trousers = proshopData.filter((x) => x.ten_vt?.includes("Quần"));
+  const skirt = proshopData.filter((x) => x.ten_vt?.includes("Váy"));
+  const glove = proshopData.filter((x) => x.ten_vt?.includes("Găng tay"));
+  const shose = proshopData.filter((x) => x.ten_vt?.includes("Giày"));
+  const golfClubs = proshopData.filter((x) => x.ten_vt?.includes("Gậy"));
   const golfBall = proshopData.filter((x) => x.ten_nvt?.includes("Bóng"));
   const data = usePagination(proshopData, 6);
   const filter = (type) => {

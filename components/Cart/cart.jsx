@@ -95,9 +95,9 @@ function Cart({ handleCloseCart }) {
                 <div className={"col-6" + " " + styles.btn}>
                   <button onClick={() => router.push("/cart")}>Giỏ Hàng</button>
                 </div>
-                <divv className={"col-6" + " " + styles.btn}>
+                <div className={"col-6" + " " + styles.btn}>
                   <button>Thanh Toán</button>
-                </divv>
+                </div>
               </div>
             </div>
           ) : (

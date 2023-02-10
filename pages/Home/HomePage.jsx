@@ -451,8 +451,8 @@ function HomePage(props) {
           </Swiper>
         </div>
         <div className={styles.moreImage}>
-          {sectionMoreImage[0]?.images.slice(0, 4).map((item) => (
-            <div key={item} className={styles.item} data-aos="fade-right">
+          {sectionMoreImage[0]?.images.slice(0, 4).map((item, index) => (
+            <div key={index} className={styles.item} data-aos="fade-right">
               <Image
                 alt="Img 1"
                 loader={({ src }) =>

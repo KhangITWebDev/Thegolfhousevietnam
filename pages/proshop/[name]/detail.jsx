@@ -85,7 +85,7 @@ function Detail(props) {
   useEffect(() => {
     dispatch(getCartData());
     dispatch(getProshopData());
-  }, [cart]);
+  }, []);
   const [qty, setQty] = useState(1);
   const decreasement = () => {
     setQty(qty - 1);
@@ -132,8 +132,12 @@ function Detail(props) {
               // gia_ban_le: 10000,
             })
           );
-          dispatch(getCartData());
-          setQty(1);
+          setTimeout(() => {
+            setTimeout(() => {
+              dispatch(getCartData());
+            }, 500);
+            setQty(1);
+          }, 1000);
         }, 1300);
       } else {
         setTimeout(() => {
@@ -144,8 +148,12 @@ function Detail(props) {
               sl_xuat: cart[find]?.sl_xuat + qty,
             })
           );
-          dispatch(getCartData());
-          setQty(1);
+          setTimeout(() => {
+            setTimeout(() => {
+              dispatch(getCartData());
+            }, 200);
+            setQty(1);
+          }, 1000);
         }, 1300);
       }
     } else {
@@ -203,7 +211,7 @@ function Detail(props) {
             );
           }
         });
-      }, 5000);
+      }, 4000);
     }
   }, [token]);
   return (

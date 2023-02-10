@@ -514,8 +514,11 @@ function Cart(props) {
               })
             );
             setTimeout(() => {
-              setLoadingQty(-1);
+              dispatch(getCartData());
             }, 1000);
+            setTimeout(() => {
+              setLoadingQty(-1);
+            }, 1500);
           }, 3000);
         }
       }

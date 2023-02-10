@@ -85,7 +85,7 @@ function Detail(props) {
   useEffect(() => {
     dispatch(getCartData());
     dispatch(getProshopData());
-  }, []);
+  }, [cart]);
   const [qty, setQty] = useState(1);
   const decreasement = () => {
     setQty(qty - 1);

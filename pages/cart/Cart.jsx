@@ -326,11 +326,10 @@ function Cart(props) {
   const router = useRouter();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.CartReducer.cartList);
-  useEffect(() => {
-    dispatch(getCartData());
-  }, []);
   const { contents } = useSelector((state) => state.ContentReducer);
   useEffect(() => {
+    dispatch(getCartData());
+    dispatch(getProvinceData());
     dispatch(getContentData());
   }, []);
   const province = useSelector((state) => state.ProvinceReducer.province);
@@ -383,9 +382,6 @@ function Cart(props) {
       value: x.code,
     };
   });
-  useEffect(() => {
-    dispatch(getProvinceData());
-  }, []);
   const sectiontitle = contents.filter(
     (item) => item.category === "63bc4d8b39d2a23b06d92f3d"
   );
@@ -423,6 +419,7 @@ function Cart(props) {
       icon: "question",
       showCancelButton: true,
       confirmButtonText: "OK",
+      allowOutsideClick: false,
       focusConfirm: false,
       confirmButtonText: "<span>Đồng ý</span>",
       cancelButtonText: "<span>Hủy bỏ</span>",
@@ -431,13 +428,18 @@ function Cart(props) {
         setLoadingRemove(item._id);
         setTimeout(() => {
           dispatch(DelteProductInCart(item._id));
-          setLoadingRemove(-1);
-          Swal.fire({
-            html: `<p>Bạn đã xóa ${item.sl_xuat} sản phẩm ${item.ten_vt} thành công !</p>`,
-            icon: "success",
-            showCancelButton: false,
-            confirmButtonText: "<span>Đồng ý</span>",
-          });
+          setTimeout(() => {
+            setTimeout(() => {
+              dispatch(getCartData());
+            }, 500);
+            setLoadingQty(-1);
+            Swal.fire({
+              html: `<p>Bạn đã xóa ${item.sl_xuat} sản phẩm ${item.ten_vt} thành công !</p>`,
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonText: "<span>Đồng ý</span>",
+            });
+          }, 1500);
         }, 2000);
       }
     });

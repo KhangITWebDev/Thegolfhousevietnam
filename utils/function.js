@@ -29,6 +29,23 @@ export const time = (time) => {
   }
 };
 
+export const generateDatabaseDateTime = (date) => {
+  const dateTime1 = new Date(date);
+  dateTime1.setHours(dateTime1.getHours() + 7);
+  const now = dateTime1.toISOString().replace("T", " ").substring(0, 19);
+  const days = new Date(date);
+  days.setHours(30);
+  days.setMinutes(59);
+  days.setSeconds(59);
+  // days.setMonth(days.getMonth() + 3);
+  const next = days.toISOString().replace("T", " ").substring(0, 19);
+  return {
+    now,
+    next,
+  };
+  // return dateTime.toISOString().replace("T", " ").split(".")[0];
+};
+
 export const convertDate = (date) => {
   const weekday = [
     "Sunday",

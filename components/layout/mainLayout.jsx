@@ -148,10 +148,11 @@ function MainLayout({ children }) {
     $(".search-dialog").css("transform", "scaleY(1)");
   });
   $(".cart").on("click", () => {
-    if (token && token.length > 0) {
+    if (token && token?.length > 0) {
       setOpen2(false);
       $(".cart-dialog").css("transform", "scaleY(1)");
     } else {
+      $(".cart-dialog").css("transform", "scaleY(0)");
       setOpen2(true);
     }
   });

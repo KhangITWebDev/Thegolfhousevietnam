@@ -53,3 +53,13 @@ export const getScheduleData = () => async (dispatch) => {
     alert(err);
   }
 };
+// export const BookingForSchedule = (data) => async (dispatch) => {
+//   try {
+//     const resApi = await BookingApi.postScheduleApi(data);
+//     if (resApi.success) {
+//     } else {
+//     }
+//   } catch (err) {
+//     alert(err);
+//   }
+// };

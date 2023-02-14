@@ -114,7 +114,7 @@ function Detail(props) {
     });
   }, []);
   const handleAddToCart = (item) => {
-    if (token && token.length > 0) {
+    if (token && token?.length > 0) {
       setLoadingAddToCart(true);
       // const cart = getLocalStorage(LOCAL_STORAGE.CART);
       const find = cart.findIndex((x) => x.ma_vt === item.ma_vt);
@@ -161,7 +161,7 @@ function Detail(props) {
     }
   };
   useEffect(() => {
-    if (token && token.length > 0) {
+    if (token && token?.length > 0) {
       setTimeout(() => {
         $("#add-cart").on("click", function () {
           var cart = $(".cart");

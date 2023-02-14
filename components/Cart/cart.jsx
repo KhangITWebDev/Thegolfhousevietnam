@@ -15,10 +15,10 @@ import { getCartData } from "../../store/redux/CartReducer/cart.action";
 function Cart({ handleCloseCart }) {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.CartReducer.cartList);
+  const token = Cookies.get("access_token");
   useEffect(() => {
     dispatch(getCartData());
-  }, []);
-  const token = Cookies.get("access_token");
+  }, [token]);
   const router = useRouter();
   useEffect(() => {
     $("#close").on("click", () => {

@@ -33,7 +33,7 @@ function MyApp({ Component, pageProps }) {
       duration: 1500,
     });
     setTimeout(() => {
-      Cookies.set("access_token", "");
+      Cookies.remove("access_token");
     }, 3600000);
   }, []);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });

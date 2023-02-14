@@ -1,15 +1,27 @@
+import axios from "axios";
+import Cookies from "js-cookie";
 import moment from "moment";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Loader } from "rsuite";
 import Swal from "sweetalert2";
+import bookingClientAxios from "../../clientAxios/bookingClientAxios";
+import { BookingForSchedule } from "../../store/redux/BookingReducer/booking.action";
 import { getTrainerData } from "../../store/redux/Trainer/trainer.action";
-import { removeAccents } from "../../utils/function";
+import { generateDatabaseDateTime, removeAccents } from "../../utils/function";
 import TrainerDetail from "../Modal/TrainerDetail";
 import buildCalendar from "./build";
 
-function Calendar({ value, onChange, schedule }) {
+function Calendar({
+  value,
+  onChange,
+  schedule,
+  step,
+  changeStep,
+  setEnableToStep2,
+}) {
   const [calendar, setCalendar] = useState([]);
   const dayNames = [
     "Chủ Nhật",
@@ -73,7 +85,105 @@ function Calendar({ value, onChange, schedule }) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getTrainerData());
-  }, [dispatch]);
+  }, []);
+  const [loadingBooking, setLoadingBooking] = useState();
+  const HandleBookingForSchedule = async (value) => {
+    const locationId = Number(Cookies.get("location_id"));
+    const locationDetailID = Number(Cookies.get("location_detail_id"));
+    const traineeId = Number(Cookies.get("trainee_id"));
+    const token = Cookies.get("access_token");
+    setLoadingBooking(value.id);
+    Swal.fire({
+      text: "Bạn có chắc chắn đặt lịch này",
+      icon: "question",
+      showCancelButton: true,
+      allowOutsideClick: false,
+      confirmButtonText: "Đồng ý",
+      cancelButtonText: "Hủy Bỏ",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        setTimeout(async () => {
+          setLoadingBooking(-1);
+          await axios
+            .post(
+              `https://betatgh.fostech.vn/restapi/1.0/object/academy.booking?vals={'location_id':'${locationId}','location_detail_id':'${locationDetailID}','trainee_id':'${traineeId}','course_id':'${value.course_id[0]}','trainer_id':'${value.trainer_id[0]}','date':'${value.date}','start_time':'${value.start_time}.0','end_time':'${value.end_time}.0','note':'','status':'pending','schedule_booking_id':'${value.id}'}`,
+              "",
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            )
+            .then((response) => {
+              if (response.status === 201) {
+                Swal.fire({
+                  text: "Bạn đã đăng ký lịch thành công",
+                  icon: "success",
+                  showCancelButton: true,
+                  allowOutsideClick: false,
+                  confirmButtonText: "Xem lịch",
+                  cancelButtonText: "Tiếp tục đặt",
+                }).then((rs) => {
+                  if (rs.isConfirmed) {
+                    changeStep(step + 1);
+                    setEnableToStep2(true);
+                  } else if (rs.isDismissed) {
+                    changeStep(0);
+                    setEnableToStep2(false);
+                  }
+                });
+              } else {
+                changeStep(0);
+                setEnableToStep2(false);
+              }
+            })
+            .catch((err) => {
+              setEnableToStep2(false);
+              switch (err?.response?.data?.error?.message) {
+                case "1": {
+                  Swal.fire({
+                    text: "Xin lỗi! Không thể book lịch nhỏ hơn hôm nay",
+                    icon: "error",
+                    showCancelButton: false,
+                    confirmButtonText: "Đồng ý",
+                  });
+                  break;
+                }
+                case "2": {
+                  Swal.fire({
+                    text: "Đã hết chỗ trống để đăng ký",
+                    icon: "error",
+                    showCancelButton: false,
+                    confirmButtonText: "Đồng ý",
+                  });
+                  break;
+                }
+                case "3": {
+                  Swal.fire({
+                    text: "Xin lỗi! anh/chị đã đăng ký đủ buổi. Một tuần chỉ được đăng ký 2 buổi",
+                    icon: "error",
+                    showCancelButton: false,
+                    confirmButtonText: "Đồng ý",
+                  });
+                  break;
+                }
+                case "4": {
+                  Swal.fire({
+                    text: "Xin lỗi! lịch tập này đã được anh/chị đăng ký",
+                    icon: "error",
+                    showCancelButton: false,
+                    confirmButtonText: "Đồng ý",
+                  });
+                  break;
+                }
+                default:
+                  break;
+              }
+            });
+        }, 3000);
+      }
+    });
+  };
   return (
     <div id="calendar">
       <div className="calendar" data-aos="fade-right">
@@ -168,7 +278,15 @@ function Calendar({ value, onChange, schedule }) {
                                 </div>
                               </div>
                               <div className="tool">
-                                <button>Đặt Lịch</button>
+                                <button
+                                  onClick={() => HandleBookingForSchedule(item)}
+                                >
+                                  {loadingBooking === item.id ? (
+                                    <Loader content="Đang xử lý" />
+                                  ) : (
+                                    "Đặt Lịch"
+                                  )}
+                                </button>
                               </div>
                             </div>
                           ))}

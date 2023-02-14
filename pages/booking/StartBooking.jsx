@@ -8,6 +8,7 @@ import { Alert } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Steps } from "rsuite";
+import Swal from "sweetalert2";
 import * as yup from "yup";
 import Calendar from "../../components/Calendar/Calendar";
 import {
@@ -15,113 +16,69 @@ import {
   getScheduleData,
 } from "../../store/redux/BookingReducer/booking.action";
 import styles from "./Booking.module.scss";
-const PHONE_REGEX = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i;
-const schema = yup.object().shape({
-  name: yup.string().required("Name is required"),
-  phone: yup
-    .string()
-    .required("Phone is required")
-    .min(10, "Phone must be at more 9 characters")
-    .max(12, "Phone must be at least 12 characters")
-    .matches(PHONE_REGEX, "This phone is not valid"),
-  email: yup
-    .string()
-    .email("This email is not valid")
-    .required("Email is required"),
-});
 function StartBooking() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    reset,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
   const token = Cookies.get("access_token");
   const router = useRouter();
-  const [value, setValue] = useState(moment());
+  const [valueD, setValueD] = useState(moment());
   const [step, setStep] = useState(0);
   const [status, setStatus] = useState("success");
+  const [enableToStep2, setEnableToStep2] = useState(false);
   const { schedule } = useSelector((state) => state.BookingReducer);
   const dispatch = useDispatch();
+  const trainee_id = Cookies.get("trainee_id");
   useEffect(() => {
     dispatch(getScheduleData());
+    // setValue("name", `Học Viên số ${trainee_id}`);
+    // setValue("phone", `0123456789`);
+    // setValue("email", `Traninee${trainee_id}@gmail.com`);
   }, []);
   useEffect(() => {
     if (!token || token?.length < 0 || token === "") {
       router.back();
+    } else {
+      // setTimeout(() => {
+      //   router.push("/course");
+      // }, 3599999);
     }
-  }, []);
+  }, [token]);
   const onChange = (nextStep) => {
     setStep(nextStep < 0 ? 0 : nextStep > 3 ? 3 : nextStep);
   };
-  const onNext = () => onChange(step + 1);
+  const onNext = () => {
+    if (step === 0) {
+      if (enableToStep2) {
+        onChange(step + 1);
+      } else {
+        Swal.fire({
+          text: "Bạn chưa chọn ngày để đặt lịch",
+          icon: "error",
+          showCancelButton: false,
+          confirmButtonText: "Đồng ý",
+        });
+      }
+    }
+  };
   const onPrevious = () => onChange(step - 1);
   const onSubmit = (data) => {
     onNext();
   };
   return (
     <div className="container">
-      <div className="col-8 m-auto">
+      {/* <div className="col-8 m-auto">
         <Steps current={step} currentStatus={status}>
           <Steps.Item title="Chọn ngày giờ" />
-          <Steps.Item title="Thông tin học viên" />
           <Steps.Item title="Thông tin đặt lịch" />
         </Steps>
-      </div>
+      </div> */}
       {step === 0 && (
-        <Calendar value={value} onChange={setValue} schedule={schedule} />
-      )}
-      {step === 1 && (
-        <div className="">
-          <div className={styles.confirm}>
-            <div className="col-8 m-auto">
-              <form action="" onSubmit={handleSubmit(onSubmit)}>
-                <div className="input-position">
-                  <div className="icon">
-                    <i className="fa-light fa-user-alt"></i>
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Họ và tên"
-                    {...register("name")}
-                  />
-                </div>
-                {errors?.name && (
-                  <Alert variant="danger">{errors?.name?.message}</Alert>
-                )}
-                <div className="input-position">
-                  <div className="icon">
-                    <i className="fa-light fa-mobile"></i>
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Số điện thoại"
-                    {...register("phone")}
-                  />
-                </div>
-                {errors?.phone && (
-                  <Alert variant="danger">{errors?.phone?.message}</Alert>
-                )}
-                <div className="input-position">
-                  <div className="icon">
-                    <i className="fa-light fa-envelope"></i>
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Email"
-                    {...register("email")}
-                  />
-                </div>
-                {errors?.email && (
-                  <Alert variant="danger">{errors?.email?.message}</Alert>
-                )}
-              </form>
-            </div>
-          </div>
-        </div>
+        <Calendar
+          value={valueD}
+          onChange={setValueD}
+          schedule={schedule}
+          step={step}
+          changeStep={setStep}
+          setEnableToStep2={setEnableToStep2}
+        />
       )}
       {step === 2 && (
         <div className="m-auto">

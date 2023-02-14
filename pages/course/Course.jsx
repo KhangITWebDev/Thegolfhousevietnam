@@ -253,7 +253,8 @@ function Course(props) {
       } else if (resApi?.result) {
         setLoading(false);
         Cookies.set("access_token", resApi?.result?.access_token);
-        Cookies.set("trainee_id", resApi?.result?.id);
+        Cookies.set("user_id", resApi?.result?.id);
+        Cookies.set("trainee_id", resApi?.result?.trainee_id);
         Cookies.set("erp_token", resApi?.result?.erp_token);
         setOpen2(false);
       }
@@ -268,6 +269,7 @@ function Course(props) {
     dispatch(getUserRegisterData());
     dispatch(getLocationData());
   }, [token]);
+  console.log(token);
   const [swiper2, setSwiper2] = React.useState(null);
   const [swiper3, setSwiper3] = React.useState(null);
   const [open, setOpen] = React.useState(false);
@@ -349,11 +351,9 @@ function Course(props) {
   const courseData = useSelector((state) => state.CourseReducer.courseList);
   useEffect(() => {
     dispatch(getCourseData());
-  }, [dispatch]);
-  const { contents } = useSelector((state) => state.ContentReducer);
-  useEffect(() => {
     dispatch(getContentData());
-  }, [dispatch]);
+  }, []);
+  const { contents } = useSelector((state) => state.ContentReducer);
   const sectionTitlePage = contents.filter(
     (item) => item.category === "63bc373939d2a23b06d898a2"
   );
@@ -919,7 +919,7 @@ function Course(props) {
                                 text: "Vui lòng chọn địa chỉ học...",
                                 icon: "error",
                                 showCancelButton: false,
-                                confirmButtonText: "OK",
+                                confirmButtonText: "Đồng ý",
                               });
                         }}
                       ></i>
@@ -944,6 +944,7 @@ function Course(props) {
                                 value: x.address,
                                 lat: x.latitude,
                                 long: x.longitude,
+                                detail_ids: x.detail_ids[0],
                               };
                             }
                           )}
@@ -956,6 +957,7 @@ function Course(props) {
                               long: value.long,
                             });
                             Cookies.set("location_id", value.id);
+                            Cookies.set("location_detail_id", value.detail_ids);
                             Cookies.set(
                               "program_id",
                               registration["academy.registration"].program_id[0]
@@ -976,8 +978,6 @@ function Course(props) {
                     <button
                       onClick={() => {
                         if (!token || token?.length < 0 || token === "") {
-                          setClickBooking(true);
-                          setClickLocation(false);
                           handleOpen2();
                         } else {
                           if (address) {

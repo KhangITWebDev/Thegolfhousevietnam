@@ -6,6 +6,7 @@ const bookingClientAxios = axios.create({
   // baseURL: process.env.API_URL,
   baseURL: "https://betatgh.fostech.vn",
   timeout: 20000,
+  mode: "cors",
   headers: {
     // "Access-Control-Allow-Methods": "GET, POST",
     // "Access-Control-Allow-Origin": "*",
@@ -20,7 +21,7 @@ bookingClientAxios.interceptors.request.use(
     return config;
   },
   (err) => {
-    console.error(err);
+    // console.error(err);
   }
 );
 bookingClientAxios.interceptors.response.use(
@@ -29,7 +30,7 @@ bookingClientAxios.interceptors.response.use(
     return res;
   },
   (err) => {
-    console.error(err);
+    // console.error(err);
   }
 );
 

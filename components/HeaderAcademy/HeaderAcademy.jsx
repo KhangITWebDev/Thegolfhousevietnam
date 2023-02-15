@@ -81,7 +81,8 @@ export default function HeaderAccademy({
                     <Nav.Item
                       eventKey="2"
                       onClick={() => {
-                        router.push("/about-us#founder");
+                        localStorage.setItem("id_url", "founder");
+                        router.push("/about-us");
                       }}
                     >
                       Nhà sáng lập
@@ -89,7 +90,8 @@ export default function HeaderAccademy({
                     <Nav.Item
                       eventKey="3"
                       onClick={() => {
-                        router.push("/about-us#about");
+                        localStorage.setItem("id_url", "about-us");
+                        router.push("/about-us");
                       }}
                     >
                       Lio Holding
@@ -120,7 +122,7 @@ export default function HeaderAccademy({
                     <Nav.Item
                       eventKey="6"
                       onClick={() => {
-                        router.push("/course");
+                        router.push("/training");
                       }}
                     >
                       Đào tạo
@@ -139,7 +141,7 @@ export default function HeaderAccademy({
                     eventKey="8"
                     onClick={(e) => {
                       e.preventDefault();
-                      router.push("/other-service#spa");
+                      router.push("/other-service/spa");
                     }}
                   >
                     Spa
@@ -148,7 +150,7 @@ export default function HeaderAccademy({
                     eventKey="9"
                     onClick={(e) => {
                       e.preventDefault();
-                      router.push("/other-service#lounge");
+                      router.push("/other-service/lounge");
                     }}
                   >
                     Lounge

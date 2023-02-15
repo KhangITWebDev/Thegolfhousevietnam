@@ -162,7 +162,7 @@ export default function HeaderMoblieBlack({
                 <Nav.Item
                   eventKey="11"
                   onClick={() => {
-                    router.push("/course");
+                    router.push("/training");
                   }}
                 >
                   Đào tạo
@@ -181,7 +181,7 @@ export default function HeaderMoblieBlack({
                 eventKey="13"
                 onClick={(e) => {
                   e.preventDefault();
-                  router.push("/other-service#spa");
+                  router.push("/other-service/spa");
                 }}
               >
                 spa
@@ -190,7 +190,7 @@ export default function HeaderMoblieBlack({
                 eventKey="14"
                 onClick={(e) => {
                   e.preventDefault();
-                  router.push("/other-service#spa");
+                  router.push("/other-service/lounge");
                 }}
               >
                 lounge

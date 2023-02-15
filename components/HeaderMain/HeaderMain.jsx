@@ -88,7 +88,7 @@ export default function HeaderMain({
                     <Nav.Item
                       eventKey="3"
                       onClick={() => {
-                        localStorage.setItem("id_url", "about");
+                        localStorage.setItem("id_url", "about-us");
                         router.push("/about-us");
                       }}
                     >
@@ -120,7 +120,7 @@ export default function HeaderMain({
                     <Nav.Item
                       eventKey="6"
                       onClick={() => {
-                        router.push("/course");
+                        router.push("/training");
                       }}
                     >
                       Đào tạo
@@ -139,7 +139,7 @@ export default function HeaderMain({
                     eventKey="8"
                     onClick={(e) => {
                       e.preventDefault();
-                      router.push("/other-service#spa");
+                      router.push("/other-service/spa");
                     }}
                   >
                     Spa
@@ -148,7 +148,7 @@ export default function HeaderMain({
                     eventKey="9"
                     onClick={(e) => {
                       e.preventDefault();
-                      router.push("/other-service#lounge");
+                      router.push("/other-service/lounge");
                     }}
                   >
                     Lounge

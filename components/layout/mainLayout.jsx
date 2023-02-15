@@ -102,41 +102,52 @@ function MainLayout({ children }) {
   const token = Cookies.get("access_token");
   useEffect(() => {
     $(".rs-navbar-item").each((index) => {
-      switch (router.asPath) {
+      switch (router.pathname) {
         case "/": {
           $(".rs-navbar-item")[0].classList.add("rs-navbar-item-active");
+          $(".footer-item")[0].classList.add("footer-active");
           break;
         }
         case "/about-us": {
           $(".rs-navbar-item")[1].classList.add("rs-navbar-item-active");
+          $(".footer-item")[1].classList.add("footer-active");
           break;
         }
         case "/academy": {
           $(".rs-navbar-item")[2].classList.add("rs-navbar-item-active");
+          $(".footer-item")[3].classList.add("footer-active");
           break;
         }
         case "/trainer": {
           $(".rs-navbar-item")[2].classList.add("rs-navbar-item-active");
+          $(".rs-dropdown-item")[3].classList.add("rs-dropdown-item-active");
+          $(".footer-item")[4].classList.add("footer-active");
           break;
         }
-        case "/course": {
+        case "/training": {
           $(".rs-navbar-item")[2].classList.add("rs-navbar-item-active");
+          $(".rs-dropdown-item")[4].classList.add("rs-dropdown-item-active");
+          $(".footer-item")[5].classList.add("footer-active");
           break;
         }
         case "/proshop": {
           $(".rs-navbar-item")[3].classList.add("rs-navbar-item-active");
+          $(".footer-item")[6].classList.add("footer-active");
           break;
         }
-        case "/orther-service#spa": {
+        case "/other-service/spa": {
           $(".rs-navbar-item")[4].classList.add("rs-navbar-item-active");
+          $(".footer-item")[7].classList.add("footer-active");
           break;
         }
-        case "/orther-service#lounge": {
+        case "/other-service/lounge": {
           $(".rs-navbar-item")[5].classList.add("rs-navbar-item-active");
+          $(".footer-item")[8].classList.add("footer-active");
           break;
         }
         case "/contact-us": {
           $(".rs-navbar-item")[6].classList.add("rs-navbar-item-active");
+          $(".footer-item")[2].classList.add("footer-active");
           break;
         }
         default:
@@ -144,6 +155,11 @@ function MainLayout({ children }) {
       }
     });
   }, [router]);
+  $(".rs-dropdown-item").on("click", () => {
+    $(".custom-menu").css({
+      transform: "scaleY(0)",
+    });
+  });
   $(".search").on("click", () => {
     $(".search-dialog").css("transform", "scaleY(1)");
   });

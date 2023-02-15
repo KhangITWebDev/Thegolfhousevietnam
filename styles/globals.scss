@@ -4190,3 +4190,23 @@ button {
 .rs-modal-wrapper {
   z-index: 4100px !important;
 }
+.ft1,
+.ft2 {
+  @media screen and (max-width: 1080px) {
+    width: 100% !important;
+  }
+}
+.ft2 {
+  @media screen and (max-width: 365px) {
+    .col-4 {
+      width: 100% !important;
+    }
+  }
+}
+#footer {
+  .footer-active {
+    &::after {
+      width: 100%;
+    }
+  }
+}

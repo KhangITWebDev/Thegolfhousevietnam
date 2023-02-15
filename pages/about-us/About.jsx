@@ -18,14 +18,17 @@ function About(props) {
     dispatch(getContentData());
   }, []);
   const id = localStorage.getItem("id_url");
-  // useEffect(() => {
-  //   $("html,body").animate(
-  //     {
-  //       scrollTop: $(`#${id}`).offset().top,
-  //     },
-  //     "slow"
-  //   );
-  // }, [id]);
+  useEffect(() => {
+    if (id) {
+      const section = document.querySelector(`#${id}`);
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [id]);
+  useEffect(() => {
+    localStorage.removeItem("id_url");
+  }, []);
   const sectionFounder = contents.filter(
     (item) => item.category === "63bc121139d2a23b06d86e59"
   );
@@ -37,8 +40,9 @@ function About(props) {
   );
   return (
     <div className={styles.about_page}>
+      <div id="founder"></div>
       <div className="container">
-        <div className={styles.membership} id="founder" data-aos="fade-right">
+        <div className={styles.membership} data-aos="fade-right">
           <div className="d-flex flex-wrap align-items-center">
             <div className={"col-12 col-md-6" + " " + styles.left}>
               <div className={styles.image1}>
@@ -138,6 +142,7 @@ function About(props) {
             </div>
           </div>
         </div>
+        <div id="about-us"></div>
         <div className={styles.welcome} id="about" data-aos="fade-right">
           <div className={styles.info}>
             <div

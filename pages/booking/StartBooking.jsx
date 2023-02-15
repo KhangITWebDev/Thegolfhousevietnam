@@ -37,7 +37,7 @@ function StartBooking() {
       router.back();
     } else {
       // setTimeout(() => {
-      //   router.push("/course");
+      //   router.push("/training");
       // }, 3599999);
     }
   }, [token]);

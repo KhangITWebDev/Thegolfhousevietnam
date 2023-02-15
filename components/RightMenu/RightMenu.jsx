@@ -1,11 +1,17 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./RightMenu.module.scss";
 import $ from "jquery";
 import { useEffect } from "react";
 import Aos from "aos";
+import { useRouter } from "next/router";
 
 function RightMenu({ handleCloseRightMenu }) {
+  const router = useRouter();
+  const [color1, setColor1] = useState();
+  const [color2, setColor2] = useState();
+  const [color3, setColor3] = useState();
+  const [color4, setColor4] = useState();
   useEffect(() => {
     $("button").on("click", () => {
       $(".sub").css({
@@ -40,6 +46,7 @@ function RightMenu({ handleCloseRightMenu }) {
             width={65}
             height={55}
             data-aos="fade-right"
+            onClick={() => router.push("/")}
           />
           <button onClick={handleCloseRightMenu} data-aos="fade-left">
             <i className="fa-light fa-xmark"></i>
@@ -47,21 +54,89 @@ function RightMenu({ handleCloseRightMenu }) {
         </div>
         <div className={styles.center + " " + "d-flex"}>
           <div className={styles.icon + " " + "d-flex flex-column"}>
-            <i className="fa-brands fa-facebook-f" data-aos="fade-right"></i>
-            <i data-aos="fade-left" className="fa-brands fa-youtube"></i>
-            <i data-aos="fade-right" className="fa-brands fa-twitter"></i>
-            <i data-aos="fade-left" className="fa-brands fa-instagram"></i>
+            <i
+              className="fa-brands fa-facebook-f"
+              data-aos="fade-right"
+              style={{
+                color: color1,
+              }}
+            ></i>
+            <i
+              data-aos="fade-left"
+              className="fa-brands fa-youtube"
+              style={{
+                color: color2,
+              }}
+            ></i>
+            <i
+              data-aos="fade-right"
+              className="fa-brands fa-twitter"
+              style={{
+                color: color3,
+              }}
+            ></i>
+            <i
+              data-aos="fade-left"
+              className="fa-brands fa-instagram"
+              style={{
+                color: color4,
+              }}
+            ></i>
           </div>
           <div className={styles.text + " " + "d-flex flex-column"}>
-            <span data-aos="fade-left">Facebook</span>
-            <span data-aos="fade-right">Youtube</span>
-            <span data-aos="fade-left">Twitter</span>
-            <span data-aos="fade-right">Instagram</span>
+            <span
+              data-aos="fade-left"
+              onMouseEnter={() => setColor1("#3b5998")}
+              onMouseLeave={() => setColor1("#000")}
+              style={{
+                color: color1,
+              }}
+            >
+              Facebook
+            </span>
+            <span
+              data-aos="fade-right"
+              onMouseEnter={() => setColor2("#ea4c89")}
+              onMouseLeave={() => setColor2("#000")}
+              style={{
+                color: color2,
+              }}
+            >
+              Youtube
+            </span>
+            <span
+              data-aos="fade-left"
+              onMouseEnter={() => setColor3("#00ffff")}
+              onMouseLeave={() => setColor3("#000")}
+              style={{
+                color: color3,
+              }}
+            >
+              Twitter
+            </span>
+            <span
+              data-aos="fade-right"
+              onMouseEnter={() => setColor4("#c862dc")}
+              onMouseLeave={() => setColor4("#000")}
+              style={{
+                color: color4,
+              }}
+            >
+              Instagram
+            </span>
           </div>
         </div>
         <div className={styles.footer}>
-          <p>(+84) 909 337 777</p>
-          <span>admin@thegolfhousevietnam.com</span>
+          <p onClick={() => window.open("tel:+84909337777")}>
+            (+84) 909 337 777
+          </p>
+          <span
+            onClick={() =>
+              window.open("mailto:adminthegolfhousevietnam@gmail.com")
+            }
+          >
+            admin@thegolfhousevietnam.com
+          </span>
         </div>
       </div>
     </div>

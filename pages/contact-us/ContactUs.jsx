@@ -79,7 +79,7 @@ function ContactUs(props) {
               text: `Vui lòng nhập lại thông tin`,
               icon: "error",
               showCancelButton: false,
-              confirmButtonText: "OK",
+              confirmButtonText: "Đồng ý",
             });
           }
         );

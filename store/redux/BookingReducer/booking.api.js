@@ -139,11 +139,36 @@ const postScheduleApi = async (value) => {
     };
   }
 };
+const getBookingListApi = async () => {
+  const traineeId = Number(Cookies.get("trainee_id"));
+  try {
+    const resApi = await bookingClientAxios.get(
+      `/restapi/1.0/object/academy.booking?domain=[('trainee_id.id','=','${traineeId}')]`
+    );
+
+    if (resApi)
+      return {
+        success: true,
+        data: resApi,
+      };
+    return {
+      success: false,
+      data: null,
+    };
+  } catch (err) {
+    console.log(err);
+    return {
+      success: false,
+      data: null,
+    };
+  }
+};
 const BookingApi = {
   login,
   getLocationApi,
   getRegistrationApi,
   getScheduleApi,
   postScheduleApi,
+  getBookingListApi,
 };
 export default BookingApi;

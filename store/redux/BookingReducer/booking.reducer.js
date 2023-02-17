@@ -8,6 +8,7 @@ const slice = createSlice({
     locationList: [],
     registration: [],
     schedule: [],
+    bookingList: [],
   },
 
   reducers: {
@@ -23,6 +24,9 @@ const slice = createSlice({
     setSchedule: (state, action) => {
       state.schedule = action.payload;
     },
+    setBookingList: (state, action) => {
+      state.bookingList = action.payload;
+    },
   },
 });
 
@@ -30,5 +34,10 @@ export default slice.reducer;
 
 // Actions
 
-export const { setUserLogin, setLocationList, setRegistration, setSchedule } =
-  slice.actions;
+export const {
+  setUserLogin,
+  setLocationList,
+  setRegistration,
+  setSchedule,
+  setBookingList,
+} = slice.actions;

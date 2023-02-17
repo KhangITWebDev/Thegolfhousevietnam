@@ -9,10 +9,10 @@ export function usePagination(datas, itemsPerPage) {
   const [currentPage, setCurrentPage] = useState(1);
   const [firstPage, setFirstPage] = useState(0);
   const [lastPage, setLastPage] = useState(3);
-  let totalPages = Math.ceil(perData.length / itemsPerPage);
+  let totalPages = Math.ceil(perData.length / itemsPerPage) || 1;
   const indexOfLastTodo = currentPage * itemsPerPage;
   const indexOfFirstTodo = indexOfLastTodo - itemsPerPage;
-  const currentDatas = perData.slice(indexOfFirstTodo, indexOfLastTodo);
+  const currentDatas = perData?.slice(indexOfFirstTodo, indexOfLastTodo);
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(perData.length / itemsPerPage); i++) {
     pageNumbers.push(i);

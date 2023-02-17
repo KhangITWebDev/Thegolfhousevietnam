@@ -83,7 +83,7 @@ function SignIn({
 
           <div className="button">
             <button onClick={handleSubmit(onSubmit)}>
-              {loading ? <Loader content="Đang đăng nhập.." /> : "Đăng nhập"}
+              {loading ? <Loader content="Đang đăng nhập" /> : "Đăng nhập"}
             </button>
           </div>
         </form>

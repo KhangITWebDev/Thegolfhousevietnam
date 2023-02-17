@@ -10,7 +10,11 @@ import Swal from "sweetalert2";
 import bookingClientAxios from "../../clientAxios/bookingClientAxios";
 import { BookingForSchedule } from "../../store/redux/BookingReducer/booking.action";
 import { getTrainerData } from "../../store/redux/Trainer/trainer.action";
-import { generateDatabaseDateTime, removeAccents } from "../../utils/function";
+import {
+  generateDatabaseDateTime,
+  removeAccents,
+  timeConvert,
+} from "../../utils/function";
 import TrainerDetail from "../Modal/TrainerDetail";
 import buildCalendar from "./build";
 
@@ -64,7 +68,7 @@ function Calendar({
       return false;
     }
   };
-  const timeConvert = (input) => moment(input, "HH").format("HH:mm");
+
   const currMonth = () => value.month() + 1;
   const currYear = () => value.year();
   const prevMonth = () => value.clone().subtract(1, "month");
@@ -121,7 +125,7 @@ function Calendar({
                   icon: "success",
                   showCancelButton: true,
                   allowOutsideClick: false,
-                  confirmButtonText: "Xem lịch",
+                  confirmButtonText: "Xem danh sách",
                   cancelButtonText: "Tiếp tục đặt",
                 }).then((rs) => {
                   if (rs.isConfirmed) {

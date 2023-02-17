@@ -68,7 +68,7 @@ function Detail(props) {
           text: `${resApi.result.message}`,
           icon: "error",
           showCancelButton: false,
-          confirmButtonText: "OK",
+          confirmButtonText: "Đồng ý",
         });
         setLoading(false);
       } else if (resApi?.result) {
@@ -95,7 +95,7 @@ function Detail(props) {
         text: "Số lượng phải lớn hơn 0",
         icon: "error",
         showCancelButton: false,
-        confirmButtonText: "OK",
+        confirmButtonText: "Đồng ý",
       }).then((result) => {
         if (result.isConfirmed) {
           setQty(1);

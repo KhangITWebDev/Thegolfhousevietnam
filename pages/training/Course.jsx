@@ -152,6 +152,8 @@ function Course(props) {
   const { userRegister } = useSelector((state) => state.CourseReducer);
   const dispatch = useDispatch();
   const [loadingSignUpTrial, setLoadingSignUpTrial] = useState(false);
+  const openLocal = localStorage.getItem("open");
+  const [open2, setOpen2] = React.useState(false);
   const onSubmit = (data) => {
     const findEmail = userRegister.findIndex(
       (x) => x.email === watch("from_email")
@@ -226,13 +228,20 @@ function Course(props) {
                 text: `Vui lòng nhập lại thông tin`,
                 icon: "error",
                 showCancelButton: false,
-                confirmButtonText: "OK",
+                confirmButtonText: "Đồng ý",
               });
             }
           );
       }
     }, 2000);
   };
+  useEffect(() => {
+    if (openLocal === "open") {
+      setOpen2(true);
+    } else {
+      setOpen2(false);
+    }
+  }, [openLocal]);
   const [loading, setLoading] = useState(false);
   const token = Cookies.get("access_token");
   const onSubmit2 = async (data) => {
@@ -247,7 +256,7 @@ function Course(props) {
           text: `${resApi.result.message}`,
           icon: "error",
           showCancelButton: false,
-          confirmButtonText: "OK",
+          confirmButtonText: "Đồng ý",
         });
         setLoading(false);
       } else if (resApi?.result) {
@@ -257,6 +266,7 @@ function Course(props) {
         Cookies.set("trainee_id", resApi?.result?.trainee_id);
         Cookies.set("erp_token", resApi?.result?.erp_token);
         setOpen2(false);
+        localStorage.setItem("open", "none");
       }
     }, 2000);
   };
@@ -269,7 +279,6 @@ function Course(props) {
     dispatch(getUserRegisterData());
     dispatch(getLocationData());
   }, [token]);
-  console.log(token);
   const [swiper2, setSwiper2] = React.useState(null);
   const [swiper3, setSwiper3] = React.useState(null);
   const [open, setOpen] = React.useState(false);
@@ -282,7 +291,6 @@ function Course(props) {
   };
   const handleClose = () => setOpen(false);
   const [open1, setOpen1] = React.useState(false);
-  const [open2, setOpen2] = React.useState(false);
   const [open3, setOpen3] = React.useState(false);
   const [open4, setOpen4] = React.useState(false);
   const [open5, setOpen5] = React.useState(false);
@@ -303,7 +311,10 @@ function Course(props) {
     setOpen4(false);
     setOpen5(false);
   };
-  const handleClose2 = () => setOpen2(false);
+  const handleClose2 = () => {
+    setOpen2(false);
+    localStorage.setItem("open", "none");
+  };
   const handleOpen3 = () => {
     setOpen3(true);
     setOpen2(false);
@@ -923,8 +934,8 @@ function Course(props) {
                               });
                         }}
                       ></i>
-                      {!token || token?.length < 0 || token === "" ? (
-                        <button type="text" onClick={handleOpen2}>
+                      {!token ? (
+                        <button type="text" onClick={() => setOpen2(true)}>
                           <span> Chọn vị trí học...</span>
                           <i
                             className="fa-light fa-chevron-down"
@@ -939,9 +950,8 @@ function Course(props) {
                           options={locationList["academy.location"]?.map(
                             (x) => {
                               return {
-                                id: x.id,
                                 label: x.name,
-                                value: x.address,
+                                value: x.id,
                                 lat: x.latitude,
                                 long: x.longitude,
                                 detail_ids: x.detail_ids[0],
@@ -956,7 +966,7 @@ function Course(props) {
                               lat: value.lat,
                               long: value.long,
                             });
-                            Cookies.set("location_id", value.id);
+                            Cookies.set("location_id", value.value);
                             Cookies.set("location_detail_id", value.detail_ids);
                             Cookies.set(
                               "program_id",
@@ -977,9 +987,8 @@ function Course(props) {
                   >
                     <button
                       onClick={() => {
-                        if (!token || token?.length < 0 || token === "") {
-                          handleOpen2();
-                        } else {
+                        if (token) {
+                          alert(token);
                           if (address) {
                             router.push("/booking");
                           } else {
@@ -987,9 +996,12 @@ function Course(props) {
                               text: "Vui lòng chọn địa chỉ học...",
                               icon: "error",
                               showCancelButton: false,
-                              confirmButtonText: "OK",
+                              confirmButtonText: "Đồng ý",
                             });
                           }
+                        } else {
+                          alert("123");
+                          setOpen2(true);
                         }
                       }}
                     >

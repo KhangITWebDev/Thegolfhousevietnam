@@ -145,7 +145,7 @@ function StartBooking() {
           </div>
         </div>
       )}
-      <div className="d-flex justify-content-between booking-tool">
+      {/* <div className="d-flex justify-content-between booking-tool">
         <button onClick={onPrevious}>
           <i className="fa-light fa-arrow-left"></i>
           Quay lại
@@ -153,7 +153,7 @@ function StartBooking() {
         <button onClick={onNext}>
           Tiếp theo<i className="fa-light fa-arrow-right"></i>
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

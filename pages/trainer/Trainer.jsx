@@ -15,9 +15,9 @@ function Trainer(props) {
     setShowDetailIndex(index);
   };
   const handleClose = () => setOpen(false);
-  const { trainers } = useSelector((state) => state.TrainerReducer);
   const dispatch = useDispatch();
   const { contents } = useSelector((state) => state.ContentReducer);
+  const { trainers } = useSelector((state) => state.TrainerReducer);
   useEffect(() => {
     dispatch(getContentData());
     dispatch(getTrainerData());

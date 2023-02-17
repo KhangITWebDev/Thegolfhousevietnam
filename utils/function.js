@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export function convertParamsToTitle(string) {
   let str = string.replace("/", "");
   str = str.replaceAll("-", " ");
@@ -45,7 +47,6 @@ export const generateDatabaseDateTime = (date) => {
   };
   // return dateTime.toISOString().replace("T", " ").split(".")[0];
 };
-
 export const convertDate = (date) => {
   const weekday = [
     "Sunday",
@@ -197,3 +198,4 @@ export const removeAccents = (str) => {
   str = str.replaceAll("---", "-");
   return str.charAt(0).toLowerCase() + str.slice(1);
 };
+export const timeConvert = (input) => moment(input, "HH").format("HH:mm");

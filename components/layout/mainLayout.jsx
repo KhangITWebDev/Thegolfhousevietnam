@@ -56,7 +56,7 @@ function MainLayout({ children }) {
           text: `${resApi.result.message}`,
           icon: "error",
           showCancelButton: false,
-          confirmButtonText: "OK",
+          confirmButtonText: "Đồng ý",
         });
         setLoading(false);
       } else if (resApi?.result) {

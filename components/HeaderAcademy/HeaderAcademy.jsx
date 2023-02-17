@@ -22,16 +22,6 @@ export default function HeaderAccademy({
   handleShowCart,
   ...props
 }) {
-  const commingSoon = (e) => {
-    e.preventDefault();
-    Swal.fire({
-      title: "Comming Soon",
-      text: "We are comming soon",
-      icon: "warning",
-      showCancelButton: false,
-      confirmButtonText: "OK",
-    });
-  };
   const router = useRouter();
   const [show, setShow] = useState(false);
   const [showCart, setShowCart] = useState(false);

@@ -10,8 +10,8 @@ import { usePagination } from "../../utils/usePagination";
 import { time } from "../../utils/function";
 import styles from "./NewsEvents.module.scss";
 function NewsEvents(props) {
-  const { news } = useSelector((state) => state.NewsReducer);
   const dispatch = useDispatch();
+  const { news } = useSelector((state) => state.NewsReducer);
   useEffect(() => {
     dispatch(getNewData());
   }, []);
@@ -142,17 +142,20 @@ function NewsEvents(props) {
                   data-aos="fade-right"
                 >
                   <h5>Tìm kiếm</h5>
-                  <div className="input-position">
-                    <div className="icon">
-                      <i className="fa-regular fa-magnifying-glass"></i>
+                  <div className="form-group">
+                    <div className="input-group">
+                      <div className="icon">
+                        <i className="fa-regular fa-magnifying-glass"></i>
+                      </div>
+                      <input
+                        type="text"
+                        placeholder="Tìm sản phẩm ..."
+                        className="form-control"
+                        onChange={(e) => {
+                          handleSearchInput(e);
+                        }}
+                      />
                     </div>
-                    <input
-                      type="text"
-                      placeholder="Tìm sản phẩm ..."
-                      onChange={(e) => {
-                        handleSearchInput(e);
-                      }}
-                    />
                   </div>
                 </div>
                 <div

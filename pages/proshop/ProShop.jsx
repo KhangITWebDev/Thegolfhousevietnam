@@ -330,17 +330,20 @@ function ProShop(props) {
                 </div>
                 <div className="col-12 col-lg-12 col-md-6">
                   <h5>Tìm kiếm</h5>
-                  <div className="input-position">
-                    <div className="icon">
-                      <i className="fa-regular fa-magnifying-glass"></i>
+                  <div className="form-group">
+                    <div className="input-group">
+                      <div className="icon">
+                        <i className="fa-regular fa-magnifying-glass"></i>
+                      </div>
+                      <input
+                        type="text"
+                        placeholder="Tìm sản phẩm ..."
+                        className="form-control"
+                        onChange={(e) => {
+                          handleSearchInput(e);
+                        }}
+                      />
                     </div>
-                    <input
-                      type="text"
-                      placeholder="Tìm sản phẩm ..."
-                      onChange={(e) => {
-                        handleSearchInput(e);
-                      }}
-                    />
                   </div>
                 </div>
               </div>

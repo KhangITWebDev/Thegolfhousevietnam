@@ -22,7 +22,7 @@ import { DefaultSeo } from "next-seo";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
-import { RouteGuard } from "./RouteGuard";
+import RouteGuard from "./RouteGuard";
 
 function MyApp({ Component, pageProps }) {
   const [showChild, setShowChild] = useState(false);

@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 // import { userService } from "services";
 import Cookies from "js-cookie";
 
-export function RouteGuard({ children }) {
+export default function RouteGuard({ children }) {
   const router = useRouter();
   const token = Cookies.get("access_token");
   const [authorized, setAuthorized] = useState(false);

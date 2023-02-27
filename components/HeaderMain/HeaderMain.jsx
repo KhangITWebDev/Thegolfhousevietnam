@@ -139,7 +139,7 @@ export default function HeaderMain({
                     eventKey="8"
                     onClick={(e) => {
                       e.preventDefault();
-                      router.push("/other-service/spa");
+                      router.push("/spa");
                     }}
                   >
                     Spa
@@ -148,7 +148,7 @@ export default function HeaderMain({
                     eventKey="9"
                     onClick={(e) => {
                       e.preventDefault();
-                      router.push("/other-service/lounge");
+                      router.push("/lounge");
                     }}
                   >
                     Lounge

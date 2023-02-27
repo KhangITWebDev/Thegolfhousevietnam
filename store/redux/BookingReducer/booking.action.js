@@ -66,3 +66,13 @@ export const getBookingListData = () => async (dispatch) => {
     alert(err);
   }
 };
+export const ChangeCancelStatus = (id) => async (dispatch) => {
+  try {
+    const resApi = await BookingApi.CancelBooking(id);
+    if (resApi.success) {
+    } else {
+    }
+  } catch (err) {
+    alert(err);
+  }
+};

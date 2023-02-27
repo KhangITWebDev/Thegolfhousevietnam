@@ -163,6 +163,28 @@ const getBookingListApi = async () => {
     };
   }
 };
+const CancelBooking = async (id) => {
+  try {
+    const resApi = await bookingClientAxios.put(
+      `/restapi/1.0/object/academy.booking/${id}?vals={'status':'cancel'}`
+    );
+    if (resApi)
+      return {
+        success: true,
+        data: resApi,
+      };
+    return {
+      success: false,
+      data: null,
+    };
+  } catch (err) {
+    console.log(err);
+    return {
+      success: false,
+      data: null,
+    };
+  }
+};
 const BookingApi = {
   login,
   getLocationApi,
@@ -170,5 +192,6 @@ const BookingApi = {
   getScheduleApi,
   postScheduleApi,
   getBookingListApi,
+  CancelBooking,
 };
 export default BookingApi;

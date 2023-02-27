@@ -1,23 +1,32 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Table } from "rsuite";
 import Pagination from "../../../components/pagination/pagination";
 import {
+  ChangeCancelStatus,
   getBookingListData,
   getLocationData,
 } from "../../../store/redux/BookingReducer/booking.action";
-import { removeAccents, timeConvert } from "../../../utils/function";
+import {
+  convertDate,
+  generateDatabaseDateTime,
+  removeAccents,
+  timeConvert,
+} from "../../../utils/function";
 import { usePagination } from "../../../utils/usePagination";
 import Select, { components } from "react-select";
 import { getTrainerData } from "../../../store/redux/Trainer/trainer.action";
 import $ from "jquery";
+import { DatePicker, Loader } from "rsuite";
+import ModalChangeStatus from "../../../components/Modal/ModalChangeStatus";
+import Swal from "sweetalert2";
+import axios from "axios";
+import Cookies from "js-cookie";
 const customStyles = {
   option: (provided, state) => ({
     ...provided,
     fontSize: 18,
     fontWeight: 400,
-    textTransform: "capitalize",
     "@media screen and (max-width: 992px)": {
       fontSize: 16,
     },
@@ -51,7 +60,7 @@ const customStyles = {
   }),
   input: (base, state) => ({
     ...base,
-    color: "#fff",
+    color: "#000",
     fontSize: 18,
     "@media screen and (max-width: 992px)": {
       fontSize: 16,
@@ -94,16 +103,43 @@ const DropdownIndicator = (props) => {
 };
 const options = [
   { value: "1", label: "Ngày học" },
-  { value: "2", label: "Đại điểm học" },
+  { value: "2", label: "Địa điểm học" },
   { value: "3", label: "Huấn luyện viên" },
   { value: "4", label: "Khóa học" },
   { value: "5", label: "Trạng thái" },
+];
+const optionStatus = [
+  {
+    value: "approved",
+    label: "Đã xác nhận",
+  },
+  {
+    value: "pending",
+    label: "Chờ duyệt",
+  },
+  {
+    value: "checkin",
+    label: "Vào lớp",
+  },
+  {
+    label: "Ra lớp",
+    value: "checkout",
+  },
+  {
+    value: "done",
+    label: "Hoàn thành",
+  },
+  {
+    value: "cancel",
+    label: "Hủy bỏ",
+  },
 ];
 function BookingList(props) {
   const dispatch = useDispatch();
   const [selectFilter, setSelectFiler] = useState("");
   const [type, setType] = useState("");
-  const [value, setValue] = useState("");
+  const [startDate, setStartDate] = useState(new Date(""));
+  const [endDate, setEndDate] = useState(new Date(""));
   const [option2, setOption2] = useState();
   const { bookingList } = useSelector((state) => state.BookingReducer);
   const { trainers } = useSelector((state) => state.TrainerReducer);
@@ -131,20 +167,29 @@ function BookingList(props) {
         data.setPerData(newData);
         break;
       }
-      // case "3": {
-      //   const Newest = [...proshopData].sort(
-      //     (a, b) => b.gia_ban_le - a.gia_ban_le
-      //   );
-      //   data.setPerData(Newest);
-      //   break;
-      // }
-      // case "4": {
-      //   const price = [...proshopData].sort(
-      //     (a, b) => a.gia_ban_le - b.gia_ban_le
-      //   );
-      //   data.setPerData(price);
-      //   break;
-      // }
+      case "3": {
+        const newData = [...bookingList["academy.booking"]]?.sort(
+          (a, b) => new Date(b.start_time) - new Date(a.start_time)
+        );
+        data.setPerData(newData);
+        break;
+      }
+      case "4": {
+        const newData = [...bookingList["academy.booking"]]?.sort(
+          (a, b) => new Date(a.start_time) - new Date(b.start_time)
+        );
+        data.setPerData(newData);
+        break;
+      }
+      case "5": {
+        const newdata = bookingList["academy.booking"]?.filter(
+          (x) =>
+            new Date(x.date) >= new Date(startDate) &&
+            new Date(x.date) <= new Date(endDate)
+        );
+        data.setPerData(newdata);
+        break;
+      }
       default:
         break;
     }
@@ -183,33 +228,7 @@ function BookingList(props) {
       }
       case "5": {
         setType("status");
-        setOption2([
-          {
-            value: "1",
-            name: "approved",
-            label: "Đã xác nhận",
-          },
-          {
-            value: "2",
-            label: "Nhận vào lớp",
-            name: "checkin",
-          },
-          {
-            value: "3",
-            label: "Kết thúc khóa",
-            name: "checkout",
-          },
-          {
-            value: "4",
-            label: "Hoàn thành",
-            name: "done",
-          },
-          {
-            value: "5",
-            label: "Hủy bỏ",
-            name: "cancel",
-          },
-        ]);
+        setOption2(optionStatus);
         break;
       }
       default:
@@ -252,7 +271,7 @@ function BookingList(props) {
         removeAccents(value.toLowerCase())
       )
     );
-    if (value !== "") {
+    if (value && value !== "") {
       if (type === "location") {
         data.setPerData(dataSearchLocation);
       } else if (type === "course") {
@@ -263,6 +282,60 @@ function BookingList(props) {
     } else {
       data.setPerData(bookingList["academy.booking"]);
     }
+  };
+  const token = Cookies.get("access_token");
+  const [loading, setLoading] = useState(-1);
+  const ChangeStatus = async (item) => {
+    setLoading(item.id);
+    console.log(item.id);
+    setTimeout(async () => {
+      setLoading(-1);
+      Swal.fire({
+        title: "",
+        html: `<p>Bạn có chắc chắn hủy lịch học ${item.course_id[1]} vào ngày ${item.date}</p>`,
+        icon: "question",
+        showCancelButton: true,
+        allowOutsideClick: false,
+        focusConfirm: false,
+        confirmButtonText: "<span>Đồng ý</span>",
+        cancelButtonText: "<span>Hủy bỏ</span>",
+      }).then(async (rs) => {
+        if (rs.isConfirmed) {
+          if (item.status === "pending" || item.status === "approved") {
+            await axios
+              .put(
+                `https://betatgh.fostech.vn/restapi/1.0/object/academy.booking/${item.id}?vals={'status':'cancel'}`,
+                "",
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                }
+              )
+              .catch((error) => console.log(error));
+          } else {
+            Swal.fire({
+              html: `<p>Bạn không thể hủy lịch khi ${
+                item.status === "cancel"
+                  ? "lịch đã hủy bỏ"
+                  : item.status === "checkin"
+                  ? "đã nhận lớp"
+                  : item.status === "checkout"
+                  ? "lớp học đã kết thúc"
+                  : item.status === "done"
+                  ? "lớp học đã hoàn thành"
+                  : ""
+              }</p>`,
+              icon: "error",
+              showCancelButton: false,
+              allowOutsideClick: false,
+              focusConfirm: false,
+              confirmButtonText: "<span>Đồng ý</span>",
+            });
+          }
+        }
+      });
+    }, 3000);
   };
   return (
     <div id="booking-list">
@@ -288,11 +361,14 @@ function BookingList(props) {
             </div>
             {selectFilter.length > 0 && selectFilter === "5" && (
               <div className="col-4  filter_item">
+                <label htmlFor="" className="form-label">
+                  Trạng Thái
+                </label>
                 <Select
                   styles={customStyles}
                   components={{ DropdownIndicator }}
                   placeholder="Lọc theo trạng thái"
-                  onChange={({ name }) => filterBySelect(name)}
+                  onChange={({ value }) => filterBySelect(value)}
                   options={option2}
                 />
               </div>
@@ -303,6 +379,9 @@ function BookingList(props) {
                 selectFilter === "4") && (
                 <div className="col-4  filter_item">
                   <div className="form-group">
+                    <label htmlFor="" className="form-label">
+                      Tìm Kiếm
+                    </label>
                     <div className="input-group">
                       <div className="icon">
                         <i className="fa-regular fa-magnifying-glass"></i>
@@ -325,33 +404,40 @@ function BookingList(props) {
                   </div>
                 </div>
               )}
-            {/* {selectFilter.length > 0 && selectFilter === "1" && (
+            {selectFilter.length > 0 && selectFilter === "1" && (
               <div className="col-7 d-flex">
-                <div className="form-group col-6 date-1">
+                <div className="form-group col-6 date-1 d-flex flex-column">
                   <label htmlFor="" className="form-label">
                     Từ ngày
                   </label>
-                  <input
-                    type="date"
-                    className="form-control"
-                    placeholder="dd-mm-yyyy"
-                    onChange={(e) => console.log(e.target.value)}
+                  <DatePicker
+                    format="dd-MM-yyyy"
+                    selected={startDate}
+                    oneTap
+                    placeholder="Chọn ngày"
+                    onChange={(date) => setStartDate(date)}
                   />
                 </div>
-                <div className="form-group col-6 date-1">
+                <div className="form-group col-6 date-2 d-flex flex-column">
                   <label htmlFor="" className="form-label">
                     Đến ngày
                   </label>
-                  <input
-                    type="date"
-                    className="form-control"
-                    placeholder=""
-                    onChange={(e) => console.log(e.target.value)}
+                  <DatePicker
+                    format="dd-MM-yyyy"
+                    placeholder="Chọn ngày"
+                    oneTap
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
                   />
                 </div>
               </div>
-            )} */}
+            )}
           </div>
+          {selectFilter.length > 0 && selectFilter === "1" && (
+            <div className="button d-flex justify-content-end">
+              <button onClick={() => sort("5")}>Lọc</button>
+            </div>
+          )}
         </div>
       </div>
       <div className="container">
@@ -384,7 +470,19 @@ function BookingList(props) {
             <div className="header">Trạng thái</div>
           </div>
           <div className="col-2">
-            <div className="header">Thời gian</div>
+            <div className="header d-flex">
+              <span>Thời gian</span>
+              <span className="d-flex flex-column tool">
+                <i
+                  onClick={() => sort("4")}
+                  className="fa-regular fa-angle-up"
+                ></i>
+                <i
+                  onClick={() => sort("3")}
+                  className="fa-regular fa-angle-down"
+                ></i>
+              </span>
+            </div>
           </div>
         </div>
         {data.currentDatas.map((item, index) => (
@@ -405,25 +503,47 @@ function BookingList(props) {
             </div>
             <div className="col-2 item">
               <div className="data">
-                <span
-                  className={`${
-                    item.status === "cancel"
-                      ? "status-cancel"
+                {loading === item.id ? (
+                  <div
+                    className="d-flex justify-content-center"
+                    style={{ paddingLeft: 26 }}
+                  >
+                    <Loader />
+                  </div>
+                ) : (
+                  <span
+                    onClick={() => ChangeStatus(item)}
+                    className={`${
+                      item.status === "cancel"
+                        ? "status-cancel"
+                        : item.status === "approved"
+                        ? "status-approved"
+                        : item.status === "checkin"
+                        ? "status-checkin"
+                        : item.status === "checkout"
+                        ? "status-checkout"
+                        : item.status === "done"
+                        ? "status-done"
+                        : item.status === "pending"
+                        ? "status-pending"
+                        : ""
+                    } status`}
+                  >
+                    {item.status === "cancel"
+                      ? "Hủy bỏ"
                       : item.status === "approved"
-                      ? "status-approved"
+                      ? "Đã xác nhận"
                       : item.status === "checkin"
-                      ? "status-checkin"
+                      ? "Vào lớp"
                       : item.status === "checkout"
-                      ? "status-checkout"
+                      ? "Ra lớp"
                       : item.status === "done"
-                      ? "status-done"
+                      ? "Hoàn thành"
                       : item.status === "pending"
-                      ? "status-pending"
-                      : ""
-                  } status`}
-                >
-                  {item.status}
-                </span>
+                      ? "Chờ duyệt"
+                      : ""}
+                  </span>
+                )}
               </div>
             </div>
             <div className="col-2 item">

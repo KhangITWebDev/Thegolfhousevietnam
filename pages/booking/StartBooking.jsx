@@ -33,13 +33,13 @@ function StartBooking() {
     // setValue("email", `Traninee${trainee_id}@gmail.com`);
   }, []);
   useEffect(() => {
-    if (!token || token?.length < 0 || token === "") {
-      router.back();
-    } else {
-      // setTimeout(() => {
-      //   router.push("/training");
-      // }, 3599999);
-    }
+    // if (!token || token?.length < 0 || token === "") {
+    //   router.back();
+    // } else {
+    //   // setTimeout(() => {
+    //   //   router.push("/training");
+    //   // }, 3599999);
+    // }
   }, [token]);
   const onChange = (nextStep) => {
     setStep(nextStep < 0 ? 0 : nextStep > 3 ? 3 : nextStep);

@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Script from "next/script";
 import { motion } from "framer-motion";
+import { useSession, signIn, signOut } from "next-auth/react";
 import "../styles/globals.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
@@ -15,7 +16,7 @@ import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { store } from "../store";
 import $ from "jquery";
-
+import { SessionProvider } from "next-auth/react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { DefaultSeo } from "next-seo";
@@ -23,15 +24,15 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const [showChild, setShowChild] = useState(false);
   const router = useRouter();
   const token = Cookies.get("access_token");
+  console.log(session);
   useEffect(() => {
     if (token) {
       setTimeout(() => {
         Cookies.remove("access_token");
-        router.push("/training");
         Swal.fire({
           title: "<h5>Phiên đăng nhập đã hết hạn</h5>",
           text: "Xin lỗi! Phiên đăng nhập của bạn đã hết hạn vui long đăng nhập lại",
@@ -41,6 +42,8 @@ function MyApp({ Component, pageProps }) {
           cancelButtonText: "Hủy bỏ",
         }).then((result) => {
           if (result.isConfirmed) {
+            // router.push("/training");
+            window.location.href = "/training";
             localStorage.setItem("open", "open");
           } else {
             localStorage.setItem("open", "none");
@@ -91,7 +94,6 @@ function MyApp({ Component, pageProps }) {
 
   const textEnter = () => setCursorVariants("text");
   const textLeave = () => setCursorVariants("default");
-
   useEffect(() => {
     $("h2").on("mouseenter", textEnter);
     $("h2").on("mouseleave", textLeave);
@@ -141,7 +143,9 @@ function MyApp({ Component, pageProps }) {
             cardType: "summary_large_image",
           }}
         />
-        <Component {...pageProps} />
+        <SessionProvider session={session}>
+          <Component {...pageProps} />
+        </SessionProvider>
       </Provider>
     );
   }

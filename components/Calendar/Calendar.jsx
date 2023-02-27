@@ -1,6 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import moment from "moment";
+import { useRouter } from "next/router";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -87,6 +88,7 @@ function Calendar({
   const handleClose = () => setOpen(false);
   const { trainers } = useSelector((state) => state.TrainerReducer);
   const dispatch = useDispatch();
+  const router = useRouter();
   useEffect(() => {
     dispatch(getTrainerData());
   }, []);
@@ -113,6 +115,7 @@ function Calendar({
               `https://betatgh.fostech.vn/restapi/1.0/object/academy.booking?vals={'location_id':'${locationId}','location_detail_id':'${locationDetailID}','trainee_id':'${traineeId}','course_id':'${value.course_id[0]}','trainer_id':'${value.trainer_id[0]}','date':'${value.date}','start_time':'${value.start_time}.0','end_time':'${value.end_time}.0','note':'','status':'pending','schedule_booking_id':'${value.id}'}`,
               "",
               {
+                mode: "cors",
                 headers: {
                   Authorization: `Bearer ${token}`,
                 },
@@ -129,8 +132,7 @@ function Calendar({
                   cancelButtonText: "Tiếp tục đặt",
                 }).then((rs) => {
                   if (rs.isConfirmed) {
-                    changeStep(step + 1);
-                    setEnableToStep2(true);
+                    router.push("/booking/booking-lists");
                   } else if (rs.isDismissed) {
                     changeStep(0);
                     setEnableToStep2(false);

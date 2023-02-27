@@ -129,6 +129,9 @@ export const convertDate = (date) => {
   const getDateMonthYear1 = `${getDateInDate}/${
     Number(new Date(date).getMonth()) + 1
   }/${y}`;
+  const getDateMonthYear2 = `${getDateInDate}-0${
+    Number(new Date(date).getMonth()) + 1
+  }-${y}`;
   return {
     dateNoWeek,
     dateWithWeek,
@@ -147,6 +150,7 @@ export const convertDate = (date) => {
     getMonthandYearVi,
     getFullInDateLongMonth,
     getDateMonthYear1,
+    getDateMonthYear2,
   };
 };
 export const getDateArray = function (start, end) {

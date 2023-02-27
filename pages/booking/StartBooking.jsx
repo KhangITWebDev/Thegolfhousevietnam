@@ -28,19 +28,7 @@ function StartBooking() {
   const trainee_id = Cookies.get("trainee_id");
   useEffect(() => {
     dispatch(getScheduleData());
-    // setValue("name", `Học Viên số ${trainee_id}`);
-    // setValue("phone", `0123456789`);
-    // setValue("email", `Traninee${trainee_id}@gmail.com`);
   }, []);
-  useEffect(() => {
-    // if (!token || token?.length < 0 || token === "") {
-    //   router.back();
-    // } else {
-    //   // setTimeout(() => {
-    //   //   router.push("/training");
-    //   // }, 3599999);
-    // }
-  }, [token]);
   const onChange = (nextStep) => {
     setStep(nextStep < 0 ? 0 : nextStep > 3 ? 3 : nextStep);
   };

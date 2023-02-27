@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Script from "next/script";
 import { motion } from "framer-motion";
-import { useSession, signIn, signOut } from "next-auth/react";
 import "../styles/globals.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
@@ -16,19 +15,19 @@ import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { store } from "../store";
 import $ from "jquery";
-import { SessionProvider } from "next-auth/react";
+
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { DefaultSeo } from "next-seo";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
+import { RouteGuard } from "./RouteGuard";
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }) {
+function MyApp({ Component, pageProps }) {
   const [showChild, setShowChild] = useState(false);
   const router = useRouter();
   const token = Cookies.get("access_token");
-  console.log(session);
   useEffect(() => {
     if (token) {
       setTimeout(() => {
@@ -94,6 +93,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
   const textEnter = () => setCursorVariants("text");
   const textLeave = () => setCursorVariants("default");
+
   useEffect(() => {
     $("h2").on("mouseenter", textEnter);
     $("h2").on("mouseleave", textLeave);
@@ -143,9 +143,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
             cardType: "summary_large_image",
           }}
         />
-        <SessionProvider session={session}>
+        <RouteGuard>
           <Component {...pageProps} />
-        </SessionProvider>
+        </RouteGuard>
       </Provider>
     );
   }

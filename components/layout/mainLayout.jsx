@@ -34,10 +34,11 @@ function MainLayout({ children }) {
     resolver: yupResolver(schema2),
   });
   const dispatch = useDispatch();
+  const router = useRouter();
   const cart = useSelector((state) => state.CartReducer.cartList);
   useEffect(() => {
     dispatch(getCartData());
-  }, [dispatch]);
+  }, []);
   const [open2, setOpen2] = React.useState(false);
   const handleOpen2 = () => {
     setOpen2(true);
@@ -98,7 +99,6 @@ function MainLayout({ children }) {
   const handleCloseCart = () => setShowCart(false);
   const handleShowSearch = () => setShowSearch(!showSearch);
   window.addEventListener("scroll", toggleVisible);
-  const router = useRouter();
   const token = Cookies.get("access_token");
   useEffect(() => {
     $(".rs-navbar-item").each((index) => {
@@ -203,7 +203,7 @@ function MainLayout({ children }) {
   });
   // $("#memu-about").on("mouseenter", () => {
   //   console.log($(".rs-dropdown-menu"));
-  // });
+
   return (
     <>
       <div className="wrapper-project">
@@ -232,7 +232,7 @@ function MainLayout({ children }) {
         )}
         <RightMenu handleCloseRightMenu={handleCloseRightMenu} />
         <Cart handleCloseCart={handleCloseCart} cart={cart} />
-        {open2 && (
+        {router.query.open && (
           <SignIn
             errors={errors2}
             register={register2}

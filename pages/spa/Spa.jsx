@@ -12,14 +12,23 @@ function Spa(props) {
     dispatch(getBannerData());
     dispatch(getContentData());
   }, []);
-  const sectionTitleHaỉrNailSpa = contents.filter(
-    (item) => item.category === "63e356cd234bcc47f71bc20e"
+  const sectionGreenSpa = contents.filter(
+    (item) => item.category === "63fc3ffbe469fb4f12ebd40d"
   );
   const imageHairNailSpa = contents.filter(
     (item) => item.category === "63e356cc234bcc47f71bc016"
   );
   const sectionIntro = contents.filter(
     (item) => item.category === "63fc181ee469fb4f12eb80af"
+  );
+  const section6Touchs = contents.filter(
+    (item) => item.category === "63fc4010e469fb4f12ebd420"
+  );
+  const sectionMenu = contents.filter(
+    (item) => item.category === "63fc4021e469fb4f12ebd45a"
+  );
+  const sectionFocus = contents.filter(
+    (item) => item.category === "63fc4037e469fb4f12ebd470"
   );
   const bannerHairNailSpa = banners.filter((x) => x.danh_muc === "Spa");
   return (
@@ -54,7 +63,7 @@ function Spa(props) {
       </div>
       <div className="container">
         <div className={styles.list}>
-          <h5 data-aos="fade-up">{sectionIntro[0].title}</h5>
+          <h5 data-aos="fade-up">{sectionIntro[0]?.title}</h5>
           <div className={styles.image_intro}>
             <Image
               alt="Other Image"
@@ -62,14 +71,30 @@ function Spa(props) {
                 `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
               }
               src={
-                sectionIntro[0]?.images[sectionIntro[0].images.length - 1]
+                sectionIntro[0]?.images[sectionIntro[0]?.images?.length - 1]
                   ?.source
               }
               layout="fill"
               objectFit="cover"
             />
           </div>
-          <h5 data-aos="fade-up">{imageHairNailSpa[0].title}</h5>
+          <h5 data-aos="fade-up">{sectionGreenSpa[0]?.title}</h5>
+          <div className={styles.image_intro}>
+            <Image
+              alt="Other Image"
+              loader={({ src }) =>
+                `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+              }
+              src={
+                sectionGreenSpa[0]?.images[
+                  sectionGreenSpa[0]?.images?.length - 1
+                ]?.source
+              }
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
+          <h5 data-aos="fade-up">{imageHairNailSpa[0]?.title}</h5>
           <div className={styles.image_more}>
             <Image
               alt="Other Image"
@@ -78,8 +103,53 @@ function Spa(props) {
               }
               src={
                 imageHairNailSpa[0]?.images[
-                  imageHairNailSpa[0].images.length - 1
+                  imageHairNailSpa[0]?.images?.length - 1
                 ]?.source
+              }
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
+          <h5 data-aos="fade-up">{section6Touchs[0]?.title}</h5>
+          <div className={styles.image_more}>
+            <Image
+              alt="Other Image"
+              loader={({ src }) =>
+                `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+              }
+              src={
+                section6Touchs[0]?.images[section6Touchs[0]?.images?.length - 1]
+                  ?.source
+              }
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
+          <h5 data-aos="fade-up">{sectionMenu[0]?.title}</h5>
+          <div className={styles.image_more}>
+            <Image
+              alt="Other Image"
+              loader={({ src }) =>
+                `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+              }
+              src={
+                sectionMenu[0]?.images[sectionMenu[0]?.images?.length - 1]
+                  ?.source
+              }
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
+          <h5 data-aos="fade-up">{sectionFocus[0]?.title}</h5>
+          <div className={styles.image_more}>
+            <Image
+              alt="Other Image"
+              loader={({ src }) =>
+                `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+              }
+              src={
+                sectionFocus[0]?.images[sectionFocus[0]?.images?.length - 1]
+                  ?.source
               }
               layout="fill"
               objectFit="cover"

@@ -111,7 +111,38 @@ function MyApp({ Component, pageProps }) {
           variants={variants}
           animate={cursorVariants}
         /> */}
-        {/* <Head></Head> */}
+        <Head>
+          <meta charset="utf-8" />
+          <title>The Golf House</title>
+          <meta
+            name="description"
+            content="Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi"
+          />
+          <meta
+            property="zalo-platform-site-verification"
+            content="NlFW6QhNR28knTmYxiS92XNKfJtvfNvbD38"
+          ></meta>
+          <meta name="theme-color" content="#000000"></meta>
+          <meta name="image" content="/images/Logo/Logo12.png"></meta>
+          <meta
+            name="description"
+            content="Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi"
+          ></meta>
+          <meta name="og:image" content="/images/Logo/Logo12.png"></meta>
+          <meta name="og:title" content="The Golf House"></meta>
+          <meta
+            name="og:description"
+            content="Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi"
+          />
+          <link href="/images/Logo/Logo12.png" rel="icon" />
+          <link href="/images/Logo/Logo12.png" rel="apple-touch-icon"></link>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="true"
+          />
+        </Head>
         <RouteGuard>
           <Component {...pageProps} />
         </RouteGuard>

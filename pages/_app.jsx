@@ -114,14 +114,14 @@ function MyApp({ Component, pageProps }) {
         <Head>
           <meta charset="utf-8" />
           <title>LIO HOLDING</title>
-          <meta name="description" content="Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi." />
+          <meta name="description" content="Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi" />
           <meta
             property="zalo-platform-site-verification"
             content="NlFW6QhNR28knTmYxiS92XNKfJtvfNvbD38"
           ></meta>
           <meta name="theme-color" content="#000000"></meta>
           <meta name="image" content="/images/Logo/Logo12.png"></meta>
-          {/* <meta name="description" content=""></meta> */}
+          <meta name="description" content="Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi"></meta>
           <meta name="og:image" content="/images/Logo/Logo12.png"></meta>
           <meta name="og:description" content=""></meta>
           <link href="/images/Logo/Logo12.png" rel="icon" />

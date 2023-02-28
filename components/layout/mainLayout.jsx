@@ -15,6 +15,7 @@ import loginClientAxios from "../../clientAxios/loginClientAxios";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartData } from "../../store/redux/CartReducer/cart.action";
+import { NextSeo } from "next-seo";
 const schema2 = yup.object().shape({
   // email: yup
   //   .string()
@@ -206,6 +207,40 @@ function MainLayout({ children }) {
 
   return (
     <>
+      <NextSeo
+        title="Avneesh Agarwal"
+        titleTemplate="Avneesh Agarwal"
+        defaultTitle="Avneesh Agarwal"
+        description="A full stack web developer, who loves to design and develop beautiful websites. I have been coding for over a year now. One of my hobbies is writing, I love to document my journey by writing blog posts and also teach others through them."
+        additionalLinkTags={[
+          {
+            rel: "icon",
+            href: "/images/Logo/logo2.png",
+          },
+          {
+            rel: "apple-touch-icon",
+            href: "/images/Logo/logo2.png",
+            sizes: "76x76",
+          },
+        ]}
+        openGraph={{
+          type: "website",
+          locale: "en_IE",
+          url: "https://www.url.ie/",
+          siteName: "SiteName",
+          images: {
+            url: "https://thegolfhousevietnam.vercel.app/images/Logo/logo2.png",
+            width: 850,
+            height: 650,
+            alt: "Photo of text",
+          },
+        }}
+        twitter={{
+          handle: "@handle",
+          site: "@site",
+          cardType: "summary_large_image",
+        }}
+      />
       <div className="wrapper-project">
         {router.pathname === "/" ? (
           <HeaderMain

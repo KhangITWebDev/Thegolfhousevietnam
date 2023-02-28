@@ -32,6 +32,9 @@
         position: absolute;
         z-index: 2002;
         left: 50px;
+        @media screen and (max-width: 576px) {
+          left: 10px;
+        }
         top: 50%;
         transform: translateY(-50%);
         strong {
@@ -122,7 +125,6 @@
         .left {
           padding-top: 50px;
           padding-right: 50px;
-          padding-left: 50px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -192,7 +194,43 @@
     }
   }
   .product {
+    .bannerv2 {
+      @media screen and (max-width: 767.98px) {
+        height: 1000px;
+      }
+      @media screen and (max-width: 576.98px) {
+        height: 1100px;
+      }
+      @media screen and (max-width: 480.98px) {
+        height: 1100px;
+      }
+    }
+    .right {
+      position: relative;
+      height: 350px;
+      .image {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+      @media screen and (max-width: 767.98px) {
+        .image {
+          span {
+            margin-left: 0px !important;
+          }
+        }
+      }
+    }
     .left {
+      height: 100%;
+      @media screen and (max-width: 767.98px) {
+        padding: 0px !important;
+        padding-top: 20px !important;
+        height: auto;
+        p {
+          text-align: justify !important;
+        }
+      }
       h2 {
         font-size: 32px;
         font-weight: 700;
@@ -204,12 +242,31 @@
   .intro {
     .bannerv2 {
       height: 700px;
+      @media screen and (max-width: 767.98px) {
+        // height: 800px;
+      }
       &_content {
         .right {
-          position: relative;
           height: 550px;
+          @media screen and (max-width: 767.98px) {
+            height: 350px;
+          }
+          @media screen and (max-width: 420px) {
+            margin-top: 50px;
+          }
+          @media screen and (max-width: 340px) {
+            margin-top: 100px;
+          }
+          .image {
+            height: 100%;
+            position: relative;
+            width: 100%;
+          }
           span {
             margin-left: 50px !important;
+            @media screen and (max-width: 767.98px) {
+              margin-left: 0px !important;
+            }
           }
         }
       }
@@ -228,12 +285,22 @@
     .bannerv2 {
       margin-top: 0px;
       height: 400px;
+      @media screen and (max-width: 576px) {
+        height: 500px;
+      }
+      @media screen and (max-width: 400px) {
+        height: 550px;
+      }
+      @media screen and (max-width: 340px) {
+        height: 650px;
+      }
       &_content {
         em {
           font-style: italic;
         }
         p {
-          color: #355540;
+          // color: #355540;
+          color: #fff;
           font-weight: 400 !important;
         }
       }
@@ -241,6 +308,10 @@
     .left {
       margin-top: 50px;
       padding-right: 10px;
+      @media screen and (max-width: 767.98px) {
+        margin-top: 0px;
+        // padding-right: 20px !important;
+      }
       h2 {
         font-size: 32px;
         font-weight: 700;
@@ -251,15 +322,44 @@
       margin-top: 50px;
       padding-left: 10px;
       padding-right: 10px;
+      @media screen and (max-width: 767.98px) {
+        padding: 0px;
+        margin-top: 20px;
+        p {
+          text-align: justify !important;
+        }
+      }
+      @media screen and (max-width: 576.98px) {
+        margin-top: 70px;
+      }
+      @media screen and (max-width: 340px) {
+        margin-top: 120px;
+      }
     }
     .right {
       margin-top: 150px;
       padding-left: 10px;
+      @media screen and (max-width: 767.98px) {
+        padding: 0px;
+        margin-top: 20px;
+        p {
+          text-align: justify !important;
+        }
+      }
     }
   }
   .touchs {
     height: 550px;
     position: relative;
+    @media screen and (max-width: 992px) {
+      height: 680px;
+    }
+    @media screen and (max-width: 767.98px) {
+      height: 1000px;
+    }
+    @media screen and (max-width: 320px) {
+      height: 1050px;
+    }
     .image {
       position: absolute;
       height: 100%;
@@ -275,6 +375,13 @@
         align-items: center;
         flex-direction: column;
         margin-top: 70px;
+        @media screen and (max-width: 992.98px) {
+          margin-top: 40px;
+        }
+        @media screen and (max-width: 767.98px) {
+          width: 100%;
+          margin-top: 40px;
+        }
         h2 {
           background-color: rgb(69, 124, 107);
           border-radius: 20px;
@@ -287,6 +394,9 @@
           color: #fff;
           margin-top: 15px;
           margin-bottom: 10px;
+          @media screen and (max-width: 767.98px) {
+            width: 90%;
+          }
         }
       }
       .line {
@@ -295,6 +405,9 @@
         background-color: #000;
         height: 2px;
         width: 500px;
+        @media screen and (max-width: 767.98px) {
+          width: 90%;
+        }
       }
       ul {
         list-style: disc;
@@ -358,7 +471,13 @@
     .image_intro {
       position: relative;
       width: 100%;
-      height: 800px;
+      height: 700px;
+      @media screen and (max-width: 767.98px) {
+        height: 1020px;
+      }
+      @media screen and (max-width: 300px) {
+        height: 1050px;
+      }
     }
     .content {
       position: absolute;
@@ -371,13 +490,22 @@
       .right {
         padding-left: 100px;
         margin-top: 20px;
+        @media screen and (max-width: 767.98px) {
+          padding-left: 0px;
+        }
       }
       .title {
-        margin-top: 50px;
+        margin-top: 30px;
         h2 {
           background-color: rgb(69, 124, 107);
           border-radius: 0px 20px 20px 0px;
           width: 85%;
+          @media screen and (max-width: 767.98px) {
+            width: 100%;
+          }
+          @media screen and (max-width: 576.98px) {
+            width: 80%;
+          }
           padding: 10px 0px;
           font-size: 30px;
           text-align: center;
@@ -412,7 +540,13 @@
     .image_intro {
       position: relative;
       width: 100%;
-      height: 600px;
+      height: 550px;
+      @media screen and (max-width: 992px) {
+        height: 900px;
+      }
+      @media screen and (max-width: 576px) {
+        height: 1300px;
+      }
     }
     .content {
       position: absolute;
@@ -420,7 +554,10 @@
       width: 100%;
       background-color: rgba(0, 0, 0, 0.3);
       .title {
-        margin-top: 50px;
+        margin-top: 20px;
+        @media screen and (max-width: 376px) {
+          margin-top: 10px;
+        }
         h2 {
           padding: 10px 0px;
           font-size: 36px;
@@ -444,9 +581,19 @@
         &:nth-child(2) {
           padding-right: 10px;
           padding-left: 10px;
+          @media screen and (max-width: 992px) {
+            padding-right: 0px;
+          }
         }
         &:nth-child(3) {
           padding-left: 10px;
+          @media screen and (max-width: 992px) {
+            padding-left: 0px;
+            margin-top: 15px;
+          }
+        }
+        @media screen and (max-width: 992px) {
+          margin-top: 25px;
         }
       }
       .image {

@@ -59,7 +59,10 @@ function Spa(props) {
         />
         <div className={styles.bannerv2_content}>
           <div className="h-100">
-            <div className="col-6 h-100" style={{ position: "relative" }}>
+            <div
+              className="col-12 col-md-6 h-100"
+              style={{ position: "relative" }}
+            >
               {/* <div className={styles.bg}>
                 <Image
                   src="/images/OrtherService/bg.jpg"
@@ -88,8 +91,8 @@ function Spa(props) {
               layout="fill"
             ></Image>
             <div className={styles.bannerv2_content}>
-              <div className="h-100 d-flex align-items-center">
-                <div className={"col-5" + " " + styles.left}>
+              <div className="h-100 col-10 mx-auto d-flex flex-wrap align-items-center">
+                <div className={"col-12 col-md-5" + " " + styles.left}>
                   <h3>{sectionIntro[0]?.sub_title}</h3>
                   <div
                     dangerouslySetInnerHTML={{
@@ -97,7 +100,7 @@ function Spa(props) {
                     }}
                   ></div>
                 </div>
-                <div className={"col-7" + " " + styles.right}>
+                <div className={"col-12 col-md-7" + " " + styles.right}>
                   <div className={styles.image}>
                     <Image
                       alt="Other Image"
@@ -142,18 +145,18 @@ function Spa(props) {
               layout="fill"
             ></Image>
             <div className={styles.bannerv2_content}>
-              <div className="h-100 d-flex">
-                <div className={"col-4" + " " + styles.left}>
+              <div className="h-100 col-10 mx-auto d-flex flex-wrap">
+                <div className={"col-12 col-md-4" + " " + styles.left}>
                   <h2>{sectionGreenSpa[0]?.title}</h2>
                 </div>
-                <div className={"col-4" + " " + styles.center}>
+                <div className={"col-12 col-md-4" + " " + styles.center}>
                   <div
                     dangerouslySetInnerHTML={{
                       __html: sectionGreenContent[0]?.content,
                     }}
                   ></div>
                 </div>
-                <div className={"col-4" + " " + styles.right}>
+                <div className={"col-12 col-md-4" + " " + styles.right}>
                   <div
                     dangerouslySetInnerHTML={{
                       __html: sectionGreenContent[1]?.content,
@@ -173,9 +176,9 @@ function Spa(props) {
               layout="fill"
             ></Image>
             <div className={styles.bannerv2_content}>
-              <div className="h-100 d-flex">
-                <div className={"col-6 h-100" + " " + styles.left}>
-                  <h2 data-aos="fade-up">{imageHairNailSpa[0]?.title}</h2>
+              <div className="h-100 col-10 mx-auto d-flex flex-wrap-reverse align-items-start">
+                <div className={"col-12 col-md-6" + " " + styles.left}>
+                  <h2>{imageHairNailSpa[0]?.title}</h2>
                   <div
                     dangerouslySetInnerHTML={{
                       __html: imageHairNailSpa[0]?.content,
@@ -197,7 +200,7 @@ function Spa(props) {
                     />
                   </div>
                 </div>
-                <div className={"col-6" + " " + styles.right}>
+                <div className={"col-12 col-md-6" + " " + styles.right}>
                   <div className={styles.image}>
                     <Image
                       alt="Other Image"
@@ -242,7 +245,10 @@ function Spa(props) {
               <div className="touch-list col-10 m-auto">
                 <div className="d-flex flex-wrap">
                   {section6TouchsContent?.map((touch, index) => (
-                    <div key={index} className="col-4 item d-flex">
+                    <div
+                      key={index}
+                      className="col-12 col-md-6 col-lg-4 item d-flex"
+                    >
                       <div className="image col-4">
                         <Image
                           alt="Other Image"
@@ -275,11 +281,13 @@ function Spa(props) {
             ></Image>
             <div className={styles.content}>
               <div className="h-100 d-flex flex-column">
-                <div className={styles.title + " " + "col-6"}>
+                <div
+                  className={styles.title + " " + "col-12 col-sm-8 col-md-6"}
+                >
                   <h2>{sectionMenu[0]?.title}</h2>
                 </div>
-                <div className="d-flex col-10 m-auto">
-                  <div className={"col-6" + " " + styles.left}>
+                <div className="d-flex flex-wrap col-10 mx-auto">
+                  <div className={"col-12 col-md-6" + " " + styles.left}>
                     <div className={styles.image}>
                       <Image
                         alt="Other Image"
@@ -296,7 +304,7 @@ function Spa(props) {
                       />
                     </div>
                   </div>
-                  <div className={"col-6" + " " + styles.right}>
+                  <div className={"col-12 col-md-6" + " " + styles.right}>
                     <div
                       dangerouslySetInnerHTML={{
                         __html: sectionMenu[0]?.content,
@@ -321,9 +329,12 @@ function Spa(props) {
               <div
                 className={"h-100 d-flex flex-column justify-content-center"}
               >
-                <div className="d-flex col-10 mx-auto">
+                <div className="d-flex flex-wrap justify-content-center col-10 mx-auto">
                   {sectionFocusContent?.map((item, index) => (
-                    <div className={"col-4" + " " + styles.item} key={index}>
+                    <div
+                      className={"col-12 col-sm-6 col-lg-4" + " " + styles.item}
+                      key={index}
+                    >
                       <div className={styles.image}>
                         <Image
                           alt="Other Image"

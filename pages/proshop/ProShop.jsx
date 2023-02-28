@@ -250,7 +250,7 @@ function ProShop(props) {
           id="pro-shop"
         >
           <div
-            className={"col-12 col-lg-7" + " " + styles.left}
+            className={"col-12 col-lg-8" + " " + styles.left}
             data-aos="fade-right"
           >
             <div
@@ -302,8 +302,8 @@ function ProShop(props) {
                         <Image
                           alt={"Image" + index + 1}
                           src="/images/Logo/Logo12.png"
-                          width={100}
-                          height={100}
+                          width={300}
+                          height={300}
                           objectFit="cover"
                         ></Image>
                       </div>
@@ -319,7 +319,7 @@ function ProShop(props) {
             </div>
           </div>
           <div
-            className={"col-12 col-lg-5" + " " + styles.right}
+            className={"col-12 col-lg-4" + " " + styles.right}
             data-aos="fade-right"
           >
             <div className={styles.tabs}>

@@ -4372,6 +4372,34 @@ button {
         padding-right: 10px;
         padding-left: 10px;
       }
+      @media screen and (max-width: 992px) {
+        &:nth-child(1),
+        &:nth-child(3),
+        &:nth-child(5) {
+          padding-right: 10px;
+          padding-left: 0px;
+        }
+        &:nth-child(2),
+        &:nth-child(4),
+        &:nth-child(6) {
+          padding-right: 0px;
+          padding-left: 10px;
+        }
+      }
+      @media screen and (max-width: 992px) {
+        &:nth-child(1),
+        &:nth-child(3),
+        &:nth-child(5) {
+          padding-right: 0px;
+          padding-left: 0px;
+        }
+        &:nth-child(2),
+        &:nth-child(4),
+        &:nth-child(6) {
+          padding-right: 0px;
+          padding-left: 0px;
+        }
+      }
       .image {
         position: relative;
         height: 100px;
@@ -4389,6 +4417,9 @@ button {
           line-height: 1 !important;
           margin-bottom: 30px;
           font-weight: 700;
+          @media screen and (max-width: 767.98px) {
+            line-height: 1.2 !important;
+          }
         }
         span {
           font-size: 14px;

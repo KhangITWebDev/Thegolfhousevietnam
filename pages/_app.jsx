@@ -105,12 +105,7 @@ function MyApp({ Component, pageProps }) {
     return <></>;
   } else {
     return (
-      <Provider store={store}>
-        {/* <motion.div
-          className="cursor"
-          variants={variants}
-          animate={cursorVariants}
-        /> */}
+      <>
         <NextSeo
           title="Avneesh Agarwal"
           titleTemplate="Avneesh Agarwal"
@@ -145,10 +140,17 @@ function MyApp({ Component, pageProps }) {
             cardType: "summary_large_image",
           }}
         />
-        <RouteGuard>
-          <Component {...pageProps} />
-        </RouteGuard>
-      </Provider>
+        <Provider store={store}>
+          {/* <motion.div
+          className="cursor"
+          variants={variants}
+          animate={cursorVariants}
+        /> */}
+          <RouteGuard>
+            <Component {...pageProps} />
+          </RouteGuard>
+        </Provider>
+      </>
     );
   }
 }

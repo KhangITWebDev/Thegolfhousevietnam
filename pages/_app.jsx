@@ -106,40 +106,18 @@ function MyApp({ Component, pageProps }) {
   } else {
     return (
       <>
-        <DefaultSeo
-          title="Avneesh Agarwal"
-          titleTemplate="Avneesh Agarwal"
-          defaultTitle="Avneesh Agarwal"
-          description="A full stack web developer, who loves to design and develop beautiful websites. I have been coding for over a year now. One of my hobbies is writing, I love to document my journey by writing blog posts and also teach others through them."
-          additionalLinkTags={[
-            {
-              rel: "icon",
-              href: "/images/Logo/logo2.png",
-            },
-            {
-              rel: "apple-touch-icon",
-              href: "/images/Logo/logo2.png",
-              sizes: "76x76",
-            },
-          ]}
-          openGraph={{
-            type: "website",
-            locale: "en_IE",
-            url: "https://www.url.ie/",
-            siteName: "SiteName",
-            images: {
-              url: "https://thegolfhousevietnam.vercel.app/images/Logo/logo2.png",
-              width: 850,
-              height: 650,
-              alt: "Photo of text",
-            },
-          }}
-          twitter={{
-            handle: "@handle",
-            site: "@site",
-            cardType: "summary_large_image",
-          }}
-        />
+        <Head>
+          <title>Title of your website</title>
+          <meta
+            name="description"
+            content="description of your website will go here"
+          />
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+          />
+        </Head>
         <Provider store={store}>
           {/* <motion.div
           className="cursor"

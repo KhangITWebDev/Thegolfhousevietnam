@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
@@ -22,18 +23,14 @@ function SignIn({
   return (
     <Modal
       open={true}
-      onClose={() => {}}
+      onClose={handleClose2}
       id="modal-signup"
       data-aos="fade-down"
       data-aos-delay="800"
     >
       <Modal.Header>
         <Modal.Title>Đăng nhập</Modal.Title>
-        <button
-          onClick={() => {
-            router.replace({ ...router.query, open: true });
-          }}
-        >
+        <button onClick={handleClose2}>
           <i className="fa-light fa-times"></i>
         </button>
       </Modal.Header>
@@ -86,11 +83,35 @@ function SignIn({
               <a className="link">Quên mật khẩu</a>
             </Link>
           </div>
-
           <div className="button">
             <button onClick={handleSubmit(onSubmit)}>
               {loading ? <Loader content="Đang đăng nhập" /> : "Đăng nhập"}
             </button>
+          </div>
+          <div>
+            <div className="deliver d-flex align-items-center justify-content-center">
+              <span className="left"></span>
+              <span>Or</span>
+              <span className="right"></span>
+            </div>
+            <div className="social d-flex justify-content-center">
+              <div className="fb">
+                <Image
+                  alt="FB"
+                  src="/images/Logo/fb.png"
+                  width={50}
+                  height={50}
+                />
+              </div>
+              <div className="gg">
+                <Image
+                  alt="FB"
+                  src="/images/Logo/gg.png"
+                  width={50}
+                  height={50}
+                />
+              </div>
+            </div>
           </div>
         </form>
       </Modal.Body>

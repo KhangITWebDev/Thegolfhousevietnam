@@ -42,7 +42,7 @@ const customStyles = {
   }),
   container: (provided, state) => ({
     ...provided,
-    width: 200,
+    width: 130,
     zIndex: 5000,
     "@media screen and (max-width: 576px)": {
       width: "100%",
@@ -78,10 +78,46 @@ const options = [
   { value: "4", label: "Giá thấp nhất" },
 ];
 
+const price = [
+  {
+    value: "price1",
+    label: "Dưới 1.000.000 VND",
+  },
+  {
+    value: "price2",
+    label: "1.000.001 VND - 5.000.000 VND",
+  },
+  {
+    value: "price3",
+    label: "5.000.000 VND - 10.000.000 VND",
+  },
+  {
+    value: "price4",
+    label: "Trên 10.000.000 VND",
+  },
+];
+
+const color = ["red", "green", "blue", "yellow", "gray"];
+const brand = [
+  {
+    value: "brand1",
+    name: "Nike",
+  },
+  {
+    value: "brand2",
+    name: "Jordan",
+  },
+];
 function ProShop(props) {
   const [value, setValue] = React.useState([0, 1]);
   const maxFilterPrice = 100000000;
   const minFilterPrice = 10000;
+  const [hiddenFilter, setHiddenFilter] = useState(false);
+  const [showFilter1, setShowFilter1] = useState(false);
+  const [showFilter2, setShowFilter2] = useState(false);
+  const [showFilter3, setShowFilter3] = useState(false);
+  const [showFilter4, setShowFilter4] = useState(false);
+  const [showFilter5, setShowFilter5] = useState(false);
   const proshopData = useSelector((state) => state.ProshopReducer.proshopList);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -250,106 +286,22 @@ function ProShop(props) {
           id="pro-shop"
         >
           <div
-            className={"col-12 col-lg-8" + " " + styles.left}
-            data-aos="fade-right"
-          >
-            <div
-              className={
-                "d-flex flex-wrap justify-content-between align-items-center" +
-                " " +
-                styles.header
-              }
-            >
-              <span className="col-12 col-sm-6" data-aos="fade-right">
-                Hiển thị {data.currentDatas.length} trên {data.perData.length}{" "}
-                kết quả
-              </span>
-              <div
-                className="col-12 col-sm-6 d-flex justify-content-start justify-content-sm-end"
-                data-aos="fade-left"
-              >
-                <Select
-                  options={options}
-                  styles={customStyles}
-                  onChange={({ value }) => sort(value)}
-                  defaultValue={options[0]}
-                  components={{ DropdownIndicator }}
-                />
-              </div>
-            </div>
-            <div className={"d-flex flex-wrap" + " " + styles.product}>
-              {proshopData.length <= 0 ? (
-                <div className="d-flex m-auto">
-                  <Loader size="md" content="Đang tải dữ liệu..." />
-                </div>
-              ) : (
-                data.currentDatas.map((item, index) => (
-                  <div
-                    key={index}
-                    className={"col-12 col-sm-6" + " " + styles.item}
-                  >
-                    <div
-                      className={
-                        styles.info +
-                        " " +
-                        "d-flex flex-column align-items-center"
-                      }
-                      onClick={() =>
-                        router.push(`/proshop/${removeAccents(item.ten_vt)}`)
-                      }
-                    >
-                      <div className={styles.image} style={{ zIndex: 1003 }}>
-                        <Image
-                          alt={"Image" + index + 1}
-                          src="/images/Logo/Logo12.png"
-                          width={300}
-                          height={300}
-                          objectFit="cover"
-                        ></Image>
-                      </div>
-                      <h5>{item.ten_vt}</h5>
-                      <p>{item.gia_ban_le.toLocaleString("vi-VI")} VND</p>
-                    </div>
-                  </div>
-                ))
-              )}
-            </div>
-            <div className="d-flex justify-content-center">
-              <Pagination data={data} />
-            </div>
-          </div>
-          <div
-            className={"col-12 col-lg-4" + " " + styles.right}
-            data-aos="fade-right"
+            className={"col-12 col-lg-3" + " " + styles.left}
+            // data-aos="fade-right"
+            style={{
+              display: hiddenFilter && "none",
+            }}
           >
             <div className={styles.tabs}>
               <div className={"d-flex flex-wrap" + " " + styles.top}>
-                <div className="col-12 col-lg-12 col-md-6">
-                  <h5>Mới nhất</h5>
-                  <span>Không có sản phẩm nào</span>
-                </div>
-                <div className="col-12 col-lg-12 col-md-6">
-                  <h5>Tìm kiếm</h5>
-                  <div className="form-group">
-                    <div className="input-group">
-                      <div className="icon">
-                        <i className="fa-regular fa-magnifying-glass"></i>
-                      </div>
-                      <input
-                        type="text"
-                        placeholder="Tìm sản phẩm ..."
-                        className="form-control"
-                        onChange={(e) => {
-                          handleSearchInput(e);
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
+                <span>
+                  Hiển thị {data.currentDatas.length} trên {data.perData.length}{" "}
+                  kết quả
+                </span>
               </div>
               <div className={"d-flex flex-wrap" + " " + styles.center}>
                 <div className="col-12 col-lg-12 col-md-6">
-                  <h5>Loại sản phẩm</h5>
+                  {/* <h5>Loại sản phẩm</h5> */}
                   <ul>
                     <li onClick={() => filter("Áo")}>Áo ({coast.length})</li>
                     <li onClick={() => filter("Quần")}>
@@ -370,7 +322,7 @@ function ProShop(props) {
                     </li>
                   </ul>
                 </div>
-                <div className="col-12 col-lg-12 col-md-6">
+                {/* <div className="col-12 col-lg-12 col-md-6">
                   <h5>Lọc sản phẩm</h5>
                   <RangeSlider
                     defaultValue={[10, 50]}
@@ -399,8 +351,262 @@ function ProShop(props) {
                   <div className="button justify-content-start">
                     <button onClick={() => filterPrice()}>Lọc</button>
                   </div>
+                </div> */}
+                <div className={styles.wrap}>
+                  <div
+                    className={
+                      "col-12 col-lg-12 col-md-6" + " " + styles.center_item
+                    }
+                  >
+                    <h5
+                      className="w-100 d-flex justify-content-between align-items-center"
+                      onClick={() => setShowFilter1(!showFilter1)}
+                    >
+                      Giới tính{" "}
+                      {showFilter1 ? (
+                        <i className="fa-light fa-chevron-up"></i>
+                      ) : (
+                        <i className="fa-light fa-chevron-down"></i>
+                      )}
+                    </h5>
+                    {showFilter1 && (
+                      <div
+                        className={
+                          styles.item_content + " " + "d-flex flex-column"
+                        }
+                      >
+                        <label htmlFor="gen1">
+                          <input type="radio" id="gen1" name="gen" /> Nam
+                        </label>
+                        <label htmlFor="gen2">
+                          <input type="radio" id="gen2" name="gen" /> Nữ
+                        </label>
+                        <label htmlFor="gen3">
+                          <input type="radio" id="gen3" name="gen" /> Unisex
+                        </label>
+                      </div>
+                    )}
+                  </div>
+                  <div
+                    className={
+                      "col-12 col-lg-12 col-md-6" + " " + styles.center_item
+                    }
+                  >
+                    <h5
+                      className="w-100 d-flex justify-content-between align-items-center"
+                      onClick={() => setShowFilter2(!showFilter2)}
+                    >
+                      Trẻ em
+                      {showFilter2 ? (
+                        <i className="fa-light fa-chevron-up"></i>
+                      ) : (
+                        <i className="fa-light fa-chevron-down"></i>
+                      )}
+                    </h5>
+                    {showFilter2 && (
+                      <div
+                        className={
+                          styles.item_content + " " + "d-flex flex-column"
+                        }
+                      >
+                        <label htmlFor="kid1">
+                          <input type="radio" id="kid1" name="kid" /> Nam
+                        </label>
+                        <label htmlFor="kid2">
+                          <input type="radio" id="kid2" name="kid" /> Nữ
+                        </label>
+                      </div>
+                    )}
+                  </div>
+                  <div
+                    className={
+                      "col-12 col-lg-12 col-md-6" + " " + styles.center_item
+                    }
+                  >
+                    <h5
+                      className="w-100 d-flex justify-content-between align-items-center"
+                      onClick={() => setShowFilter3(!showFilter3)}
+                    >
+                      Giá
+                      {showFilter3 ? (
+                        <i className="fa-light fa-chevron-up"></i>
+                      ) : (
+                        <i className="fa-light fa-chevron-down"></i>
+                      )}
+                    </h5>
+                    {showFilter3 && (
+                      <div
+                        className={
+                          styles.item_content + " " + "d-flex flex-column"
+                        }
+                      >
+                        {price.map((item, index) => (
+                          <label htmlFor={item.value} key={index}>
+                            <input type="radio" name="price" id={item.value} />{" "}
+                            {item.label}
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  <div
+                    className={
+                      "col-12 col-lg-12 col-md-6" + " " + styles.center_item
+                    }
+                  >
+                    <h5
+                      className="w-100 d-flex justify-content-between align-items-center"
+                      onClick={() => setShowFilter4(!showFilter4)}
+                    >
+                      Màu sắc
+                      {showFilter4 ? (
+                        <i className="fa-light fa-chevron-up"></i>
+                      ) : (
+                        <i className="fa-light fa-chevron-down"></i>
+                      )}
+                    </h5>
+                    {showFilter4 && (
+                      <div
+                        className={
+                          styles.item_content + " " + "d-flex flex-column"
+                        }
+                      >
+                        <div className="d-flex flex-wrap">
+                          {color.map((i) => (
+                            <div
+                              key={i}
+                              className={
+                                "d-flex flex-column align-items-center col-4" +
+                                " " +
+                                styles.color_item
+                              }
+                            >
+                              <div
+                                className={styles.color}
+                                style={{
+                                  width: 20,
+                                  height: 20,
+                                  backgroundColor: i,
+                                }}
+                              ></div>
+                              <span>{i}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <div
+                    className={
+                      "col-12 col-lg-12 col-md-6" + " " + styles.center_item
+                    }
+                  >
+                    <h5
+                      className="w-100 d-flex justify-content-between align-items-center"
+                      onClick={() => setShowFilter5(!showFilter5)}
+                    >
+                      Thương hiệu
+                      {showFilter5 ? (
+                        <i className="fa-light fa-chevron-up"></i>
+                      ) : (
+                        <i className="fa-light fa-chevron-down"></i>
+                      )}
+                    </h5>
+                    {showFilter5 && (
+                      <div
+                        className={
+                          styles.item_content + " " + "d-flex flex-column"
+                        }
+                      >
+                        {brand.map((it, id) => (
+                          <label htmlFor={it.value} key={id}>
+                            <input type="radio" id={it.value} name="brand" />{" "}
+                            {it.name}
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
+            </div>
+          </div>
+          <div
+            className={
+              hiddenFilter ? "col-12" : "col-12 col-lg-9" + " " + styles.right
+            }
+            // data-aos="fade-right"
+          >
+            <div
+              className={
+                "d-flex flex-wrap justify-content-between align-items-center" +
+                " " +
+                styles.header
+              }
+            >
+              <span className="col-12 col-sm-6">
+                {/* Hiển thị {data.currentDatas.length} trên {data.perData.length}{" "}
+                kết quả */}
+              </span>
+              <div
+                className="col-12 col-sm-6 d-flex align-items-center justify-content-start justify-content-sm-end"
+                data-aos="fade-left"
+              >
+                <span
+                  className={styles.hiddenFilter}
+                  onClick={() => setHiddenFilter(!hiddenFilter)}
+                >
+                  {hiddenFilter ? "Hiện bộ lọc" : "Ẩn bộ lọc"}
+                  <i className="fa-sharp fa-solid fa-shuffle"></i>
+                </span>
+                <Select
+                  options={options}
+                  styles={customStyles}
+                  onChange={({ value }) => sort(value)}
+                  defaultValue={options[0]}
+                  components={{ DropdownIndicator }}
+                />
+              </div>
+            </div>
+            <div className={"d-flex flex-wrap" + " " + styles.product}>
+              {proshopData.length <= 0 ? (
+                <div className="d-flex m-auto">
+                  <Loader size="md" content="Đang tải dữ liệu..." />
+                </div>
+              ) : (
+                data.currentDatas.map((item, index) => (
+                  <div
+                    key={index}
+                    className={"col-12 col-sm-6 col-lg-4" + " " + styles.item}
+                  >
+                    <div
+                      className={
+                        styles.info +
+                        " " +
+                        "d-flex flex-column align-items-center"
+                      }
+                      onClick={() =>
+                        router.push(`/proshop/${removeAccents(item.ten_vt)}`)
+                      }
+                    >
+                      <div className={styles.image} style={{ zIndex: 1003 }}>
+                        <Image
+                          alt={"Image" + index + 1}
+                          src="/images/Logo/Logo12.png"
+                          width={300}
+                          height={300}
+                          objectFit={"cover"}
+                        ></Image>
+                      </div>
+                      <h5>{item.ten_vt}</h5>
+                      <p>{item.gia_ban_le.toLocaleString("vi-VI")} VND</p>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+            <div className="d-flex justify-content-center">
+              <Pagination data={data} />
             </div>
           </div>
         </div>

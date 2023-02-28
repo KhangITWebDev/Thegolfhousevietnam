@@ -2697,24 +2697,24 @@ button {
   }
 }
 .container {
-  padding-left: 100px !important;
-  padding-right: 100px !important;
+  padding-left: 50px !important;
+  padding-right: 50px !important;
   @media screen and (min-width: 1520px) {
-    padding-left: 200px !important;
-    padding-right: 200px !important;
+    padding-left: 100px !important;
+    padding-right: 100px !important;
   }
   @media screen and (min-width: 1800px) {
-    padding-left: 280px !important;
-    padding-right: 280px !important;
+    padding-left: 140px !important;
+    padding-right: 140px !important;
   }
   @media screen and (min-width: 1920px) {
-    padding-left: 300px !important;
-    padding-right: 300px !important;
+    padding-left: 150px !important;
+    padding-right: 150px !important;
   }
   max-width: 100% !important;
   @media screen and (max-width: 992px) {
-    padding-left: 50px !important;
-    padding-right: 50px !important;
+    padding-left: 25px !important;
+    padding-right: 25px !important;
   }
   @media screen and (max-width: 768px) {
     padding-left: 25px !important;
@@ -2858,6 +2858,34 @@ button {
     }
     @media screen and (max-width: 576px) {
       font-size: 14px;
+    }
+  }
+  .deliver {
+    margin-top: 30px;
+    .left,
+    .right {
+      width: 150px;
+      height: 1px;
+      background-color: #000;
+    }
+    span {
+      font-size: 24px;
+      text-transform: uppercase;
+    }
+    .left {
+      margin-right: 10px;
+    }
+    .right {
+      margin-left: 10px;
+    }
+  }
+  .social {
+    margin-top: 20px;
+    .fb {
+      padding-right: 10px;
+    }
+    .gg {
+      padding-left: 10px;
     }
   }
   .button {

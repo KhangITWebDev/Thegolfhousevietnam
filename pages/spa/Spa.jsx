@@ -176,7 +176,7 @@ function Spa(props) {
               layout="fill"
             ></Image>
             <div className={styles.bannerv2_content}>
-              <div className="h-100 col-10 mx-auto d-flex flex-wrap-reverse align-items-start">
+              <div className="h-100 col-10 mx-auto d-flex flex-wrap-reverse flex-md-nowrap align-items-start">
                 <div className={"col-12 col-md-6" + " " + styles.left}>
                   <h2>{imageHairNailSpa[0]?.title}</h2>
                   <div
@@ -190,11 +190,7 @@ function Spa(props) {
                       loader={({ src }) =>
                         `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
                       }
-                      src={
-                        imageHairNailSpa[0]?.images[
-                          imageHairNailSpa[0]?.images?.length - 1
-                        ]?.source
-                      }
+                      src={imageHairNailSpa[0]?.images[0]?.source}
                       layout="fill"
                       objectFit="cover"
                     />
@@ -207,7 +203,7 @@ function Spa(props) {
                       loader={({ src }) =>
                         `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
                       }
-                      src={imageHairNailSpa[0]?.images[0]?.source}
+                      src={imageHairNailSpa[0]?.images[1]?.source}
                       layout="fill"
                       objectFit="cover"
                     />

@@ -232,7 +232,7 @@ function MainLayout({ children }) {
         )}
         <RightMenu handleCloseRightMenu={handleCloseRightMenu} />
         <Cart handleCloseCart={handleCloseCart} cart={cart} />
-        {router.query.open && (
+        {open2 && (
           <SignIn
             errors={errors2}
             register={register2}

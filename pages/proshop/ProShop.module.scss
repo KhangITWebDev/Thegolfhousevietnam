@@ -81,6 +81,21 @@
   }
   .content {
     margin-top: 40px;
+    .hiddenFilter {
+      font-size: 18px;
+      font-weight: 500;
+      color: #000 !important;
+      margin-right: 50px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      &:hover {
+        color: #576e33 !important;
+      }
+      i {
+        margin-left: 10px;
+      }
+    }
     .header {
       span {
         font-size: 18px;
@@ -105,20 +120,22 @@
         //   z-index: 0 !important;
         // }
         margin-top: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
         &:nth-child(odd) {
-          padding-right: 10px;
+          // padding-right: 10px;
           @media screen and (max-width: 567px) {
             padding-right: 0px;
           }
         }
         &:nth-child(even) {
-          padding-left: 10px;
+          // padding-left: 10px;
           @media screen and (max-width: 567px) {
             padding-left: 0px;
           }
         }
         &:not(:first-child) {
-          padding-left: 10px;
+          // padding-left: 10px;
           @media screen and (max-width: 567px) {
             padding-top: 20px;
           }
@@ -127,7 +144,7 @@
           h5 {
             font-size: 18px;
             text-align: center;
-            font-weight: 700;
+            font-weight: 400;
             line-height: 1.4;
             padding-right: 15px;
             padding-left: 15px;
@@ -165,7 +182,6 @@
       }
     }
     .tabs {
-      background: #f8f8f4;
       padding: 40px 30px;
       .top {
         div:first-child {
@@ -185,24 +201,50 @@
       }
       .center {
         margin-top: 20px;
-        div:first-child {
-          h5 {
-            margin-bottom: 10px;
-          }
+        .wrap {
+          margin-top: 40px;
+          width: 100%;
         }
-        div:not(:first-child) {
+        &_item {
+          margin-top: 20px;
+          border-top: 2px solid #eee;
+          padding-top: 20px;
+          cursor: pointer;
           h5 {
-            margin-top: 15px;
-            margin-bottom: 20px;
-            @media screen and (max-width: 992px) and (min-width: 768px) {
-              margin-top: 0px;
+            font-weight: 400;
+          }
+          .item_content {
+            label {
+              margin-top: 15px;
+            }
+            .color_item {
+              margin-top: 20px;
+              span {
+                font-size: 14px;
+                margin-top: 5px;
+                text-transform: capitalize;
+              }
             }
           }
-          button {
-            margin-top: 20px !important;
-            margin-left: 0px;
-          }
         }
+        // div:first-child {
+        //   h5 {
+        //     margin-bottom: 10px;
+        //   }
+        // }
+        // div:not(:first-child) {
+        //   h5 {
+        //     margin-top: 15px;
+        //     margin-bottom: 20px;
+        //     @media screen and (max-width: 992px) and (min-width: 768px) {
+        //       margin-top: 0px;
+        //     }
+        //   }
+        //   button {
+        //     margin-top: 20px !important;
+        //     margin-left: 0px;
+        //   }
+        // }
       }
       .bottom {
         margin-top: 45px;
@@ -223,8 +265,6 @@
         color: #8e8e8e;
       }
       ul {
-        list-style: disc;
-        padding-left: 18px !important;
         li {
           cursor: pointer;
           font-weight: 400;

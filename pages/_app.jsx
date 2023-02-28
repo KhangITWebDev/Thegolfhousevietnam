@@ -23,7 +23,6 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 import RouteGuard from "./RouteGuard";
-import Seo from "../components/Seo/seo";
 
 function MyApp({ Component, pageProps }) {
   const [showChild, setShowChild] = useState(false);
@@ -112,14 +111,36 @@ function MyApp({ Component, pageProps }) {
           variants={variants}
           animate={cursorVariants}
         /> */}
-        <Seo
-          data={{
-            title: "WordPress Themes & Website Templates from ThemeForest",
-            description:
-              "Step by step tutorials to build a full CRUD website using NextJS for beginners",
-            url: "https://saas-ecommerce.vercel.app/",
-            thumbnailUrl:
-              "https://cdn.create.vista.com/downloads/348b83d7-7b70-4496-ba3f-b052b3454117_1024.jpeg",
+        <DefaultSeo
+          title="The Golf House"
+          description="Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi."
+          additionalLinkTags={[
+            {
+              rel: "icon",
+              href: "/images/Logo/logo2.png",
+            },
+            {
+              rel: "apple-touch-icon",
+              href: "/images/Logo/logo2.png",
+              sizes: "76x76",
+            },
+          ]}
+          openGraph={{
+            type: "website",
+            locale: "en_IE",
+            url: "https://www.url.ie/",
+            siteName: "SiteName",
+            images: {
+              url: "/images/Logo/Logo12.png",
+              width: 850,
+              height: 650,
+              alt: "Photo of text",
+            },
+          }}
+          twitter={{
+            handle: "@handle",
+            site: "@site",
+            cardType: "summary_large_image",
           }}
         />
         <RouteGuard>

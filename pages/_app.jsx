@@ -105,12 +105,6 @@ function MyApp({ Component, pageProps }) {
     return <></>;
   } else {
     return (
-      <Provider store={store}>
-        {/* <motion.div
-          className="cursor"
-          variants={variants}
-          animate={cursorVariants}
-        /> */}
         <NextSeo
           title="The Golf House"
           description="Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi."
@@ -142,11 +136,18 @@ function MyApp({ Component, pageProps }) {
             site: "@site",
             cardType: "summary_large_image",
           }}
-        />
+        >
+      <Provider store={store}>
+        {/* <motion.div
+          className="cursor"
+          variants={variants}
+          animate={cursorVariants}
+        /> */}
         <RouteGuard>
           <Component {...pageProps} />
         </RouteGuard>
       </Provider>
+        </NextSeo>
     );
   }
 }

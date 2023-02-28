@@ -118,23 +118,15 @@ function MyApp({ Component, pageProps }) {
           <meta charset="utf-8" />
           <title>{title}</title>
           <meta name="description" content={description} />
-          <meta name="og:title" content={title} key="og-title" />
-          <meta name="og:description" content={description} key="og-desc" />
-          <meta name="og:url" content={router.pathname} key="og-url" />
-          <meta name="og:image" content={image} key="og-image" />
-          <meta name="og:site_name" content={description} key="og-site" />
-          <meta name="twitter:title" content={title} key="tw-title" />
-          <meta
-            name="twitter:description"
-            content={description}
-            key="tw-desc"
-          />
-          <meta name="twitter:image" content={image} key="tw-image" />
-          <meta
-            name="twitter:card"
-            content="summary_large_image"
-            key="tw-card"
-          />
+          <meta name="og:title" content={title} />
+          <meta name="og:description" content={description} />
+          <meta name="og:url" content={router.pathname} />
+          <meta name="og:image" content={image} />
+          <meta name="og:site_name" content={description} />
+          <meta name="twitter:title" content={title} />
+          <meta name="twitter:description" content={description} />
+          <meta name="twitter:image" content={image} />
+          <meta name="twitter:card" content="summary_large_image" />
           <link href="/images/Logo/Logo12.png" rel="icon"></link>
           <link href="/images/Logo/Logo12.png" rel="apple-touch-icon"></link>
           <link rel="preconnect" href="https://fonts.googleapis.com" />

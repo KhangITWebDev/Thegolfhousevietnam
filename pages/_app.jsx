@@ -111,7 +111,7 @@ function MyApp({ Component, pageProps }) {
           variants={variants}
           animate={cursorVariants}
         /> */}
-        <DefaultSeo
+        {/* <DefaultSeo
           title="The Golf House"
           description="Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi."
           additionalLinkTags={[
@@ -145,7 +145,7 @@ function MyApp({ Component, pageProps }) {
             site: "@site",
             cardType: "summary_large_image",
           }}
-        />
+        /> */}
         <RouteGuard>
           <Component {...pageProps} />
         </RouteGuard>

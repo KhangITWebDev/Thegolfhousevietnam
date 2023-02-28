@@ -3,7 +3,6 @@
   .bannerv2 {
     height: 600px;
     position: relative;
-    margin-top: 30px;
     &_content {
       position: absolute;
       width: 100%;
@@ -101,7 +100,6 @@
     margin-bottom: 20px;
   }
   .list {
-    margin-bottom: 90px;
   }
   .product,
   .intro,
@@ -109,7 +107,6 @@
     .bannerv2 {
       height: 600px;
       position: relative;
-      margin-top: 30px;
       &_content {
         position: absolute;
         width: 100%;
@@ -205,6 +202,18 @@
     }
   }
   .intro {
+    .bannerv2 {
+      height: 700px;
+      &_content {
+        .right {
+          position: relative;
+          height: 550px;
+          span {
+            margin-left: 50px !important;
+          }
+        }
+      }
+    }
     .left {
       padding-top: 0px !important;
       h3 {
@@ -213,13 +222,9 @@
       }
     }
     .right {
-      span {
-        margin-right: 50px !important;
-      }
     }
   }
   .green_spa {
-    margin-top: 40px !important;
     .bannerv2 {
       margin-top: 0px;
       height: 400px;
@@ -404,11 +409,10 @@
   }
   .foscus {
     position: relative;
-    margin-top: 40px;
     .image_intro {
       position: relative;
       width: 100%;
-      height: 800px;
+      height: 600px;
     }
     .content {
       position: absolute;

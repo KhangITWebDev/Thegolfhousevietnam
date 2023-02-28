@@ -93,10 +93,7 @@ function MyApp({ Component, pageProps }) {
 
   const textEnter = () => setCursorVariants("text");
   const textLeave = () => setCursorVariants("default");
-  const title = "The Golf House";
-  const description =
-    "Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi";
-  const image = "https://thegolfhousevietnam.com/images/Logo/logo2.png";
+
   useEffect(() => {
     $("h2").on("mouseenter", textEnter);
     $("h2").on("mouseleave", textLeave);
@@ -114,26 +111,38 @@ function MyApp({ Component, pageProps }) {
           variants={variants}
           animate={cursorVariants}
         /> */}
-        <Head>
-          <meta
-            property="zalo-platform-site-verification"
-            content="NlFW6QhNR28knTmYxiS92XNKfJtvfNvbD38"
-          />
-          <meta charset="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <meta name="theme-color" content="#000000" />
-          <meta
-            name="image"
-            content="https://fostech.vn/assets/img/logo/LOGOFOS.png"
-          />
-          <meta name="description" content="Simple & Conformity Solution" />
-          <meta
-            property="og:image"
-            content="https://fostech.vn/assets/img/logo/LOGOFOS.png"
-          />
-          <meta name="og:description" content="Simple & Conformity Solution" />
-          <title>The Golf House</title>
-        </Head>
+        <DefaultSeo
+          title="The Golf House"
+          description="Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi."
+          additionalLinkTags={[
+            {
+              rel: "icon",
+              href: "/images/Logo/logo2.png",
+            },
+            {
+              rel: "apple-touch-icon",
+              href: "/images/Logo/logo2.png",
+              sizes: "76x76",
+            },
+          ]}
+          openGraph={{
+            type: "website",
+            locale: "en_IE",
+            url: "https://www.url.ie/",
+            siteName: "SiteName",
+            images: {
+              url: "/images/Logo/Logo12.png",
+              width: 850,
+              height: 650,
+              alt: "Photo of text",
+            },
+          }}
+          twitter={{
+            handle: "@handle",
+            site: "@site",
+            cardType: "summary_large_image",
+          }}
+        />
         <RouteGuard>
           <Component {...pageProps} />
         </RouteGuard>

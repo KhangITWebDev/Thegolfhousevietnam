@@ -128,7 +128,7 @@ function MyApp({ Component, pageProps }) {
           />
           <meta name="description" content="Simple & Conformity Solution" />
           <meta
-            name="og:image"
+            property="og:image"
             content="https://fostech.vn/assets/img/logo/LOGOFOS.png"
           />
           <meta name="og:description" content="Simple & Conformity Solution" />

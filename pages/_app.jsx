@@ -133,7 +133,7 @@ function MyApp({ Component, pageProps }) {
             url: "https://www.url.ie/",
             siteName: "SiteName",
             images: {
-              url: "/images/Logo/Logo12.png",
+              url: "https://thegolfhousevietnam.vercel.app/images/Logo/logo2.png",
               width: 850,
               height: 650,
               alt: "Photo of text",

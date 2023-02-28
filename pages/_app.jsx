@@ -121,7 +121,7 @@ function MyApp({ Component, pageProps }) {
           <meta property="og:description" content={description} key="og-desc" />
           <meta property="og:url" content={router.pathname} key="og-url" />
           <meta property="og:image" content={image} key="og-image" />
-          <meta property="og:site_name" content="mysitename" key="og-site" />
+          <meta property="og:site_name" content={description} key="og-site" />
           <meta name="twitter:title" content={title} key="tw-title" />
           <meta
             name="twitter:description"

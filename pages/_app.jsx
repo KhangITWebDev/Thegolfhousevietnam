@@ -18,7 +18,7 @@ import $ from "jquery";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { DefaultSeo } from "next-seo";
+import { DefaultSeo, NextSeo } from "next-seo";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
@@ -111,9 +111,11 @@ function MyApp({ Component, pageProps }) {
           variants={variants}
           animate={cursorVariants}
         /> */}
-        <DefaultSeo
-          title="The Golf House"
-          description="Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi."
+        <NextSeo
+          title="Avneesh Agarwal"
+          titleTemplate="Avneesh Agarwal"
+          defaultTitle="Avneesh Agarwal"
+          description="A full stack web developer, who loves to design and develop beautiful websites. I have been coding for over a year now. One of my hobbies is writing, I love to document my journey by writing blog posts and also teach others through them."
           additionalLinkTags={[
             {
               rel: "icon",

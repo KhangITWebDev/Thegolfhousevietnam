@@ -18,7 +18,7 @@ import $ from "jquery";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { DefaultSeo, NextSeo } from "next-seo";
+import { DefaultSeo } from "next-seo";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
@@ -105,30 +105,48 @@ function MyApp({ Component, pageProps }) {
     return <></>;
   } else {
     return (
-      <>
-        <Head>
-          <title>Title of your website</title>
-          <meta
-            name="description"
-            content="description of your website will go here"
-          />
-          <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="/apple-touch-icon.png"
-          />
-        </Head>
-        <Provider store={store}>
-          {/* <motion.div
+      <Provider store={store}>
+        {/* <motion.div
           className="cursor"
           variants={variants}
           animate={cursorVariants}
         /> */}
-          <RouteGuard>
-            <Component {...pageProps} />
-          </RouteGuard>
-        </Provider>
-      </>
+        <DefaultSeo
+          title="The Golf House"
+          description="Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi."
+          additionalLinkTags={[
+            {
+              rel: "icon",
+              href: "/images/Logo/logo2.png",
+            },
+            {
+              rel: "apple-touch-icon",
+              href: "/images/Logo/logo2.png",
+              sizes: "76x76",
+            },
+          ]}
+          openGraph={{
+            type: "website",
+            locale: "en_IE",
+            url: router.pathname,
+            siteName: "The Golf House",
+            images: {
+              url: "/images/Logo/Logo12.png",
+              width: 850,
+              height: 650,
+              alt: "Photo of text",
+            },
+          }}
+          twitter={{
+            handle: "@handle",
+            site: "@site",
+            cardType: "summary_large_image",
+          }}
+        />
+        <RouteGuard>
+          <Component {...pageProps} />
+        </RouteGuard>
+      </Provider>
     );
   }
 }

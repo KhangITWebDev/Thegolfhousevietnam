@@ -22,6 +22,7 @@ import {
   getUserRegisterData,
   PostSignTrial,
 } from "../../store/redux/CourseReducer/course.action";
+import { DefaultSeo } from "next-seo";
 const PHONE_REGEX = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i;
 const schema = yup.object().shape({
   from_name: yup.string().required("Vui lòng nhập họ tên"),
@@ -190,6 +191,41 @@ function HomePage(props) {
   const [swiper2, setSwiper2] = React.useState(null);
   return (
     <>
+      <DefaultSeo
+        title="The Golf House"
+        description="Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi."
+        additionalLinkTags={[
+          {
+            rel: "icon",
+            href: "/images/Logo/logo2.png",
+          },
+          {
+            rel: "apple-touch-icon",
+            href: "/images/Logo/logo2.png",
+            sizes: "76x76",
+          },
+        ]}
+        openGraph={{
+          type: "website",
+          locale: "en_IE",
+          url: router.pathname,
+          siteName: "The Golf House",
+          title: "The Golf House",
+          description:
+            "Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi.",
+          images: {
+            url: "https://thegolfhousevietnam.vercel.app/images/Logo/Logo12.png",
+            width: 850,
+            height: 650,
+            alt: "Photo of text",
+          },
+        }}
+        twitter={{
+          handle: "@handle",
+          site: "@site",
+          cardType: "summary_large_image",
+        }}
+      />
       <div className={styles.home_page}>
         <div className={styles.banner} id="banner" data-aos="fade-right">
           <Swiper

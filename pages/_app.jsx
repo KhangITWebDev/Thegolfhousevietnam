@@ -18,7 +18,7 @@ import $ from "jquery";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { DefaultSeo, NextSeo } from "next-seo";
+import { DefaultSeo } from "next-seo";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
@@ -105,49 +105,38 @@ function MyApp({ Component, pageProps }) {
     return <></>;
   } else {
     return (
-        <NextSeo
-          title="The Golf House"
-          description="Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi."
-          additionalLinkTags={[
-            {
-              rel: "icon",
-              href: "/images/Logo/logo2.png",
-            },
-            {
-              rel: "apple-touch-icon",
-              href: "/images/Logo/logo2.png",
-              sizes: "76x76",
-            },
-          ]}
-          openGraph={{
-            type: "website",
-            locale: "en_IE",
-            url: "https://www.url.ie/",
-            siteName: "SiteName",
-            images: {
-              url: "/images/Logo/Logo12.png",
-              width: 850,
-              height: 650,
-              alt: "Photo of text",
-            },
-          }}
-          twitter={{
-            handle: "@handle",
-            site: "@site",
-            cardType: "summary_large_image",
-          }}
-        >
       <Provider store={store}>
         {/* <motion.div
           className="cursor"
           variants={variants}
           animate={cursorVariants}
         /> */}
+        <Head>
+          <meta charset="utf-8" />
+          <title>LIO HOLDING</title>
+          <meta name="description" content="Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi." />
+          <meta
+            property="zalo-platform-site-verification"
+            content="NlFW6QhNR28knTmYxiS92XNKfJtvfNvbD38"
+          ></meta>
+          <meta name="theme-color" content="#000000"></meta>
+          <meta name="image" content="/images/Logo/Logo12.png"></meta>
+          {/* <meta name="description" content=""></meta> */}
+          <meta name="og:image" content="/images/Logo/Logo12.png"></meta>
+          <meta name="og:description" content=""></meta>
+          <link href="/images/Logo/Logo12.png" rel="icon" />
+          <link href="/images/Logo/Logo12.png" rel="apple-touch-icon"></link>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="true"
+          />
+        </Head>
         <RouteGuard>
           <Component {...pageProps} />
         </RouteGuard>
       </Provider>
-        </NextSeo>
     );
   }
 }

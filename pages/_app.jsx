@@ -117,6 +117,7 @@ function MyApp({ Component, pageProps }) {
         <Head>
           <meta charset="utf-8" />
           <title>{title}</title>
+          <meta name="description" content={description} />
           <meta property="og:title" content={title} key="og-title" />
           <meta property="og:description" content={description} key="og-desc" />
           <meta property="og:url" content={router.pathname} key="og-url" />

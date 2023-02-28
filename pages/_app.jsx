@@ -93,7 +93,10 @@ function MyApp({ Component, pageProps }) {
 
   const textEnter = () => setCursorVariants("text");
   const textLeave = () => setCursorVariants("default");
-
+  const title = "The Golf House";
+  const description =
+    "Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi";
+  const image = "https://thegolfhousevietnam.com/images/Logo/logo2.png";
   useEffect(() => {
     $("h2").on("mouseenter", textEnter);
     $("h2").on("mouseleave", textLeave);
@@ -113,28 +116,25 @@ function MyApp({ Component, pageProps }) {
         /> */}
         <Head>
           <meta charset="utf-8" />
-          <title>The Golf House</title>
+          <title>{title}</title>
+          <meta property="og:title" content={title} key="og-title" />
+          <meta property="og:description" content={description} key="og-desc" />
+          <meta property="og:url" content={router.pathname} key="og-url" />
+          <meta property="og:image" content={image} key="og-image" />
+          <meta property="og:site_name" content="mysitename" key="og-site" />
+          <meta name="twitter:title" content={title} key="tw-title" />
           <meta
-            name="description"
-            content="Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi"
+            name="twitter:description"
+            content={description}
+            key="tw-desc"
           />
+          <meta name="twitter:image" content={image} key="tw-image" />
           <meta
-            property="zalo-platform-site-verification"
-            content="NlFW6QhNR28knTmYxiS92XNKfJtvfNvbD38"
-          ></meta>
-          <meta name="theme-color" content="#000000"></meta>
-          <meta name="image" content="/images/Logo/Logo12.png"></meta>
-          <meta
-            name="description"
-            content="Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi"
-          ></meta>
-          <meta name="og:image" content="/images/Logo/Logo12.png"></meta>
-          <meta name="og:title" content="The Golf House"></meta>
-          <meta
-            name="og:description"
-            content="Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi"
+            name="twitter:card"
+            content="summary_large_image"
+            key="tw-card"
           />
-          <link href="/images/Logo/Logo12.png" rel="icon" />
+          <link href="/images/Logo/Logo12.png" rel="icon"></link>
           <link href="/images/Logo/Logo12.png" rel="apple-touch-icon"></link>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link

@@ -115,26 +115,24 @@ function MyApp({ Component, pageProps }) {
           animate={cursorVariants}
         /> */}
         <Head>
-          <meta charset="utf-8" />
-          <title>{title}</title>
-          <meta name="description" content={description} />
-          <meta name="og:title" content={title} />
-          <meta name="og:description" content={description} />
-          <meta name="og:url" content={router.pathname} />
-          <meta name="og:image" content={image} />
-          <meta name="og:site_name" content={description} />
-          <meta name="twitter:title" content={title} />
-          <meta name="twitter:description" content={description} />
-          <meta name="twitter:image" content={image} />
-          <meta name="twitter:card" content="summary_large_image" />
-          <link href="/images/Logo/Logo12.png" rel="icon"></link>
-          <link href="/images/Logo/Logo12.png" rel="apple-touch-icon"></link>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossOrigin="true"
+          <meta
+            property="zalo-platform-site-verification"
+            content="NlFW6QhNR28knTmYxiS92XNKfJtvfNvbD38"
           />
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="theme-color" content="#000000" />
+          <meta
+            name="image"
+            content="https://fostech.vn/assets/img/logo/LOGOFOS.png"
+          />
+          <meta name="description" content="Simple & Conformity Solution" />
+          <meta
+            name="og:image"
+            content="https://fostech.vn/assets/img/logo/LOGOFOS.png"
+          />
+          <meta name="og:description" content="Simple & Conformity Solution" />
+          <title>The Golf House</title>
         </Head>
         <RouteGuard>
           <Component {...pageProps} />

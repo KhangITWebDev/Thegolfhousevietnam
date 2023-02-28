@@ -130,8 +130,11 @@ function MyApp({ Component, pageProps }) {
             locale: "en_IE",
             url: router.pathname,
             siteName: "The Golf House",
+            title: "The Golf House",
+            description:
+              "Tại The Golf House Vietnam, tạo nên môi trường giúp học viên trải nghiệm việc học và chơi Golf dễ dàng và hiệu quả nhất là ưu tiên hàng đầu của chúng tôi.",
             images: {
-              url: "/images/Logo/Logo12.png",
+              url: "https://thegolfhousevietnam.vercel.app/images/Logo/Logo12.png",
               width: 850,
               height: 650,
               alt: "Photo of text",

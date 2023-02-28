@@ -118,11 +118,11 @@ function MyApp({ Component, pageProps }) {
           <meta charset="utf-8" />
           <title>{title}</title>
           <meta name="description" content={description} />
-          <meta property="og:title" content={title} key="og-title" />
-          <meta property="og:description" content={description} key="og-desc" />
-          <meta property="og:url" content={router.pathname} key="og-url" />
-          <meta property="og:image" content={image} key="og-image" />
-          <meta property="og:site_name" content={description} key="og-site" />
+          <meta name="og:title" content={title} key="og-title" />
+          <meta name="og:description" content={description} key="og-desc" />
+          <meta name="og:url" content={router.pathname} key="og-url" />
+          <meta name="og:image" content={image} key="og-image" />
+          <meta name="og:site_name" content={description} key="og-site" />
           <meta name="twitter:title" content={title} key="tw-title" />
           <meta
             name="twitter:description"

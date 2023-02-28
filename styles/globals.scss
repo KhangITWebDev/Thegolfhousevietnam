@@ -4354,3 +4354,50 @@ button {
     }
   }
 }
+#spa {
+  .touch-list {
+    margin-top: 30px !important;
+    .item {
+      margin-top: 30px;
+      &:nth-child(1),
+      &:nth-child(4) {
+        padding-right: 10px;
+      }
+      &:nth-child(3),
+      &:nth-child(6) {
+        padding-left: 10px;
+      }
+      &:nth-child(2),
+      &:nth-child(5) {
+        padding-right: 10px;
+        padding-left: 10px;
+      }
+      .image {
+        position: relative;
+        height: 100px;
+        width: 100px;
+        span {
+          padding-right: 10px !important;
+          border-radius: 50%;
+          border: 2px solid #000 !important;
+        }
+      }
+      .info {
+        padding-left: 10px;
+        h3 {
+          color: #355540;
+          font-size: 18px;
+          line-height: 1 !important;
+          margin-bottom: 30px;
+          font-weight: 700;
+        }
+        span {
+          font-size: 14px;
+          font-weight: 500;
+          font-style: italic;
+          color: #558e76;
+        }
+      }
+    }
+  }
+}

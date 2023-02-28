@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { Alert } from "react-bootstrap";
 import { Loader, Modal } from "rsuite";
@@ -17,17 +18,22 @@ function SignIn({
       password: "",
     });
   }, []);
+  const router = useRouter();
   return (
     <Modal
       open={true}
-      onClose={handleClose2}
+      onClose={() => {}}
       id="modal-signup"
       data-aos="fade-down"
       data-aos-delay="800"
     >
       <Modal.Header>
         <Modal.Title>Đăng nhập</Modal.Title>
-        <button onClick={handleClose2}>
+        <button
+          onClick={() => {
+            router.replace({ ...router.query, open: true });
+          }}
+        >
           <i className="fa-light fa-times"></i>
         </button>
       </Modal.Header>

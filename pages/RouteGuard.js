@@ -35,7 +35,9 @@ export default function RouteGuard({ children }) {
     if (!token && publicPaths.includes(path)) {
       setAuthorized(false);
       router.back();
-      router.replace({ ...router.query, open: true });
+      router.replace({ ...router.query, open: true }, undefined, {
+        shallow: false,
+      });
     } else {
       setAuthorized(true);
     }

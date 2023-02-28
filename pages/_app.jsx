@@ -106,7 +106,7 @@ function MyApp({ Component, pageProps }) {
   } else {
     return (
       <>
-        <NextSeo
+        <DefaultSeo
           title="Avneesh Agarwal"
           titleTemplate="Avneesh Agarwal"
           defaultTitle="Avneesh Agarwal"

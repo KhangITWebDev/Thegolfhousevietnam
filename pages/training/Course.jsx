@@ -147,17 +147,23 @@ const coursePromotion = [
         },
       },
       {
-        name: "2 HLV",
+        name: "Nhóm 2 HLV",
         pirce: {
           vga: 50400000,
           pga: 88200000,
         },
       },
       {
-        name: "3 HLV",
+        name: "Nhóm 3 HLV",
         pirce: {
           vga: 36000000,
           pga: 63000000,
+        },
+      },
+      {
+        name: "Nhóm 4 HLV",
+        pirce: {
+          pga: 50400000,
         },
       },
     ],
@@ -176,17 +182,23 @@ const coursePromotion = [
         },
       },
       {
-        name: "2 HLV",
+        name: "Nhóm 2 HLV",
         pirce: {
           vga: 108000000,
           pga: 176000000,
         },
       },
       {
-        name: "3 HLV",
+        name: "Nhóm 3 HLV",
         pirce: {
           vga: 72000000,
           pga: 126000000,
+        },
+      },
+      {
+        name: "Nhóm 4 HLV",
+        pirce: {
+          pga: 100800000,
         },
       },
     ],
@@ -205,17 +217,23 @@ const coursePromotion = [
         },
       },
       {
-        name: "2 HLV",
+        name: "Nhóm 2 HLV",
         pirce: {
           vga: 140000000,
           pga: 245000000,
         },
       },
       {
-        name: "3 HLV",
+        name: "Nhóm 3 HLV",
         pirce: {
           vga: 100000000,
           pga: 175000000,
+        },
+      },
+      {
+        name: "Nhóm 4 HLV",
+        pirce: {
+          pga: 140000000,
         },
       },
     ],
@@ -234,17 +252,23 @@ const coursePromotion = [
         },
       },
       {
-        name: "2 HLV",
+        name: "Nhóm2 HLV",
         pirce: {
           vga: 280000000,
           pga: 490000000,
         },
       },
       {
-        name: "3 HLV",
+        name: "Nhóm3 HLV",
         pirce: {
           vga: 200000000,
           pga: 350000000,
+        },
+      },
+      {
+        name: "Nhóm 4 HLV",
+        pirce: {
+          pga: 280000000,
         },
       },
     ],

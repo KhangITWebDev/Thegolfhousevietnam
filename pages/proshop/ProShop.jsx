@@ -85,7 +85,7 @@ const price = [
   },
   {
     value: "price2",
-    label: "1.000.001 VND - 5.000.000 VND",
+    label: "1.000.000 VND - 4.999.999 VND",
   },
   {
     value: "price3",
@@ -240,14 +240,37 @@ function ProShop(props) {
   const sectiontitle = contents.filter(
     (item) => item.category === "63bc4b5739d2a23b06d91f9e"
   );
-  const filterPrice = () => {
-    let priceMin = maxFilterPrice * (value[0] / 100);
-    let priceMax = maxFilterPrice * (value[1] / 100);
-    const dataSearch = proshopData.filter(
-      (x) => x.gia_ban_le >= priceMin && x.gia_ban_le <= priceMax
-    );
-    data.setPerData(dataSearch);
+  const filterPrice = (e) => {
+    const { value } = e.target;
     data.setCurrentPage(1);
+    switch (value) {
+      case "price1": {
+        const Newest = proshopData.filter((x) => x.gia_ban_le < 1000000);
+        data.setPerData(Newest);
+        break;
+      }
+      case "price2": {
+        const Newest = proshopData.filter(
+          (x) => x.gia_ban_le >= 1000000 && x.gia_ban_le < 4999999
+        );
+        data.setPerData(Newest);
+        break;
+      }
+      case "price2": {
+        const Newest = proshopData.filter(
+          (x) => x.gia_ban_le >= 5000000 && x.gia_ban_le < 9999999
+        );
+        data.setPerData(Newest);
+        break;
+      }
+      case "price4": {
+        const Newest = proshopData.filter((x) => x.gia_ban_le >= 10000000);
+        data.setPerData(Newest);
+        break;
+      }
+      default:
+        break;
+    }
   };
   return (
     <div className={styles.proshop_page}>
@@ -322,36 +345,6 @@ function ProShop(props) {
                     </li>
                   </ul>
                 </div>
-                {/* <div className="col-12 col-lg-12 col-md-6">
-                  <h5>Lọc sản phẩm</h5>
-                  <RangeSlider
-                    defaultValue={[10, 50]}
-                    tooltip={false}
-                    onChange={(value) => {
-                      if (value[1] === 0) {
-                        setValue([1, 2]);
-                      } else {
-                        setValue(value);
-                      }
-                    }}
-                  />
-                  <span>
-                    Giá:{" "}
-                    {value[0] === 0
-                      ? minFilterPrice.toLocaleString("vi-VI")
-                      : Math.floor(
-                          maxFilterPrice * (value[0] / 100)
-                        ).toLocaleString("vi-VI")}{" "}
-                    -{" "}
-                    {Math.floor(
-                      maxFilterPrice * (value[1] / 100)
-                    ).toLocaleString("vi-VI")}{" "}
-                    VND
-                  </span>
-                  <div className="button justify-content-start">
-                    <button onClick={() => filterPrice()}>Lọc</button>
-                  </div>
-                </div> */}
                 <div className={styles.wrap}>
                   <div
                     className={
@@ -442,7 +435,13 @@ function ProShop(props) {
                       >
                         {price.map((item, index) => (
                           <label htmlFor={item.value} key={index}>
-                            <input type="radio" name="price" id={item.value} />{" "}
+                            <input
+                              type="radio"
+                              name="price"
+                              id={item.value}
+                              value={item.value}
+                              onChange={(e) => filterPrice(e)}
+                            />{" "}
                             {item.label}
                           </label>
                         ))}

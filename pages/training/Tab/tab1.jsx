@@ -66,10 +66,14 @@ function Tab1({ item }) {
                 <p>
                   Số buổi: <strong>{item.day}</strong>
                 </p>
-                <p>
-                  Chi phí HLV VGA:
-                  <strong>{x?.pirce?.vga?.toLocaleString("vi-VI")} VND</strong>
-                </p>
+                {x?.pirce?.vga && (
+                  <p>
+                    Chi phí HLV VGA:
+                    <strong>
+                      {x?.pirce?.vga?.toLocaleString("vi-VI")} VND
+                    </strong>
+                  </p>
+                )}
                 <p>
                   Chi phí HLV PGA:{" "}
                   <strong>{x?.pirce?.pga?.toLocaleString("vi-VI")} VND</strong>

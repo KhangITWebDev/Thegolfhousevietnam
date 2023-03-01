@@ -4523,11 +4523,14 @@ button {
       justify-content: center;
     }
     .nav-item {
-      width: 50%;
+      width: 40%;
       // height: 100px;
       display: flex;
       justify-content: center;
-
+      .nav-link {
+        width: 100px;
+        height: 100px;
+      }
       .nav-link::after {
         display: none;
       }
@@ -4536,20 +4539,21 @@ button {
           display: none;
         }
       }
-      &:first-child {
+      &:nth-child(odd) {
         border-right: 1px solid #ccc;
-        padding-right: 30px;
-        button {
-          margin-left: auto;
-        }
+        // padding-right: 30px;
+        // button {
+        //   margin-left: auto;
+        // }
       }
       &:nth-child(2) {
-        padding-left: 30px;
-        button {
-          margin-right: auto;
-        }
+        // padding-left: 30px;
+        // // button {
+        //   margin-right: auto;
+        // }
       }
-      &:last-child {
+      &:last-child,
+      &:nth-child(3) {
         border-top: 1px solid #ccc;
       }
     }

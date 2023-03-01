@@ -71,25 +71,6 @@ const customStyles = {
   }),
 };
 
-const shopImg = [
-  {
-    id: 1,
-    url: "/images/Home/Shop/shop1.png",
-  },
-  {
-    id: 2,
-    url: "/images/Home/Shop/shop2.png",
-  },
-  {
-    id: 3,
-    url: "/images/Home/Shop/shop3.png",
-  },
-  {
-    id: 4,
-    url: "/images/Home/Shop/shop4.png",
-  },
-];
-
 const options = [
   { value: "1", label: "Mới nhất" },
   { value: "2", label: "Cũ nhất" },
@@ -124,13 +105,16 @@ const brand = [
   },
   {
     value: "brand2",
-    name: "Jordan",
+    name: "Addidas",
+  },
+  {
+    value: "brand3",
+    name: "Hazzy",
   },
 ];
 function ProShop(props) {
   const [value, setValue] = React.useState([0, 1]);
-  const maxFilterPrice = 100000000;
-  const minFilterPrice = 10000;
+  const [typeFilter, setTypeFilter] = useState("");
   const [hiddenFilter, setHiddenFilter] = useState(false);
   const [showFilter1, setShowFilter1] = useState(false);
   const [showFilter2, setShowFilter2] = useState(false);
@@ -161,13 +145,32 @@ function ProShop(props) {
       </components.DropdownIndicator>
     );
   };
-  const coast = proshopData.filter((x) => x.ten_vt?.includes("Áo"));
-  const trousers = proshopData.filter((x) => x.ten_vt?.includes("Quần"));
-  const skirt = proshopData.filter((x) => x.ten_vt?.includes("Váy"));
-  const glove = proshopData.filter((x) => x.ten_vt?.includes("Găng tay"));
-  const shose = proshopData.filter((x) => x.ten_vt?.includes("Giày"));
-  const golfClubs = proshopData.filter((x) => x.ten_vt?.includes("Gậy"));
-  const golfBall = proshopData.filter((x) => x.ten_nvt?.includes("Bóng"));
+  const coast = proshopData.filter((x) =>
+    x.ten_vt?.toLowerCase()?.includes("áo")
+  );
+  const trousers = proshopData.filter((x) =>
+    x.ten_vt?.toLowerCase()?.includes("quần")
+  );
+  const skirt = proshopData.filter((x) =>
+    x.ten_vt?.toLowerCase()?.includes("váy")
+  );
+  const glove = proshopData.filter(
+    (x) =>
+      x.ten_vt?.toLowerCase()?.includes("găng") ||
+      x.ten_vt?.toLowerCase()?.includes("glove")
+  );
+  const shose = proshopData.filter((x) =>
+    x.ten_vt?.toLowerCase()?.includes("giày")
+  );
+  const trangphuc = proshopData.filter((x) =>
+    x.ten_vt?.toLowerCase()?.includes("trang phục")
+  );
+  const fullset = proshopData.filter((x) =>
+    x.ten_vt?.toLowerCase()?.includes("full")
+  );
+  const hat = proshopData.filter((x) =>
+    x.ten_vt?.toLowerCase()?.includes("nón")
+  );
   const data = usePagination(proshopData, 6);
   const filter = (type) => {
     data.setCurrentPage(1);
@@ -184,8 +187,8 @@ function ProShop(props) {
         data.setPerData(trousers);
         break;
       }
-      case "Gậy": {
-        data.setPerData(golfClubs);
+      case "Găng bọc": {
+        data.setPerData(gloveWrap);
         break;
       }
       case "Găng tay": {
@@ -196,8 +199,16 @@ function ProShop(props) {
         data.setPerData(shose);
         break;
       }
-      case "Bóng": {
-        data.setPerData(golfBall);
+      case "Nón": {
+        data.setPerData(hat);
+        break;
+      }
+      case "Trang phục": {
+        data.setPerData(trangphuc);
+        break;
+      }
+      case "Full": {
+        data.setPerData(fullset);
         break;
       }
       default: {
@@ -287,9 +298,73 @@ function ProShop(props) {
         data.setPerData(Newest);
         break;
       }
+      case "gen1": {
+        const Newest = proshopData.filter((x) =>
+          x.ten_vt?.toLowerCase()?.includes("nam")
+        );
+        data.setPerData(Newest);
+        break;
+      }
+      case "gen2": {
+        const Newest = proshopData.filter((x) =>
+          x.ten_vt?.toLowerCase()?.includes("nữ")
+        );
+        data.setPerData(Newest);
+        break;
+      }
+      case "brand1": {
+        const Newest = proshopData.filter((x) =>
+          x.ten_vt?.toLowerCase()?.includes("nike")
+        );
+        data.setPerData(Newest);
+        break;
+      }
+      case "brand2": {
+        const Newest = proshopData.filter((x) =>
+          x.ten_vt?.toLowerCase()?.includes("addidas")
+        );
+        data.setPerData(Newest);
+        break;
+      }
+      case "brand3": {
+        const Newest = proshopData.filter((x) =>
+          x.ten_vt?.toLowerCase()?.includes("hazzy")
+        );
+        data.setPerData(Newest);
+        break;
+      }
       default:
         break;
     }
+  };
+  const [arr, setArr] = useState();
+  const pictureArray = (data) => {
+    let arr = [];
+    if (data?.picture) {
+      arr.push({
+        id: 1,
+        url: data.picture,
+      });
+    }
+    if (data?.picture2) {
+      arr.push({
+        id: 2,
+        url: data.picture2,
+      });
+    }
+    if (data?.picture3) {
+      arr.push({
+        id: 3,
+        url: data.picture3,
+      });
+    }
+    if (data?.picture4) {
+      arr.push({
+        id: 4,
+        url: data.picture4,
+      });
+    }
+    return arr;
   };
   const [showInfo2, setShowInfo2] = useState(-1);
   const [url, setUrl] = useState();
@@ -338,15 +413,15 @@ function ProShop(props) {
           >
             <div className={styles.tabs}>
               <div className={"d-flex flex-wrap" + " " + styles.top}>
-                <span>
-                  Hiển thị {data.currentDatas.length} trên {data.perData.length}{" "}
-                  kết quả
-                </span>
+                <span>Tổng cộng ({data.perData.length})</span>
               </div>
               <div className={"d-flex flex-wrap" + " " + styles.center}>
                 <div className="col-12 col-lg-12 col-md-6">
                   {/* <h5>Loại sản phẩm</h5> */}
                   <ul>
+                    <li onClick={() => filter("Full")}>
+                      Full set ({fullset.length})
+                    </li>
                     <li onClick={() => filter("Áo")}>Áo ({coast.length})</li>
                     <li onClick={() => filter("Quần")}>
                       Quần ({trousers.length})
@@ -355,14 +430,12 @@ function ProShop(props) {
                     <li onClick={() => filter("Giày")}>
                       Giày ({shose.length})
                     </li>
-                    <li onClick={() => filter("Găng tay")}>
-                      Găng tay ({glove.length})
+                    <li onClick={() => filter("Găng")}>
+                      Găng ({glove.length})
                     </li>
-                    <li onClick={() => filter("Bóng")}>
-                      Bóng Golf ({golfBall.length})
-                    </li>
-                    <li onClick={() => filter("Gậy")}>
-                      Gậy Golf ({golfClubs.length})
+                    <li onClick={() => filter("Bóng")}>Nón ({hat.length})</li>
+                    <li onClick={() => filter("Trang phục")}>
+                      Trang phục ({trangphuc.length})
                     </li>
                   </ul>
                 </div>
@@ -376,7 +449,7 @@ function ProShop(props) {
                       className="w-100 d-flex justify-content-between align-items-center"
                       onClick={() => setShowFilter1(!showFilter1)}
                     >
-                      Giới tính{" "}
+                      Giới tính
                       {showFilter1 ? (
                         <i className="fa-light fa-chevron-up"></i>
                       ) : (
@@ -390,14 +463,28 @@ function ProShop(props) {
                         }
                       >
                         <label htmlFor="gen1">
-                          <input type="radio" id="gen1" name="gen" /> Nam
+                          <input
+                            type="radio"
+                            id="gen1"
+                            value="gen1"
+                            name="gen"
+                            onChange={(e) => filterPrice(e)}
+                          />{" "}
+                          Nam
                         </label>
                         <label htmlFor="gen2">
-                          <input type="radio" id="gen2" name="gen" /> Nữ
+                          <input
+                            type="radio"
+                            id="gen2"
+                            value="gen2"
+                            name="gen"
+                            onChange={(e) => filterPrice(e)}
+                          />
+                          Nữ
                         </label>
-                        <label htmlFor="gen3">
+                        {/* <label htmlFor="gen3">
                           <input type="radio" id="gen3" name="gen" /> Unisex
-                        </label>
+                        </label> */}
                       </div>
                     )}
                   </div>
@@ -540,7 +627,13 @@ function ProShop(props) {
                       >
                         {brand.map((it, id) => (
                           <label htmlFor={it.value} key={id}>
-                            <input type="radio" id={it.value} name="brand" />{" "}
+                            <input
+                              type="radio"
+                              id={it.value}
+                              name="brand"
+                              value={it.value}
+                              onChange={(e) => filterPrice(e)}
+                            />
                             {it.name}
                           </label>
                         ))}
@@ -604,6 +697,7 @@ function ProShop(props) {
                     onMouseLeave={() => {
                       setShowInfo2(-1);
                       setUrl();
+                      pictureArray({});
                     }}
                   >
                     <div className={styles.info + " " + "d-flex flex-column"}>
@@ -611,75 +705,98 @@ function ProShop(props) {
                         <>
                           <div
                             className={styles.image}
-                            style={{ zIndex: 1003 }}
+                            style={{ zIndex: 1006, position: "relative" }}
+                            onClick={() =>
+                              router.push(
+                                `/proshop/${removeAccents(item.ten_vt)}`
+                              )
+                            }
                           >
                             {url ? (
                               <Image
                                 alt={"Image" + index + 1}
                                 src={url}
+                                loader={({ src }) =>
+                                  `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                                }
                                 width={300}
                                 height={300}
                                 objectFit={"cover"}
-                                onClick={() =>
-                                  router.push(
-                                    `/proshop/${removeAccents(item.ten_vt)}`
-                                  )
-                                }
                               ></Image>
                             ) : (
                               <Image
                                 alt={"Image" + index + 1}
-                                src="/images/Logo/Logo12.png"
+                                loader={({ src }) =>
+                                  `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                                }
+                                src={item.picture}
                                 width={300}
                                 height={300}
                                 objectFit={"cover"}
-                                onClick={() =>
-                                  router.push(
-                                    `/proshop/${removeAccents(item.ten_vt)}`
-                                  )
-                                }
                               ></Image>
                             )}
                           </div>
                           <div className="d-flex">
-                            {shopImg.map((x, y) => (
+                            {pictureArray(item)?.map((it, ind) => (
                               <div
-                                key={y}
+                                key={ind}
                                 className={styles.tool_img}
-                                onClick={() => setUrl(x.url)}
+                                onClick={() => setUrl(it.url)}
                               >
                                 <Image
-                                  alt={"Image" + y + 1}
-                                  src={x.url}
+                                  alt={"Image2"}
+                                  loader={({ src }) =>
+                                    `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                                  }
+                                  src={it.url}
                                   layout="fill"
                                   objectFit={"cover"}
                                 ></Image>
                               </div>
                             ))}
                           </div>
-                          <p>{item.gia_ban_le.toLocaleString("vi-VI")} VND</p>
+                          <div
+                            onClick={() =>
+                              router.push(
+                                `/proshop/${removeAccents(item.ten_vt)}`
+                              )
+                            }
+                          >
+                            <p>{item.gia_ban_le.toLocaleString("vi-VI")} VND</p>
+                          </div>
                         </>
                       ) : (
                         <>
                           <div
                             className={styles.image}
                             style={{ zIndex: 1003 }}
+                            onClick={() =>
+                              router.push(
+                                `/proshop/${removeAccents(item.ten_vt)}`
+                              )
+                            }
                           >
                             <Image
                               alt={"Image" + index + 1}
-                              src="/images/Logo/Logo12.png"
+                              loader={({ src }) =>
+                                `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                              }
+                              src={item.picture}
                               width={300}
                               height={300}
-                              onClick={() =>
-                                router.push(
-                                  `/proshop/${removeAccents(item.ten_vt)}`
-                                )
-                              }
                               objectFit={"cover"}
                             ></Image>
                           </div>
-                          <h5>{item.ten_vt}</h5>
-                          <p>{item.gia_ban_le.toLocaleString("vi-VI")} VND</p>
+                          <div
+                            onClick={() =>
+                              router.push(
+                                `/proshop/${removeAccents(item.ten_vt)}`
+                              )
+                            }
+                          >
+                            <h5>{item.ten_vt}</h5>
+                            <p>{item.gia_ban_le.toLocaleString("vi-VI")} VND</p>
+                          </div>
                         </>
                       )}
                     </div>

@@ -104,14 +104,18 @@ function Detail(props) {
     }
   };
   useEffect(() => {
-    $("#proshop-detail .swiper-pagination-bullet").each(function (indexC) {
-      $(this).css({
-        backgroundImage: `url(/images/Logo/Logo12.png)`,
-        backgroundPosition: "center",
-        backgroundSize: "contain",
-        opacity: 1,
-      });
-    });
+    pictureArray(proshopDetail)?.map((x, i) =>
+      $("#proshop-detail .swiper-pagination-bullet").each(function (indexC) {
+        $(this).css({
+          backgroundImage:
+            i === indexC &&
+            `url(https://api.fostech.vn${x.url}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93)`,
+          backgroundPosition: "center",
+          backgroundSize: "contain",
+          opacity: 1,
+        });
+      })
+    );
   }, []);
   const handleAddToCart = (item) => {
     if (token && token?.length > 0) {
@@ -214,6 +218,34 @@ function Detail(props) {
       }, 4000);
     }
   }, [token]);
+  const pictureArray = (data) => {
+    let arr = [];
+    if (data?.picture) {
+      arr.push({
+        id: 1,
+        url: data.picture,
+      });
+    }
+    if (data?.picture2) {
+      arr.push({
+        id: 2,
+        url: data.picture2,
+      });
+    }
+    if (data?.picture3) {
+      arr.push({
+        id: 3,
+        url: data.picture3,
+      });
+    }
+    if (data?.picture4) {
+      arr.push({
+        id: 4,
+        url: data.picture4,
+      });
+    }
+    return arr;
+  };
   return (
     <div className={styles.detail_page} id="detail-page">
       {!proshopDetail ? (
@@ -240,23 +272,23 @@ function Detail(props) {
                 modules={[Pagination, Navigation]}
                 className="mySwiper"
               >
-                {Array(3)
-                  .fill()
-                  .map((item, index) => (
-                    <SwiperSlide key={index}>
-                      <div className="image" id="image-proshop-detail">
-                        <Image
-                          alt="Image"
-                          loader={({ src }) =>
-                            `https://thegolfhousevietnam.com/${src}`
-                          }
-                          src="/images/Logo/logo2.png"
-                          layout="fill"
-                          objectFit="cover"
-                        />
-                      </div>
-                    </SwiperSlide>
-                  ))}
+                {pictureArray(proshopDetail)?.map((item, index) => (
+                  <SwiperSlide key={index}>
+                    <div className="image" id="image-proshop-detail">
+                      <Image
+                        alt={"Image" + index + 1}
+                        src={item.url}
+                        loader={({ src }) =>
+                          `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                        }
+                        // width={300}
+                        // height={300}
+                        layout="fill"
+                        objectFit={"cover"}
+                      ></Image>
+                    </div>
+                  </SwiperSlide>
+                ))}
               </Swiper>
             </div>
             <div className="col-12 col-lg-6 content">

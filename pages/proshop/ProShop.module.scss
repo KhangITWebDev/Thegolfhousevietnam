@@ -112,7 +112,7 @@
         cursor: pointer;
         .image {
           position: relative;
-          z-index: -1 !important;
+          // z-index: -1 !important;
         }
         .tool_img {
           margin-left: 10px;
@@ -156,6 +156,7 @@
             padding-right: 15px;
             padding-left: 15px;
             color: #000;
+            text-align: center;
             cursor: pointer;
             &:hover {
               color: #576e33;
@@ -190,19 +191,10 @@
     .tabs {
       padding: 40px 30px;
       .top {
-        div:first-child {
-          h5 {
-            margin-bottom: 10px;
-          }
-        }
-        div:not(:first-child) {
-          h5 {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            @media screen and (max-width: 992px) and (min-width: 768px) {
-              margin-top: 0px;
-            }
-          }
+        span {
+          font-size: 24px;
+          font-weight: 500;
+          color: #000;
         }
       }
       .center {

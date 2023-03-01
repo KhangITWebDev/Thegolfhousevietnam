@@ -4459,3 +4459,118 @@ button {
     }
   }
 }
+#bonus-course {
+  .nav-tabs {
+    border-bottom: none;
+    @media screen and (max-width: 768px) {
+      display: flex;
+      width: 100%;
+      .nav-item {
+        width: 50%;
+      }
+    }
+  }
+  .nav-link {
+    border-radius: 0px;
+    color: #000;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 0px;
+    width: fit-content;
+    // margin-right: 35px;
+    border: none;
+    background-color: transparent;
+    @media screen and (max-width: 768px) {
+      // padding: 11px 0px;
+      // margin-right: 0px;
+    }
+    &:hover {
+      color: red;
+    }
+    &::after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 2px;
+      background: red;
+      transition: width 0.5s;
+    }
+  }
+  .nav-link.active {
+    background-color: transparent;
+    color: red;
+    &::after {
+      width: 100%;
+    }
+  }
+  .left {
+    padding-right: 20px;
+  }
+  .right {
+    padding-left: 20px;
+    .image {
+      position: relative;
+      height: 450px;
+    }
+  }
+  .wrap-section {
+    margin-top: 40px;
+  }
+  #course-content {
+    .nav.nav-tabs {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+    }
+    .nav-item {
+      width: 50%;
+      // height: 100px;
+      display: flex;
+      justify-content: center;
+
+      .nav-link::after {
+        display: none;
+      }
+      .nav-link.active {
+        &::after {
+          display: none;
+        }
+      }
+      &:first-child {
+        border-right: 1px solid #ccc;
+        padding-right: 30px;
+        button {
+          margin-left: auto;
+        }
+      }
+      &:nth-child(2) {
+        padding-left: 30px;
+        button {
+          margin-right: auto;
+        }
+      }
+      &:last-child {
+        border-top: 1px solid #ccc;
+      }
+    }
+    .tab-content {
+      border-left: 2.5px solid red;
+      height: fit-content;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      width: 50%;
+      padding-left: 30px;
+      p {
+        margin-top: 15px;
+        font-size: 16px;
+      }
+      .button {
+        justify-content: flex-start;
+        button {
+          padding: 4px 20px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

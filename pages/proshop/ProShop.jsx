@@ -71,6 +71,25 @@ const customStyles = {
   }),
 };
 
+const shopImg = [
+  {
+    id: 1,
+    url: "/images/Home/Shop/shop1.png",
+  },
+  {
+    id: 2,
+    url: "/images/Home/Shop/shop2.png",
+  },
+  {
+    id: 3,
+    url: "/images/Home/Shop/shop3.png",
+  },
+  {
+    id: 4,
+    url: "/images/Home/Shop/shop4.png",
+  },
+];
+
 const options = [
   { value: "1", label: "Mới nhất" },
   { value: "2", label: "Cũ nhất" },
@@ -256,7 +275,7 @@ function ProShop(props) {
         data.setPerData(Newest);
         break;
       }
-      case "price2": {
+      case "price3": {
         const Newest = proshopData.filter(
           (x) => x.gia_ban_le >= 5000000 && x.gia_ban_le < 9999999
         );
@@ -272,6 +291,8 @@ function ProShop(props) {
         break;
     }
   };
+  const [showInfo2, setShowInfo2] = useState(-1);
+  const [url, setUrl] = useState();
   return (
     <div className={styles.proshop_page}>
       <div className="container" data-aos="fade-down">
@@ -577,28 +598,90 @@ function ProShop(props) {
                   <div
                     key={index}
                     className={"col-12 col-sm-6 col-lg-4" + " " + styles.item}
+                    onMouseEnter={() => {
+                      setShowInfo2(index);
+                    }}
+                    onMouseLeave={() => {
+                      setShowInfo2(-1);
+                      setUrl();
+                    }}
                   >
-                    <div
-                      className={
-                        styles.info +
-                        " " +
-                        "d-flex flex-column align-items-center"
-                      }
-                      onClick={() =>
-                        router.push(`/proshop/${removeAccents(item.ten_vt)}`)
-                      }
-                    >
-                      <div className={styles.image} style={{ zIndex: 1003 }}>
-                        <Image
-                          alt={"Image" + index + 1}
-                          src="/images/Logo/Logo12.png"
-                          width={300}
-                          height={300}
-                          objectFit={"cover"}
-                        ></Image>
-                      </div>
-                      <h5>{item.ten_vt}</h5>
-                      <p>{item.gia_ban_le.toLocaleString("vi-VI")} VND</p>
+                    <div className={styles.info + " " + "d-flex flex-column"}>
+                      {showInfo2 === index ? (
+                        <>
+                          <div
+                            className={styles.image}
+                            style={{ zIndex: 1003 }}
+                          >
+                            {url ? (
+                              <Image
+                                alt={"Image" + index + 1}
+                                src={url}
+                                width={300}
+                                height={300}
+                                objectFit={"cover"}
+                                onClick={() =>
+                                  router.push(
+                                    `/proshop/${removeAccents(item.ten_vt)}`
+                                  )
+                                }
+                              ></Image>
+                            ) : (
+                              <Image
+                                alt={"Image" + index + 1}
+                                src="/images/Logo/Logo12.png"
+                                width={300}
+                                height={300}
+                                objectFit={"cover"}
+                                onClick={() =>
+                                  router.push(
+                                    `/proshop/${removeAccents(item.ten_vt)}`
+                                  )
+                                }
+                              ></Image>
+                            )}
+                          </div>
+                          <div className="d-flex">
+                            {shopImg.map((x, y) => (
+                              <div
+                                key={y}
+                                className={styles.tool_img}
+                                onClick={() => setUrl(x.url)}
+                              >
+                                <Image
+                                  alt={"Image" + y + 1}
+                                  src={x.url}
+                                  layout="fill"
+                                  objectFit={"cover"}
+                                ></Image>
+                              </div>
+                            ))}
+                          </div>
+                          <p>{item.gia_ban_le.toLocaleString("vi-VI")} VND</p>
+                        </>
+                      ) : (
+                        <>
+                          <div
+                            className={styles.image}
+                            style={{ zIndex: 1003 }}
+                          >
+                            <Image
+                              alt={"Image" + index + 1}
+                              src="/images/Logo/Logo12.png"
+                              width={300}
+                              height={300}
+                              onClick={() =>
+                                router.push(
+                                  `/proshop/${removeAccents(item.ten_vt)}`
+                                )
+                              }
+                              objectFit={"cover"}
+                            ></Image>
+                          </div>
+                          <h5>{item.ten_vt}</h5>
+                          <p>{item.gia_ban_le.toLocaleString("vi-VI")} VND</p>
+                        </>
+                      )}
                     </div>
                   </div>
                 ))

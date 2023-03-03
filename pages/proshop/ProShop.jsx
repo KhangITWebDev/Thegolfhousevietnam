@@ -321,41 +321,30 @@ function ProShop(props) {
     var growDiv = document.getElementById("grow");
     if (growDiv.clientHeight) {
       growDiv.style.height = 0;
-      growDiv.style.borderBottom = "none";
-      growDiv.style.overflow = "hidden";
     } else {
       var wrapper = document.querySelector(".wr");
-      growDiv.style.height = wrapper.clientHeight + "px";
-      growDiv.style.borderBottom = "1px solid black";
-      growDiv.style.overflow = "auto";
+      growDiv.style.height = 310 + "px";
     }
   }
   useEffect(() => {
     if (showFilter1) {
-      document.getElementById("grow").style.height =
-        document.querySelector(".wr")?.clientHeight + "px";
-      document.getElementById("grow").style.borderBottom = "1px solid black";
-      document.getElementById("grow").style.overflow = "auto";
+      document.getElementById("grow").style.height = 310 + "px";
     }
     if (showFilter2) {
       document.getElementById("grow2").style.height =
         document.querySelector(".wr2")?.clientHeight + "px";
-      document.getElementById("grow2").style.borderBottom = "1px solid black";
     }
     if (showFilter3) {
       document.getElementById("grow3").style.height =
         document.querySelector(".wr3")?.clientHeight + "px";
-      document.getElementById("grow3").style.borderBottom = "1px solid black";
     }
     if (showFilter4) {
       document.getElementById("grow4").style.height =
         document.querySelector(".wr4")?.clientHeight + "px";
-      document.getElementById("grow4").style.borderBottom = "1px solid black";
     }
     if (showFilter5) {
       document.getElementById("grow5").style.height =
         document.querySelector(".wr5")?.clientHeight + "px";
-      document.getElementById("grow5").style.borderBottom = "1px solid black";
     }
   }, []);
   function ToogleFilter2() {
@@ -363,11 +352,9 @@ function ProShop(props) {
     var growDiv = document.getElementById("grow2");
     if (growDiv.clientHeight) {
       growDiv.style.height = 0;
-      growDiv.style.borderBottom = "none";
     } else {
       var wrapper = document.querySelector(".wr2");
       growDiv.style.height = wrapper.clientHeight + "px";
-      growDiv.style.borderBottom = "1px solid black";
     }
   }
   function ToogleFilter3() {
@@ -375,11 +362,9 @@ function ProShop(props) {
     var growDiv = document.getElementById("grow3");
     if (growDiv.clientHeight) {
       growDiv.style.height = 0;
-      growDiv.style.borderBottom = "none";
     } else {
       var wrapper = document.querySelector(".wr3");
       growDiv.style.height = wrapper.clientHeight + "px";
-      growDiv.style.borderBottom = "1px solid black";
     }
   }
   function ToogleFilter4() {
@@ -387,11 +372,9 @@ function ProShop(props) {
     var growDiv = document.getElementById("grow4");
     if (growDiv.clientHeight) {
       growDiv.style.height = 0;
-      growDiv.style.borderBottom = "none";
     } else {
       var wrapper = document.querySelector(".wr4");
       growDiv.style.height = wrapper.clientHeight + "px";
-      growDiv.style.borderBottom = "1px solid black";
     }
   }
   function ToogleFilter5() {
@@ -399,11 +382,9 @@ function ProShop(props) {
     var growDiv = document.getElementById("grow5");
     if (growDiv.clientHeight) {
       growDiv.style.height = 0;
-      growDiv.style.borderBottom = "none";
     } else {
       var wrapper = document.querySelector(".wr5");
       growDiv.style.height = wrapper.clientHeight + "px";
-      growDiv.style.borderBottom = "1px solid black";
     }
   }
   var wrapper = document.querySelector("#product");
@@ -934,7 +915,7 @@ function ProShop(props) {
                     "col-12 col-lg-12 col-md-6" + " " + styles.center_item
                   }
                 >
-                  <h5
+                  {/* <h5
                     className="w-100 d-flex justify-content-between align-items-center"
                     onClick={() => {
                       ToogleFilter1();
@@ -946,7 +927,7 @@ function ProShop(props) {
                     ) : (
                       <i className="fa-solid fa-caret-down"></i>
                     )}
-                  </h5>
+                  </h5> */}
                   <div id="grow">
                     <ul className={styles.item_content + " " + "wr"}>
                       <li onClick={() => filter("Full")}>Full set </li>
@@ -973,9 +954,9 @@ function ProShop(props) {
                   >
                     Giới tính
                     {showFilter2 ? (
-                      <i className="fa-solid fa-caret-up"></i>
+                      <i className="fa-regular fa-chevron-up"></i>
                     ) : (
-                      <i className="fa-solid fa-caret-down"></i>
+                      <i className="fa-regular fa-chevron-down"></i>
                     )}
                   </h5>
                   <div id="grow2">
@@ -1011,11 +992,11 @@ function ProShop(props) {
                       ToogleFilter3();
                     }}
                   >
-                    Kích cở
+                    Kích cỡ
                     {showFilter3 ? (
-                      <i className="fa-solid fa-caret-up"></i>
+                      <i className="fa-regular fa-chevron-up"></i>
                     ) : (
-                      <i className="fa-solid fa-caret-down"></i>
+                      <i className="fa-regular fa-chevron-down"></i>
                     )}
                   </h5>
                   <div id="grow3">
@@ -1053,9 +1034,9 @@ function ProShop(props) {
                   >
                     Mức giá
                     {showFilter4 ? (
-                      <i className="fa-solid fa-caret-up"></i>
+                      <i className="fa-regular fa-chevron-up"></i>
                     ) : (
-                      <i className="fa-solid fa-caret-down"></i>
+                      <i className="fa-regular fa-chevron-down"></i>
                     )}
                   </h5>
                   <div id="grow4">
@@ -1093,9 +1074,9 @@ function ProShop(props) {
                   >
                     Thương hiệu
                     {showFilter5 ? (
-                      <i className="fa-solid fa-caret-up"></i>
+                      <i className="fa-regular fa-chevron-up"></i>
                     ) : (
-                      <i className="fa-solid fa-caret-down"></i>
+                      <i className="fa-regular fa-chevron-down"></i>
                     )}
                   </h5>
                   <div id="grow5">
@@ -1137,7 +1118,7 @@ function ProShop(props) {
                 styles.header
               }
             >
-              <span className="col-12 col-sm-6">
+              <span className="col-12 col-sm-8">
                 <div className="form-group">
                   <div className="input-group">
                     <div className="icon">
@@ -1155,7 +1136,7 @@ function ProShop(props) {
                 </div>
               </span>
               <div
-                className="col-12 col-sm-6 d-flex align-items-center justify-content-start justify-content-sm-end"
+                className="col-12 col-sm-4 d-flex align-items-center justify-content-start justify-content-sm-end"
                 data-aos="fade-left"
               >
                 <span

@@ -206,7 +206,6 @@
       padding: 10px 20px;
       overflow-y: scroll;
       .center {
-        border: 1px solid #000;
         .wrap {
           margin-top: 40px;
           width: 100%;
@@ -217,11 +216,12 @@
             font-weight: 500;
             font-size: 20px;
             text-transform: uppercase;
+            border-top: 1px solid gray;
             color: #000;
             padding-left: 10px;
             padding-right: 10px;
-            padding-top: 10px;
-            padding-bottom: 10px;
+            padding-top: 20px;
+            padding-bottom: 20px;
           }
           .item_content {
             padding-left: 10px !important;
@@ -331,7 +331,7 @@
     }
 
     .tabs::-webkit-scrollbar-thumb {
-      background-color: #6e6d68;
+      background-color: gray;
     }
   }
 }

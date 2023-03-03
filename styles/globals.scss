@@ -323,18 +323,21 @@ button {
     background-color: transparent;
     border: none;
     color: #000;
-    padding-right: 30px;
+    padding-right: 40px;
+    padding-left: 12px;
     &::after {
       display: none;
     }
   }
   .fiter-select {
     position: relative;
+    border: 1px solid grey;
+    border-radius: 5px;
     i {
       position: absolute;
       font-size: 16px;
       top: 50%;
-      right: 0px;
+      right: 10px;
       transform: translateY(-50%);
     }
   }
@@ -4656,7 +4659,6 @@ button {
   -o-transition: height 0.5s;
   -webkit-transition: height 0.5s;
   transition: height 0.5s;
-  border-top: 1px solid #000;
   height: 0;
   overflow: hidden;
   &::-webkit-scrollbar-track {
@@ -4670,7 +4672,7 @@ button {
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #6e6d68;
+    background-color: gray;
   }
 }
 

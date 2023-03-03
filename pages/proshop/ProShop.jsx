@@ -217,6 +217,8 @@ function ProShop(props) {
   const hat = proshopData.filter((x) =>
     x.ten_vt?.toLowerCase()?.includes("nón")
   );
+  const [filterCate, setFiterCate] = useState(true);
+  const [fiterSize, setFiterSize] = useState(false);
   const data = usePagination(proshopData, 6);
   const filter = (type) => {
     data.setCurrentPage(1);
@@ -1225,7 +1227,7 @@ function ProShop(props) {
                         <>
                           <div
                             className={styles.image}
-                            style={{ zIndex: -1, position: "relative" }}
+                            style={{ zIndex: 1, position: "relative" }}
                             onClick={() =>
                               router.push(
                                 `/proshop/${removeAccents(item.ten_vt)}`

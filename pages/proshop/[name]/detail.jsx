@@ -103,12 +103,40 @@ function Detail(props) {
       });
     }
   };
+  const pictureArray = (data) => {
+    let arr = [];
+    if (data?.picture) {
+      arr.push({
+        id: 1,
+        url: data.picture,
+      });
+    }
+    if (data?.picture2) {
+      arr.push({
+        id: 2,
+        url: data.picture2,
+      });
+    }
+    if (data?.picture3) {
+      arr.push({
+        id: 3,
+        url: data.picture3,
+      });
+    }
+    if (data?.picture4) {
+      arr.push({
+        id: 4,
+        url: data.picture4,
+      });
+    }
+    return arr;
+  };
   useEffect(() => {
     pictureArray(proshopDetail)?.map((x, i) =>
       $("#proshop-detail .swiper-pagination-bullet").each(function (indexC) {
         $(this).css({
           backgroundImage:
-            i === indexC &&
+            indexC === i &&
             `url(https://api.fostech.vn${x.url}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93)`,
           backgroundPosition: "center",
           backgroundSize: "contain",
@@ -218,34 +246,7 @@ function Detail(props) {
       }, 4000);
     }
   }, [token]);
-  const pictureArray = (data) => {
-    let arr = [];
-    if (data?.picture) {
-      arr.push({
-        id: 1,
-        url: data.picture,
-      });
-    }
-    if (data?.picture2) {
-      arr.push({
-        id: 2,
-        url: data.picture2,
-      });
-    }
-    if (data?.picture3) {
-      arr.push({
-        id: 3,
-        url: data.picture3,
-      });
-    }
-    if (data?.picture4) {
-      arr.push({
-        id: 4,
-        url: data.picture4,
-      });
-    }
-    return arr;
-  };
+
   return (
     <div className={styles.detail_page} id="detail-page">
       {!proshopDetail ? (

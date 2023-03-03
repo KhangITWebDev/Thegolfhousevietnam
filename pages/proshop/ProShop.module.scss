@@ -1,6 +1,18 @@
 .proshop_page {
-  padding-top: 140px;
+  padding-top: 90px;
   margin-bottom: 40px;
+  .banner {
+    .image_container {
+      height: 720px;
+      position: relative;
+      @media screen and (max-width: 992px) {
+        // height: 600px;
+        img {
+          object-fit: cover;
+        }
+      }
+    }
+  }
   .bannerv2 {
     height: 480px;
     position: relative;
@@ -61,7 +73,7 @@
     }
   }
   .left {
-    padding-right: 30px;
+    padding-right: 24px;
     @media screen and (max-width: 1080px) {
       padding-right: 10px;
     }
@@ -70,7 +82,7 @@
     }
   }
   .right {
-    padding-left: 30px;
+    padding-left: 24px;
     @media screen and (max-width: 1080px) {
       padding-left: 10px;
     }
@@ -106,6 +118,7 @@
           margin-bottom: 10px;
         }
       }
+      // padding-left: 17px;
     }
     .product {
       .item {
@@ -113,23 +126,29 @@
         .image {
           position: relative;
           // z-index: -1 !important;
+          margin: auto;
+        }
+        &:nth-child(1),
+        &:nth-child(4) {
+          padding-right: 10px;
+        }
+        &:nth-child(3),
+        &:nth-child(6) {
+          padding-left: 10px;
+        }
+        &:nth-child(2),
+        &:nth-child(5) {
+          padding-right: 10px;
+          padding-left: 10px;
         }
         .tool_img {
           margin-left: 10px;
-          background: #8e8e8e;
-          border: 1px solid #8e8e8e;
           position: relative;
           width: 50px;
           height: 50px;
         }
-        // img {
-        //   cursor: pointer;
-        //   position: relative;
-        //   z-index: 0 !important;
-        // }
         margin-top: 20px;
-        padding-left: 10px;
-        padding-right: 10px;
+
         &:nth-child(odd) {
           // padding-right: 10px;
           @media screen and (max-width: 567px) {
@@ -153,10 +172,7 @@
             font-size: 18px;
             font-weight: 400;
             line-height: 1.4;
-            padding-right: 15px;
-            padding-left: 15px;
             color: #000;
-            text-align: center;
             cursor: pointer;
             &:hover {
               color: #576e33;
@@ -164,12 +180,10 @@
           }
           p {
             font-size: 22px;
-            font-weight: 700;
+            font-weight: 400;
             line-height: 1.3;
             margin-top: 15px;
             color: rgba(0, 0, 0, 0.6);
-            padding-right: 15px;
-            padding-left: 15px;
           }
           .rate {
             margin-top: 25px;
@@ -189,31 +203,34 @@
       }
     }
     .tabs {
-      padding: 40px 30px;
-      .top {
-        span {
-          font-size: 24px;
-          font-weight: 500;
-          color: #000;
-        }
-      }
+      padding: 10px 20px;
+      overflow-y: scroll;
       .center {
-        margin-top: 20px;
+        border: 1px solid #000;
         .wrap {
           margin-top: 40px;
           width: 100%;
         }
         &_item {
-          margin-top: 20px;
-          border-top: 2px solid #eee;
-          padding-top: 20px;
           cursor: pointer;
           h5 {
-            font-weight: 400;
+            font-weight: 500;
+            font-size: 20px;
+            text-transform: uppercase;
+            color: #000;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
           }
           .item_content {
+            padding-left: 10px !important;
+            padding-bottom: 10px !important;
             label {
               margin-top: 15px;
+              position: relative;
+              display: flex;
+              cursor: pointer;
             }
             .color_item {
               margin-top: 20px;
@@ -223,91 +240,98 @@
                 text-transform: capitalize;
               }
             }
-          }
-        }
-        // div:first-child {
-        //   h5 {
-        //     margin-bottom: 10px;
-        //   }
-        // }
-        // div:not(:first-child) {
-        //   h5 {
-        //     margin-top: 15px;
-        //     margin-bottom: 20px;
-        //     @media screen and (max-width: 992px) and (min-width: 768px) {
-        //       margin-top: 0px;
-        //     }
-        //   }
-        //   button {
-        //     margin-top: 20px !important;
-        //     margin-left: 0px;
-        //   }
-        // }
-      }
-      .bottom {
-        margin-top: 45px;
-      }
-      h5 {
-        font-weight: 700;
-        font-size: 16px;
-        color: #000;
-        line-height: 1.3;
-      }
-      span {
-        font-weight: 400;
-        font-size: 16px;
-        @media screen and (max-width: 768px) {
-          font-size: 16px;
-        }
-        line-height: 1.3;
-        color: #8e8e8e;
-      }
-      ul {
-        li {
-          cursor: pointer;
-          font-weight: 400;
-          margin-top: 10px;
-          font-size: 16px;
-          line-height: 1.3;
-          border-bottom: 2px solid transparent;
-          width: fit-content;
-          transition: 0.5s linear;
-          &::after {
-            content: "";
-            display: block;
-            width: 0%;
-            height: 2px;
-            background: #000;
-            transition: 0.5s linear;
-          }
-          &:hover::after {
-            width: 100%;
-          }
-        }
-      }
-      button {
-        margin-top: 22px;
-      }
-      .tag {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-gap: 12px;
-        margin-top: 20px;
-        button {
-          border: 1px solid #8e8e8e;
-          background: transparent;
-          margin-top: 0;
-          padding: 8px 0px;
-          color: #8e8e8e;
-          font-weight: 400;
-          font-size: 12px;
-          line-height: 1.3;
-          &:hover {
-            border: 1px solid #576e33;
-            color: #576e33;
+            li {
+              cursor: pointer;
+              font-weight: 500;
+              margin-top: 10px;
+              color: #000;
+              font-size: 18px;
+              text-transform: uppercase;
+              line-height: 1.3;
+              border-bottom: 2px solid transparent;
+              width: fit-content;
+              transition: 0.5s linear;
+              &::after {
+                content: "";
+                display: block;
+                width: 0%;
+                height: 2px;
+                background: #000;
+                transition: 0.5s linear;
+              }
+              &:hover::after {
+                width: 100%;
+              }
+            }
+            .title {
+              cursor: pointer;
+              font-weight: 400;
+              color: #000;
+              font-size: 18px;
+              margin-left: 10px;
+              padding-right: 10px;
+              width: calc(100% - 22px);
+            }
+            input[type="checkbox"] {
+              position: absolute;
+              z-index: 2000;
+              opacity: 0;
+              top: 0px;
+              cursor: pointer;
+              height: 22px;
+              width: 22px;
+            }
+            .checkmark {
+              margin-top: 0px;
+              border-radius: 3px;
+              height: 22px;
+              display: flex;
+              width: 23px;
+              background-color: #fff;
+              border: 1px solid #bababa;
+            }
+            // &:hover input ~ .checkmark {
+            //   background-color: #ccc;
+            // }
+            & input:checked ~ .checkmark {
+              background-color: #576e33;
+              border-color: #576e33;
+            }
+            .checkmark:after {
+              content: "";
+              position: absolute;
+              display: none;
+            }
+            & input:checked ~ .checkmark:after {
+              display: block;
+            }
+            & .checkmark:after {
+              left: 8px;
+              top: 3px;
+              width: 6px;
+              height: 12px;
+              border: solid white;
+              border-width: 0 2px 2px 0;
+              -webkit-transform: rotate(45deg);
+              -ms-transform: rotate(45deg);
+              transform: rotate(45deg);
+            }
           }
         }
       }
+    }
+    .tabs::-webkit-scrollbar-track {
+      width: 4px;
+      border-radius: 4px;
+    }
+
+    .tabs::-webkit-scrollbar {
+      width: 4px;
+      border-radius: 4px;
+    }
+
+    .tabs::-webkit-scrollbar-thumb {
+      background-color: #6e6d68;
     }
   }
 }

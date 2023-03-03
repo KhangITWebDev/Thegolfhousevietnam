@@ -1541,7 +1541,7 @@ function ProShop(props) {
                   <p
                     style={{
                       fontSize: 20,
-                      marginTop: data.perData > 0 && 150,
+                      marginTop: data.perData <= 0 && 100,
                     }}
                   >
                     Không có sản phẩm phù hợp điều kiện

@@ -156,6 +156,40 @@ const brand = [
     label: "Hazzy",
   },
 ];
+const cate = [
+  {
+    value: "cate1",
+    label: "Full set",
+  },
+  {
+    value: "cate2",
+    label: "Áo",
+  },
+  {
+    value: "cate3",
+    label: "Quần",
+  },
+  {
+    value: "cate4",
+    label: "Váy",
+  },
+  {
+    value: "cate5",
+    label: "Giày",
+  },
+  {
+    value: "cate6",
+    label: "Găng",
+  },
+  {
+    value: "cate7",
+    label: "Nón",
+  },
+  {
+    value: "cate8",
+    label: "Trang phục",
+  },
+];
 function ProShop(props) {
   const [value, setValue] = React.useState([0, 1]);
   const [typeFilter, setTypeFilter] = useState("");
@@ -166,6 +200,13 @@ function ProShop(props) {
   const [showFilter4, setShowFilter4] = useState(true);
   const [showFilter5, setShowFilter5] = useState(true);
   const proshopData = useSelector((state) => state.ProshopReducer.proshopList);
+  useEffect(() => {
+    if (proshopData.length <= 0) {
+      setHiddenFilter(true);
+    } else {
+      setHiddenFilter(false);
+    }
+  }, [proshopData]);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProshopData());
@@ -178,85 +219,191 @@ function ProShop(props) {
     (item) => item.danh_muc === "Slide Proshop"
   );
   const router = useRouter();
-  const DropdownIndicator = (props) => {
-    return (
-      <components.DropdownIndicator {...props}>
-        <i
-          className="fa-solid fa-chevron-down"
-          style={{
-            fontSize: 16,
-            color: "#5F5F5F",
-          }}
-        ></i>
-      </components.DropdownIndicator>
-    );
+  const filterarr = {
+    ten_sp: "",
+    danh_muc: "",
+    gioi_tinh: "",
+    kich_co: "",
+    muc_gia_min: 0,
+    muc_gia_max: 1000000000,
+    thuong_hieu: "",
   };
-  const coast = proshopData.filter((x) =>
-    x.ten_vt?.toLowerCase()?.includes("áo")
-  );
-  const trousers = proshopData.filter((x) =>
-    x.ten_vt?.toLowerCase()?.includes("quần")
-  );
-  const skirt = proshopData.filter((x) =>
-    x.ten_vt?.toLowerCase()?.includes("váy")
-  );
-  const glove = proshopData.filter(
-    (x) =>
-      x.ten_vt?.toLowerCase()?.includes("găng") ||
-      x.ten_vt?.toLowerCase()?.includes("glove")
-  );
-  const shose = proshopData.filter((x) =>
-    x.ten_vt?.toLowerCase()?.includes("giày")
-  );
-  const trangphuc = proshopData.filter((x) =>
-    x.ten_vt?.toLowerCase()?.includes("trang phục")
-  );
-  const fullset = proshopData.filter((x) =>
-    x.ten_vt?.toLowerCase()?.includes("full")
-  );
-  const hat = proshopData.filter((x) =>
-    x.ten_vt?.toLowerCase()?.includes("nón")
-  );
-  const [filterCate, setFiterCate] = useState(true);
-  const [fiterSize, setFiterSize] = useState(false);
+  const [genFilter, setGenFilter] = useState(-1);
+  const [sizeFilter, setSizeFilter] = useState(-1);
+  const [priceFilter, setPriceFilter] = useState(-1);
+  const [brandFilter, setBrandFilter] = useState(-1);
+  const [activeCate, setActiveCate] = useState(-1);
+  const [activeKey, setActiveKey] = React.useState(-1);
+  const [showInfo2, setShowInfo2] = useState(-1);
+  const [url, setUrl] = useState();
+  if (activeCate > -1) {
+    filterarr.danh_muc = cate[activeCate].label.toLowerCase();
+  } else {
+    filterarr.danh_muc = "";
+  }
+  if (genFilter > -1) {
+    filterarr.gioi_tinh = Filter1[genFilter].label.toLowerCase();
+  } else {
+    filterarr.gioi_tinh = "";
+  }
+  if (sizeFilter > -1) {
+    filterarr.kich_co = `size ${Size[sizeFilter].label.toLowerCase()}`;
+  } else {
+    filterarr.kich_co = "";
+  }
+  if (brandFilter > -1) {
+    filterarr.thuong_hieu = brand[brandFilter].label.toLowerCase();
+  } else {
+    filterarr.thuong_hieu = "";
+  }
+  if (priceFilter > -1) {
+    if (priceFilter === 0) {
+      filterarr.muc_gia_max = 1000000;
+      filterarr.muc_gia_min = 0;
+    } else if (priceFilter === 1) {
+      filterarr.muc_gia_max = 5000000;
+      filterarr.muc_gia_min = 1000000;
+    } else if (priceFilter === 2) {
+      filterarr.muc_gia_max = 10000000;
+      filterarr.muc_gia_min = 5000000;
+    } else if (priceFilter === 3) {
+      filterarr.muc_gia_min = 10000000;
+      filterarr.muc_gia_max = 1000000000;
+    }
+  } else {
+    filterarr.muc_gia_max = 1000000000;
+    filterarr.muc_gia_min = 0;
+  }
   const data = usePagination(proshopData, 6);
   const filter = (type) => {
     data.setCurrentPage(1);
     switch (type) {
       case "Váy": {
-        data.setPerData(skirt);
+        filterarr.danh_muc = "váy";
+        const Newest = proshopData.filter((item) => {
+          return (
+            item.ten_vt.toLowerCase().includes(filterarr.ten_sp) &&
+            item.ten_vt.toLowerCase().includes(filterarr.gioi_tinh) &&
+            item.ten_vt.toLowerCase().includes(filterarr.danh_muc) &&
+            item.ten_vt.toLowerCase().includes(filterarr.kich_co) &&
+            item.ten_vt.toLowerCase().includes(filterarr.thuong_hieu) &&
+            item.gia_ban_le > filterarr.muc_gia_min &&
+            item.gia_ban_le < filterarr.muc_gia_max
+          );
+        });
+        data.setPerData(Newest);
         break;
       }
       case "Áo": {
-        data.setPerData(coast);
+        filterarr.danh_muc = "áo";
+        const Newest = proshopData.filter((item) => {
+          return (
+            item.ten_vt.toLowerCase().includes(filterarr.ten_sp) &&
+            item.ten_vt.toLowerCase().includes(filterarr.gioi_tinh) &&
+            item.ten_vt.toLowerCase().includes(filterarr.danh_muc) &&
+            item.ten_vt.toLowerCase().includes(filterarr.kich_co) &&
+            item.ten_vt.toLowerCase().includes(filterarr.thuong_hieu) &&
+            item.gia_ban_le > filterarr.muc_gia_min &&
+            item.gia_ban_le < filterarr.muc_gia_max
+          );
+        });
+        data.setPerData(Newest);
         break;
       }
       case "Quần": {
-        data.setPerData(trousers);
+        filterarr.danh_muc = "quần";
+        const Newest = proshopData.filter((item) => {
+          return (
+            item.ten_vt.toLowerCase().includes(filterarr.ten_sp) &&
+            item.ten_vt.toLowerCase().includes(filterarr.gioi_tinh) &&
+            item.ten_vt.toLowerCase().includes(filterarr.danh_muc) &&
+            item.ten_vt.toLowerCase().includes(filterarr.kich_co) &&
+            item.ten_vt.toLowerCase().includes(filterarr.thuong_hieu) &&
+            item.gia_ban_le > filterarr.muc_gia_min &&
+            item.gia_ban_le < filterarr.muc_gia_max
+          );
+        });
+        data.setPerData(Newest);
         break;
       }
-      case "Găng bọc": {
-        data.setPerData(gloveWrap);
-        break;
-      }
-      case "Găng tay": {
-        data.setPerData(glove);
+      case "Găng": {
+        filterarr.danh_muc = "găng";
+        const Newest = proshopData.filter((item) => {
+          return (
+            item.ten_vt.toLowerCase().includes(filterarr.ten_sp) &&
+            item.ten_vt.toLowerCase().includes(filterarr.gioi_tinh) &&
+            item.ten_vt.toLowerCase().includes(filterarr.danh_muc) &&
+            item.ten_vt.toLowerCase().includes(filterarr.kich_co) &&
+            item.ten_vt.toLowerCase().includes(filterarr.thuong_hieu) &&
+            item.gia_ban_le > filterarr.muc_gia_min &&
+            item.gia_ban_le < filterarr.muc_gia_max
+          );
+        });
+        data.setPerData(Newest);
         break;
       }
       case "Giày": {
-        data.setPerData(shose);
+        filterarr.danh_muc = "giày";
+        const Newest = proshopData.filter((item) => {
+          return (
+            item.ten_vt.toLowerCase().includes(filterarr.ten_sp) &&
+            item.ten_vt.toLowerCase().includes(filterarr.gioi_tinh) &&
+            item.ten_vt.toLowerCase().includes(filterarr.danh_muc) &&
+            item.ten_vt.toLowerCase().includes(filterarr.kich_co) &&
+            item.ten_vt.toLowerCase().includes(filterarr.thuong_hieu) &&
+            item.gia_ban_le > filterarr.muc_gia_min &&
+            item.gia_ban_le < filterarr.muc_gia_max
+          );
+        });
+        data.setPerData(Newest);
         break;
       }
       case "Nón": {
-        data.setPerData(hat);
+        filterarr.danh_muc = "nón";
+        const Newest = proshopData.filter((item) => {
+          return (
+            item.ten_vt.toLowerCase().includes(filterarr.ten_sp) &&
+            item.ten_vt.toLowerCase().includes(filterarr.gioi_tinh) &&
+            item.ten_vt.toLowerCase().includes(filterarr.danh_muc) &&
+            item.ten_vt.toLowerCase().includes(filterarr.kich_co) &&
+            item.ten_vt.toLowerCase().includes(filterarr.thuong_hieu) &&
+            item.gia_ban_le > filterarr.muc_gia_min &&
+            item.gia_ban_le < filterarr.muc_gia_max
+          );
+        });
+        data.setPerData(Newest);
         break;
       }
       case "Trang phục": {
-        data.setPerData(trangphuc);
+        filterarr.danh_muc = "trang phục";
+        const Newest = proshopData.filter((item) => {
+          return (
+            item.ten_vt.toLowerCase().includes(filterarr.ten_sp) &&
+            item.ten_vt.toLowerCase().includes(filterarr.gioi_tinh) &&
+            item.ten_vt.toLowerCase().includes(filterarr.danh_muc) &&
+            item.ten_vt.toLowerCase().includes(filterarr.kich_co) &&
+            item.ten_vt.toLowerCase().includes(filterarr.thuong_hieu) &&
+            item.gia_ban_le > filterarr.muc_gia_min &&
+            item.gia_ban_le < filterarr.muc_gia_max
+          );
+        });
+        data.setPerData(Newest);
         break;
       }
-      case "Full": {
-        data.setPerData(fullset);
+      case "Full set": {
+        filterarr.danh_muc = "full set";
+        const Newest = proshopData.filter((item) => {
+          return (
+            item.ten_vt.toLowerCase().includes(filterarr.ten_sp) &&
+            item.ten_vt.toLowerCase().includes(filterarr.gioi_tinh) &&
+            item.ten_vt.toLowerCase().includes(filterarr.danh_muc) &&
+            item.ten_vt.toLowerCase().includes(filterarr.kich_co) &&
+            item.ten_vt.toLowerCase().includes(filterarr.thuong_hieu) &&
+            item.gia_ban_le > filterarr.muc_gia_min &&
+            item.gia_ban_le < filterarr.muc_gia_max
+          );
+        });
+        data.setPerData(Newest);
         break;
       }
       default: {
@@ -315,9 +462,6 @@ function ProShop(props) {
         break;
     }
   };
-  const sectiontitle = contents.filter(
-    (item) => item.category === "63bc4b5739d2a23b06d91f9e"
-  );
   function ToogleFilter1() {
     setShowFilter1(!showFilter1);
     var growDiv = document.getElementById("grow");
@@ -429,15 +573,6 @@ function ProShop(props) {
     }
     return arr;
   };
-  const filterarr = {
-    ten_sp: "",
-    danh_muc: "",
-    gioi_tinh: "",
-    kich_co: "",
-    muc_gia_min: 0,
-    muc_gia_max: 1000000000,
-    thuong_hieu: "",
-  };
   const filterPrice = (e) => {
     const { value } = e.target;
     data.setCurrentPage(1);
@@ -445,9 +580,11 @@ function ProShop(props) {
       case "price1": {
         if (e.target.name === "price" && e.target.checked) {
           filterarr.muc_gia_max = 1000000;
+          filterarr.muc_gia_min = 0;
         }
         if (e.target.name === "price" && !e.target.checked) {
-          filterarr.gioi_tinh = "";
+          filterarr.muc_gia_max = 1000000000;
+          filterarr.muc_gia_min = 0;
         }
         const Newest = proshopData.filter((item) => {
           return (
@@ -469,7 +606,8 @@ function ProShop(props) {
           filterarr.muc_gia_min = 1000000;
         }
         if (e.target.name === "price" && !e.target.checked) {
-          filterarr.gioi_tinh = "";
+          filterarr.muc_gia_max = 1000000000;
+          filterarr.muc_gia_min = 0;
         }
         const Newest = proshopData.filter((item) => {
           return (
@@ -491,7 +629,8 @@ function ProShop(props) {
           filterarr.muc_gia_min = 5000000;
         }
         if (e.target.name === "price" && !e.target.checked) {
-          filterarr.gioi_tinh = "";
+          filterarr.muc_gia_max = 1000000000;
+          filterarr.muc_gia_min = 0;
         }
         const Newest = proshopData.filter((item) => {
           return (
@@ -510,9 +649,11 @@ function ProShop(props) {
       case "price4": {
         if (e.target.name === "price" && e.target.checked) {
           filterarr.muc_gia_min = 10000000;
+          filterarr.muc_gia_max = 1000000000;
         }
         if (e.target.name === "price" && !e.target.checked) {
-          filterarr.gioi_tinh = "";
+          filterarr.muc_gia_max = 1000000000;
+          filterarr.muc_gia_min = 0;
         }
         const Newest = proshopData.filter((item) => {
           return (
@@ -804,11 +945,7 @@ function ProShop(props) {
       default:
         break;
     }
-    console.log(filterarr);
   };
-  const [activeKey, setActiveKey] = React.useState(-1);
-  const [showInfo2, setShowInfo2] = useState(-1);
-  const [url, setUrl] = useState();
   return (
     <div className={styles.proshop_page}>
       <div className={styles.banner} id="banner" data-aos="fade-right">
@@ -894,9 +1031,7 @@ function ProShop(props) {
       </div>
       <div className="container">
         <div
-          className={
-            "d-flex flex-wrap align-items-start" + " " + styles.content
-          }
+          className={"d-flex flex-wrap" + " " + styles.content}
           id="pro-shop"
         >
           <div
@@ -932,14 +1067,18 @@ function ProShop(props) {
                   </h5> */}
                   <div id="grow">
                     <ul className={styles.item_content + " " + "wr"}>
-                      <li onClick={() => filter("Full")}>Full set </li>
-                      <li onClick={() => filter("Áo")}>Áo</li>
-                      <li onClick={() => filter("Quần")}>Quần</li>
-                      <li onClick={() => filter("Váy")}>Váy</li>
-                      <li onClick={() => filter("Giày")}>Giày</li>
-                      <li onClick={() => filter("Găng")}>Găng</li>
-                      <li onClick={() => filter("Nón")}>Nón</li>
-                      <li onClick={() => filter("Trang phục")}>Trang phục</li>
+                      {cate.map((x, y) => (
+                        <li
+                          key={y}
+                          onClick={() => {
+                            filter(x.label);
+                            setActiveCate(y);
+                          }}
+                          className={activeCate === y && styles.active}
+                        >
+                          {x.label}
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -974,7 +1113,14 @@ function ProShop(props) {
                             id={item.value}
                             value={item.value}
                             name="gen"
-                            onClick={(e) => filterPrice(e)}
+                            onClick={(e) => {
+                              if (e.target.checked) {
+                                setGenFilter(index);
+                              } else {
+                                setGenFilter(-1);
+                              }
+                              filterPrice(e);
+                            }}
                           />
                           <span className={styles.checkmark}></span>
                           <div className={styles.title}>{item.label}</div>
@@ -1014,7 +1160,14 @@ function ProShop(props) {
                             id={item.value}
                             value={item.value}
                             name="size"
-                            onClick={(e) => filterPrice(e)}
+                            onClick={(e) => {
+                              if (e.target.checked) {
+                                setSizeFilter(index);
+                              } else {
+                                setSizeFilter(-1);
+                              }
+                              filterPrice(e);
+                            }}
                           />
                           <span className={styles.checkmark}></span>
                           <div className={styles.title}>{item.label}</div>
@@ -1054,7 +1207,14 @@ function ProShop(props) {
                             id={item.value}
                             value={item.value}
                             name="price"
-                            onClick={(e) => filterPrice(e)}
+                            onClick={(e) => {
+                              if (e.target.checked) {
+                                setPriceFilter(index);
+                              } else {
+                                setPriceFilter(-1);
+                              }
+                              filterPrice(e);
+                            }}
                           />
                           <span className={styles.checkmark}></span>
                           <div className={styles.title}>{item.label}</div>
@@ -1094,7 +1254,14 @@ function ProShop(props) {
                             id={item.value}
                             value={item.value}
                             name="brand"
-                            onClick={(e) => filterPrice(e)}
+                            onClick={(e) => {
+                              if (e.target.checked) {
+                                setBrandFilter(index);
+                              } else {
+                                setBrandFilter(-1);
+                              }
+                              filterPrice(e);
+                            }}
                           />
                           <span className={styles.checkmark}></span>
                           <div className={styles.title}>{item.label}</div>
@@ -1115,7 +1282,9 @@ function ProShop(props) {
           >
             <div
               className={
-                "d-flex flex-wrap justify-content-between align-items-center" +
+                "flex-wrap justify-content-between align-items-center" +
+                " " +
+                `${hiddenFilter ? "d-none" : "d-flex"}` +
                 " " +
                 styles.header
               }
@@ -1203,12 +1372,17 @@ function ProShop(props) {
                 </div>
               </div>
             </div>
-            <div className={"d-flex flex-wrap" + " " + styles.product}>
+            <div
+              className={"d-flex flex-wrap" + " " + styles.product}
+              style={{
+                height: data.currentDatas.length > 0 ? "auto" : "100%",
+              }}
+            >
               {proshopData.length <= 0 ? (
                 <div className="d-flex m-auto">
                   <Loader size="md" content="Đang tải dữ liệu..." />
                 </div>
-              ) : (
+              ) : data.currentDatas.length > 0 ? (
                 data.currentDatas.map((item, index) => (
                   <div
                     key={index}
@@ -1228,11 +1402,11 @@ function ProShop(props) {
                           <div
                             className={styles.image}
                             style={{ zIndex: 1, position: "relative" }}
-                            onClick={() =>
+                            onClick={() => {
                               router.push(
                                 `/proshop/${removeAccents(item.ten_vt)}`
-                              )
-                            }
+                              );
+                            }}
                           >
                             {url ? (
                               <Image
@@ -1306,11 +1480,11 @@ function ProShop(props) {
                             </Swiper>
                           </div>
                           <div
-                            onClick={() =>
+                            onClick={() => {
                               router.push(
                                 `/proshop/${removeAccents(item.ten_vt)}`
-                              )
-                            }
+                              );
+                            }}
                           >
                             <p>{item.gia_ban_le.toLocaleString("vi-VI")} VND</p>
                           </div>
@@ -1320,11 +1494,11 @@ function ProShop(props) {
                           <div
                             className={styles.image}
                             style={{ zIndex: -1 }}
-                            onClick={() =>
+                            onClick={() => {
                               router.push(
                                 `/proshop/${removeAccents(item.ten_vt)}`
-                              )
-                            }
+                              );
+                            }}
                           >
                             {item.picture ? (
                               <Image
@@ -1348,11 +1522,11 @@ function ProShop(props) {
                             )}
                           </div>
                           <div
-                            onClick={() =>
+                            onClick={() => {
                               router.push(
                                 `/proshop/${removeAccents(item.ten_vt)}`
-                              )
-                            }
+                              );
+                            }}
                           >
                             <h5>{item.ten_vt}</h5>
                             <p>{item.gia_ban_le.toLocaleString("vi-VI")} VND</p>
@@ -1362,6 +1536,17 @@ function ProShop(props) {
                     </div>
                   </div>
                 ))
+              ) : (
+                <div className="d-flex justify-content-center w-100">
+                  <p
+                    style={{
+                      fontSize: 20,
+                      marginTop: data.perData > 0 && 150,
+                    }}
+                  >
+                    Không có sản phẩm phù hợp điều kiện
+                  </p>
+                </div>
               )}
             </div>
             <div className="d-flex justify-content-center">

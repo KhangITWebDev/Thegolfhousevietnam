@@ -127,19 +127,19 @@ const Size = [
 const price = [
   {
     value: "price1",
-    label: "Dưới 1.000.000 VND",
+    label: "Dưới 1.000.000 đ",
   },
   {
     value: "price2",
-    label: "1.000.000 VND - 4.999.999 VND",
+    label: "1.000.000 đ - 4.999.999 đ",
   },
   {
     value: "price3",
-    label: "5.000.000 VND - 10.000.000 VND",
+    label: "5.000.000 đ - 10.000.000 đ",
   },
   {
     value: "price4",
-    label: "Trên 10.000.000 VND",
+    label: "Trên 10.000.000 đ",
   },
 ];
 const brand = [

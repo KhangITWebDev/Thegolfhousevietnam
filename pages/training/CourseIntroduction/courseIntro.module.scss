@@ -1,0 +1,50 @@
+.course {
+  margin-top: 50px;
+  background-color: #f8f8f4;
+  padding-top: 40px;
+  &_detail {
+    // padding-top: 95px;
+    // padding-bottom: 95px;
+    @media screen and (max-width: 992px) {
+      padding-top: 0px;
+    }
+    background-color: #f8f8f4;
+    .item {
+      .image {
+        position: relative;
+      }
+    }
+  }
+  .top {
+    span {
+      font-size: 20px;
+      font-weight: 700;
+      color: #b4a461;
+      @media screen and (max-width: 992px) {
+        font-size: 16px;
+      }
+    }
+    h2 {
+      font-size: 45px;
+      font-weight: 700;
+      margin-top: 5px;
+      margin-bottom: 0px;
+      line-height: 1.3;
+      color: #000;
+      @media screen and (max-width: 992px) {
+        font-size: 36px;
+      }
+    }
+    p {
+      font-size: 18px;
+      @media screen and (max-width: 992px) {
+        font-size: 16px;
+      }
+      font-weight: 400;
+      margin-top: 5px;
+      line-height: 1.3;
+      color: #6e6d68;
+      text-align: justify;
+    }
+  }
+}

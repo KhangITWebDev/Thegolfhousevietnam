@@ -1,0 +1,58 @@
+#Booking {
+  .rs-steps-item {
+    flex-basis: auto !important;
+  }
+  .rs-steps-item-icon-wrapper {
+    border-radius: 0;
+    background-color: #3a3838;
+    border-color: #3a3838;
+  }
+  .rs-steps-item-status-finish {
+    .rs-steps-item-icon-wrapper {
+      background-color: #576e33;
+      border-color: #576e33;
+    }
+  }
+  .rs-steps-item-status-wait {
+    .rs-steps-item-icon-wrapper {
+      background-color: #bababa;
+      border-color: #bababa;
+    }
+  }
+  .swiper-slide {
+    padding: 0px 28px;
+    .step_slide {
+      display: flex;
+      align-items: center;
+      margin-top: 30px;
+      span {
+        font-size: 14px;
+        text-transform: uppercase;
+        color: #0b2b20;
+        font-weight: 500;
+        &:nth-child(2) {
+          width: 50px;
+          height: 1px;
+          background: #0b2b20;
+          margin-left: 10px;
+          margin-right: 10px;
+        }
+      }
+    }
+    h3 {
+      font-size: 30px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #000;
+      padding-top: 30px;
+      padding-bottom: 45px;
+    }
+    p {
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.5;
+      text-align: justify;
+      color: #0b2b20;
+    }
+  }
+}

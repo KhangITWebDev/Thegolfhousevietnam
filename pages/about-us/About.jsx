@@ -6,12 +6,10 @@ import { Autoplay, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { getContentData } from "../../store/redux/LoadContentReducer/content.action";
 import styles from "./About.module.scss";
-import $ from "jquery";
 
 function About(props) {
   const [swiper, setSwiper] = useState(null);
   const [activeSlide, setActiveSlide] = useState(0);
-  const router = useRouter();
   const dispatch = useDispatch();
   const { contents } = useSelector((state) => state.ContentReducer);
   useEffect(() => {
@@ -26,9 +24,6 @@ function About(props) {
       window.scrollTo(0, 0);
     }
   }, [id]);
-  useEffect(() => {
-    localStorage.removeItem("id_url");
-  }, []);
   const sectionFounder = contents.filter(
     (item) => item.category === "63bc121139d2a23b06d86e59"
   );

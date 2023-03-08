@@ -1,0 +1,12 @@
+.banner {
+  .image_container {
+    height: 720px;
+    position: relative;
+    @media screen and (max-width: 992px) {
+      // height: 600px;
+      img {
+        object-fit: cover;
+      }
+    }
+  }
+}

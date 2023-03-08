@@ -1,0 +1,35 @@
+#footer .swiper,
+#footer .swiper-wrapper {
+  position: unset !important;
+}
+#footer .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#footer .swiper-pagination {
+  bottom: 15px;
+  z-index: 1;
+  .swiper-pagination-bullet {
+    width: 20px !important;
+    height: 20px !important;
+    margin: 0 10px !important;
+  }
+  .swiper-pagination-bullet-active {
+    background-color: #f8ab0c;
+  }
+}
+#footer {
+  .col {
+    @media screen {
+      width: calc(100% / 4);
+    }
+  }
+}
+#footer {
+  .footer-active {
+    &::after {
+      width: 100%;
+    }
+  }
+}

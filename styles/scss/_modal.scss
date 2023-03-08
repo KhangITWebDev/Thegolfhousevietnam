@@ -1,0 +1,392 @@
+#modal-signup {
+  width: 720px;
+  // @media screen and (max-width: 768px) {
+  //   margin-bottom: 30px;
+  // }
+  z-index: 4100;
+  margin-bottom: 30px;
+  .rs-modal-header {
+    padding: 20px 60px;
+    padding-right: 30px;
+    display: flex;
+    background-color: #f8f8f4;
+    @media screen and (max-width: 992px) {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+    @media screen and (max-width: 576px) {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .rs-modal-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #000;
+      @media screen and (max-width: 992px) {
+        font-size: 20px;
+      }
+    }
+    button {
+      background: transparent;
+      border: none;
+      i {
+        font-size: 18px;
+        color: #000;
+      }
+    }
+  }
+  .rs-modal-content {
+    padding: 0;
+  }
+  .rs-modal-body {
+    padding: 15px 60px 40px;
+    overflow: visible !important;
+    max-height: 90% !important;
+    height: 90%;
+    @media screen and (max-width: 992px) {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+    @media screen and (max-width: 576px) {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    // @media screen and (max-width: 768px) {
+    //   overflow: visible !important;
+    //   max-height: 90% !important;
+    //   height: 90%;
+    // }
+  }
+  .rs-modal-header-close {
+    display: none;
+  }
+  .link {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: #7c8e5b;
+    @media screen and (max-width: 992px) {
+      font-size: 16px;
+    }
+    @media screen and (max-width: 576px) {
+      font-size: 14px;
+    }
+  }
+  .deliver {
+    margin-top: 30px;
+    .left,
+    .right {
+      width: 150px;
+      height: 1px;
+      background-color: #000;
+    }
+    span {
+      font-size: 24px;
+      text-transform: uppercase;
+    }
+    .left {
+      margin-right: 10px;
+    }
+    .right {
+      margin-left: 10px;
+    }
+  }
+  .social {
+    margin-top: 20px;
+    .fb {
+      padding-right: 10px;
+    }
+    .gg {
+      padding-left: 10px;
+    }
+  }
+  .button {
+    button {
+      background: #576e33;
+      margin-top: 25px;
+      border: 2px solid #576e33;
+      &:hover {
+        background-color: transparent;
+        color: #576e33;
+      }
+    }
+  }
+  h5 {
+    font-size: 24px;
+    font-weight: 700;
+    @media screen and (max-width: 992px) {
+      font-size: 20px;
+    }
+    @media screen and (max-width: 576px) {
+      font-size: 18px;
+    }
+    color: #000;
+  }
+  .form-group {
+    &:first-child {
+      margin-top: 36px;
+    }
+    &:not(:first-child) {
+      margin-top: 20px;
+    }
+  }
+}
+#modal-notify {
+  width: 720px;
+  margin-bottom: 30px;
+  .rs-modal-header {
+    padding: 20px 60px;
+    padding-right: 30px;
+    display: flex;
+    @media screen and (max-width: 992px) {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+    @media screen and (max-width: 576px) {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    button {
+      background: transparent;
+      border: none;
+      i {
+        font-size: 18px;
+        color: #000;
+      }
+    }
+  }
+  .rs-modal-content {
+    padding: 0;
+  }
+  .rs-modal-body {
+    padding: 10px 100px 40px;
+    @media screen and (max-width: 992px) {
+      padding-left: 60px;
+      padding-right: 60px;
+      padding-top: 0px;
+    }
+    @media screen and (max-width: 768px) {
+      padding-left: 20px;
+      padding-right: 20px;
+      button {
+        width: 100% !important;
+      }
+    }
+    overflow: visible !important;
+    max-height: 90% !important;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    i {
+      font-size: 90px;
+      color: #576e33;
+    }
+    h5 {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-top: 30px;
+      text-align: center;
+      @media screen and (max-width: 992px) {
+        font-size: 20px;
+      }
+      @media screen and (max-width: 576px) {
+        font-size: 18px;
+      }
+    }
+    h6 {
+      font-size: 20px;
+      text-align: center;
+      @media screen and (max-width: 992px) {
+        font-size: 18px;
+      }
+      @media screen and (max-width: 576px) {
+        font-size: 16px;
+      }
+      font-weight: 700;
+      margin-top: 15px;
+      line-height: 1.3;
+    }
+  }
+  .rs-modal-header-close {
+    display: none;
+  }
+  .button {
+    button {
+      background: #576e33;
+      margin-top: 25px;
+      border: 2px solid #576e33;
+      &:hover {
+        background-color: transparent;
+        color: #576e33;
+      }
+    }
+  }
+  h5 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000;
+  }
+}
+#modal-checkinfo {
+  width: 1115px;
+  .rs-modal-header {
+    padding: 20px 60px;
+    padding-right: 30px;
+    display: flex;
+    @media screen and (max-width: 992px) {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+    @media screen and (max-width: 576px) {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    background-color: #f8f8f4;
+    .rs-modal-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #000;
+      @media screen and (max-width: 992px) {
+        font-size: 22px;
+      }
+    }
+    button {
+      background: transparent;
+      border: none;
+      i {
+        font-size: 18px;
+        color: #000;
+      }
+    }
+  }
+  .rs-modal-content {
+    padding: 0;
+  }
+  .rs-modal-body {
+    padding: 10px 60px 40px;
+    overflow: visible !important;
+    max-height: 90% !important;
+    height: 90%;
+    @media screen and (max-width: 992px) {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+    @media screen and (max-width: 576px) {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    @media screen and (max-width: 376px) {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+  .rs-modal-header-close {
+    display: none;
+  }
+  .link {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: #576e33;
+  }
+  .button {
+    button {
+      background: #576e33;
+      margin-top: 25px;
+      border: 2px solid #576e33;
+      &:hover {
+        background-color: transparent;
+        color: #576e33;
+      }
+    }
+  }
+  h5 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000;
+    @media screen and (max-width: 992px) {
+      font-size: 20px;
+    }
+  }
+  .information_column {
+    margin-top: 15px;
+    display: flex;
+    align-items: start !important;
+    h6 {
+      font-size: 20px;
+      @media screen and (max-width: 992px) {
+        font-size: 18px;
+      }
+      @media screen and (max-width: 576px) {
+        font-size: 16px;
+      }
+      font-weight: 700;
+      line-height: 1.3;
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      i {
+        font-size: 18px;
+        width: 20%;
+      }
+      span {
+        width: 80%;
+      }
+    }
+    .desc {
+      font-weight: 400;
+    }
+  }
+}
+.rs-modal {
+  form {
+    // input[type="text"] {
+    //   width: 100%;
+    //   background: rgba(217, 217, 217, 0.3);
+    //   border: 0;
+    //   border-radius: 8px;
+    //   padding: 10px 15px;
+    //   margin-top: 22px;
+    //   color: #000;
+    // }
+  }
+  .rs-custom-button {
+    margin-top: 30px;
+    button {
+      color: #fff;
+      padding: 4px 25px;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 8px;
+      text-transform: uppercase;
+      @media screen and (max-width: 576px) {
+        width: 49%;
+        padding: 4px 15px;
+      }
+      &:nth-child(1) {
+        background-color: #0b2b20;
+        border: 2px solid #0b2b20;
+        margin-right: 5px;
+        &:hover {
+          color: #0b2b20;
+          background-color: transparent;
+        }
+      }
+      &:nth-child(2) {
+        background-color: #ba2525;
+        border: 2px solid #ba2525;
+        margin-left: 5px;
+        &:hover {
+          color: #ba2525;
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}
+.rs-modal-wrapper {
+  z-index: 4100px !important;
+}

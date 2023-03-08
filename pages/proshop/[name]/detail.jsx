@@ -1,43 +1,75 @@
-import $ from "jquery";
 import { yupResolver } from "@hookform/resolvers/yup";
+import $ from "jquery";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Tab, Tabs } from "react-bootstrap";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "rsuite";
 import Swal from "sweetalert2";
 import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { getProshopData } from "../../../store/redux/ProshopReducer/proshop.action";
-import { removeAccents } from "../../../utils/function";
 import * as yup from "yup";
-import {
-  getLocalStorage,
-  LOCAL_STORAGE,
-  setLocalStorage,
-} from "../../../utils/handleStorage";
-import styles from "./detail.module.scss";
-import TabDescription from "./TabDescription/TabDescription";
-import SignIn from "../../../components/Modal/SignIn";
-import { useForm } from "react-hook-form";
-import Cookies from "js-cookie";
 import loginClientAxios from "../../../clientAxios/loginClientAxios";
+import SignIn from "../../../components/Modal/SignIn";
 import {
   AddToCart,
   getCartData,
   UdateProductInCart,
 } from "../../../store/redux/CartReducer/cart.action";
+import { getProshopData } from "../../../store/redux/ProshopReducer/proshop.action";
+import ProshopAPI from "../../../store/redux/ProshopReducer/proshop.api";
+import { removeAccents } from "../../../utils/function";
+import styles from "./detail.module.scss";
+import TabDescription from "./TabDescription/TabDescription";
 const schema2 = yup.object().shape({
   phone: yup.string().required("Vui lòng nhập số điện thoại"),
   password: yup.string().required("Mật khẩu là trường bắt buộc"),
 });
 function Detail(props) {
   const router = useRouter();
-  const proshopDetail = useSelector((state) =>
-    state.ProshopReducer.proshopList.find(
-      (x) => removeAccents(x.ten_vt || "") === router.query.name
+  const [ProshopData, setProshopData] = useState();
+  const cate = Cookies.get("Pro_DM");
+  const page = Cookies.get("page_shop");
+  const name = Cookies.get("name");
+  const gender = Cookies.get("gender");
+  const size = Cookies.get("size");
+  const brand = Cookies.get("brand");
+  const price_min = Cookies.get("price_min");
+  const price_max = Cookies.get("price_max");
+  const dateNewest = Cookies.get("date_newest");
+  const price_Incresss = Cookies.get("price_incresss");
+  useEffect(() => {
+    ProshopAPI.getProshopAPI(
+      page,
+      cate,
+      name,
+      gender,
+      size,
+      brand,
+      price_min,
+      price_max,
+      dateNewest,
+      price_Incresss
     )
+      .then((rs) => setProshopData(rs?.data))
+      .catch((err) => setProshopData([]));
+  }, [
+    cate,
+    page,
+    name,
+    gender,
+    size,
+    brand,
+    price_min,
+    price_max,
+    dateNewest,
+    price_Incresss,
+  ]);
+  const proshopDetail = ProshopData?.find(
+    (x) => removeAccents(x?.ten_vt) === router.query.name
   );
   const {
     register: register2,
@@ -144,7 +176,7 @@ function Detail(props) {
         });
       })
     );
-  }, []);
+  }, [proshopDetail]);
   const handleAddToCart = (item) => {
     if (token && token?.length > 0) {
       setLoadingAddToCart(true);
@@ -156,7 +188,7 @@ function Detail(props) {
           dispatch(
             AddToCart({
               ma_vt: item?.ma_vt,
-              ma_dvt: item.ma_dvt,
+              ma_dvt: item?.ma_dvt,
               sl_xuat: qty,
               // tien_nt: 200000,
               // tien: 200000,
@@ -296,7 +328,7 @@ function Detail(props) {
               <h2>{proshopDetail?.ten_vt}</h2>
               <div className="d-flex flex-wrap justify-content-lg-between align-items-center justify-content-start">
                 <p className="price">
-                  {proshopDetail?.gia_ban_le.toLocaleString("vi-Vi")} VND
+                  {proshopDetail?.gia_ban_le?.toLocaleString("vi-Vi")} VND
                 </p>
               </div>
               <p>

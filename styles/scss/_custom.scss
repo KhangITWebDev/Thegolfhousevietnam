@@ -1,0 +1,46 @@
+.custom-timeline {
+  margin-top: 45px !important;
+  .rs-timeline-item-custom-dot {
+    position: absolute;
+    background: #fff;
+    top: 0;
+    left: -2px;
+    border: 2px solid;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    font-size: 14px !important;
+    color: #000;
+    margin-left: -13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+  }
+  .rs-timeline-item-tail {
+    background-color: #000;
+  }
+  .rs-timeline-item-content p {
+    margin: 0;
+  }
+  .rs-timeline-item-content {
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+  }
+}
+.rs-tree {
+  height: 100% !important;
+  max-height: 100% !important;
+  .item {
+    font-size: 16px;
+    i {
+      margin-right: 5px;
+    }
+  }
+}
+.rs-modal {
+  &-wrapper {
+    z-index: 3002 !important;
+  }
+}

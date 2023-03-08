@@ -1,36 +1,74 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Alert } from "react-bootstrap";
 import { Loader, Modal } from "rsuite";
-function SignIn({
-  handleClose2,
-  errors,
-  register,
-  onSubmit,
-  handleSubmit,
-  loading,
-  reset,
-}) {
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import Swal from "sweetalert2";
+import loginClientAxios from "../../clientAxios/loginClientAxios";
+
+const schema = yup.object().shape({
+  phone: yup.string().required("Vui lòng nhập số điện thoại"),
+  password: yup.string().required("Mật khẩu là trường bắt buộc"),
+});
+
+function SignIn({ handleClose }) {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
   useEffect(() => {
     reset({
       phone: "",
       password: "",
     });
   }, []);
-  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const onSubmit = async (data) => {
+    setLoading(true);
+    const resApi = await loginClientAxios.post("/user/login", {
+      username: data.phone,
+      password: data.password,
+    });
+    setTimeout(() => {
+      if (resApi?.result?.message?.length > 0) {
+        Swal.fire({
+          text: `${resApi.result.message}`,
+          icon: "error",
+          showCancelButton: false,
+          confirmButtonText: "Đồng ý",
+        });
+        setLoading(false);
+      } else if (resApi?.result) {
+        setLoading(false);
+        Cookies.set("access_token", resApi?.result?.access_token);
+        Cookies.set("user_id", resApi?.result?.id);
+        Cookies.set("trainee_id", resApi?.result?.trainee_id);
+        Cookies.set("erp_token", resApi?.result?.erp_token);
+        handleClose();
+        localStorage.setItem("open", "none");
+      }
+    }, 2000);
+  };
   return (
     <Modal
       open={true}
-      onClose={handleClose2}
+      onClose={handleClose}
       id="modal-signup"
       data-aos="fade-down"
       data-aos-delay="800"
     >
       <Modal.Header>
         <Modal.Title>Đăng nhập</Modal.Title>
-        <button onClick={handleClose2}>
+        <button onClick={handleClose}>
           <i className="fa-light fa-times"></i>
         </button>
       </Modal.Header>

@@ -1,18 +1,18 @@
 import React from "react";
 import { Modal } from "rsuite";
 
-function CheckInfo({ handleClose4, watch }) {
+function CheckInfo({ handleClose, watch }) {
   return (
     <Modal
       open={true}
-      onClose={handleClose4}
+      onClose={handleClose}
       id="modal-checkinfo"
       data-aos="fade-down"
       data-aos-delay="800"
     >
       <Modal.Header>
         <Modal.Title>Thông tin đăng ký học thử</Modal.Title>
-        <button onClick={handleClose4}>
+        <button onClick={handleClose}>
           <i className="fa-light fa-times"></i>
         </button>
       </Modal.Header>

@@ -1,0 +1,27 @@
+.rs-steps-item-status-finish .rs-steps-item-icon-wrapper {
+  border-color: #bababa !important;
+}
+.rs-steps-item-icon-wrapper {
+  background-color: #bababa;
+  border: 1px solid #bababa;
+  .rs-steps-item-icon {
+    color: #fff !important;
+  }
+}
+.rs-steps-item {
+  .rs-steps-item-title {
+    color: #bababa;
+  }
+}
+.rs-steps-item-status-wait .rs-steps-item-active {
+  .rs-steps-item-icon-wrapper {
+    background-color: #000;
+    border: 1px solid #000;
+    .rs-steps-item-icon {
+      color: #fff;
+    }
+  }
+  .rs-steps-item-title {
+    color: #000;
+  }
+}

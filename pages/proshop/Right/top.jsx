@@ -6,10 +6,21 @@ import styles from "./right.module.scss";
 
 function Top({ hiddenFilter, setHiddenFilter, callFilter }) {
   const name = Cookies.get("name");
+  const [keyword, setkeyWord] = useState("");
   const handleSearchInput = (e) => {
     Cookies.set("page_shop", 1);
-    Cookies.set("name", e.target.value.toLowerCase());
-    callFilter();
+    setkeyWord(e.target.value);
+  };
+  const handleSearch = (e) => {
+    console.log(keyword);
+    e.preventDefault();
+    if (keyword && keyword !== "") {
+      Cookies.set("name", keyword.toLowerCase());
+      callFilter();
+    } else {
+      Cookies.set("name", "");
+      callFilter();
+    }
   };
   const sortType = Cookies.get("sort");
   const incress = Cookies.get("incress");
@@ -71,14 +82,14 @@ function Top({ hiddenFilter, setHiddenFilter, callFilter }) {
   return (
     <div
       className={
-        "flex-wrap justify-content-between align-items-center" +
+        "flex-wrap justify-content-between align-items-start" +
         " " +
         `${hiddenFilter ? "d-flex" : "d-flex"}` +
         " " +
         styles.header
       }
     >
-      <span className="col-12 col-sm-8">
+      <form className="col-12 col-sm-8" onSubmit={(e) => handleSearch(e)}>
         <div className="form-group">
           <div className="input-group">
             <div className="icon">
@@ -95,7 +106,10 @@ function Top({ hiddenFilter, setHiddenFilter, callFilter }) {
             />
           </div>
         </div>
-      </span>
+        <div className="button justify-content-start">
+          <button onClick={handleSearch}>Tìm kiếm</button>
+        </div>
+      </form>
       <div
         className="col-12 col-sm-4 d-flex align-items-center justify-content-start justify-content-sm-end"
         data-aos="fade-left"

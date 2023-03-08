@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Loader } from "rsuite";
 import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -39,6 +39,13 @@ function ProductList({ loading, proshopData, hiddenFilter }) {
     }
     return arr;
   };
+  const [loader, setloader] = useState(false);
+  useEffect(() => {
+    setloader(true);
+    setTimeout(() => {
+      setloader(false);
+    }, 5000);
+  }, []);
   return (
     <div
       className={"d-flex flex-wrap" + " " + styles.product}
@@ -46,9 +53,20 @@ function ProductList({ loading, proshopData, hiddenFilter }) {
         height: proshopData?.length > 0 ? "auto" : "100%",
       }}
     >
-      {!proshopData ? (
-        <div className="d-flex m-auto">
-          <Loader size="md" content="Đang tải dữ liệu..." />
+      {proshopData.length <= 0 ? (
+        <div className="d-flex mx-auto">
+          {loader ? (
+            <Loader size="md" content="Đang tải dữ liệu..." />
+          ) : (
+            <p
+              style={{
+                fontSize: 20,
+                marginTop: 50,
+              }}
+            >
+              Không có dữ liệu
+            </p>
+          )}
         </div>
       ) : proshopData?.length < 0 ? (
         <div>

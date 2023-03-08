@@ -6,6 +6,7 @@ import Top from "./top";
 
 function Right({
   proshopData,
+  setProshopData,
   callFilter,
   loading,
   hiddenFilter,
@@ -21,6 +22,7 @@ function Right({
       <Top
         hiddenFilter={hiddenFilter}
         setHiddenFilter={setHiddenFilter}
+        setProshopData={setProshopData}
         callFilter={callFilter}
       />
       <ProductList

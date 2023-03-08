@@ -82,15 +82,18 @@ function Top({ hiddenFilter, setHiddenFilter, callFilter }) {
   return (
     <div
       className={
-        "flex-wrap justify-content-between align-items-start" +
+        "flex-wrap justify-content-between align-items-center" +
         " " +
         `${hiddenFilter ? "d-flex" : "d-flex"}` +
         " " +
         styles.header
       }
     >
-      <form className="col-12 col-sm-8" onSubmit={(e) => handleSearch(e)}>
-        <div className="form-group">
+      <form
+        className="col-12 col-sm-8 d-flex"
+        onSubmit={(e) => handleSearch(e)}
+      >
+        <div className={"form-group col-8" + " " + styles.wraper_input}>
           <div className="input-group">
             <div className="icon">
               <i className="fa-regular fa-magnifying-glass"></i>
@@ -106,7 +109,7 @@ function Top({ hiddenFilter, setHiddenFilter, callFilter }) {
             />
           </div>
         </div>
-        <div className="button justify-content-start">
+        <div className="button justify-content-start col-4 ml-auto">
           <button onClick={handleSearch}>Tìm kiếm</button>
         </div>
       </form>

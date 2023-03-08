@@ -15,60 +15,18 @@ import loginClientAxios from "../../clientAxios/loginClientAxios";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartData } from "../../store/redux/CartReducer/cart.action";
-const schema2 = yup.object().shape({
-  // email: yup
-  //   .string()
-  //   .email("Email không hợp lệ")
-  //   .required("vui lòng nhập email"),
-  phone: yup.string().required("Vui lòng nhập số điện thoại"),
-  password: yup.string().required("Mật khẩu là trường bắt buộc"),
-});
 function MainLayout({ children }) {
-  const {
-    register: register2,
-    handleSubmit: handleSubmit2,
-    watch: watch2,
-    reset: reset2,
-    formState: { errors: errors2 },
-  } = useForm({
-    resolver: yupResolver(schema2),
-  });
   const dispatch = useDispatch();
   const router = useRouter();
   const cart = useSelector((state) => state.CartReducer.cartList);
   useEffect(() => {
     dispatch(getCartData());
   }, []);
-  const [open2, setOpen2] = React.useState(false);
-  const handleOpen2 = () => {
-    setOpen2(true);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
   };
-  const handleClose2 = () => setOpen2(false);
-  const [loading, setLoading] = useState(false);
-  const onSubmit2 = async (data) => {
-    setLoading(true);
-    const resApi = await loginClientAxios.post("/user/login", {
-      username: data.phone,
-      password: data.password,
-    });
-    setTimeout(() => {
-      if (resApi?.result?.message?.length > 0) {
-        Swal.fire({
-          text: `${resApi.result.message}`,
-          icon: "error",
-          showCancelButton: false,
-          confirmButtonText: "Đồng ý",
-        });
-        setLoading(false);
-      } else if (resApi?.result) {
-        setLoading(false);
-        Cookies.set("access_token", resApi?.result?.access_token);
-        Cookies.set("trainee_id", resApi?.result?.id);
-        Cookies.set("erp_token", resApi?.result?.erp_token);
-        setOpen2(false);
-      }
-    }, 2000);
-  };
+  const handleClose = () => setOpen(false);
   const [activeKey, setActiveKey] = React.useState(1);
   const [visible, setVisible] = useState(false);
   const [visibleHome, setVisibleHome] = useState(false);
@@ -165,11 +123,11 @@ function MainLayout({ children }) {
   });
   $(".cart").on("click", () => {
     if (token && token?.length > 0) {
-      setOpen2(false);
+      setOpen(false);
       $(".cart-dialog").css("transform", "scaleY(1)");
     } else {
       $(".cart-dialog").css("transform", "scaleY(0)");
-      setOpen2(true);
+      setOpen(true);
     }
   });
   $(".sub-menu").on("click", () => {
@@ -232,17 +190,7 @@ function MainLayout({ children }) {
         )}
         <RightMenu handleCloseRightMenu={handleCloseRightMenu} />
         <Cart handleCloseCart={handleCloseCart} cart={cart} />
-        {open2 && (
-          <SignIn
-            errors={errors2}
-            register={register2}
-            onSubmit={onSubmit2}
-            handleSubmit={handleSubmit2}
-            handleClose2={handleClose2}
-            loading={loading}
-            reset={reset2}
-          />
-        )}
+        {open && <SignIn setOpen={setOpen} handleClose={handleClose} />}
         <div>{children}</div>
         <button
           className="btn-scroll"

@@ -38,3 +38,6 @@ export const schema = yup.object().shape({
   street: yup.string().required("Vui lòng điền tên đường"),
   no: yup.string().required("Vui lòng điền số nhà"),
 });
+export default function Validation() {
+  return;
+}

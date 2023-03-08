@@ -15,7 +15,7 @@ const schema = yup.object().shape({
   password: yup.string().required("Mật khẩu là trường bắt buộc"),
 });
 
-function SignIn({ handleClose }) {
+function SignIn({ setOpen, handleClose }) {
   const {
     register,
     handleSubmit,
@@ -53,8 +53,7 @@ function SignIn({ handleClose }) {
         Cookies.set("user_id", resApi?.result?.id);
         Cookies.set("trainee_id", resApi?.result?.trainee_id);
         Cookies.set("erp_token", resApi?.result?.erp_token);
-        handleClose();
-        localStorage.setItem("open", "none");
+        setOpen(false);
       }
     }, 2000);
   };

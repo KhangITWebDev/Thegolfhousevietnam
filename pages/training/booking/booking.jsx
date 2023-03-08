@@ -230,7 +230,7 @@ function Booking({ contents }) {
                   </button>
                 </div>
               </div>
-              {open && <SignIn handleClose={handleClose} />}
+              {open && <SignIn setOpen={setOpen} handleClose={handleClose} />}
             </div>
           </div>
         </div>

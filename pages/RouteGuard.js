@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 // import { userService } from "services";
 import Cookies from "js-cookie";
+import SignIn from "../components/Modal/SignIn";
 
 export default function RouteGuard({ children }) {
   const router = useRouter();
@@ -30,18 +31,14 @@ export default function RouteGuard({ children }) {
 
   function authCheck(url) {
     // redirect to login page if accessing a private page and not logged in
-    const publicPaths = ["/booking"];
+    const publicPaths = ["/booking", "/cart"];
     const path = url.split("?")[0];
     if (!token && publicPaths.includes(path)) {
       setAuthorized(false);
-      router.back();
-      router.replace({ ...router.query, open: true }, undefined, {
-        shallow: false,
-      });
     } else {
       setAuthorized(true);
     }
   }
-
-  return authorized && children;
+  const handleClose = () => router.back();
+  return authorized ? <>{children} </> : <SignIn handleClose={handleClose} />;
 }

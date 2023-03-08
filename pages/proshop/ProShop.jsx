@@ -31,24 +31,20 @@ function ProShop(props) {
   const sortType = Cookies.get("sort");
   const incress = Cookies.get("incress");
   const callFilter = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      ProshopAPI.getProshopAPI(
-        page,
-        cate,
-        name,
-        gender,
-        size,
-        brand,
-        price_min,
-        price_max,
-        sortType,
-        incress
-      )
-        .then((res) => setProshopData(res?.data))
-        .then(() => setProshopData([]));
-    }, 3000);
+    ProshopAPI.getProshopAPI(
+      page,
+      cate,
+      name,
+      gender,
+      size,
+      brand,
+      price_min,
+      price_max,
+      sortType,
+      incress
+    )
+      .then((res) => setProshopData(res?.data))
+      .then(() => setProshopData([]));
   };
   useEffect(() => {
     ProshopAPI.getProshopAPI(
@@ -77,6 +73,7 @@ function ProShop(props) {
     sortType,
     incress,
   ]);
+  console.log(proshopData);
   return (
     <div className={styles.proshop_page}>
       <Banner />

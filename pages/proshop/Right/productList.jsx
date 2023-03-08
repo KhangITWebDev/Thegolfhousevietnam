@@ -50,6 +50,10 @@ function ProductList({ loading, proshopData, hiddenFilter }) {
         <div className="d-flex m-auto">
           <Loader size="md" content="Đang tải dữ liệu..." />
         </div>
+      ) : proshopData?.length < 0 ? (
+        <div>
+          <p>Không có dữ liệu</p>
+        </div>
       ) : (
         proshopData?.map((item, index) => (
           <div

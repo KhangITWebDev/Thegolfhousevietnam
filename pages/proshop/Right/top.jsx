@@ -6,18 +6,10 @@ import styles from "./right.module.scss";
 
 function Top({ hiddenFilter, setHiddenFilter, callFilter }) {
   const name = Cookies.get("name");
-  const [keyWord, setKeyword] = useState(name || "");
   const handleSearchInput = (e) => {
-    const value = e.target.value;
-    if (value && value.length > 0) {
-      Cookies.set("page_shop", 1);
-      Cookies.set("name", value.toLowerCase());
-      callFilter();
-    } else {
-      Cookies.set("page_shop", 1);
-      Cookies.set("name", "");
-      callFilter();
-    }
+    Cookies.set("page_shop", 1);
+    Cookies.set("name", e.target.value.toLowerCase());
+    callFilter();
   };
   const sortType = Cookies.get("sort");
   const incress = Cookies.get("incress");

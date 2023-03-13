@@ -27,7 +27,7 @@ export default function RouteGuard({ children }) {
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [token]);
 
   function authCheck(url) {
     // redirect to login page if accessing a private page and not logged in

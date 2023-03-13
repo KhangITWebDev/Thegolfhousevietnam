@@ -259,16 +259,18 @@ function BookingList(props) {
     data.setCurrentPage(1);
     const value = e.target.value;
     const dataSearchLocation = bookingList["academy.booking"].filter((x) =>
-      removeAccents(x.location_id[1]).includes(
-        removeAccents(value.toLowerCase())
+      removeAccents(x.location_id[1]?.toLowerCase() || "").includes(
+        removeAccents(value.toLowerCase() || "")
       )
     );
     const dataSearchCourse = bookingList["academy.booking"].filter((x) =>
-      removeAccents(x.course_id[1]).includes(removeAccents(value.toLowerCase()))
+      removeAccents(x.course_id[1]?.toLowerCase() || "").includes(
+        removeAccents(value.toLowerCase() || "")
+      )
     );
     const dataSearchTrainer = bookingList["academy.booking"].filter((x) =>
-      removeAccents(x.trainer_id[1]).includes(
-        removeAccents(value.toLowerCase())
+      removeAccents(x.trainer_id[1]?.toLowerCase() || "").includes(
+        removeAccents(value.toLowerCase() || "")
       )
     );
     if (value && value !== "") {

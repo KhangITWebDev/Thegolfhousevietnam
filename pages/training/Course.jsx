@@ -20,11 +20,11 @@ function Course(props) {
     <div className={styles.course_page}>
       <Heading contents={contents} />
       <Banner />
-      <CourseIntroduction contents={contents} />
       <div className="container">
         <CardPack />
         <Benefit contents={contents} />
       </div>
+      <CourseIntroduction contents={contents} />
       <Trainee contents={contents} />
       <Booking contents={contents} />
     </div>

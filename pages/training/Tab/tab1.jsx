@@ -79,7 +79,7 @@ function Tab1({ item }) {
                   <strong>{x?.pirce?.pga?.toLocaleString("vi-VI")} VND</strong>
                 </p>
                 <div className="button" onClick={handleOpen}>
-                  <button>Đang ký ngay</button>
+                  <button>Đăng ký ngay</button>
                 </div>
                 {open && (
                   <SignUpClub

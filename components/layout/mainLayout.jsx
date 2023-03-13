@@ -93,12 +93,12 @@ function MainLayout({ children }) {
           $(".footer-item")[6].classList.add("footer-active");
           break;
         }
-        case "/other-service/spa": {
+        case "/spa": {
           $(".rs-navbar-item")[4].classList.add("rs-navbar-item-active");
           $(".footer-item")[7].classList.add("footer-active");
           break;
         }
-        case "/other-service/lounge": {
+        case "/lounge": {
           $(".rs-navbar-item")[5].classList.add("rs-navbar-item-active");
           $(".footer-item")[8].classList.add("footer-active");
           break;

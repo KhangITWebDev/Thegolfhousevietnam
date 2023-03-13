@@ -140,7 +140,7 @@ function Footer(props) {
                   <div
                     className={styles.item + " " + "footer-item"}
                     onClick={(e) => {
-                      router.push("/other-service/spa");
+                      router.push("/spa");
                     }}
                   >
                     Spa
@@ -148,7 +148,7 @@ function Footer(props) {
                   <div
                     className={styles.item + " " + "footer-item"}
                     onClick={(e) => {
-                      router.push("/other-service/lounge");
+                      router.push("/lounge");
                     }}
                   >
                     Lounge

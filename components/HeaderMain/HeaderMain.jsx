@@ -167,9 +167,11 @@ export default function HeaderMain({
                   <Nav.Item eventKey="12" onClick={handleShowCart}>
                     <div className="cart">
                       <i className="fa-light fa-bag-shopping"></i>
-                      <span className="d-flex justify-content-center align-items-center">
-                        {cart.length}
-                      </span>
+                      {cart.length > 0 ? (
+                        <span className="d-flex justify-content-center align-items-center">
+                          {cart.length}
+                        </span>
+                      ) : null}
                     </div>
                   </Nav.Item>
                   <Nav.Item eventKey="14" className="sub-menu">

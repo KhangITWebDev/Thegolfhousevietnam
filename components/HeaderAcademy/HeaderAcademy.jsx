@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import styles from "./headerAcademy.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -159,9 +158,11 @@ export default function HeaderAccademy({
                   <Nav.Item eventKey="12" onClick={handleShowCart}>
                     <div className="cart">
                       <i className="fa-light fa-bag-shopping"></i>
-                      <span className="d-flex justify-content-center align-items-center">
-                        {cart.length}
-                      </span>
+                      {cart.length > 0 ? (
+                        <span className="d-flex justify-content-center align-items-center">
+                          {cart.length}
+                        </span>
+                      ) : null}
                     </div>
                   </Nav.Item>
 

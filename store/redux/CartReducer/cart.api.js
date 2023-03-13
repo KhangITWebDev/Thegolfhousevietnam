@@ -3,9 +3,11 @@ import ContentAxios from "../../../clientAxios/contentAxios";
 
 const getCartAPI = async () => {
   const erp_token = Cookies.get("erp_token");
+  const test_token = "7d7fea98483f31af4ac3cdd9db2e4a93";
+
   try {
     const resApi = await ContentAxios.get(
-      `/cart?limit=500&page=1&access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+      s`/cart?limit=500&page=1&access_token=${erp_token}`
     );
     if (resApi)
       return {
@@ -28,7 +30,7 @@ const deleteProductCartAPI = async (id) => {
   const erp_token = Cookies.get("erp_token");
   try {
     const resApi = await ContentAxios.delete(
-      `/cart/${id}?limit=500&page=1&access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+      `/cart/${id}?limit=500&page=1&access_token=${erp_token}`
     );
     if (resApi)
       return {
@@ -51,7 +53,7 @@ const postCartAPI = async (data) => {
   const erp_token = Cookies.get("erp_token");
   try {
     const resApi = await ContentAxios.post(
-      `/cart?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`,
+      `/cart?access_token=${erp_token}`,
       data
     );
     if (resApi)
@@ -75,7 +77,7 @@ const putCartAPI = async (id, data) => {
   const erp_token = Cookies.get("erp_token");
   try {
     const resApi = await ContentAxios.put(
-      `/cart/${id}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`,
+      `/cart/${id}?access_token=${erp_token}`,
       data
     );
     if (resApi)

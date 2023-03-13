@@ -32,7 +32,7 @@ const customStyles = {
   }),
   control: (base, state) => ({
     ...base,
-    backgroundColor: "tranparent",
+    backgroundColor: "transparent",
     cursor: "pointer",
     color: "#fff",
     border: state.isFocused ? 0 : 0,

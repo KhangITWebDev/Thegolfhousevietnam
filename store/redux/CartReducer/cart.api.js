@@ -7,7 +7,7 @@ const getCartAPI = async () => {
 
   try {
     const resApi = await ContentAxios.get(
-      s`/cart?limit=500&page=1&access_token=${erp_token}`
+      `/cart?limit=500&page=1&access_token=${erp_token}`
     );
     if (resApi)
       return {

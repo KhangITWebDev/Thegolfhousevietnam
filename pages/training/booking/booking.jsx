@@ -11,6 +11,7 @@ import {
   getRegistrationData,
 } from "../../../store/redux/BookingReducer/booking.action";
 import styles from "./booking.module.scss";
+
 const customStyles = {
   option: (provided, state) => ({
     ...provided,
@@ -71,11 +72,12 @@ const customStyles = {
     return {
       ...base,
       fontSize: 18,
-      fontWeight: 500,
+      fontWeight: 400,
       color: "#fff",
     };
   },
 };
+
 const DropdownIndicator = (props) => {
   return (
     <components.DropdownIndicator {...props}>
@@ -89,6 +91,7 @@ const DropdownIndicator = (props) => {
     </components.DropdownIndicator>
   );
 };
+
 function Booking({ contents }) {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -98,13 +101,16 @@ function Booking({ contents }) {
   const token = Cookies.get("access_token");
   const { locationList } = useSelector((state) => state.BookingReducer);
   const { registration } = useSelector((state) => state.BookingReducer);
+
   useEffect(() => {
     dispatch(getRegistrationData());
     dispatch(getLocationData());
   }, [token]);
+
   const sectionBooking = contents.filter(
     (item) => item.category === "63bc3d4539d2a23b06d8bb0e"
   );
+
   return (
     <div className={styles.Booking} data-aos="fade-right">
       <div className="container">
@@ -112,6 +118,7 @@ function Booking({ contents }) {
           <h2>{sectionBooking[0]?.title}</h2>
         </div>
       </div>
+
       <div className={styles.bannerv2}>
         <Image
           alt="Booking banner"
@@ -159,6 +166,7 @@ function Booking({ contents }) {
                             });
                       }}
                     ></i>
+
                     {!token ? (
                       <button type="text" onClick={() => setOpen(true)}>
                         <span> Chọn vị trí học...</span>
@@ -201,6 +209,7 @@ function Booking({ contents }) {
                     )}
                   </div>
                 </div>
+
                 <div
                   className={
                     "col-12 col-lg-3 d-flex justify-content-end justify-content-lg-center align-center" +
@@ -230,6 +239,7 @@ function Booking({ contents }) {
                   </button>
                 </div>
               </div>
+
               {open && <SignIn setOpen={setOpen} handleClose={handleClose} />}
             </div>
           </div>

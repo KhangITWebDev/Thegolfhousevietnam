@@ -99,7 +99,7 @@ function ProductList({ loading, proshopData, hiddenFilter }) {
                     className={styles.image}
                     style={{ zIndex: 1, position: "relative" }}
                     onClick={() => {
-                      router.push(`/proshop/${removeAccents(item.ten_vt)}`);
+                      router.push(`/proshop/${removeAccents(item.ma_vt)}`);
                     }}
                   >
                     {url ? (
@@ -175,7 +175,7 @@ function ProductList({ loading, proshopData, hiddenFilter }) {
                   </div>
                   <div
                     onClick={() => {
-                      router.push(`/proshop/${removeAccents(item.ten_vt)}`);
+                      router.push(`/proshop/${removeAccents(item.ma_vt)}`);
                     }}
                   >
                     <p>{item.gia_ban_le.toLocaleString("vi-VI")} VND</p>
@@ -187,7 +187,7 @@ function ProductList({ loading, proshopData, hiddenFilter }) {
                     className={styles.image}
                     style={{ zIndex: -1 }}
                     onClick={() => {
-                      router.push(`/proshop/${removeAccents(item.ten_vt)}`);
+                      router.push(`/proshop/${removeAccents(item.ma_vt)}`);
                     }}
                   >
                     {item.picture ? (
@@ -213,7 +213,7 @@ function ProductList({ loading, proshopData, hiddenFilter }) {
                   </div>
                   <div
                     onClick={() => {
-                      router.push(`/proshop/${removeAccents(item.ten_vt)}`);
+                      router.push(`/proshop/${removeAccents(item.ma_vt)}`);
                     }}
                   >
                     <h5>{item.ten_vt}</h5>

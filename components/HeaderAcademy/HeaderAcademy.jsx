@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import Swal from "sweetalert2";
-import { Dropdown } from "react-bootstrap";
 import Cookies from "js-cookie";
-import { getLocalStorage, LOCAL_STORAGE } from "../../utils/handleStorage";
-import $ from "jquery";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 import { Nav, Navbar } from "rsuite";
-import HeaderMoblie from "../HeaderMobile/HeaderMobile";
 import HeaderMoblieBlack from "../HeaderMobileBlack/HeaderMobileBlack";
 
 export default function HeaderAccademy({
@@ -21,6 +15,7 @@ export default function HeaderAccademy({
   handleShowCart,
   ...props
 }) {
+  const token = Cookies.get("access_token");
   const router = useRouter();
   const [show, setShow] = useState(false);
   const [showCart, setShowCart] = useState(false);
@@ -158,7 +153,7 @@ export default function HeaderAccademy({
                   <Nav.Item eventKey="12" onClick={handleShowCart}>
                     <div className="cart">
                       <i className="fa-light fa-bag-shopping"></i>
-                      {cart.length > 0 ? (
+                      {token && cart.length > 0 ? (
                         <span className="d-flex justify-content-center align-items-center">
                           {cart.length}
                         </span>

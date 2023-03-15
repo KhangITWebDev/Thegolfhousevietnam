@@ -9,13 +9,15 @@ import {
   getCartData,
   UdateProductInCart,
 } from "../../../store/redux/CartReducer/cart.action";
+
 const { Column, HeaderCell, Cell } = Table;
 
 function TableCart({ cart }) {
-  const dispatch = useDispatch();
   const router = useRouter();
+  const dispatch = useDispatch();
   const [loadingRemove, setLoadingRemove] = useState(-1);
   const [loadingQty, setLoadingQty] = useState(-1);
+
   const handleRemove = (item) => {
     Swal.fire({
       title: "",
@@ -48,6 +50,7 @@ function TableCart({ cart }) {
       }
     });
   };
+
   const handleDecreaseQty = (item) => {
     Swal.fire({
       title: "",
@@ -95,6 +98,7 @@ function TableCart({ cart }) {
       }
     });
   };
+
   const handleIncreaseQty = (item, index) => {
     Swal.fire({
       title: "",
@@ -126,6 +130,7 @@ function TableCart({ cart }) {
       }
     });
   };
+
   return (
     <Table
       height={420}
@@ -141,13 +146,17 @@ function TableCart({ cart }) {
         <HeaderCell>
           <span className="h-100 header">Sản Phẩm</span>
         </HeaderCell>
+
         <Cell>
           {(rowData) => (
             <div className="d-flex align-items-center box-name">
               <div className="col-3">
                 <Image
                   alt="Image"
-                  src="/images/Home/Shop/shop1.png"
+                  src={rowData.picture}
+                  loader={({ src }) =>
+                    `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                  }
                   width={80}
                   height={80}
                   objectFit="cover"
@@ -170,10 +179,12 @@ function TableCart({ cart }) {
           )}
         </Cell>
       </Column>
+
       <Column flexGrow={1}>
         <HeaderCell>
           <span className="h-100 header">Giá</span>
         </HeaderCell>
+
         <Cell>
           {(rowData) => (
             <span className="h-100 d-flex align-items-center data">
@@ -182,34 +193,31 @@ function TableCart({ cart }) {
           )}
         </Cell>
       </Column>
+
       <Column flexGrow={1}>
         <HeaderCell>
           <span className="h-100 header">Số lượng</span>
         </HeaderCell>
+
         <Cell>
           {(rowData, index) => (
             <div className="d-flex align-items-center h-100">
-              <div className="quantity d-flex justify-content-center align-items-center">
+              <div className="quantity d-flex flex-row justify-content-around align-items-center">
                 {loadingQty === rowData._id ? (
                   <Loader />
                 ) : (
                   <>
-                    <span
-                      style={{
-                        paddingRight: 15,
-                      }}
-                      className="h-100 d-flex align-items-center data"
-                    >
+                    <i
+                      onClick={() => handleDecreaseQty(rowData, index)}
+                      className="fa-light fa-minus"
+                    />
+                    <span className="h-100 d-flex align-items-center data">
                       {rowData.sl_xuat}
                     </span>
                     <i
-                      className="fa-light fa-chevron-up"
+                      className="fa-light fa-plus"
                       onClick={() => handleIncreaseQty(rowData)}
-                    ></i>
-                    <i
-                      onClick={() => handleDecreaseQty(rowData, index)}
-                      className="fa-light fa-chevron-down"
-                    ></i>
+                    />
                   </>
                 )}
               </div>
@@ -217,10 +225,12 @@ function TableCart({ cart }) {
           )}
         </Cell>
       </Column>
+
       <Column flexGrow={1}>
         <HeaderCell>
           <span className="h-100 header">Tổng giá</span>
         </HeaderCell>
+
         <Cell>
           {(rowData) => (
             <span className="h-100 d-flex align-items-center data">
@@ -229,10 +239,12 @@ function TableCart({ cart }) {
           )}
         </Cell>
       </Column>
+
       <Column flexGrow={1}>
         <HeaderCell>
           <span className="h-100 header">Xóa</span>
         </HeaderCell>
+
         <Cell>
           {(rowData) => (
             <span className="h-100 d-flex align-items-center data romove">

@@ -1,10 +1,9 @@
 import $ from "jquery";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Nav, Navbar } from "rsuite";
-import Swal from "sweetalert2";
-import { getLocalStorage, LOCAL_STORAGE } from "../../utils/handleStorage";
 export default function HeaderMoblieBlack({
   onSelect,
   visible,
@@ -14,6 +13,7 @@ export default function HeaderMoblieBlack({
   cart,
   ...props
 }) {
+  const token = Cookies.get("access_token");
   const router = useRouter();
   const [show, setShow] = useState(false);
   useEffect(() => {
@@ -65,9 +65,11 @@ export default function HeaderMoblieBlack({
                 <Nav.Item eventKey="1">
                   <div className="cart">
                     <i className="fa-light fa-bag-shopping"></i>
-                    <span className="d-flex justify-content-center align-items-center">
-                      {cart.length}
-                    </span>
+                    {token && cart.length > 0 ? (
+                      <span className="d-flex justify-content-center align-items-center">
+                        {cart.length}
+                      </span>
+                    ) : null}
                   </div>
                 </Nav.Item>
                 <Nav.Item eventKey="3" className="bar">

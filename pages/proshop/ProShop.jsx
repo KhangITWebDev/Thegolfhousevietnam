@@ -73,7 +73,7 @@ function ProShop(props) {
     sortType,
     incress,
   ]);
-  // console.log(proshopData, name);
+  console.log("DATA" + JSON.stringify(proshopData));
   return (
     <div className={styles.proshop_page}>
       <Banner />

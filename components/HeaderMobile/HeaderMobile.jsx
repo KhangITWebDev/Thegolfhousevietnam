@@ -1,10 +1,9 @@
 import $ from "jquery";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Nav, Navbar } from "rsuite";
-import Swal from "sweetalert2";
-import { getLocalStorage, LOCAL_STORAGE } from "../../utils/handleStorage";
 export default function HeaderMoblie({
   onSelect,
   activeKey,
@@ -14,6 +13,7 @@ export default function HeaderMoblie({
   cart,
   ...props
 }) {
+  const token = Cookies.get("access_token");
   const router = useRouter();
   const [show, setShow] = useState(false);
   useEffect(() => {
@@ -66,9 +66,11 @@ export default function HeaderMoblie({
                 <Nav.Item eventKey="1" onClick={handleShowCart}>
                   <div className="cart">
                     <i className="fa-light fa-bag-shopping"></i>
-                    <span className="d-flex justify-content-center align-items-center">
-                      {cart.length}
-                    </span>
+                    {token && cart.length > 0 ? (
+                      <span className="d-flex justify-content-center align-items-center">
+                        {cart.length}
+                      </span>
+                    ) : null}
                   </div>
                 </Nav.Item>
                 {/* <Nav.Item eventKey="2" className="search">
@@ -104,6 +106,7 @@ export default function HeaderMoblie({
                 height={95}
               />
             </Navbar.Brand>
+
             <Nav.Item
               eventKey="4"
               className="close"
@@ -127,6 +130,7 @@ export default function HeaderMoblie({
               >
                 Trang chủ
               </Nav.Item>
+
               <Nav.Menu title="Về Chúng Tôi">
                 <Nav.Item
                   eventKey="6"
@@ -136,6 +140,7 @@ export default function HeaderMoblie({
                 >
                   Nhà sáng lập
                 </Nav.Item>
+
                 <Nav.Item
                   eventKey="7"
                   onClick={() => {
@@ -144,6 +149,7 @@ export default function HeaderMoblie({
                 >
                   Lio Holding
                 </Nav.Item>
+
                 <Nav.Item
                   eventKey="8"
                   onClick={() => {
@@ -153,6 +159,7 @@ export default function HeaderMoblie({
                   Tin tức, sự kiện
                 </Nav.Item>
               </Nav.Menu>
+
               <Nav.Menu title="Học Viện">
                 <Nav.Item
                   eventKey="9"
@@ -162,6 +169,7 @@ export default function HeaderMoblie({
                 >
                   Học viện
                 </Nav.Item>
+
                 <Nav.Item
                   eventKey="10"
                   onClick={(e) => {
@@ -170,6 +178,7 @@ export default function HeaderMoblie({
                 >
                   Huấn Luyện Viên
                 </Nav.Item>
+
                 <Nav.Item
                   eventKey="11"
                   onClick={() => {
@@ -179,6 +188,7 @@ export default function HeaderMoblie({
                   Đào tạo
                 </Nav.Item>
               </Nav.Menu>
+
               <Nav.Item
                 eventKey="12"
                 onClick={(e) => {
@@ -188,6 +198,7 @@ export default function HeaderMoblie({
               >
                 Proshop
               </Nav.Item>
+
               <Nav.Item
                 eventKey="13"
                 onClick={(e) => {
@@ -197,6 +208,7 @@ export default function HeaderMoblie({
               >
                 spa
               </Nav.Item>
+
               <Nav.Item
                 eventKey="14"
                 onClick={(e) => {
@@ -206,6 +218,7 @@ export default function HeaderMoblie({
               >
                 lounge
               </Nav.Item>
+
               <Nav.Item
                 eventKey="15"
                 onClick={(e) => {
@@ -217,6 +230,7 @@ export default function HeaderMoblie({
               </Nav.Item>
             </div>
           </div>
+
           <div className="d-flex social justify-content-center">
             <i className="fa-brands fa-facebook-f"></i>
             <i className="fa-brands fa-youtube"></i>

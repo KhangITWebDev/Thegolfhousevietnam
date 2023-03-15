@@ -14,7 +14,7 @@ function Step1({ cart, checkoutMethod, onNext }) {
       <div className="tool-cart">
         <div className="d-flex justify-content-end align-items-center">
           <button onClick={() => router.push("/proshop")}>Tiếp tục mua</button>
-          <button onClick={() => dispatch(getCartData())}>Cập nhật giỏi</button>
+          <button onClick={() => dispatch(getCartData())}>Cập nhật giỏ</button>
         </div>
       </div>
       <BoxTotal cart={cart} checkoutMethod={checkoutMethod} onNext={onNext} />

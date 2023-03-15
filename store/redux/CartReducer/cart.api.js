@@ -3,7 +3,6 @@ import ContentAxios from "../../../clientAxios/contentAxios";
 
 const getCartAPI = async () => {
   const erp_token = Cookies.get("erp_token");
-  const test_token = "7d7fea98483f31af4ac3cdd9db2e4a93";
 
   try {
     const resApi = await ContentAxios.get(

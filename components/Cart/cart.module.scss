@@ -18,29 +18,30 @@
       width: 100%;
       right: auto;
     }
-    padding: 35px;
+    padding: 30px 35px 35px 35px;
     transition: 0.5s;
     @keyframes rotation {
       from {
         transform: rotate(0deg);
       }
       to {
-        transform: rotate(359deg);
+        transform: rotate(45deg);
       }
     }
     .close {
       background-color: transparent;
       border: none;
+      padding: 0 0 10px 0;
       i {
-        color: #fff;
         font-size: 22px;
+        font-weight: 500;
         margin-left: 10px;
-        transition: transform 0.8s;
-        animation: rotation 0.8s linear;
+        transition: transform 0.2s;
+        animation: rotation 0.2s linear;
       }
       &:hover {
         i {
-          transform: rotate(359deg);
+          transform: rotate(90deg);
         }
       }
     }
@@ -59,8 +60,26 @@
     }
     .product {
       overflow: auto;
-      height: 150px;
+      height: 185px;
       padding-right: 6px;
+
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 3px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #576e33;
+        border-radius: 3px;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: #6c8d38;
+      }
     }
     .have {
       border-bottom: 1px solid #fff;

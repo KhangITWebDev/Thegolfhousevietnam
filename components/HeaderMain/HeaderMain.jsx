@@ -1,10 +1,9 @@
 import $ from "jquery";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Nav, Navbar } from "rsuite";
-import Swal from "sweetalert2";
-import { getLocalStorage, LOCAL_STORAGE } from "../../utils/handleStorage";
 import HeaderMoblie from "../HeaderMobile/HeaderMobile";
 
 export default function HeaderMain({
@@ -17,6 +16,7 @@ export default function HeaderMain({
   cart,
   ...props
 }) {
+  const token = Cookies.get("access_token");
   const router = useRouter();
   const [show, setShow] = useState(false);
   useEffect(() => {
@@ -167,7 +167,7 @@ export default function HeaderMain({
                   <Nav.Item eventKey="12" onClick={handleShowCart}>
                     <div className="cart">
                       <i className="fa-light fa-bag-shopping"></i>
-                      {cart.length > 0 ? (
+                      {token && cart.length > 0 ? (
                         <span className="d-flex justify-content-center align-items-center">
                           {cart.length}
                         </span>

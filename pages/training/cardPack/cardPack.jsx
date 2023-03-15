@@ -132,7 +132,7 @@ function CardPack() {
       id="bonus-course"
       className="d-flex flex-wrap align-items-center justify-content-center px-0 px-xl-5"
     >
-      <div className="col-12 col-md-8 left">
+      <div className="col-12 col-md-8 left mb-3 mb-md-0">
         <Tabs
           defaultActiveKey="tab-1"
           id="uncontrolled-tab-example"

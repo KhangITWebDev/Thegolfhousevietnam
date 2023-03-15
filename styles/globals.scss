@@ -62,7 +62,7 @@
   width: 100%;
   margin: 0 auto !important;
   position: relative;
-  overflow-x: hidden;
+  overflow: hidden;
   // overflow-y: auto;
   // height: 100vh;
   // scroll-snap-type: y mandatory;
@@ -144,6 +144,12 @@
   height: 45px;
   z-index: 2001;
   transition: 0.5s linear;
+
+  @media screen and (max-width: 576px) {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+  }
   &:hover {
     background: #576e33;
     border-color: #576e33;

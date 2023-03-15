@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-
-// import { userService } from "services";
 import Cookies from "js-cookie";
 import SignIn from "../components/Modal/SignIn";
 
 export default function RouteGuard({ children }) {
-  const router = useRouter();
   const token = Cookies.get("access_token");
+  const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     // on initial load - run auth check
     authCheck(router.pathname);
+
     // on route change start - hide page content by setting authorized to false
     const hideContent = () => setAuthorized(false);
     router.events.on("routeChangeStart", hideContent);
@@ -31,14 +31,23 @@ export default function RouteGuard({ children }) {
 
   function authCheck(url) {
     // redirect to login page if accessing a private page and not logged in
-    const publicPaths = ["/booking", "/cart"];
+    const privatePaths = ["/booking", "/cart"];
     const path = url.split("?")[0];
-    if (!token && publicPaths.includes(path)) {
+
+    if (!token && privatePaths.includes(path)) {
       setAuthorized(false);
+      setOpen(true);
     } else {
       setAuthorized(true);
+      setOpen(false);
     }
   }
+
   const handleClose = () => router.back();
-  return authorized ? <>{children} </> : <SignIn handleClose={handleClose} />;
+
+  return !authorized ? (
+    <SignIn handleClose={handleClose} setOpen={setOpen} />
+  ) : (
+    <>{children}</>
+  );
 }

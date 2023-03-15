@@ -93,11 +93,11 @@
     }
   }
   .quantity {
-    position: relative;
     width: 116px;
     border: 1px solid #d9d9d9;
     height: 45px;
     border-radius: 6px;
+
     // @media screen and (max-width: 1280px) and (min-width: 992px) {
     //   height: 50px;
     // }
@@ -105,14 +105,19 @@
     //   height: 50px;
     // }
     i {
-      position: absolute;
       font-size: 12px;
+      font-weight: 500;
       cursor: pointer;
-      top: 5px;
-      right: 15px;
-      &:last-child {
-        top: auto;
-        bottom: 5px;
+      background-color: transparent;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background-color: #d6d6d6;
       }
     }
   }
@@ -126,10 +131,12 @@
     white-space: normal;
   }
   .romove {
-    cursor: pointer;
-    &:hover {
-      i {
-        transform: rotate(270deg);
+    i {
+      cursor: pointer;
+      transition: transform 0.2s;
+
+      &:hover {
+        transform: rotate(90deg);
       }
     }
   }

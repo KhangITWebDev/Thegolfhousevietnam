@@ -31,6 +31,8 @@ const schema2 = yup.object().shape({
 function Detail(props) {
   const router = useRouter();
   const [ProshopData, setProshopData] = useState();
+
+  const token = Cookies.get("access_token");
   const cate = Cookies.get("Pro_DM");
   const page = Cookies.get("page_shop");
   const name = Cookies.get("name");
@@ -41,6 +43,7 @@ function Detail(props) {
   const price_max = Cookies.get("price_max");
   const dateNewest = Cookies.get("date_newest");
   const price_Incresss = Cookies.get("price_incresss");
+
   useEffect(() => {
     ProshopAPI.getProshopAPI(
       page,
@@ -68,9 +71,11 @@ function Detail(props) {
     dateNewest,
     price_Incresss,
   ]);
+
   const proshopDetail = ProshopData?.find(
-    (x) => removeAccents(x?.ten_vt) === router.query.name
+    (x) => removeAccents(x?.ma_vt) === router.query.name
   );
+
   const {
     register: register2,
     handleSubmit: handleSubmit2,
@@ -80,14 +85,17 @@ function Detail(props) {
   } = useForm({
     resolver: yupResolver(schema2),
   });
-  const [open2, setOpen2] = React.useState(false);
+
+  const [open2, setOpen2] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [loadingAddToCart, setLoadingAddToCart] = useState(false);
+  const [loadingBuyNow, setLoadingBuyNow] = useState(false);
+
   const handleOpen2 = () => {
     setOpen2(true);
   };
   const handleClose2 = () => setOpen2(false);
-  const [loading, setLoading] = useState(false);
-  const [loadingAddToCart, setLoadingAddToCart] = useState(false);
-  const token = Cookies.get("access_token");
+
   const onSubmit2 = async (data) => {
     setLoading(true);
     const resApi = await loginClientAxios.post("/user/login", {
@@ -112,12 +120,14 @@ function Detail(props) {
       }
     }, 2000);
   };
+
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.CartReducer.cartList);
   useEffect(() => {
     dispatch(getCartData());
     dispatch(getProshopData());
   }, []);
+
   const [qty, setQty] = useState(1);
   const decreasement = () => {
     setQty(qty - 1);
@@ -135,6 +145,7 @@ function Detail(props) {
       });
     }
   };
+
   const pictureArray = (data) => {
     let arr = [];
     if (data?.picture) {
@@ -163,6 +174,7 @@ function Detail(props) {
     }
     return arr;
   };
+
   useEffect(() => {
     pictureArray(proshopDetail)?.map((x, i) =>
       $("#proshop-detail .swiper-pagination-bullet").each(function (indexC) {
@@ -177,6 +189,7 @@ function Detail(props) {
       })
     );
   }, [proshopDetail]);
+
   const handleAddToCart = (item) => {
     if (token && token?.length > 0) {
       setLoadingAddToCart(true);
@@ -224,12 +237,62 @@ function Detail(props) {
       handleOpen2();
     }
   };
+
+  const handleBuyNow = (item) => {
+    if (token && token?.length > 0) {
+      setLoadingBuyNow(true);
+      // const cart = getLocalStorage(LOCAL_STORAGE.CART);
+      const find = cart.findIndex((x) => x.ma_vt === item.ma_vt);
+      if (find < 0) {
+        setTimeout(() => {
+          setLoadingBuyNow(false);
+          dispatch(
+            AddToCart({
+              ma_vt: item?.ma_vt,
+              ma_dvt: item?.ma_dvt,
+              sl_xuat: qty,
+              // tien_nt: 200000,
+              // tien: 200000,
+              // gia_ban: 10000,
+              // gia_ban_le: 10000,
+            })
+          );
+          setTimeout(() => {
+            setTimeout(() => {
+              dispatch(getCartData());
+            }, 500);
+            setQty(1);
+          }, 1000);
+        }, 1300);
+      } else {
+        setTimeout(() => {
+          setLoadingBuyNow(false);
+          dispatch(
+            UdateProductInCart(cart[find]?._id, {
+              ...cart[find],
+              sl_xuat: cart[find]?.sl_xuat + qty,
+            })
+          );
+          setTimeout(() => {
+            setTimeout(() => {
+              dispatch(getCartData());
+            }, 200);
+            setQty(1);
+          }, 1000);
+        }, 1300);
+      }
+    } else {
+      handleOpen2();
+    }
+  };
+
   useEffect(() => {
     if (token && token?.length > 0) {
       setTimeout(() => {
         $("#add-cart").on("click", function () {
           var cart = $(".cart");
           var imgtodrag = $("#image-proshop-detail").eq(0);
+
           if (imgtodrag) {
             var imgclone = imgtodrag
               .clone()
@@ -255,6 +318,7 @@ function Detail(props) {
                 1000,
                 "easeInOutExpo"
               );
+
             setTimeout(function () {
               cart.effect(
                 "shake",
@@ -264,6 +328,7 @@ function Detail(props) {
                 200
               );
             }, 1000);
+
             imgclone.animate(
               {
                 width: 0,
@@ -337,43 +402,55 @@ function Detail(props) {
                 sit amet, elitr, sed diam nonum eirmod tempor invidunt labore et
                 dolore.
               </p>
-              <div className="d-flex tool">
-                <div className="quantity d-flex align-items-center">
+              <div className="d-flex flex-wrap tool">
+                <div className="col-12 quantity d-flex flex-row justify-content-around align-items-center">
+                  <i className="fa-light fa-minus" onClick={decreasement}></i>
                   <span>{qty}</span>
                   <i
-                    className="fa-light fa-chevron-up"
+                    className="fa-light fa-plus"
                     onClick={() => setQty(qty + 1)}
                   ></i>
-                  <i
-                    className="fa-light fa-chevron-down"
-                    onClick={decreasement}
-                  ></i>
                 </div>
-                <div className="button">
-                  <button
-                    onClick={() => handleAddToCart(proshopDetail)}
-                    id="add-cart"
-                  >
-                    {loadingAddToCart ? (
-                      <Loader content="Đang xử lý" />
-                    ) : (
-                      "Thêm vào giỏ hàng"
-                    )}
-                    <span className="cart-item"></span>
-                  </button>
+
+                <div className="col-12 d-flex flex-row">
+                  <div className="button2">
+                    <button
+                      onClick={() => {
+                        handleAddToCart(proshopDetail);
+                      }}
+                      id="add-cart"
+                    >
+                      {loadingAddToCart ? (
+                        <Loader content="Đang xử lý" />
+                      ) : (
+                        "Thêm vào giỏ hàng"
+                      )}
+                      <span className="cart-item"></span>
+                    </button>
+                  </div>
+
+                  <div className="button ms-4">
+                    <button
+                      onClick={() => {
+                        handleBuyNow(proshopDetail);
+                        router.push("/cart");
+                      }}
+                      id="add-cart"
+                    >
+                      {loadingBuyNow ? (
+                        <Loader content="Đang xử lý" />
+                      ) : (
+                        "Mua ngay"
+                      )}
+                      <span className="cart-item"></span>
+                    </button>
+                  </div>
+
+                  <i className="fa-light fa-heart"></i>
                 </div>
                 {open2 && (
-                  <SignIn
-                    errors={errors2}
-                    register={register2}
-                    onSubmit={onSubmit2}
-                    handleSubmit={handleSubmit2}
-                    handleClose2={handleClose2}
-                    loading={loading}
-                    reset={reset2}
-                  />
+                  <SignIn handleClose={handleClose2} setOpen={setOpen2} />
                 )}
-                <i className="fa-light fa-heart"></i>
               </div>
               <div className="bonus">
                 <p>
@@ -391,14 +468,17 @@ function Detail(props) {
           <div>
             <div className="Tabs" id="proshop-detail-tabs">
               <Tabs
-                defaultActiveKey="desc"
+                defaultActiveKey="info"
                 id="uncontrolled-tab-example"
                 className="mb-3"
               >
-                <Tab eventKey="desc" title="Mô tả">
+                <Tab eventKey="info" title="Thông tin sản phẩm">
                   <TabDescription proshopDetail={proshopDetail} />
                 </Tab>
-                <Tab eventKey="rate" title="Đánh giá (1)">
+                <Tab eventKey="policy" title="Chính sách bán hàng">
+                  <TabDescription proshopDetail={proshopDetail} />
+                </Tab>
+                <Tab eventKey="rate" title="Đánh giá">
                   <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
                     provident doloribus sunt aliquid et, alias dicta beatae,

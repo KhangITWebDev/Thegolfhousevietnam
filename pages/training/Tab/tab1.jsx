@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import * as yup from "yup";
 import { Tab, Tabs } from "react-bootstrap";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import SignUpClub from "../../../components/Modal/SignUpClub";
+
 const PHONE_REGEX = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i;
 const schema = yup.object().shape({
   from_name: yup.string().required("Vui lòng nhập họ tên"),
@@ -32,6 +33,8 @@ const schema = yup.object().shape({
 });
 
 function Tab1({ item }) {
+  const [open, setOpen] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -42,12 +45,15 @@ function Tab1({ item }) {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const [open, setOpen] = React.useState(false);
+
   const handleOpen = () => {
     setOpen(true);
   };
+
   const handleClose = () => setOpen(false);
+
   const onSubmit = (data) => console.log(data);
+
   return (
     <div id="course-content">
       <div className="wrap-section d-flex">
@@ -64,23 +70,29 @@ function Tab1({ item }) {
                   Thời gian tập luyện: <strong>{item.time}</strong>
                 </p>
                 <p>
-                  Số buổi: <strong>{item.day}</strong>
+                  Số buổi: <strong>{item.day} buổi</strong>
                 </p>
-                {x?.pirce?.vga && (
-                  <p>
-                    Chi phí HLV VGA:
-                    <strong>
-                      {x?.pirce?.vga?.toLocaleString("vi-VI")} VND
-                    </strong>
-                  </p>
-                )}
+
                 <p>
-                  Chi phí HLV PGA:{" "}
-                  <strong>{x?.pirce?.pga?.toLocaleString("vi-VI")} VND</strong>
+                  Chi phí:{" "}
+                  <strong>{x?.price?.toLocaleString("vi-VI")} VND</strong>
                 </p>
+
+                <p>
+                  Chi phí / buổi:{" "}
+                  <strong>
+                    {x?.price &&
+                      Math.ceil(x.price / item.day).toLocaleString(
+                        "vi-VI"
+                      )}{" "}
+                    VND
+                  </strong>
+                </p>
+
                 <div className="button" onClick={handleOpen}>
                   <button>Đăng ký ngay</button>
                 </div>
+
                 {open && (
                   <SignUpClub
                     errors={errors}

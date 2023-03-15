@@ -289,7 +289,7 @@
         transform: rotate(0deg);
       }
       to {
-        transform: rotate(359deg);
+        transform: rotate(90deg);
       }
     }
     .close {
@@ -302,12 +302,12 @@
         color: #fff;
         font-size: 32px;
         margin-left: 10px;
-        transition: transform 0.5s;
-        animation: rotation 1.2s linear;
+        transition: transform 0.2s;
+        animation: rotation 0.2s linear;
       }
       &:hover {
         i {
-          transform: rotate(360deg);
+          transform: rotate(90deg);
         }
       }
     }

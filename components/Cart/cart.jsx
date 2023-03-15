@@ -74,7 +74,10 @@ function Cart({ handleCloseCart }) {
                         width={150}
                         height={150}
                         objectFit="cover"
-                        src="/images/Home/Shop/shop1.png"
+                        src={item.picture}
+                        loader={({ src }) =>
+                          `https://api.fostech.vn${src}?access_token=7d7fea98483f31af4ac3cdd9db2e4a93`
+                        }
                         alt=""
                       />
                     </div>

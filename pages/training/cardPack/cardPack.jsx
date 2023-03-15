@@ -2,175 +2,158 @@ import Image from "next/image";
 import React from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import Tab1 from "../Tab/tab1";
-import styles from "../Course.module.scss";
+
 const coursePromotion = [
   {
     id: 1,
-    name: "BEGINNER -> 37",
+    name: "BRONZE",
     time: "03 tháng",
-    day: "36 buổi",
+    day: 36,
     type: [
       {
-        name: "1:1",
-        pirce: {
-          vga: 72000000,
-          pga: 126000000,
-        },
+        name: "1 HV",
+        price: 126000000,
       },
       {
-        name: "Nhóm 2 HLV",
-        pirce: {
-          vga: 50400000,
-          pga: 88200000,
-        },
+        name: "2 HV",
+        price: 88200000,
       },
       {
-        name: "Nhóm 3 HLV",
-        pirce: {
-          vga: 36000000,
-          pga: 63000000,
-        },
+        name: "3 HV",
+        price: 75600000,
       },
       {
-        name: "Nhóm 4 HLV",
-        pirce: {
-          pga: 50400000,
-        },
+        name: "Từ 4 HV",
+        price: 63000000,
       },
     ],
   },
   {
     id: 2,
-    name: "BEGINNER -> 29",
+    name: "SILVER",
     time: "06 tháng",
-    day: "72 buổi",
+    day: 72,
     type: [
       {
         name: "1:1",
-        pirce: {
-          vga: 144000000,
-          pga: 252000000,
-        },
+        price: 218400000,
       },
       {
-        name: "Nhóm 2 HLV",
-        pirce: {
-          vga: 108000000,
-          pga: 176000000,
-        },
+        name: "1:2",
+        price: 152880000,
       },
       {
-        name: "Nhóm 3 HLV",
-        pirce: {
-          vga: 72000000,
-          pga: 126000000,
-        },
+        name: "1:3",
+        price: 131040000,
       },
       {
-        name: "Nhóm 4 HLV",
-        pirce: {
-          pga: 100800000,
-        },
+        name: "1:4",
+        price: 109200000,
       },
     ],
   },
   {
     id: 3,
-    name: "BEGINNER -> 17",
-    time: "01 name",
-    day: "100 buổi",
+    name: "GOLD",
+    time: "12 tháng",
+    day: 108,
     type: [
       {
         name: "1:1",
-        pirce: {
-          vga: 200000000,
-          pga: 350000000,
-        },
+        price: 393750000,
       },
       {
-        name: "Nhóm 2 HLV",
-        pirce: {
-          vga: 140000000,
-          pga: 245000000,
-        },
+        name: "1:2",
+        price: 275625000,
       },
       {
-        name: "Nhóm 3 HLV",
-        pirce: {
-          vga: 100000000,
-          pga: 175000000,
-        },
+        name: "1:3",
+        price: 236250000,
       },
       {
-        name: "Nhóm 4 HLV",
-        pirce: {
-          pga: 140000000,
-        },
+        name: "1:4",
+        price: 196875000,
       },
     ],
   },
   {
     id: 4,
-    name: "BEGINNER -> 9",
-    time: "02 năm",
-    day: "200 buổi",
+    name: "DIAMOND",
+    time: "18 tháng",
+    day: 144,
     type: [
       {
         name: "1:1",
-        pirce: {
-          vga: 400000000,
-          pga: 700000000,
-        },
+        price: 644000000,
       },
       {
-        name: "Nhóm2 HLV",
-        pirce: {
-          vga: 280000000,
-          pga: 490000000,
-        },
+        name: "1:2",
+        price: 450800000,
       },
       {
-        name: "Nhóm3 HLV",
-        pirce: {
-          vga: 200000000,
-          pga: 350000000,
-        },
+        name: "1:3",
+        price: 386400000,
       },
       {
-        name: "Nhóm 4 HLV",
-        pirce: {
-          pga: 280000000,
-        },
+        name: "1:4",
+        price: 322000000,
+      },
+    ],
+  },
+  {
+    id: 5,
+    name: "PLATINUM",
+    time: "24 tháng",
+    day: 180,
+    type: [
+      {
+        name: "1:1",
+        price: 840000000,
+      },
+      {
+        name: "1:2",
+        price: 588000000,
+      },
+      {
+        name: "1:3",
+        price: 504000000,
+      },
+      {
+        name: "1:4",
+        price: 420000000,
       },
     ],
   },
 ];
+
 function CardPack() {
   return (
-    <div className="container">
-      <div id="bonus-course" className="d-flex align-items-center">
-        <div className="col-7 left">
-          <Tabs
-            defaultActiveKey="tab-1"
-            id="uncontrolled-tab-example"
-            className="mb-3"
-            fill
-          >
-            {coursePromotion.map((item, i) => (
-              <Tab key={i} eventKey={`tab-${item.id}`} title={item.name}>
-                <Tab1 item={item} />
-              </Tab>
-            ))}
-          </Tabs>
-        </div>
-        <div className="col-5 right">
-          <div className="image">
-            <Image
-              src="https://api.fostech.vn/getfile/anytype/6281eb1d900bb51266dee8a9_1673411358813_434x580px.jpg.webp?access_token=7d7fea98483f31af4ac3cdd9db2e4a93"
-              alt="Image"
-              layout="fill"
-            />
-          </div>
+    <div
+      id="bonus-course"
+      className="d-flex flex-wrap align-items-center justify-content-center px-0 px-xl-5"
+    >
+      <div className="col-12 col-md-8 left">
+        <Tabs
+          defaultActiveKey="tab-1"
+          id="uncontrolled-tab-example"
+          className="mb-3"
+          fill
+        >
+          {coursePromotion.map((item, i) => (
+            <Tab key={i} eventKey={`tab-${item.id}`} title={item.name}>
+              <Tab1 item={item} />
+            </Tab>
+          ))}
+        </Tabs>
+      </div>
+
+      <div className="col-12 col-sm-10 col-md-4 right mx-auto ps-0 ps-xl-5">
+        <div className="image">
+          <Image
+            src="https://api.fostech.vn/getfile/anytype/6281eb1d900bb51266dee8a9_1673411358813_434x580px.jpg.webp?access_token=7d7fea98483f31af4ac3cdd9db2e4a93"
+            alt="Image"
+            layout="fill"
+          />
         </div>
       </div>
     </div>

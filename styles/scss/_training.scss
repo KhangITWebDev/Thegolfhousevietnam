@@ -432,7 +432,7 @@
     border-radius: 0px;
     color: #000;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 700;
     padding: 0px;
     width: fit-content;
     // margin-right: 35px;
@@ -443,20 +443,20 @@
       // margin-right: 0px;
     }
     &:hover {
-      color: red;
+      color: #f36532;
     }
     &::after {
       content: "";
       display: block;
       width: 0;
       height: 2px;
-      background: red;
+      background: #f36532;
       transition: width 0.5s;
     }
   }
   .nav-link.active {
     background-color: transparent;
-    color: red;
+    color: #f36532;
     &::after {
       width: 100%;
     }
@@ -504,19 +504,19 @@
         //   margin-left: auto;
         // }
       }
-      &:nth-child(2) {
-        // padding-left: 30px;
-        // // button {
-        //   margin-right: auto;
-        // }
-      }
+      // &:nth-child(2) {
+      // padding-left: 30px;
+      // // button {
+      //   margin-right: auto;
+      // }
+      // }
       &:last-child,
       &:nth-child(3) {
         border-top: 1px solid #ccc;
       }
     }
     .tab-content {
-      border-left: 2.5px solid red;
+      border-left: 2.5px solid #f36532;
       height: fit-content;
       padding-top: 15px;
       padding-bottom: 15px;
